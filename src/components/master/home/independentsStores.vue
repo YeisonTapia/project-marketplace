@@ -103,6 +103,8 @@
       transform skew(-10deg)
     @media screen and (max-width: $breakpoint-md)
         min-width 60%
+        font-size 20px
+        padding 0 15px
    
 .line-pink
   width 100%

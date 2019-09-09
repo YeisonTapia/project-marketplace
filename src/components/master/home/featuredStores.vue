@@ -110,6 +110,8 @@
         top 27px
     @media screen and (max-width: $breakpoint-md)
         min-width 60%
+        font-size 20px
+        padding 0 15px
         &:before
             display none !important    
     & > div

@@ -5,6 +5,9 @@
       <img alt="Logo" :src="logo">
     </div>
     <div v-else>
+
+      <full-width-gallery system-name="principal" />
+
       <top></top> 
       <featured-stores></featured-stores>
 
@@ -31,6 +34,7 @@
   </q-page>
 </template>
 <script>
+  import fullWidthGallery from '@imagina/qslider/_components/fullWidthGallery'
   import top from 'src/components/master/home/top'
   import featuredStores from 'src/components/master/home/featuredStores'
   import interestStores from 'src/components/master/home/interestStores'
@@ -40,6 +44,7 @@
   export default {
     name: 'PageIndex',
     components: {
+      fullWidthGallery,
       top,
       featuredStores,
       interestStores,

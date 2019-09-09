@@ -20,6 +20,26 @@ export default {
 		icon: 'fas fa-home',
 		middleware: [auth]
 	},
+	nosotros: {
+		permission: null,
+		activated: true,
+		path: '/nosotros',
+		name: 'app.nosotros',
+		layout: require('src/layouts/pages/nosotros').default,
+		containerLayout: master,
+		title: 'Nosotros',
+		icon: 'fas fa-users'
+	},
+	contacto: {
+		permission: null,
+		activated: true,
+		path: '/contacto',
+		name: 'app.contacto',
+		layout: require('src/layouts/pages/contacto').default,
+		containerLayout: master,
+		title: 'Contacto',
+		icon: 'far fa-envelope-open'
+	},
 	//Config Page
 	config: {
 		permission: null,

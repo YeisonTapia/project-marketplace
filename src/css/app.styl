@@ -32,6 +32,9 @@
   .q-sm-show
     @media screen and (min-width: $breakpoint-sm)
       display block !important
+  .q-sm-inline-show
+    @media screen and (min-width: $breakpoint-sm)
+      display inline-block !important
   .q-md-show
     @media screen and (min-width: $breakpoint-md)
       display block !important
@@ -446,3 +449,37 @@ footer
     left 0
     width 100%
     height: 100% 
+
+.border-0
+  border 0
+
+.rounded-sm
+  border-radius 10px
+  
+.rounded-md
+  border-radius 20px
+   
+.q-layout-page
+  margin-top -50px
+  @media screen and (max-width: $breakpoint-lg)
+    margin-top 0
+    
+.page    
+  .title
+    font-size 35px
+  p  
+    font-size 16px
+    color #555555
+    
+.title-label
+  -webkit-transform skew(10deg)
+  transform skew(10deg)
+  border-radius 10px
+  padding 10px 20px
+  display inline-block
+  min-width 80%
+  font-size 25px
+  position relative
+  & > div
+    -webkit-transform  skew(-10deg)
+    transform skew(-10deg)

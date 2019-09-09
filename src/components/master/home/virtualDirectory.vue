@@ -91,7 +91,9 @@
     font-size 30px
     position relative
     @media screen and (max-width: $breakpoint-md)
-        min-width 60%   
+        min-width 60%  
+        font-size 20px 
+        padding 0 15px
     & > div
         -webkit-transform  skew(-10deg)
         transform skew(-10deg)
