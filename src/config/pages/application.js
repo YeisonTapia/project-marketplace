@@ -12,7 +12,7 @@ export default {
 	home: {
 		permission: null,
 		activated: true,
-		path: '/',
+		path: '/inicio',
 		name: 'app.home',
 		layout: require('src/layouts/index').default,
 		containerLayout: master,

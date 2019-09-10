@@ -78,7 +78,7 @@
           config: false,
           notification: false
         },
-        menu: (this.$store.getters['qmenuMaster/menu'](9)).items,
+        menu: (this.$store.getters['qmenuMaster/menu'](1)).items,
         logo : this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo1').path
       }
     },

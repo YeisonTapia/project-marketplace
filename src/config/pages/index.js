@@ -1,5 +1,6 @@
 import appConfig from 'src/config/app'
 import admin from 'src/layouts/admin/admin'
+import frontend from 'src/layouts/master.vue'
 //Auto load api routes from modules available in: src/config/app.js "modules"
 //===== Not edit
 let pages = {}
@@ -17,8 +18,6 @@ if (appConfig && appConfig.modules) {
   })
 }
 pages.app = require('src/config/pages/application').default //Pages of APP
-
-console.warn(pages)
 pages.qblog.posts.containerLayout=admin
 pages.qblog.posts.path=  '/admin/blog/articulos/index'
 pages.qblog.categories.containerLayout=admin
@@ -45,8 +44,8 @@ pages.qmedia.index.containerLayout=admin
 pages.qmedia.index.path= '/admin/media'
 pages.qmenu.menus.containerLayout=admin
 pages.qmenu.menus.path= '/admin/menu'
-pages.qmenu.menuItems.containerLayout=admin
-pages.qmenu.menuItems.path= '/admin/menu/menu-items'
+pages.qmenu.menuitems.containerLayout=admin
+pages.qmenu.menuitems.path= '/admin/menu/menu-items'
 pages.qsite.index.containerLayout=admin
 pages.qsite.index.path= '/admin/site/index'
 pages.qslider.index.containerLayout=admin
@@ -57,6 +56,10 @@ pages.quser.userDepartments.containerLayout=admin
 pages.quser.userDepartments.path= '/admin/usuarios/departamentos'
 pages.quser.userRoles.containerLayout=admin
 pages.quser.userRoles.path= '/admin/usuarios/roles'
+pages.quser.userProfile.containerLayout=admin
+pages.quser.userProfile.path='admin/me/profile'
+pages.quser.login.layout=require('@imagina/quser/_layouts/login').default
+
 
 //======= Add or update extra apiRoutes
 //#example: pages.<name-page> = require('path-page').default
