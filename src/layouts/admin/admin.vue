@@ -1,17 +1,19 @@
 <template>
   <q-layout view="lHh LpR lFr"
+            class="bg-grey-1"
             v-if="$store.state.app.active">
     <!-- HEADER -->
+    <admin-header />
 
-    <frontend-header/>
 
     <!-- ROUTER VIEW -->
     <q-page-container>
-      <router-view/>
+      <router-view class="q-layout-page layout-padding" />
     </q-page-container>
 
     <!-- FOOTER -->
-    <frontend-footer/>
+    <admin-footer />
+
   </q-layout>
 </template>
 

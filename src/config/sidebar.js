@@ -5,7 +5,7 @@ const appConfig = config('app')
 //Not edit
 let localSidebar = []//Response
 
-if (appConfig.isBackend) {
+
   let modules = appConfig.modules
   modules.forEach((name) => {
     try {
@@ -16,7 +16,6 @@ if (appConfig.isBackend) {
     } catch (e) {
     }
   })
-}
 
 
 //Add extra items to sidebar

@@ -1,3 +1,4 @@
+
 <template>
   <div id="masterHeader">
     <q-layout-header reveal class="no-shadow">

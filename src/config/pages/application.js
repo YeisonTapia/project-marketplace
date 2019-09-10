@@ -2,7 +2,7 @@
 import master from 'src/layouts/master'
 import config from 'src/layouts/config'
 import notFound from 'src/layouts/404'
-
+import admin from 'src/layouts/admin/admin'
 //Middleware
 import auth from '@imagina/quser/_router/middlewares/auth'
 import access from '@imagina/quser/_router/middlewares/access'
@@ -12,13 +12,13 @@ export default {
 	home: {
 		permission: null,
 		activated: true,
-		path: '/home',
+		path: '/',
 		name: 'app.home',
 		layout: require('src/layouts/index').default,
 		containerLayout: master,
 		title: 'sidebar.pageHome',
 		icon: 'fas fa-home',
-		middleware: [auth]
+
 	},
 	nosotros: {
 		permission: null,
@@ -40,6 +40,17 @@ export default {
 		title: 'Contacto',
 		icon: 'far fa-envelope-open'
 	},
+    admin: {
+        permission: null,
+        activated: true,
+        path: '/admin',
+        name: 'app.admin',
+        layout: require('src/layouts/admin/index').default,
+        containerLayout: admin,
+        title: 'Admintrador',
+        icon: 'far fa-envelope-open',
+        middleware: [auth]
+    },
 	//Config Page
 	config: {
 		permission: null,

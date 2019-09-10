@@ -19,7 +19,7 @@ class Notification {
   global() {
     this.Echo.leave('global')
 
-    let userId = store.state.quserAuth.userData.id
+    let userId = 0
 
     this.Echo.channel('global')
       .listen('.clearCache', (message) => {
