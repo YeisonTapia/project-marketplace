@@ -12,8 +12,7 @@
         </div>
         <div class="col-12 q-pb-xl">
           <div class="row gutter-xs"> 
-            <div class="col-sm-12 col-md-6 col-lg-4 q-pb-lg" v-for="trivia in trivias">
-              
+            <div class="col-sm-12 col-md-6 col-lg-4 q-pb-lg" v-for="trivia in trivias" :key="trivia.id">
                 <q-card square  class="card-trivia-item no-shadow q-ma-sm" >
                   <div  @click="trivia.opened = !trivia.opened">
                   <q-card-media>
@@ -47,7 +46,6 @@ export default {
   data() {
     return {
       lang: this.$q.i18n.lang,
-      epale: true,
       trivias:  [
         {
           id: '1',
@@ -56,7 +54,7 @@ export default {
           summary: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy',
           questions: [
               {
-                title: '¿titulo de la pregunta?',
+                title: '¿titulo de la pregunta ?',
                 options: [
                   {
                       label: '1920',
@@ -74,7 +72,7 @@ export default {
                 answer: ''
               },
               {
-                title: '¿titulo de la segunta pregunta',
+                title: '¿titulo de la segunta pregunta?',
                 options: [
                   {
                       label: '1920',
@@ -118,7 +116,7 @@ export default {
                 answer: ''
               },
               {
-                title: '¿titulo de la segunta pregunta',
+                title: '¿titulo de la segunta pregunta?',
                 options: [
                   {
                       label: '1920',
@@ -162,7 +160,7 @@ export default {
                 answer: ''
               },
               {
-                title: '¿titulo de la segunta pregunta',
+                title: '¿titulo de la segunta pregunta?',
                 options: [
                   {
                       label: '1920',
@@ -206,7 +204,7 @@ export default {
                 answer: ''
               },
               {
-                title: '¿titulo de la segunta pregunta',
+                title: '¿titulo de la segunta pregunta?',
                 options: [
                   {
                       label: '1920',
@@ -232,7 +230,7 @@ export default {
           summary: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy',
           questions: [
               {
-                title: '¿titulo de la pregunta?',
+                title: '¿Pregunta 1?',
                 options: [
                   {
                       label: '1920',
@@ -250,7 +248,25 @@ export default {
                 answer: ''
               },
               {
-                title: '¿titulo de la segunta pregunta',
+                title: '¿pregunta 2?',
+                options: [
+                  {
+                      label: '1920',
+                      value: 'op1'
+                  },
+                  {
+                      label: '1916',
+                      value: 'op2'
+                  },
+                  {
+                      label: '1826',
+                      value: 'op3'
+                  },
+                ],
+                answer: ''
+              },
+              {
+                title: '¿pregunta3?',
                 options: [
                   {
                       label: '1920',
@@ -294,7 +310,7 @@ export default {
                 answer: ''
               },
               {
-                title: '¿titulo de la segunta pregunta',
+                title: '¿titulo de la segunta pregunta?',
                 options: [
                   {
                       label: '1920',
@@ -338,7 +354,7 @@ export default {
                 answer: ''
               },
               {
-                title: '¿titulo de la segunta pregunta',
+                title: '¿titulo de la segunta pregunta?',
                 options: [
                   {
                       label: '1920',
@@ -382,7 +398,7 @@ export default {
                 answer: ''
               },
               {
-                title: '¿titulo de la segunta pregunta',
+                title: '¿titulo de la segunta pregunta?',
                 options: [
                   {
                       label: '1920',
@@ -404,11 +420,7 @@ export default {
       ]
     }
   },
-  methods: {
-    search() {
-      console.log(this.advanced_search);
-    }
-  }
+  methods: {}
 }
 </script>
 <style lang="stylus">
