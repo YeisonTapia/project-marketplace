@@ -1,5 +1,5 @@
 <template>
-  <q-card class="card-store q-ma-md">
+  <q-card class="card-store text-center q-ma-md">
     <q-card-media>
       <div class="ratio-4-3">
         <img  :src="store.image">

@@ -40,6 +40,36 @@ export default {
 		title: 'Contacto',
 		icon: 'far fa-envelope-open'
 	},
+	categoria: {
+		permission: null,
+		activated: true,
+		path: '/categoria',
+		name: 'app.categoria',
+		layout: require('src/layouts/pages/categoria').default,
+		containerLayout: master,
+		title: 'Categoria',
+		icon: 'far fa-envelope-open'
+	},
+	busqueda: {
+		permission: null,
+		activated: true,
+		path: '/busqueda',
+		name: 'app.busqueda',
+		layout: require('src/layouts/pages/busqueda').default,
+		containerLayout: master,
+		title: 'Busqueda',
+		icon: 'far fa-envelope-open'
+	},
+	trivia: {
+		permission: null,
+		activated: true,
+		path: '/trivia',
+		name: 'app.trivia',
+		layout: require('src/layouts/pages/trivia').default,
+		containerLayout: master,
+		title: 'Trivia',
+		icon: 'far fa-envelope-open'
+	},
     admin: {
         permission: null,
         activated: true,

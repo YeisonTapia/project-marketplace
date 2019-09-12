@@ -84,7 +84,7 @@
     }
 </script>
 <style lang="stylus">
-@import "~variables";
+@import "~variables"
 .feature-stores   
     background-color #F7C837
 .title-label-blue

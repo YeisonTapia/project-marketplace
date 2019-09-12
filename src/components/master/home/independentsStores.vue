@@ -85,7 +85,7 @@
     }
 </script>
 <style lang="stylus">
-@import "~variables";
+@import "~variables"
 .title-label-pink
     -webkit-transform skew(10deg)
     transform skew(10deg)
