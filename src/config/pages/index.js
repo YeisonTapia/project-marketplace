@@ -11,12 +11,22 @@ if (appConfig && appConfig.modules) {
   modules.forEach(name => {
     try {
       //Get pages according to app config in: src/config/app.js "isBackend"
-      let page = require(`@imagina/${name}/_config/backendPages`).default
-
-      pages[name] = page
+      let page = require(`@imagina/${name}/_config/backendPages`).default;
+      pages[name] = page;
+    ;
     } catch (e) {}
   })
+    modules.forEach(name => {
+        try {
+            let front=require(`@imagina/${name}/_config/frontendPages`).default;
+            pages['front'+name] = front;
+        } catch (e) {}
+    })
+
 }
+
+console.warn(pages)
+
 pages.app = require('src/config/pages/application').default //Pages of APP
 pages.qblog.posts.containerLayout=admin
 pages.qblog.posts.path=  '/admin/blog/articulos/index'
@@ -42,10 +52,10 @@ pages.qcommerce.shippingMethods.path= '/admin/ecommerce/metodos-de-envio'
 //pages.qcommerce.orders.path= '/admin/ecommerce/ordenes'
 pages.qmedia.index.containerLayout=admin
 pages.qmedia.index.path= '/admin/media'
-pages.qmenu.menus.containerLayout=admin
-pages.qmenu.menus.path= '/admin/menu'
-pages.qmenu.menuitems.containerLayout=admin
-pages.qmenu.menuitems.path= '/admin/menu/menu-items'
+//pages.qmenu.menus.containerLayout=admin
+//pages.qmenu.menus.path= '/admin/menu'
+//pages.qmenu.menuitems.containerLayout=admin
+//pages.qmenu.menuitems.path= '/admin/menu/menu-items'
 pages.qsite.index.containerLayout=admin
 pages.qsite.index.path= '/admin/site/index'
 pages.qslider.index.containerLayout=admin

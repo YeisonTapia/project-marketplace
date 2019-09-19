@@ -19,10 +19,8 @@
 
 <script>
   /*Components*/
-  import adminHeader from 'src/components/master/admin/header'
-  import adminFooter from 'src/components/master/admin/footer'
-  import frontendHeader from 'src/components/master/frontend/header'
-  import frontendFooter from 'src/components/master/frontend/footer'
+  import adminHeader from 'src/components/admin/header'
+  import adminFooter from 'src/components/admin/footer'
 
   export default {
     meta() {
@@ -39,7 +37,6 @@
     },
     components: {
       adminHeader, adminFooter,
-      frontendHeader, frontendFooter
     },
     mounted() {
       this.$nextTick(async function () {
@@ -49,7 +46,7 @@
     },
     data() {
       return {
-        appIsBackend: config('app.isBackend')
+        appIsBackend: true
       }
     },
     computed: {

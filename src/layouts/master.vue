@@ -17,8 +17,6 @@
 
 <script>
   /*Components*/
-  import adminHeader from 'src/components/master/admin/header'
-  import adminFooter from 'src/components/master/admin/footer'
   import frontendHeader from 'src/components/master/frontend/header'
   import frontendFooter from 'src/components/master/frontend/footer'
 
@@ -36,7 +34,6 @@
       next()
     },
     components: {
-      adminHeader, adminFooter,
       frontendHeader, frontendFooter
     },
     mounted() {

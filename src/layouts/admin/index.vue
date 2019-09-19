@@ -30,7 +30,7 @@
       return {
         lang: this.$q.i18n.lang,
         logo: this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo1').path,
-        appIsBackend: config('app.isBackend')
+        appIsBackend: true
       }
     }
   }

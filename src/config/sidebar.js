@@ -16,7 +16,7 @@ let localSidebar = []//Response
     } catch (e) {
     }
   })
-
+console.warn(modules)
 
 //Add extra items to sidebar
 /*Example group item. April 04, 2019
@@ -38,7 +38,7 @@ let localSidebar = []//Response
 
 //Add items tu sidebar
 let sidebar = [
-  pages.app.home,//Home
+  pages.app.admin,//Home
 ]
 
 //Return merge between local sidebar and sidebar of qMenu

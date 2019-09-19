@@ -62,8 +62,8 @@
 </template>
 <script>
   import WidgetUser from "@imagina/quser/_components/widget-user";
-  import configList from '../configList';
-  import menuList from "../recursiveItem";
+  import configList from 'src/components/admin/configList';
+  import menuList from "src/components/admin/recursiveItem";
 
   export default {
     props: {},
