@@ -4,7 +4,7 @@
       <img class="img-title" src="/assets/img/top-companies.png">
     </div>
     <q-card-main>
-      <h2 class="text-primary">Mejores Empresas</h2>
+      <h2 class="text-primary font-family-secondary">Mejores Empresas</h2>
       <ol>
         <li v-for="item of list">{{item.name}}</li>
       </ol>
@@ -63,4 +63,5 @@
           content counter(my-awesome-counter)
           color #FD2D5E
           margin-right 6px
+          font-family 'Carter One'
 </style>

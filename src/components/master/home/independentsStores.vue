@@ -86,26 +86,6 @@
 </script>
 <style lang="stylus">
 @import "~variables"
-.title-label-pink
-    -webkit-transform skew(10deg)
-    transform skew(10deg)
-    border-radius 10px
-    padding 10px 20px
-    display inline-block
-    min-width 40%
-    margin -58px 0 10px 0
-    background-color $primary
-    color #FFFFFF
-    font-size 30px
-    position relative
-    & > div
-      -webkit-transform  skew(-10deg)
-      transform skew(-10deg)
-    @media screen and (max-width: $breakpoint-md)
-        min-width 60%
-        font-size 20px
-        padding 0 15px
-   
 .line-pink
   width 100%
   height 4px
@@ -113,5 +93,4 @@
   background-color $primary
   margin-top -45px
   margin-bottom 45px
-
 </style>

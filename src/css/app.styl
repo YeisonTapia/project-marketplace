@@ -1,5 +1,10 @@
 // app global css
 @import "~variables";
+@import url('https://fonts.googleapis.com/css?family=Carter+One&display=swap');
+
+font-primary = 'Trebuchet MS'
+font-secondary = 'Carter One'
+
 
 *
   a
@@ -202,21 +207,37 @@
 
   .backend-page
     .box
-      border-top 3px solid $primary
-      border-radius 5px
+      border-radius 20px
       box-shadow $shadow-1
       background-color white
       padding 15px
-
+      .bg-positive
+        background-color $secondary!important    
+      .bg-info
+        background-color $tertiary!important  
+        
     .box-table
-      border-top 3px solid $primary
-      border-radius 5px
+      border-radius 20px
       box-shadow $shadow-1
       background-color white
+      padding 15px
+      .bg-positive
+        background-color $secondary!important    
+      .bg-info
+        background-color $tertiary!important  
 
     .q-table-container
-      .q-table-top
-        padding 8px 15px !important
+      
+      .q-table-top, .q-table-middle, .q-table-bottom
+        padding 15px !important
+      .q-table thead tr 
+        background-color #F0F0F0
+        th 
+          font-weight 700
+          color #444444
+      .q-table tbody tr:last-child td
+        border-color transparent
+  
 
     .q-btn, .q-btn-group //All buttons with border radius
       border-radius 28px
@@ -397,11 +418,17 @@
           line-height 1.8
 
 body
-  font-family 'Carter One', cursive
+  font-family font-primary
   
 footer
-  font-family 'Trebuchet MS'
   font-size 13px
+  
+  
+.font-family-primary
+  font-family font-primary
+
+.font-family-secondary
+  font-family font-secondary
   
 .bg-degradado
   background linear-gradient(to right, #FD2D5E 0%, #fc4c57 50%, #fa4d22 100%)
@@ -410,6 +437,12 @@ footer
   background-color #F0F0F0
   background-image url('/assets/img/fondo.jpg')
   background-size cover       
+
+.bg-fondo-q 
+  background #e4e0c7
+  background -moz-linear-gradient(top, #e4e0c7 0%, #e4e0c7 1%, #e2dec5 1%, #e4e0c7 1%, #e3dfc6 3%, #e3deca 3%, #e4dfcb 9%, #dfdec9 9%, #e0dfcb 16%, #dcddcb 17%, #e1e0cc 17%, #e0dfcb 21%, #dcdfca 21%, #dcded1 22%, #dcded0 29%, #d8dfcf 30%, #d9e0d0 33%, #d9dfd3 33%, #d9dfd3 36%, #d7ddd1 36%, #d8ded2 37%, #d9dfd5 38%, #d9dfd5 42%, #d5e0d0 42%, #d5e0d2 47%, #d5dfd6 47%, #d7ded7 47%, #d7ded6 52%, #d7ded7 52%, #d2dfd6 52%, #cfe0d8 61%, #cfdfdc 61%, #cfdfdc 63%, #ccdcd9 63%, #d0e0dd 63%, #cfdfdc 68%, #cbe2dc 68%, #c9dfdc 68%, #cbe1de 73%, #c7dfdf 73%, #cadedf 73%, #c7dfdf 81%, #c7dfe3 81%, #c7dfe3 82%, #c6dfe3 82%, #c2dfe3 82%, #c4dfe6 91%, #bedfe4 91%, #c2e1e6 92%, #c1e0e5 92%, #c1dfe9 92%, #c1dfe9 100%)
+  background -webkit-linear-gradient(top, #e4e0c7 0%,#e4e0c7 1%,#e2dec5 1%,#e4e0c7 1%,#e3dfc6 3%,#e3deca 3%,#e4dfcb 9%,#dfdec9 9%,#e0dfcb 16%,#dcddcb 17%,#e1e0cc 17%,#e0dfcb 21%,#dcdfca 21%,#dcded1 22%,#dcded0 29%,#d8dfcf 30%,#d9e0d0 33%,#d9dfd3 33%,#d9dfd3 36%,#d7ddd1 36%,#d8ded2 37%,#d9dfd5 38%,#d9dfd5 42%,#d5e0d0 42%,#d5e0d2 47%,#d5dfd6 47%,#d7ded7 47%,#d7ded6 52%,#d7ded7 52%,#d2dfd6 52%,#cfe0d8 61%,#cfdfdc 61%,#cfdfdc 63%,#ccdcd9 63%,#d0e0dd 63%,#cfdfdc 68%,#cbe2dc 68%,#c9dfdc 68%,#cbe1de 73%,#c7dfdf 73%,#cadedf 73%,#c7dfdf 81%,#c7dfe3 81%,#c7dfe3 82%,#c6dfe3 82%,#c2dfe3 82%,#c4dfe6 91%,#bedfe4 91%,#c2e1e6 92%,#c1e0e5 92%,#c1dfe9 92%,#c1dfe9 100%)
+  background linear-gradient(to bottom, #e4e0c7 0%,#e4e0c7 1%,#e2dec5 1%,#e4e0c7 1%,#e3dfc6 3%,#e3deca 3%,#e4dfcb 9%,#dfdec9 9%,#e0dfcb 16%,#dcddcb 17%,#e1e0cc 17%,#e0dfcb 21%,#dcdfca 21%,#dcded1 22%,#dcded0 29%,#d8dfcf 30%,#d9e0d0 33%,#d9dfd3 33%,#d9dfd3 36%,#d7ddd1 36%,#d8ded2 37%,#d9dfd5 38%,#d9dfd5 42%,#d5e0d0 42%,#d5e0d2 47%,#d5dfd6 47%,#d7ded7 47%,#d7ded6 52%,#d7ded7 52%,#d2dfd6 52%,#cfe0d8 61%,#cfdfdc 61%,#cfdfdc 63%,#ccdcd9 63%,#d0e0dd 63%,#cfdfdc 68%,#cbe2dc 68%,#c9dfdc 68%,#cbe1de 73%,#c7dfdf 73%,#cadedf 73%,#c7dfdf 81%,#c7dfe3 81%,#c7dfe3 82%,#c6dfe3 82%,#c2dfe3 82%,#c4dfe6 91%,#bedfe4 91%,#c2e1e6 92%,#c1e0e5 92%,#c1dfe9 92%,#c1dfe9 100%)
   
 .h-100
   height: 100%
@@ -473,10 +506,11 @@ footer
 .rounded-lg
   border-radius 40px  
    
-.q-layout-page
-  margin-top -50px
-  @media screen and (max-width: $breakpoint-lg)
-    margin-top 0
+.master-frontend   
+  .q-layout-page
+    margin-top -55px
+    @media screen and (max-width: $breakpoint-lg)
+      margin-top 0
     
 .page    
   .title
@@ -494,6 +528,7 @@ footer
   width 80%
   font-size 25px
   position relative
+  font-family font-secondary
   & > div
     -webkit-transform  skew(-10deg)
     transform skew(-10deg)
@@ -505,4 +540,225 @@ footer
     padding 15px 35px
     @media screen and (max-width: $breakpoint-md)
       font-size 30px 
-      padding 10px 20px
+      padding 10px 
+      
+.line-grey
+  border 1.5px solid #E1E1E1  
+  
+
+/* Bottons arrows */      
+.btn-arrow-send-pink
+  font-family font-secondary
+  &:after
+    content ''
+    background-image url('/assets/img/arrow-send-pink.png')
+    background-repeat no-repeat
+    background-size contain
+    width 74px
+    height 100px
+    top -4px
+    right 63px
+    position absolute
+    
+.btn-arrow-send-yellow
+  font-family font-secondary
+  &:after
+    content ''
+    background-image url('/assets/img/arrow-send-yellow.png')
+    background-repeat no-repeat
+    background-size contain
+    width 74px
+    height 100px
+    top -4px
+    right 63px
+    position absolute    
+
+.btn-arrow-send-white
+  font-family font-family-secondary
+  &:after
+    content ''
+    background-image url('/assets/img/arrow-send-white.png')
+    background-repeat no-repeat
+    background-size contain
+    width 74px
+    height 100px
+    top -4px
+    right 63px
+    position absolute    
+    
+/* Forms */  
+.form-general  
+  .caption
+    font-size 18px
+    color #555555
+  .q-input-target 
+    font-size 18px
+    color #777777
+    &::-webkit-input-placeholder 
+      color #999999 !important
+    &::-moz-placeholder 
+      color #999999 !important
+    &:-ms-input-placeholder 
+      color #999999 !important
+  .q-if:before 
+    color: #E1E1E1
+  .q-if:before, .q-if:after 
+    border-width 2px !important 
+  .q-select
+    .q-if-control 
+      color $primary  
+    .q-chip-main
+      font-size 18px
+  .q-option    
+    font-size 18px
+    color #555555
+  .q-if-label  
+    font-size 18px
+    color #282D46
+  .q-chip-side 
+    .q-icon
+      color #FFFFFF  
+  .q-input    
+    .q-icon
+      color $primary   
+      
+.label-primary
+  background-image url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 262 209.06'%3E%3Cdefs%3E%3Cstyle%3E.cls-1{fill:%23fd2d5e;}%3C/style%3E%3C/defs%3E%3Ctitle%3ERecurso 4%3C/title%3E%3Cg id='Capa_2' data-name='Capa 2'%3E%3Cg id='home'%3E%3Cpath class='cls-1' d='M255,0H7C3.13,0,0,3.77,0,8.42V200.63c0,5.48,4.27,9.49,8.68,8.18L131.59,172.2a5.86,5.86,0,0,1,3.42,0L253.26,208.7c4.43,1.37,8.74-2.66,8.74-8.16V8.42C262,3.77,258.87,0,255,0Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+  background-repeat no-repeat
+  background-size 100% 100%    
+  display flex
+  justify-content center
+  align-content center
+  flex-direction column
+  min-height 200px
+  .title
+    font-size 30px
+    letter-spacing 6px
+    span
+      border-top 1px solid #FFFFFF
+      border-bottom 1px solid #FFFFFF
+  .subtitle  
+    font-size 20px
+    
+.logo-tienda
+  padding-top 0 !important
+  padding-bottom 30px !important
+  img
+    width 220px
+    height 220px
+    border-radius 50%
+    border 5px solid $tertiary    
+    margin 0 auto
+    position relative
+    object-fit contain
+    padding 10px
+
+
+/* Title label*/
+.title-label-pink
+    -webkit-transform skew(10deg)
+    transform skew(10deg)
+    border-radius 10px
+    padding 10px 20px
+    display inline-block
+    min-width 40%
+    margin -58px 0 10px 0
+    background-color $primary
+    color #FFFFFF
+    font-size 30px
+    position relative
+    font-family font-secondary
+    & > div
+      -webkit-transform  skew(-10deg)
+      transform skew(-10deg)
+    @media screen and (max-width: $breakpoint-md)
+        min-width 60%
+        font-size 20px
+        padding 0 15px
+
+.title-label-blue
+    -webkit-transform skew(10deg)
+    transform skew(10deg)
+    border-radius 10px
+    padding 10px 20px
+    display inline-block
+    min-width 40%
+    margin -58px 0 10px 0
+    background-color #282D46
+    color #FFFFFF
+    font-size 30px
+    position relative
+    font-family font-secondary
+    &:before
+        content ''
+        background-image url('/assets/img/arrow-down.png')
+        position absolute
+        right 15px
+        width 38px
+        height 70px
+        background-repeat no-repeat
+        top 27px
+    @media screen and (max-width: $breakpoint-md)
+        min-width 60%
+        font-size 20px
+        padding 0 15px
+        &:before
+            display none !important    
+    & > div
+        -webkit-transform  skew(-10deg)
+        transform skew(-10deg)      
+        
+.title-label-orange
+  -webkit-transform skew(10deg)
+  transform skew(10deg)
+  border-radius 10px
+  padding 10px 20px
+  display inline-block
+  min-width 40%
+  margin -58px 0 10px 0
+  background-color #F96353
+  color #FFFFFF
+  font-size 30px
+  position relative
+  font-family font-secondary
+  &:before
+    content ''
+    background-image url('/assets/img/arrow-down-blue.png')
+    position absolute
+    right -5px
+    width 55px
+    height 70px
+    background-repeat no-repeat
+    top 27px
+  @media screen and (max-width: $breakpoint-md)
+    min-width 60%
+    font-size 20px
+    padding 0 15px
+    &:before
+        display none !important      
+  & > div
+    -webkit-transform  skew(-10deg)
+    transform skew(-10deg)          
+   
+.title-label-blue-none
+    -webkit-transform skew(10deg)
+    transform skew(10deg)
+    border-radius 10px
+    padding 10px 20px
+    display inline-block
+    min-width 40%
+    margin -58px 0 10px 0
+    background-color #282D46
+    font-size 30px
+    position relative
+    font-family font-secondary
+    @media screen and (max-width: $breakpoint-md)
+        min-width 60%  
+        font-size 20px 
+        padding 0 15px
+    & > div
+        -webkit-transform  skew(-10deg)
+        transform skew(-10deg)
+        
+.cursor-pointer
+  cursor pointer        

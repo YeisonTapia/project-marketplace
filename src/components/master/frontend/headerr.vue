@@ -1,6 +1,6 @@
 
 <template>
-  <div id="masterHeader">
+  <div id="masterHeaderFrontend" class="font-family-secondary">
     <q-layout-header reveal class="no-shadow">
       <q-toolbar-title>
         <div class="row gutter-sm bg-degradado">
@@ -17,8 +17,9 @@
                 <im-social class="q-hide q-sm-inline-show"></im-social>
                 <div class="profile">
                   <a href=""><i class="fas fa-user-alt"></i></a>
-                  <span class="q-px-sm">|</span>
+                  <span class="q-px-sm font-family-primary">|</span>
                   <a href=""><i class="fas fa-heart"></i></a>
+
                 </div>
                 <span class="q-lg-hide q-pr-md">
                   <q-btn
@@ -33,7 +34,7 @@
               </div>
               <div class="col-12 q-py-sm-sm q-py-lg-md q-hide q-sm-show">
                 <div class="row gutter-sm justify-center items-center">
-                  <div class="col-xs-12 col-sm-9 col-md-auto">
+                  <div class="col-xs-12 col-sm-11 col-md-9 col-lg-auto">
                     <div class="search">
                       <div class="row items-center">
                         <div class="col-auto">
@@ -76,42 +77,47 @@
         </div>
         <div class="row justify-center q-mx-xl q-hide q-lg-show">
           <div class="col-12 text-center">
-            <nav class="menu" role="navigation">
-              <ul class="className">
-                  <li>
-                    <q-icon name="fas fa-bars"/> Categorias
-                    <ul class="dropdown">
-                      <li><q-icon name="fas fa-apple-alt"/> Comida</li>
-                      <li><q-icon name="fas fa-concierge-bell"/>Hotel</li>
-                    </ul>
-                  </li>
-                  <li> <q-icon name="fas fa-store"/> Tiendas en ofertas</li>
-                  <li> <q-icon name="fas fa-car-side"/>  Domicilio</li>
-                  <li> <q-icon name="far fa-surprise"/>  ¿Probemas con una tienda?</li>
-                  <li> <q-icon name="far fa-newspaper"/>  Blog</li>
-                  <li> <q-icon name="fas fa-users"/>Nosotros</li>
-                  <li> <q-icon name="far fa-envelope-open"/> Contacto</li>
-              </ul>
-            </nav>
+             <div class="menu">
+               <q-list class="q-pa-none border-0">
+                  <q-item  v-for="(item, index) in menu_frontend" :key="index"> 
+                     
+
+                    <q-btn-dropdown flat no-caps :icon="item.icon" :label="item.title" v-if="item.children">
+
+                        <q-list class="submenu border-0 q-pa-none bg-light" v-for="(i, index) in item.children" :key="index">
+                          <q-collapsible :icon="i.icon" :label="i.title"  v-if="i.children">
+                            <div>
+                              <p>{{item.title}}</p>
+                              <q-item :to="a.page" v-for="(a, index) in i.children" :key="index">
+                                <q-item-main :label="a.title" />
+                              </q-item>
+                            </div>
+                          </q-collapsible>
+                          <q-item :to="i.page" v-else>
+                              <q-item-side :icon="i.icon" />
+                              <q-item-main :label="i.title" />
+                          </q-item>
+                        </q-list>
+
+                    </q-btn-dropdown>
+                    <q-btn :to="item.page" :icon="item.icon" flat no-caps :label="item.title" v-else/>
+
+
+                  </q-item>
+                </q-list>
+            </div>
 
           </div>
         </div>
       </q-toolbar-title>
       <div class="q-lg-hide">
-        <q-layout-drawer overlay behavior="mobile" content-class="bg-light drawer-main" v-model="drawer">
+        <q-layout-drawer overlay behavior="mobile" content-class=" drawer-main" v-model="drawer">
 
-             <q-list>
-                <q-item> 
-                  <!-- Search -->
-                </q-item>
-                <q-item> 
-                  <!-- cities -->
-                </q-item>
-                 <q-item-separator />
-                <q-item> 
-                  <!-- Menu -->
-                </q-item>
-              </q-list>
+          <q-list>
+            <q-list-header class="text-center"> Menu
+
+            </q-list-header>
+          </q-list>
 
         </q-layout-drawer>
       </div>
@@ -152,23 +158,79 @@ export default {
           value: '1'
         },
         {
-          label: 'Barrios',
+          label: 'Barrioswert',
           value: '2'
         }
       ],
       cityOptions: [
-      {
-        label: 'Rioacha',
-        value: '1'
-      },
-      {
-        label: 'Playaacha',
-        value: '2'
-      },
-      {
-        label: 'Lagoacha',
-        value: '3'
-      }
+        {
+          label: 'Rioacha',
+          value: '1'
+        },
+        {
+          label: 'Playaacha',
+          value: '2'
+        },
+        {
+          label: 'Lagoacha',
+          value: '3'
+        }
+      ],
+      menu_frontend: [
+        {
+          icon: 'fas fa-bars',
+          title: 'Categorias',
+          page: '',
+          children: [
+            {
+              icon: 'fas fa-apple-alt',
+              title: 'Comida',
+              page: '',
+              children: [
+                {
+                  icon: '',
+                  title: 'Restaurantes',
+                  page: '/#'
+                }
+              ]
+            },
+            {
+              icon: 'fas fa-concierge-bell',
+              title: 'Hotel',
+              page: '/#'
+            }
+          ]
+        },
+        {
+          icon: 'fas fa-store',
+          title: 'Tiendas en ofertas',
+          page: '/#'
+        },
+        {
+          icon: 'fas fa-car-side',
+          title: 'Domicilio',
+          page: '/#'
+        },
+        {
+          icon: 'far fa-surprise',
+          title: '¿Probemas con una tienda?',
+          page: '/#'
+        },
+        {
+          icon: 'far fa-newspaper',
+          title: 'Blog',
+          page: '/#'
+        },
+        {
+          icon: 'fas fa-users',
+          title: 'Nosotros',
+          page: '/nosotros'
+        },
+        {
+          icon: 'far fa-envelope-open',
+          title: 'Contacto',
+          page: '/contacto'
+        }
       ]
     }
   },
@@ -183,10 +245,9 @@ export default {
 }
 </script>
 <style lang="stylus">
-@import "~variables";
+@import "~variables"
 
-#masterHeader
-
+#masterHeaderFrontend
   .drawer-main
     .select-cities
       & .q-input-target
@@ -208,6 +269,7 @@ export default {
         z-index 9
         position relative    
         object-fit contain
+        max-height 184px
       &:before
         content ''
         height 100%
@@ -228,7 +290,7 @@ export default {
     background-color $warning
     font-size 20px
     position relative
-    > ul
+    > ul, > .q-list
       -webkit-transform  skew(-10deg)
       transform skew(-10deg)     
       display -ms-flexbox
@@ -237,32 +299,40 @@ export default {
       flex-wrap wrap
       margin 0
       list-style none
-      padding 0
-      > li
+      padding 0 
+      > li, > .q-item
         -ms-flex 1 1 auto
         flex 1 1 auto
         cursor pointer  
         position relative
-        & ul
-          visibility: hidden;
-          opacity: 0;
-          position: absolute;
-          transition: all 0.5s ease;
-          left: 0;
-          display: none;
-          width: 99%;
-          list-style: none;
-          padding: 0; 
-          will-change: transform;
-    ul li:hover > ul, ul li ul:hover 
-      visibility: visible;
-      opacity: 1;
-      display: block;
-
-      
+        padding 0 
+        & .q-btn
+          color $secondary
+          padding 4px 10px
+          position relative
+        & :hover 
+          color $tertiary
+        & .q-btn:hover
+            &:before
+              content ''
+              background-image url('/assets/img/menu-hover.png')
+              position absolute
+              width 100%
+              height 10px
+              background-repeat no-repeat
+              bottom -3px
+              left 0
+              right 0
+              background-position center
+    .q-item.router-link-active, .q-item-link:hover
+      background none  
+    .q-focus-helper
+      display none  
 
   .q-btn-dropdown-arrow
     display none
+
+
 
   .imsocial
     background-color $white
@@ -279,7 +349,9 @@ export default {
       padding 5px
     & a
       margin 5px
-      color #C81E5A
+      color $primary
+      & :hover
+       color $warning
 
   .profile
     display inline-block
@@ -288,6 +360,8 @@ export default {
     padding 10px 15px
     & a
       color #ffffff
+      & :hover
+        color $warning
 
   .search
     .q-select
@@ -313,16 +387,12 @@ export default {
       & .q-input-target
         padding-left 15px
         color #fd2d5e
-        & ::-webkit-input-placeholder 
-          color red
-        & :-ms-input-placeholder 
-          color red
-        & ::-moz-placeholder 
-          color red
-          opacity 1
-        & :-moz-placeholder
-          color red
-          opacity 1
+        &::-webkit-input-placeholder 
+          color $primary !important
+        &::-moz-placeholder 
+          color $primary !important
+        &:-ms-input-placeholder 
+          color $primary !important  
 
 
   .select-cities

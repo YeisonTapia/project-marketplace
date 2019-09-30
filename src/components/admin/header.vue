@@ -37,18 +37,40 @@
     <!-- ============= DRAWERS ======================= -->
     <!-- MENU -->
     <q-layout-drawer id="menu_master" class="no-shadow" v-model="drawer.menu">
-      <q-list no-border link inset-delimiter>
+      <q-list no-border link inset-delimiter class="q-pa-none">
+
+
+        <q-list-header class="q-pb-none">
+          <div class="label-primary text-center text-white">
+
+            <div class="title q-pb-md font-family-secondary">
+              <span>NIVEL</span>
+            </div>
+            <div class="subtitle q-pt-md " >
+              TIENDA PROFESIONAL
+            </div>
+                      
+          </div>
+        </q-list-header>
+
+
+
         <!-- === LOGO === -->
-        <q-list-header class="text-center">
+        <q-list-header class="logo-tienda text-center">
           <router-link :to="{ name: 'app.home'}">
-            <a>
-              <img :src="logo" width="90%">
-            </a>
+              <img :src="logo">
           </router-link>
         </q-list-header>
 
+
         <!--= MENU =-->
         <menu-list :menu="menu"/>
+
+        <q-list-header class="bg-light text-center q-py-lg">
+          <div class="q-headline text-primary text-weight-bold">¿NECESITAS AYUDA </div>
+          <div class="q-subheading text-primary  text-weight-bold q-mb-md">PARA EDITAR TU TIENDA?</div>
+          <q-btn rounded to="/contacto" color="primary" label="Contáctanos aquí"/>
+        </q-list-header>
       </q-list>
     </q-layout-drawer>
 

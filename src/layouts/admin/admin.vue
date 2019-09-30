@@ -1,6 +1,6 @@
 <template>
-  <q-layout view="lHh LpR lFr"
-            class="bg-grey-1"
+  <q-layout view="hHh LpR lFr"
+            class="bg-fondo-q"
             v-if="$store.state.app.active">
     <!-- HEADER -->
     <admin-header />
@@ -64,16 +64,6 @@
 
 <style lang="stylus">
   @import "~variables";
-
-  #list_menu
-    .q-icon
-      font-size: 16px
-
-    .q-item-side
-      min-width 20px !important
-
-  .q-item-main
-    font-size: 15px !important
 
   #menu_leads
     .q-item

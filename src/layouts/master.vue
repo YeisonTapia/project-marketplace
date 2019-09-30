@@ -1,12 +1,12 @@
 <template>
-  <q-layout view="lHh LpR lFr"
+  <q-layout view=" hHh LpR lFr"
             v-if="$store.state.app.active">
     <!-- HEADER -->
 
     <frontend-header/>
 
     <!-- ROUTER VIEW -->
-    <q-page-container>
+    <q-page-container class="master-frontend">
       <router-view/>
     </q-page-container>
 
@@ -17,7 +17,7 @@
 
 <script>
   /*Components*/
-  import frontendHeader from 'src/components/master/frontend/header'
+  import frontendHeader from 'src/components/master/frontend/headerr'
   import frontendFooter from 'src/components/master/frontend/footer'
 
   export default {

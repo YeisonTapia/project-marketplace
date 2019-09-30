@@ -70,6 +70,16 @@ export default {
 		title: 'Trivia',
 		icon: 'far fa-envelope-open'
 	},
+	editartienda: {
+		permission: null,
+		activated: true,
+		path: '/editartienda',
+		name: 'app.editartienda',
+		layout: require('src/layouts/pages/editar_tienda').default,
+		containerLayout: master,
+		title: 'Editar Tienda',
+		icon: 'far fa-store'
+	},
     admin: {
         permission: null,
         activated: true,

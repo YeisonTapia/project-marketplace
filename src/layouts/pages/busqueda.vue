@@ -1,5 +1,5 @@
 <template>
-  <q-page class="bg-fondo advanced_search">
+  <q-page class="bg-fondo advanced_search form-general">
     <div class="q-pa-xl bg-white shadow-2">
       <div class="q-container q-pt-xl">
         <div class="row gutter-lg">
@@ -10,12 +10,12 @@
 
             <q-field class="q-mb-lg">
               <p class="caption q-mb-xs">Categorias</p>
-               <q-select v-model="advanced_search.category" :options="categoryOptions"/>
+              <q-select v-model="advanced_search.category" :options="categoryOptions"/>
             </q-field>
 
             <q-field class="q-mb-lg">
               <p class="caption q-mb-xs">Busca tu producto</p>
-              <q-input v-model="advanced_search.product"placeholder="Busca tu vaina aquí" />
+              <q-input v-model="advanced_search.product" placeholder="Busca tu vaina aquí" />
             </q-field>
 
             <q-field class="q-mb-lg">
@@ -49,7 +49,7 @@
         </div>
         <div class="col-12 text-right">
             <q-field class="q-my-lg">
-              <q-btn class="bg-primary text-white send" @click="search">Buscar</q-btn>
+              <q-btn class="bg-primary text-white btn-arrow-send-pink" @click="search">Buscar</q-btn>
             </q-field>
         </div>
 
@@ -217,27 +217,7 @@ export default {
 </script>
 <style lang="stylus">
 @import "~variables"
-.advanced_search
-  .caption
-    font-family 'Trebuchet MS'
-    font-size 18px
-    color #555555
-  .q-input-target 
-    font-family 'Trebuchet MS'
-    font-size 18px
-    color #999999
-  .q-select
-    & .q-icon  
-     color $primary
-  .send
-    &:after
-      content ''
-      background-image url('/assets/img/arrow-send-pink.png')
-      background-repeat no-repeat
-      background-size contain
-      width 74px
-      height 100px
-      top -4px
-      right 63px
-      position absolute
+
+
+
 </style>

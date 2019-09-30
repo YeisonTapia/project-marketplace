@@ -9,7 +9,7 @@
         color="primary"
       />
     </q-card-main>
-    <q-card-actions vertical align="end" class="send text-primary q-pa-md">
+    <q-card-actions vertical align="end" class="send text-primary q-pa-md font-family-secondary">
       <q-btn>Enviar</q-btn>
     </q-card-actions>
   </q-card>

@@ -86,35 +86,5 @@
 <style lang="stylus">
 @import "~variables"
 .feature-stores   
-    background-color #F7C837
-.title-label-blue
-    -webkit-transform skew(10deg)
-    transform skew(10deg)
-    border-radius 10px
-    padding 10px 20px
-    display inline-block
-    min-width 40%
-    margin -58px 0 10px 0
-    background-color #282D46
-    color #FFFFFF
-    font-size 30px
-    position relative
-    &:before
-        content ''
-        background-image url('/assets/img/arrow-down.png')
-        position absolute
-        right 15px
-        width 38px
-        height 70px
-        background-repeat no-repeat
-        top 27px
-    @media screen and (max-width: $breakpoint-md)
-        min-width 60%
-        font-size 20px
-        padding 0 15px
-        &:before
-            display none !important    
-    & > div
-        -webkit-transform  skew(-10deg)
-        transform skew(-10deg)
+    background-color $warning
 </style>

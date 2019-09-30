@@ -4,7 +4,7 @@
       <img class="img-title" src="/assets/img/copa.png">
     </div>
     <q-card-main>
-      <h2 class="q-mb-0">Usuarios Destacados</h2>
+      <h2 class="q-mb-0 font-family-secondary">Usuarios Destacados</h2>
       <ul>
         <li v-for="item of list">{{item.name}}</li>
       </ul>

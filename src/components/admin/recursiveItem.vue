@@ -1,5 +1,5 @@
 <template>
-	<q-list separator link no-border id="listMenu" class="q-pa-none">
+	<q-list separator link no-border id="listMenuAdmin" class="q-pa-none">
 		<!--Single Item-->
 		<q-item v-for="(item,key) in menu" :key="key"
             v-if="checkItemSingle(item)"
@@ -14,7 +14,7 @@
 			<!--Custom Header-->
 			<template slot="header">
 				<q-item-main>
-					<q-icon :name="item.icon" class="icon-collapsible q-mr-sm text-grey-8" />
+					<q-icon :name="item.icon" class="icon-collapsible q-mr-sm" />
 					<span class="icon-collapsible">{{$tr(item.title)}}</span>
 				</q-item-main>
 			</template>
@@ -89,34 +89,70 @@
 </script>
 <style lang="stylus">
 	@import "~variables";
-	#listMenu
+	#listMenuAdmin
+		font-weight 700
+		font-size 16px
+		border-top 1px solid #e0e0e0 !important
 		.q-icon
 			font-size 16px
+			padding 0 15px
+			color #444444
 
 		.q-collapsible-inner
 			a, .q-collapsible
 				border-top none !important
+				color #444444
+					
 			.q-collapsible-sub-item
-				padding 0 15px
-				padding-right 0
+				padding 0
+				&:hover
+					color #444444
+				.q-item
+					padding 10px
+					border 0
+				.q-item.router-link-active
+					padding 10px
+					border 0
+					background $light !important
+					color $tertiary !important
+					i
+						color $tertiary
+					&:hover
+						background $light !important
+						color $tertiary !important
+				.q-item-side-left
+					padding-left 15px		
+					
 
 		.collapsible-active
+			background $tertiary!important
+			color #fff !important
 			.icon-collapsible
 				transition .5s
-				color $primary !important
+				color #ffffff !important
 				font-weight bold
+			.q-collapsible-sub-item
+				background #fff!important
+				color #444444
+				
 
 		.router-link-active
 			transition .5s
-			background-color $primary
-			color white
+			background $tertiary
+			color #ffffff
+			.q-item-side-left
+				i 
+					color #ffffff 
 			.q-icon
 				transition .5s
-				color white !important
 
-		.q-item, q-collapsible
-			min-height 38px !important
-			padding 6px 10px
+		.q-item
+			padding 20px 10px
+			&:hover
+				background $tertiary!important
+				color #ffffff
+				i 
+					color #ffffff
 </style>
 
 

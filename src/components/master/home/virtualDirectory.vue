@@ -1,7 +1,7 @@
 <template>
     <div class="q-my-lg">
         <div class="virtual-directory text-center ">
-            <h3 class="title-label-blue-1 text-center text-white">
+            <h3 class="title-label-blue-none text-center text-white">
                 <div>Directorio Virtual</div>
             </h3>
           <div class="row q-pa-lg">
@@ -78,23 +78,6 @@
 <style lang="stylus">
 @import "~variables";
 .virtual-directory   
-    background-color #F96353
-.title-label-blue-1
-    -webkit-transform skew(10deg)
-    transform skew(10deg)
-    border-radius 10px
-    padding 10px 20px
-    display inline-block
-    min-width 40%
-    margin -58px 0 10px 0
-    background-color #282D46
-    font-size 30px
-    position relative
-    @media screen and (max-width: $breakpoint-md)
-        min-width 60%  
-        font-size 20px 
-        padding 0 15px
-    & > div
-        -webkit-transform  skew(-10deg)
-        transform skew(-10deg)
+    background-color $tertiary
+
 </style>

@@ -426,6 +426,7 @@ export default {
 <style lang="stylus">
 @import "~variables"
 .page-trivia
+  padding-top 20px
   .card-trivia-item
     cursor pointer
     .q-card-main

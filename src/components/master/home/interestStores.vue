@@ -73,36 +73,4 @@
 </script>
 <style lang="stylus">
 @import "~variables"
-.title-label-orange
-  -webkit-transform skew(10deg)
-  transform skew(10deg)
-  border-radius 10px
-  padding 10px 20px
-  display inline-block
-  min-width 40%
-  margin -58px 0 10px 0
-  background-color #F96353
-  color #FFFFFF
-  font-size 30px
-  position relative
-  &:before
-    content ''
-    background-image url('/assets/img/arrow-down-blue.png')
-    position absolute
-    right -5px
-    width 55px
-    height 70px
-    background-repeat no-repeat
-    top 27px
-  @media screen and (max-width: $breakpoint-md)
-    min-width 60%
-    font-size 20px
-    padding 0 15px
-    &:before
-        display none !important      
-  & > div
-    -webkit-transform  skew(-10deg)
-    transform skew(-10deg)
-
-
 </style>
