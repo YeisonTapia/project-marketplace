@@ -1,6 +1,8 @@
 import appConfig from 'src/config/app'
 import admin from 'src/layouts/admin/admin'
 import frontend from 'src/layouts/master.vue'
+import account from 'src/layouts/account.vue'
+
 //Auto load api routes from modules available in: src/config/app.js "modules"
 //===== Not edit
 let pages = {}
@@ -8,6 +10,7 @@ let pages = {}
 if (appConfig && appConfig.modules) {
   const modules = appConfig.modules
 
+  
   modules.forEach(name => {
     try {
       //Get pages according to app config in: src/config/app.js "isBackend"
@@ -60,6 +63,7 @@ pages.qsite.index.containerLayout=admin
 pages.qsite.index.path= '/admin/site/index'
 pages.qslider.index.containerLayout=admin
 pages.qslider.index.path= '/admin/site/index'
+
 pages.quser.userIndex.containerLayout=admin
 pages.quser.userIndex.path= '/admin/usuarios/index'
 pages.quser.userDepartments.containerLayout=admin
@@ -69,6 +73,27 @@ pages.quser.userRoles.path= '/admin/usuarios/roles'
 pages.quser.userProfile.containerLayout=admin
 pages.quser.userProfile.path='admin/me/profile'
 pages.quser.login.layout=require('@imagina/quser/_layouts/login').default
+
+pages.frontquser.userProfile.path='/account/me/profile'
+pages.frontquser.userProfile.containerLayout=account
+pages.frontquser.userProfile.layout=require('src/layouts/quser/profile').default
+
+pages.frontqquiz.test.path='account/iquiz/test' // Testing Route Frontend Account Iquiz
+
+pages.qquiz.polls.containerLayout=admin
+pages.qquiz.polls.path= '/admin/iquiz/polls/index'
+pages.qquiz.pollsCreate.containerLayout=admin
+pages.qquiz.pollsCreate.path= '/admin/iquiz/polls/create'
+pages.qquiz.pollsUpdate.containerLayout=admin
+pages.qquiz.pollsUpdate.path= '/admin/iquiz/polls/:id'
+pages.qquiz.questions.containerLayout=admin
+pages.qquiz.questions.path= '/admin/iquiz/questions/index/poll/:id'
+pages.qtrivia.trivias.containerLayout=admin
+pages.qtrivia.trivias.path= '/admin/itrivia/trivias/index'
+pages.qtrivia.questions.containerLayout=admin
+pages.qtrivia.questions.path= '/admin/itrivia/questions/index/trivia/:id'
+pages.qtrivia.rangepoints.containerLayout=admin
+pages.qtrivia.rangepoints.path= '/admin/itrivia/rangepoints/index/trivia/:id'
 
 
 //======= Add or update extra apiRoutes

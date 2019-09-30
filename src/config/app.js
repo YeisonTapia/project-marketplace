@@ -19,7 +19,8 @@ export default {
     'qslider',
     'qsite',
     'qsubscription',
-    'qquiz'
+    'qquiz',
+    'qtrivia'
   ],
   //Storage
   saveStorage : {

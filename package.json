@@ -18,7 +18,7 @@
     "@imagina/qcrud": "^1.0.0",
     "@imagina/qhelper": "^1.0.0",
     "@imagina/qmedia": "^1.0.0",
-    "@imagina/qmenu": "^1.0.0",
+    "@imagina/qmenu": "^1.0.1",
     "@imagina/qnotification": "^0.0.6",
     "@imagina/qplace": "^1.0.0",
     "@imagina/qsite": "^1.0.0",

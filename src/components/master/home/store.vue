@@ -46,7 +46,7 @@
           height 100px
           width 100px
       & .pts
-        background-image url('/assets/img/label.png')
+        background-image url('/assets/img/label-primary.png')
         display flex
         align-items center
         justify-content center
