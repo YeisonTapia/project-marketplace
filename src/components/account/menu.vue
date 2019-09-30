@@ -6,15 +6,15 @@
     <div class="row bloque-nivel-club">
               <div class="col-12">
                   <div class="nivel relative-position text-white text-center q-pt-lg round-borders">
-                      <h4 class="uppercase q-my-sm">nivel</h4>
+                      <h4 class="uppercase q-my-sm font-family-secondary">nivel</h4>
                       <h5 class="uppercase q-mb-xs q-mt-md">club de conocidos</h5>
                       <p class="text-center text-white">dondeestaesavaina.com</p>
                   </div>
                   <div class="club text-center">
                     <div class="circulo bg-secondary text-white round flex items-center justify-center">
-                      <div class="points">100</div>
+                      <div class="points font-family-secondary">100</div>
                     </div>
-                    <h5 class="text-secondary q-mt-md">Puntos historicos</h5>
+                    <h5 class="font-family-secondary text-secondary q-mt-md">Puntos historicos</h5>
                   </div>
               </div>
     </div>

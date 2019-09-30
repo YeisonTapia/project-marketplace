@@ -1,7 +1,6 @@
 import {helper} from '@imagina/qhelper/_plugins/helper'
 import alert from '@imagina/qhelper/_plugins/alert'
 import {Forage} from '@imagina/qhelper/_plugins/localForage'
-import CKEditor from '@ckeditor/ckeditor5-vue';
 
 
 export default ({ Vue }) => {

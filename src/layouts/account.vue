@@ -6,7 +6,7 @@
     <frontend-header/>
 
     <!-- ROUTER VIEW -->
-    <q-page-container>
+    <q-page-container class="master-frontend">
        <q-page id="profilePage" class="page bg-fondo q-layout-page layout-padding frontend-page">
 
         <div class="row gutter-lg q-my-xl">
@@ -24,7 +24,6 @@
         </div>
 
       </q-page>
-
     </q-page-container>
 
     <!-- FOOTER -->

@@ -707,6 +707,8 @@
         this.form.fields = this.$clone(this.defaultFields)//Set default fields
         await this.setUserData()//Set user data
         await this.getCountries()// Get countries
+        if(this.form.fields.country.value!="")
+          await this.getCities()
         this.success = true//Success page
         this.loading = false//Loading
       },
@@ -793,6 +795,7 @@
                   label:data.name,
                   value:data.id
                 })
+
               })
               resolve(true);
             })
@@ -808,9 +811,11 @@
             let apiUrl = '/provinces'
             let params = {
               params: {
-                filter: {country_id: this.form.fields.country.value}
+                filter: {country: this.form.fields.country.value}
               }
             }
+
+            this.cityOptions = []
 
             http.get(config('apiRoutes.api.api_ilocations') + apiUrl, params)
             .then(response => {
