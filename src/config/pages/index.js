@@ -78,7 +78,7 @@ pages.frontquser.userProfile.path='/account/me/profile'
 pages.frontquser.userProfile.containerLayout=account
 pages.frontquser.userProfile.layout=require('src/layouts/quser/profile').default
 
-pages.frontqquiz.test.path='account/iquiz/test' // Testing Route Frontend Account Iquiz
+//pages.frontqquiz.test.path='account/iquiz/test' // Testing Route Frontend Account Iquiz
 
 pages.qquiz.polls.containerLayout=admin
 pages.qquiz.polls.path= '/admin/iquiz/polls/index'

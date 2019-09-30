@@ -17,7 +17,7 @@
 
 <script>
   /*Components*/
-  import frontendHeader from 'src/components/master/frontend/headerr'
+  import frontendHeader from 'src/components/master/frontend/header'
   import frontendFooter from 'src/components/master/frontend/footer'
 
   export default {
