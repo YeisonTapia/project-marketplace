@@ -8,5 +8,4 @@ export default ({ Vue }) => {
   Vue.prototype.$helper = helper
   Vue.prototype.$alert = alert
   Vue.prototype.$storage = Forage
-  Vue.use( CKEditor );
 }
