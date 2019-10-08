@@ -1,7 +1,7 @@
 
 <template>
   <div id="masterHeaderFrontend" class="font-family-secondary">
-    <q-layout-header reveal class="no-shadow">
+    <q-layout-header reveal class="no-shadow" v-if="desktop">
       <q-toolbar-title>
         <div class="row gutter-sm bg-degradado">
           <div class="col-3 bg-white self-center logo-circle">
@@ -11,7 +11,7 @@
               </router-link>
             </div>
           </div>
-          <div class="col-9  ">
+          <div class="col-9">
             <div class="row h-100 justify-end">
               <div class="col-auto icon-center-start">
                 <im-social class="q-hide q-sm-inline-show"></im-social>
@@ -19,18 +19,13 @@
                   <a href=""><i class="fas fa-user-alt"></i></a>
                   <span class="q-px-sm font-family-primary">|</span>
                   <a href=""><i class="fas fa-heart"></i></a>
-
+                  <span class="q-lg-hide">
+                    <span class="q-px-sm font-family-primary">|</span>
+                    <a @click="createStore()"><i class="fas fa-store"></i></a>
+                    <span class="q-px-sm font-family-primary">|</span>
+                    <a @click="toggleDrawer('menu',!drawer.menu)"><i class="fas fa-bars"></i></a>
+                  </span>
                 </div>
-                <span class="q-lg-hide q-pr-md">
-                  <q-btn
-                  @click="drawer = !drawer"
-                  flat
-                  round
-                  dense
-                  color="white"
-                  icon="menu"
-                  />
-                </span>
               </div>
               <div class="col-12 q-py-sm-sm q-py-lg-md q-hide q-sm-show">
                 <div class="row gutter-sm justify-center items-center">
@@ -38,37 +33,43 @@
                     <div class="search">
                       <div class="row items-center">
                         <div class="col-auto">
-                          <q-btn class="btn-search" round color="warning" icon="search" />
+                          <q-btn class="btn-search" round color="warning" icon="search" @click="searchStore()" />
                         </div>
                         <div class="col">
                           <q-input v-model="search.text" color="white" inverted placeholder="Busca tu vaina aquí..."/>
                         </div>
-                        <div class="col-4">
-                          <q-select 
+                        <div class="col-3">
+                          <q-select class="select-neighborhood"
                           color="white" inverted
                           hide-underline
-                          v-model="search.select"
-                          :options="searchOptions"
+                          v-model="search.neighborhood"
+                          :options="neighborhoodOptions"
                           />
+                        </div>
+                        <div class="col-auto q-pl-md">
+                          <q-select class="select-cities"
+                            color="yellow"
+                            hide-underline
+                            v-model="search.city"
+                            :options="cityOptions"
+                            :before="[{ icon: 'fas fa-globe-americas' }]"
+                            />
                         </div>
                       </div>
                     </div>
+
                   </div>
-                  <div class="col-xs-12 col-sm-9 col-md-auto q-hide q-md-show">
+                  <!--<div class="col-xs-12 col-sm-9 col-md-auto q-hide q-sm-show">
                     <q-select class="select-cities"
                     color="yellow"
                     hide-underline
-                    v-model="cities"
+                    v-model="search.city"
                     :options="cityOptions"
-                    :before="[
-                    {
-                      icon: 'fas fa-globe-americas'
-                    }
-                    ]"
+                    :before="[{ icon: 'fas fa-globe-americas' }]"
                     />
-                  </div>
+                  </div> -->
                   <div class="col-xs-12 col-sm-9 col-md-auto q-hide q-md-show">
-                    <q-btn class="btn-tienda" flat icon="fas fa-store" color="white" no-caps label="Crea tu Tienda Virtual" />
+                    <q-btn class="btn-tienda" flat icon="fas fa-store" color="white" no-caps label="Crea tu Tienda Virtual" @click="createStore()" />
                   </div>
                 </div>
               </div>
@@ -77,63 +78,51 @@
         </div>
         <div class="row justify-center q-mx-xl q-hide q-lg-show">
           <div class="col-12 text-center">
-             <div class="menu">
-               <q-list class="q-pa-none border-0">
-                  <q-item  v-for="(item, index) in menu_frontend" :key="index"> 
-                     
-
-                    <q-btn-dropdown flat no-caps :icon="item.icon" :label="item.title" v-if="item.children">
-
-                        <q-list class="submenu border-0 q-pa-none bg-light" v-for="(i, index) in item.children" :key="index">
-                          <q-collapsible :icon="i.icon" :label="i.title"  v-if="i.children">
-                            <div>
-                              <p>{{item.title}}</p>
-                              <q-item :to="a.page" v-for="(a, index) in i.children" :key="index">
-                                <q-item-main :label="a.title" />
-                              </q-item>
-                            </div>
-                          </q-collapsible>
-                          <q-item :to="i.page" v-else>
-                              <q-item-side :icon="i.icon" />
-                              <q-item-main :label="i.title" />
-                          </q-item>
-                        </q-list>
-
-                    </q-btn-dropdown>
-                    <q-btn :to="item.page" :icon="item.icon" flat no-caps :label="item.title" v-else/>
-
-
-                  </q-item>
-                </q-list>
-            </div>
-
+             <menu-component :menu="menu_frontend"/>
           </div>
         </div>
       </q-toolbar-title>
-      <div class="q-lg-hide">
-        <q-layout-drawer overlay behavior="mobile" content-class=" drawer-main" v-model="drawer">
-
-          <q-list>
-            <q-list-header class="text-center"> Menu
-
-            </q-list-header>
-          </q-list>
-
-        </q-layout-drawer>
-      </div>
     </q-layout-header>
+    <q-layout-header v-else>
+        <q-toolbar class="bg-degradado logo-movil">
+          <q-btn flat color="primary" dense style="z-index: 9;" round @click="toggleDrawer('menu',!drawer.menu)" aria-label="Menu">
+            <q-icon name="menu" />
+          </q-btn>
+          <q-toolbar-title class="q-pl-sm" style="z-index: 9;">
+             <router-link :to="{ name: 'app.home'}">
+                <img :src="logo" :alt="projectName" class="row items-center" style="height: 2.4em;">
+              </router-link>
+          </q-toolbar-title>
+          <q-btn flat round dense icon="fas fa-user-alt" />
+          <q-btn flat round dense icon="fas fa-heart" />
+          <q-btn flat round dense @click="createStore()" icon="fas fa-store" />
+        </q-toolbar>
+    </q-layout-header>
+    <q-layout-drawer overlay behavior="mobile" content-class=" drawer-main" v-model="drawer.menu">
+      <q-list no-border link inset-delimiter class="q-pa-none">
+
+        <q-list-header class="text-center"> Menu </q-list-header>
+
+          <menu-side :menu="menu_frontend"/>
+
+       </q-list>
+    </q-layout-drawer>
   </div>
 </template>
 <script>
 import WidgetUser from "@imagina/quser/_components/widget-user";
 import configList from '../configList';
 import imSocial from 'src/components/master/imSocial';
+import menuComponent from 'src/components/master/frontend/menu';
+import menuSide from 'src/components/master/frontend/menuSide';
 export default {
   props: {},
   components: {
     WidgetUser,
     configList,
-    imSocial
+    imSocial,
+    menuComponent,
+    menuSide
   },
   watch: {},
   mounted() {
@@ -144,15 +133,21 @@ export default {
     return {
       projectName: this.$store.getters['qsiteSettings/getSettingValueByName']('core::site-name'),
       userData: this.$store.state.quserAuth.userData,
-      logo: this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo1').path,
-      cities: '1',
+      drawer: {
+        menu: false,
+        config: false,
+        notification: false
+      },
+      menu: (this.$store.getters['qmenuMaster/menu'](1)).items,
+      logo : this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo1').path,
+      desktop: true, // this.$q.platform.is.desktop,
       text: '',
-      drawer: false,
       search: {
         text: '',
-        select: '1'
+        neighborhood: '1',
+        city: '1'
       },
-      searchOptions: [
+      neighborhoodOptions: [
         {
           label: 'Barrios',
           value: '1'
@@ -176,60 +171,107 @@ export default {
           value: '3'
         }
       ],
-      menu_frontend: [
+      categories: [
         {
           icon: 'fas fa-bars',
           title: 'Categorias',
-          page: '',
+          activated: true,
+          permission: true,
           children: [
             {
               icon: 'fas fa-apple-alt',
               title: 'Comida',
               page: '',
+              activated: true,
+              permission: true,
               children: [
                 {
                   icon: '',
                   title: 'Restaurantes',
-                  page: '/#'
+                  page: '/#',
+                  activated: true,
+                  permission: true,
                 }
               ]
             },
             {
               icon: 'fas fa-concierge-bell',
               title: 'Hotel',
-              page: '/#'
+              page: '/#',
+              activated: true,
+              permission: true,
+            }
+          ]
+        }
+      ],
+      menu_frontend: [
+        {
+          icon: 'fas fa-bars',
+          title: 'Categorias',
+          activated: true,
+          permission: true,
+          children: [
+            {
+              icon: 'fas fa-apple-alt',
+              title: 'Comida',
+              page: '',
+              activated: true,
+              permission: true,
+              children: [
+                {
+                  icon: '',
+                  title: 'Restaurantes',
+                  page: '/#',
+                  activated: true,
+                  permission: true,
+                }
+              ]
+            },
+            {
+              icon: 'fas fa-concierge-bell',
+              title: 'Hotel',
+              page: '/#',
+              activated: true,
+              permission: true,
             }
           ]
         },
         {
           icon: 'fas fa-store',
           title: 'Tiendas en ofertas',
-          page: '/#'
+          name: 'app.tiendas',
+          activated: true
         },
         {
           icon: 'fas fa-car-side',
           title: 'Domicilio',
-          page: '/#'
+          name: 'app.domicilio',
+          activated: true
         },
         {
           icon: 'far fa-surprise',
           title: '¿Probemas con una tienda?',
-          page: '/#'
+          name: 'app.contacto',
+          activated: true
         },
         {
           icon: 'far fa-newspaper',
           title: 'Blog',
-          page: '/#'
+          name: 'app.blog',
+          activated: true,
+          permission: true,
         },
         {
           icon: 'fas fa-users',
           title: 'Nosotros',
-          page: '/nosotros'
+          name: 'app.nosotros',
+          activated: true
         },
         {
           icon: 'far fa-envelope-open',
           title: 'Contacto',
-          page: '/contacto'
+          name: 'app.contacto',
+          activated: true
         }
       ]
     }
@@ -241,6 +283,19 @@ export default {
   },
   methods: {
     //Show drawer specific
+    toggleDrawer(name, show) {
+      //Hidden all drawers
+      for (var drawer in this.drawer) {
+        this.drawer[drawer] = false
+      }
+      this.drawer[name] = show//Show only drawer specific
+    },
+    createStore() {
+      //Crear Tienda
+    },
+    searchStore() {
+      // Buscar tienda
+    } 
   }
 }
 </script>
@@ -248,14 +303,6 @@ export default {
 @import "~variables"
 
 #masterHeaderFrontend
-  .drawer-main
-    .select-cities
-      & .q-input-target
-        color #333
-      & .q-icon
-        font-size 1.4rem
-        color #333
-
   .q-toolbar-title
     padding 0
 
@@ -281,57 +328,8 @@ export default {
         position absolute
         top 0
 
-  .menu
-    -webkit-transform skew(10deg)
-    transform skew(10deg)
-    border-radius 10px
-    padding 10px 15px
-    margin -14px 0 10px 0
-    background-color $warning
-    font-size 20px
-    position relative
-    > ul, > .q-list
-      -webkit-transform  skew(-10deg)
-      transform skew(-10deg)     
-      display -ms-flexbox
-      display flex
-      -ms-flex-wrap wrap
-      flex-wrap wrap
-      margin 0
-      list-style none
-      padding 0 
-      > li, > .q-item
-        -ms-flex 1 1 auto
-        flex 1 1 auto
-        cursor pointer  
-        position relative
-        padding 0 
-        & .q-btn
-          color $secondary
-          padding 4px 10px
-          position relative
-        & :hover 
-          color $tertiary
-        & .q-btn:hover
-            &:before
-              content ''
-              background-image url('/assets/img/menu-hover.png')
-              position absolute
-              width 100%
-              height 10px
-              background-repeat no-repeat
-              bottom -3px
-              left 0
-              right 0
-              background-position center
-    .q-item.router-link-active, .q-item-link:hover
-      background none  
-    .q-focus-helper
-      display none  
-
   .q-btn-dropdown-arrow
     display none
-
 
 
   .imsocial
@@ -364,7 +362,7 @@ export default {
         color $warning
 
   .search
-    .q-select
+    .select-neighborhood
       color #fd2d5e!important
       box-shadow none
       border-radius 0 20px 20px 0
@@ -390,17 +388,18 @@ export default {
         &::-webkit-input-placeholder 
           color $primary !important
         &::-moz-placeholder 
+          opacity 1
           color $primary !important
+        &:-moz-placeholder 
+          color $primary !important  
         &:-ms-input-placeholder 
           color $primary !important  
-
-
-  .select-cities
-    font-size 20px
-    & .q-input-target
-      color #FFFFFF
-    & .q-icon
-      color #F7C837
+    .select-cities
+      font-size 20px
+      & .q-input-target
+        color #FFFFFF
+      & .q-icon
+        color #F7C837
 
 
   .btn-tienda
@@ -458,4 +457,18 @@ export default {
       .logo
         &:before
           right -12%       
+
+  .logo-movil
+    position relative
+    &:before
+      content ''
+      height 100%
+      width 140px
+      background-color #FFFFFF
+      display block
+      border-radius 0 40px 40px 0
+      left 0
+      position absolute
+      top 0
+
 </style>

@@ -5,6 +5,7 @@
       <h2 class="text-primary q-mb-0">¿En que año se inició la Copa América de fútbol?</h2>
       <q-option-group
         v-model="group"
+        type="radio"
         :options="options"
         color="primary"
       />
@@ -19,7 +20,7 @@
       name: 'TriviaComponent',
       data () {
           return {
-              group: [],
+              group: '',
               options: [
                   {
                       label: '1920',
@@ -32,7 +33,7 @@
                   {
                       label: '1926',
                       value: 'op3'
-                  },
+                  }
               ]
           }
       }

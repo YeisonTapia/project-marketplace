@@ -21,7 +21,7 @@
 
 
                 <div class="row gutter-lg">
-                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-5">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
            
                     <q-field class="q-mb-lg">
                       <p class="caption q-mb-md">Agregar Logo 
@@ -41,7 +41,7 @@
                     </q-field>
 
                   </div>
-                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-7">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                      <q-field class="q-mb-lg">
                         <p class="caption q-mb-md">Agregar imagenes para slider 
                           <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
@@ -55,10 +55,10 @@
                           <q-carousel
                             color="white"
                             quick-nav
-                            height="250px"
+                            class="img-ratio-4-3"
                           >
 
-                            <q-carousel-slide class="rounded-md" v-for="(s,index) in company.slider" :hey="index" :img-src="s.image" />
+                            <q-carousel-slide class="rounded-md" v-for="(s,index) in company.slider" :key="index" :img-src="s.image" />
 
                           </q-carousel>
                           <div class="absolute-bottom-right">
@@ -158,15 +158,7 @@
                         </q-btn>
                       </p>
 
-                      <!--
-                      <q-input v-model="selected" />
-                      <q-tree
-                        :nodes="categoryOptions"
-                        node-key="label"
-                        default-expand-all
-                        :selected.sync="selected"
-                        tick-strategy="feal"
-                      />  -->
+                      <q-select multiple v-model="company.category" :options="categoryOptions" />
                     </q-field>
 
                     <q-field  class="q-mb-xl">
@@ -214,9 +206,9 @@
                           <q-carousel
                             color="white"
                             quick-nav
-                            height="310px"
+                            class="img-ratio-4-3"
                           >
-                            <q-carousel-slide class="rounded-md" v-for="(s,index) in company.gallery" :hey="index" :img-src="s.image" />
+                            <q-carousel-slide class="rounded-md" v-for="(s,index) in company.gallery" :key="index" :img-src="s.image" />
                           </q-carousel>
                           <div class="absolute-bottom-right">
                             <q-btn class="rounded-sm btn q-mr-sm" color="primary" icon="fas fa-edit"/>
@@ -247,7 +239,7 @@
 
                   <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7">
-                      <div v-for="item in company.social_networks">
+                      <div v-for="(item,index) in company.social_networks" :key="index">
                         <div class="row items-center q-mb-md">
                           <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
                             <q-checkbox v-model="item.active"> 
@@ -279,7 +271,7 @@
                     </q-btn>
                   </p>
 
-                  <div v-for="item in company.payment_methods">
+                  <div v-for="(item,index) in company.payment_methods" :key="index">
                     <div class="row items-center q-py-md border-bottom-gray">
                       <div class="col">
                         <q-checkbox v-model="item.active"> 
@@ -309,7 +301,7 @@
                     </q-btn>
                   </p>
 
-                  <div v-for="item in company.shipping_methods">
+                  <div v-for="(item,index) in company.shipping_methods" :key="index">
                     <div class="row items-center q-py-md border-bottom-gray">
                       <div class="col">
                         <q-checkbox v-model="item.active"> 
@@ -378,8 +370,27 @@
                     <p class="caption q-mb-none">Primario</p>
                   </div>
                   <div class="col-xs-6 col-sm-5 col-md-3">
-                    <div class="q-pa-md line-grey text-center" :style="{ 'background-color': theme.primary }">
+                    <div @click="showingPrimary = true"  class="q-pa-md line-grey text-center" :style="{ 'background-color': theme.primary }">
                       {{theme.primary}}
+
+                      <q-popover v-model="showingPrimary" anchor="bottom right" self="bottom left">
+                        <q-tabs align="justify">
+                          <q-tab default  slot="title" name="tab-1" label="HEX" :style="{ 'background-color': theme.primary }"/>
+                          <q-tab  slot="title" name="tab-2" label="RGB" :style="{ 'background-color': theme.primary }"/>
+                          <q-tab-pane name="tab-1" class="q-pa-none" style="min-width: 80px;">
+                              <div class="text-center q-pa-md" :style="{ 'background-color': theme.primary }">
+                                {{theme.primary}}
+                              </div>
+                              <q-color-picker v-model="theme.primary" format-model="hex" />
+                          </q-tab-pane>
+                          <q-tab-pane name="tab-2" class="q-pa-none" style="min-width: 80px;">
+                              <div class="text-center q-pa-md" :style="{ 'background-color': theme.primary }">
+                                {{theme.primary}}
+                              </div>
+                              <q-color-picker v-model="theme.primary" format-model="rgb" />
+                          </q-tab-pane>
+                        </q-tabs>
+                      </q-popover>
                     </div>
                   </div>
                 </div>
@@ -388,8 +399,27 @@
                     <p class="caption q-mb-none">Secondario</p>
                   </div>
                   <div class="col-xs-6 col-sm-5 col-md-3">
-                    <div class="q-pa-md line-grey text-center line" :style="{ 'background-color': theme.secondary }">
+                    <div @click="showingSecondary = true" class="q-pa-md line-grey text-center line" :style="{ 'background-color': theme.secondary }">
                       {{theme.secondary}}
+
+                      <q-popover v-model="showingSecondary" anchor="bottom right" self="bottom left">
+                        <q-tabs align="justify">
+                          <q-tab default  slot="title" name="tab-1" label="HEX" :style="{ 'background-color': theme.secondary }"/>
+                          <q-tab  slot="title" name="tab-2" label="RGB" :style="{ 'background-color': theme.secondary }"/>
+                          <q-tab-pane name="tab-1" class="q-pa-none" style="min-width: 80px;">
+                              <div class="text-center q-pa-md" :style="{ 'background-color': theme.secondary }">
+                                {{theme.secondary}}
+                              </div>
+                              <q-color-picker v-model="theme.secondary" format-model="hex" />
+                          </q-tab-pane>
+                          <q-tab-pane name="tab-2" class="q-pa-none" style="min-width: 80px;">
+                              <div class="text-center q-pa-md" :style="{ 'background-color': theme.secondary }">
+                                {{theme.secondary}}
+                              </div>
+                              <q-color-picker v-model="theme.secondary" format-model="rgb" />
+                          </q-tab-pane>
+                        </q-tabs>
+                      </q-popover>
                     </div>
                   </div>
                 </div>
@@ -398,8 +428,27 @@
                     <p class="caption q-mb-none">Fondo</p>
                   </div>
                   <div class="col-xs-6 col-sm-5 col-md-3">
-                    <div class="q-pa-md line-grey text-center" :style="{ 'background-color': theme.fondo }">
+                    <div @click="showingBackground = true" class="q-pa-md line-grey text-center" :style="{ 'background-color': theme.background }">
                       {{theme.background}}
+
+                      <q-popover v-model="showingBackground" anchor="bottom right" self="bottom left">
+                        <q-tabs align="justify">
+                          <q-tab default  slot="title" name="tab-1" label="HEX" :style="{ 'background-color': theme.background }"/>
+                          <q-tab  slot="title" name="tab-2" label="RGB" :style="{ 'background-color': theme.background }"/>
+                          <q-tab-pane name="tab-1" class="q-pa-none" style="min-width: 80px;">
+                              <div class="text-center q-pa-md" :style="{ 'background-color': theme.background }">
+                                {{theme.background}}
+                              </div>
+                              <q-color-picker v-model="theme.background" format-model="hex" />
+                          </q-tab-pane>
+                          <q-tab-pane name="tab-2" class="q-pa-none" style="min-width: 80px;">
+                              <div class="text-center q-pa-md" :style="{ 'background-color': theme.background }">
+                                {{theme.background}}
+                              </div>
+                              <q-color-picker v-model="theme.background" format-model="rgb" />
+                          </q-tab-pane>
+                        </q-tabs>
+                      </q-popover>
                     </div>
                   </div>
                 </div>
@@ -409,21 +458,19 @@
 
             <h5 class="text-primary q-ma-lg">Crear Producto</h5>
 
-            <q-card  class="rounded-md bg-white w-100 q-mb-xl">
+            <q-card  class="rounded-md bg-white w-100 q-my-xl">
 
-              <q-card-main class="q-px-xl q-py-xl form-general">
+              <q-card-main class="q-px-xl  q-py-none form-general">
 
                 <div class="row gutter-md justify-center">
-                  <div class="col-7">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 card-border-right">
 
                     <q-field class="q-mb-xl">
-                      <p class="caption q-mb-sm">Nombre de producto
-                      </p>
+                      <p class="caption q-mb-sm">Nombre de producto</p>
                       <q-input v-model="product.name" placeholder="Lorem Ipsum" />
                     </q-field>
                     <q-field class="q-mb-xl">
-                      <p class="caption q-mb-sm">Descripción corta
-                      </p>
+                      <p class="caption q-mb-sm">Descripción corta</p>
                       <q-input v-model="product.summary" placeholder="Lorem Ipsum" />
                     </q-field>
                     <q-field class="q-mb-xl">
@@ -445,8 +492,8 @@
                       </q-btn>
                     </p>
                     <div class="row gutter-sm">
-                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-5">
-                        <q-field class="q-mb-lg">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                        <q-field class="q-mb-xl">
                           <div class="images ratio-4-3">
                             <img class="rounded-md" :src="product.image" alt="default">
 
@@ -456,16 +503,16 @@
                           </div>
                         </q-field>
                       </div>
-                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-7">
-                         <q-field class="q-mb-lg">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                         <q-field class="q-mb-xl">
                             <div class="images" style="position:relative;">
                               <q-carousel
                                 color="white"
                                 quick-nav
-                                height="250px"
+                                class="img-ratio-4-3"
                               >
 
-                                <q-carousel-slide class="rounded-md" v-for="(s,index) in product.gallery" :hey="index" :img-src="s.image" />
+                                <q-carousel-slide class="rounded-md" v-for="(s,index) in product.gallery" :key="index" :img-src="s.image" />
 
                               </q-carousel>
                               <div class="absolute-bottom-right">
@@ -490,7 +537,29 @@
                     </q-field>
 
                   </div>
-                  <div class="col-5">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 col-xl-4">
+                    <q-field  class="q-mb-xl">
+                      <p class="caption q-mb-sm">Estado</p>
+                      <q-select v-model="product.status" :options="statusOptions" />
+                    </q-field>
+
+                    <q-field  class="q-mb-xl">
+                      <p class="caption q-mb-sm">Categoria Principal</p>
+                      <q-select v-model="product.category" :options="categoryOptions" />
+                    </q-field>
+
+                    <q-field  class="q-mb-xl">
+                      <p class="caption q-mb-sm">Categoria </p>
+                      <q-search
+                          v-model="searchModel"
+                          placeholder="Buscar categorías"
+                          icon="search"
+                          inverted-light
+                          color="white"
+                          hide-underline  no-parent-field
+                          class="border">
+                        </q-search>
+                    </q-field>
 
 
                   </div>
@@ -500,6 +569,117 @@
               </q-card-main>
             </q-card>
 
+            <q-card  class="rounded-md bg-white w-100 q-mb-xl">
+
+              <q-card-main class="q-px-xl q-py-xl form-general">
+
+                <div class="row gutter-md justify-center">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+
+                    <q-field class="q-mb-xl">
+                      <p class="caption q-mb-sm">Precio</p>
+                      <q-input  helper="Helper" count="10" prefix="$" v-model="product.price" placeholder="000.00" />
+                    </q-field>
+                    <q-field class="q-mb-xl">
+                      <p class="caption q-mb-sm">Cantidad</p>
+                      <q-input v-model="product.quantity" placeholder="1" />
+                    </q-field>
+                    <q-field class="q-mb-xl">
+                      <p class="caption q-mb-sm">Peso</p>
+                       <q-input v-model="product.weight" placeholder="1" />
+                    </q-field>
+                    <q-field class="q-mb-xl">
+                      <p class="caption q-mb-sm">Longitud</p>
+                       <q-input v-model="product.length" placeholder="1" />
+                    </q-field>
+                    <q-field class="q-mb-xl">
+                      <p class="caption q-mb-sm">Anchura</p>
+                       <q-input v-model="product.width" placeholder="1" />
+                    </q-field>
+                    <q-field class="q-mb-xl">
+                      <p class="caption q-mb-sm">Altura</p>
+                       <q-input v-model="product.height" placeholder="1" />
+                    </q-field>
+                  </div>
+
+
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                    <q-field class="q-mb-xl">
+                      <p class="caption q-mb-sm">Referencia</p>
+                       <q-input v-model="product.reference" placeholder="" />
+                    </q-field>
+
+                    <q-field  class="q-mb-xl">
+                      <q-toggle v-model="product.stock" color="primary" label="Stock" />
+                    </q-field>
+
+                    <q-field  class="q-mb-xl">
+                      <p class="caption q-mb-sm">Orden minima</p>
+                      <q-input v-model="product.order_min" placeholder="1" />
+                    </q-field>
+                    <q-field class="q-mb-xl">
+                      <p class="caption q-mb-sm">Puntos</p>
+                       <q-input v-model="product.points" placeholder="1" />
+                    </q-field>
+                    <q-field class="q-mb-xl">
+                      <div class="row gutter-sm">
+                        <div class="col-auto">
+                           <q-checkbox v-model="product.active_home"></q-checkbox>
+                        </div>
+                        <div class="col">
+                          <p class="caption q-mb-none">Agregar producto a la página inicial de "Donde esta tu vaina" </p>
+                          <p><small class="text-primary">Disponibles (2)</small></p>
+                        </div>
+                      </div>
+                    </q-field>
+
+                    <q-card-actions no-caps class="q-pa-lg">
+                      <q-btn class="rounded-sm q-px-md" size="lg" no-caps color="primary" label="Opción de Producto"/>
+                    </q-card-actions>
+
+                  </div>
+                </div>
+
+              </q-card-main>
+            </q-card>
+
+            <q-card  class="rounded-md bg-white w-100 q-mb-xl">
+
+              <q-card-main class="q-px-xl q-py-xl form-general">
+
+                <div class="row gutter-md justify-center">
+                  <div class="col-12">
+                    <p class="caption q-mb-sm">Editar SEO
+                      <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
+                        <q-tooltip>
+                          Some text as content of Tooltip
+                        </q-tooltip>
+                      </q-btn>
+                    </p>
+                  </div>
+                </div>
+
+              </q-card-main>
+            </q-card>
+
+            <q-card  class="rounded-md bg-white w-100 q-mb-xl">
+
+              <q-card-main class="q-px-xl q-py-xl form-general">
+
+                <div class="row gutter-md justify-center">
+                  <div class="col-12">
+                    <p class="caption q-mb-sm">Relacionados
+                      <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
+                        <q-tooltip>
+                          Some text as content of Tooltip
+                        </q-tooltip>
+                      </q-btn>
+                    </p>
+                  </div>
+                </div>
+                
+              </q-card-main>
+            </q-card>
 
           </div>
 
@@ -606,7 +786,10 @@ export default {
           }
         ]
       },
-      selected: null,
+      showingPrimary: false,
+      showingSecondary: false,
+      showingBackground: false,
+      searchModel: '',
       sectorOptions: [
         {
           label: 'Barrios',
@@ -633,36 +816,40 @@ export default {
       ],
       categoryOptions: [
         {
-          label: 'Categoría',
-          value: '0',
+          label: 'Comida', 
+          value: '1',
           children: [
-            {
-              label: 'Comida', 
-              value: '1',
-              children: [
-                { label: 'Restaurantes', value: '2' },
-                { label: 'Comidas rápidas', value: '2' },
-                { label: 'Panaderías', value: '2' }
-              ]
-            },
-            {
-              label: 'Good service (disabled node)', 
-              value: '2',
-              children: [
-                { label: 'Prompt attention', value: '2' },
-                { label: 'Professional waiter', value: '2' }
-              ]
-            },
-            {
-              label: 'Pleasant surroundings', 
-              value: '2',
-              children: [
-                { label: 'Happy atmosphere', value: '2' },
-                { label: 'Good table presentation', value: '2' },
-                { label: 'Pleasing decor', value: '2' }
-              ]
-            }
+            { label: 'Restaurantes', value: '2' },
+            { label: 'Comidas rápidas', value: '2' },
+            { label: 'Panaderías', value: '2' }
           ]
+        },
+        {
+          label: 'Good service (disabled node)', 
+          value: '2',
+          children: [
+            { label: 'Prompt attention', value: '2' },
+            { label: 'Professional waiter', value: '2' }
+          ]
+        },
+        {
+          label: 'Pleasant surroundings', 
+          value: '2',
+          children: [
+            { label: 'Happy atmosphere', value: '2' },
+            { label: 'Good table presentation', value: '2' },
+            { label: 'Pleasing decor', value: '2' }
+          ]
+        }        
+      ],
+      statusOptions: [
+        {
+          label: 'Habilitado',
+          value: '1'
+        },
+        {
+          label: 'Inhabilitado',
+          value: '2'
         }
       ],
       theme: {
@@ -687,6 +874,20 @@ export default {
         gallery: [
           {image:'/assets/img/fondo.jpg'},{image:'/assets/img/fondo.jpg'}
         ],
+        status:'',
+        category: '',
+        categories:[],
+        price: 0,
+        stock: false,
+        length: 0,
+        quantity: 0,
+        weight: 0,
+        reference: '',
+        order_min: 0,
+        width: 0,
+        height: 0,
+        points: 0,
+        active_home: false
       }
     }
   },
@@ -703,14 +904,23 @@ export default {
       .btn
         width 40px
         height 40px
-  .q-carousel-quick-nav 
+  .q-carousel-quick-nav
     background transparent
   .border-bottom-gray
     border-bottom 1px solid #E1E1E1  
   .btn-arrow-send-pink:after 
     right 92px
 
-
-
+  .card-border-right
+    border-right 3px solid #E1E1E1  
+    padding-right 32px
+    @media screen and (max-width: $breakpoint-md)
+        border-right 0
+        padding-right 0
+  .border
+    border 1px solid #E1E1E1
+    box-shadow none !important
+    border-radius 5px       
+  
 
 </style>

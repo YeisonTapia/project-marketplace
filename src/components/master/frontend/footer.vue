@@ -1,7 +1,7 @@
 <template>
   <footer>
     <!--=== Copyright ===-->
-    <div class="bg-degradado">
+    <div class="bg-degradado" v-if="desktop">
       <div class="row flex flex-center gutter-x-sm q-py-md">
         <div>
           <logo-imagina></logo-imagina>
@@ -11,6 +11,18 @@
         </div>
       </div>
     </div>
+    
+    <q-layout-footer v-else>
+      <q-tabs color="transparent" class="bg-degradado">
+        <q-route-tab
+          icon="home"
+          :to="{ name: 'app.home'}"
+          name="app.home"
+          slot="title"
+        />
+        <q-tab name="xtab-1" icon="search" slot="title" />
+      </q-tabs>
+    </q-layout-footer>
   </footer>
 </template>
 <script>
@@ -26,7 +38,9 @@
       })
     },
     data() {
-      return {}
+      return {
+        desktop: this.$q.platform.is.desktop
+      }
     },
     methods: {}
   }

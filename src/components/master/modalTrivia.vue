@@ -21,6 +21,7 @@
 				    <div class="q-py-md card-trivia">
 				    	 <q-option-group
 				        v-model="question.answer"
+						type="radio"
 				        :options="question.options"
 				        color="primary"
 				      />

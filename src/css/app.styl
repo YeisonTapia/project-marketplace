@@ -4,6 +4,7 @@
 
 font-primary = 'Trebuchet MS'
 font-secondary = 'Carter One'
+bg-degradado = background linear-gradient(to right, #FD2D5E 0%, #fc4c57 50%, #fa4d22 100%)
 
 
 *
@@ -431,7 +432,7 @@ footer
   font-family font-secondary
   
 .bg-degradado
-  background linear-gradient(to right, #FD2D5E 0%, #fc4c57 50%, #fa4d22 100%)
+  background linear-gradient(to right, #FD2D5E 0%, #fc4c57 50%, #fa4d22 100%)!important
   
 .bg-fondo
   background-color #F0F0F0
@@ -463,7 +464,7 @@ footer
 
 .ratio-16-9  
   height 0
-  padding-bottom: 56.25%;
+  padding-bottom 56.25%
   position relative
   img
     position absolute
@@ -506,11 +507,12 @@ footer
 .rounded-lg
   border-radius 40px  
    
-.master-frontend   
-  .q-layout-page
-    margin-top -55px
-    @media screen and (max-width: $breakpoint-lg)
-      margin-top 0
+.desktop   
+  .master-frontend   
+    .q-layout-page
+      margin-top -55px
+      @media screen and (max-width: $breakpoint-lg)
+        margin-top 0
     
 .page    
   .title
@@ -594,10 +596,11 @@ footer
   .q-input-target 
     font-size 18px
     color #777777
-    &::-webkit-input-placeholder 
+    &::-webkit-input-placeholder
       color #999999 !important
     &::-moz-placeholder 
       color #999999 !important
+      opacity 1
     &:-ms-input-placeholder 
       color #999999 !important
   .q-if:before 
@@ -761,4 +764,213 @@ footer
         transform skew(-10deg)
         
 .cursor-pointer
-  cursor pointer        
+  cursor pointer     
+  
+.img-ratio-4-3
+  .q-carousel-track
+    height 0
+    padding-bottom 75%
+    position relative
+    .q-carousel-slide
+      position absolute
+      height 100%
+      width 100%
+
+.img-ratio-16-9
+  .q-carousel-track
+    height 0
+    padding-bottom 56.25%
+    position relative
+    .q-carousel-slide
+      position absolute
+      height 100%
+      width 100%      
+      
+.plan      
+  & .img-title
+    object-fit contain
+    width  auto
+    margin-top -40px
+    position absolute
+    right 20px   
+  & .list-plan   
+    margin-bottom 10px 
+    display flex
+  & .q-card-actions
+    position absolute
+    width 100%
+    bottom 0
+  & .q-card-title
+    height 20px
+  & .q-btn-end
+    border-radius 0
+    box-shadow none  
+    margin-bottom -8px
+  
+    
+.title-arrow-line-tertiary
+  display inline-block
+  color #f96353
+  font-size 30px
+  position relative
+  font-family font-secondary
+  &:before
+    height 2px
+    background-image url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 65 2'%3E%3Cdefs%3E%3Cstyle%3E.cls-1{fill:%23f96353;}%3C/style%3E%3C/defs%3E%3Ctitle%3Earrow-top%3C/title%3E%3Cg id='Capa_2' data-name='Capa 2'%3E%3Cg id='home'%3E%3Cpath class='cls-1' d='M0,1Q8.13.42,16.25.22C21.67.06,27.08,0,32.5,0S43.33.06,48.75.22,59.58.61,65,1q-8.13.59-16.25.78C43.33,1.94,37.92,2,32.5,2s-10.83-.06-16.25-.22S5.42,1.39,0,1Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+    background-size contain
+    background-repeat no-repeat
+    background-position center
+    width 100%
+    content ''
+    position absolute
+    top -5px
+  &:after
+    height 33px
+    background-image url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 65 34.15'%3E%3Cdefs%3E%3Cstyle%3E.cls-1{fill:%23f96353;}%3C/style%3E%3C/defs%3E%3Ctitle%3ERecurso 3%3C/title%3E%3Cg id='Capa_2' data-name='Capa 2'%3E%3Cg id='home'%3E%3Cpath class='cls-1' d='M33.72,8.83Q31,12.51,28.22,16.2a1,1,0,0,0,.66,1.69c3.12.15,3.59-2.19,4.65-4.28-.24,1.64,0,3.35-.23,5a18,18,0,0,1-.63,2.91,15,15,0,0,1-17.6,8.12c-.75-.21-1.26.81-.51,1.14l.22.09c-.45,1.89,1.47,3,3.35,3.22,3.39.35,7.16-1.12,9.92-3a17,17,0,0,0,6.48-8.52c.13-.38.26-.78.38-1.21A16.27,16.27,0,0,0,36.17,15,22.7,22.7,0,0,1,40,19.29l.94,1.49c.7,1.15,2.37-.12,1.71-1.26-.26-.44-.52-.86-.8-1.27-2-3.22-4.08-6.36-6.33-9.4A1.12,1.12,0,0,0,33.72,8.83Zm-17,22.71a13.68,13.68,0,0,0,6,.21C20.41,32.69,18.15,32.92,16.71,31.54Z'/%3E%3Cpath class='cls-1' d='M0,1Q8.13.42,16.25.22C21.67.06,27.08,0,32.5,0S43.33.06,48.75.22,59.58.61,65,1q-8.13.59-16.25.78C43.33,1.94,37.92,2,32.5,2s-10.83-.06-16.25-.22S5.42,1.39,0,1Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+    background-size contain
+    background-repeat no-repeat
+    background-position center
+    width 100%
+    content ''
+    position absolute
+    bottom -35px
+    right 0
+    left 0
+    
+.title-arrow-line-white
+  display inline-block
+  color #FFFFFF
+  font-size 30px
+  position relative
+  font-family font-secondary
+  &:before
+    height 2px
+    background-image url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 65 2'%3E%3Cdefs%3E%3Cstyle%3E.cls-1{fill:%23ffffff;}%3C/style%3E%3C/defs%3E%3Ctitle%3Earrow-top%3C/title%3E%3Cg id='Capa_2' data-name='Capa 2'%3E%3Cg id='home'%3E%3Cpath class='cls-1' d='M0,1Q8.13.42,16.25.22C21.67.06,27.08,0,32.5,0S43.33.06,48.75.22,59.58.61,65,1q-8.13.59-16.25.78C43.33,1.94,37.92,2,32.5,2s-10.83-.06-16.25-.22S5.42,1.39,0,1Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+    background-size contain
+    background-repeat no-repeat
+    background-position center
+    width 100%
+    content ''
+    position absolute
+    top -5px
+  &:after
+    height 33px
+    background-image url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 65 34.15'%3E%3Cdefs%3E%3Cstyle%3E.cls-1{fill:%23ffffff;}%3C/style%3E%3C/defs%3E%3Ctitle%3ERecurso 3%3C/title%3E%3Cg id='Capa_2' data-name='Capa 2'%3E%3Cg id='home'%3E%3Cpath class='cls-1' d='M33.72,8.83Q31,12.51,28.22,16.2a1,1,0,0,0,.66,1.69c3.12.15,3.59-2.19,4.65-4.28-.24,1.64,0,3.35-.23,5a18,18,0,0,1-.63,2.91,15,15,0,0,1-17.6,8.12c-.75-.21-1.26.81-.51,1.14l.22.09c-.45,1.89,1.47,3,3.35,3.22,3.39.35,7.16-1.12,9.92-3a17,17,0,0,0,6.48-8.52c.13-.38.26-.78.38-1.21A16.27,16.27,0,0,0,36.17,15,22.7,22.7,0,0,1,40,19.29l.94,1.49c.7,1.15,2.37-.12,1.71-1.26-.26-.44-.52-.86-.8-1.27-2-3.22-4.08-6.36-6.33-9.4A1.12,1.12,0,0,0,33.72,8.83Zm-17,22.71a13.68,13.68,0,0,0,6,.21C20.41,32.69,18.15,32.92,16.71,31.54Z'/%3E%3Cpath class='cls-1' d='M0,1Q8.13.42,16.25.22C21.67.06,27.08,0,32.5,0S43.33.06,48.75.22,59.58.61,65,1q-8.13.59-16.25.78C43.33,1.94,37.92,2,32.5,2s-10.83-.06-16.25-.22S5.42,1.39,0,1Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+    background-size contain
+    background-repeat no-repeat
+    background-position center
+    width 100%
+    content ''
+    position absolute
+    bottom -35px
+    right 0
+    left 0
+
+.title-arrow-line-primary
+  display inline-block
+  color #fd2d5e
+  font-size 30px
+  position relative
+  font-family font-secondary
+  &:before
+    height 2px
+    background-image url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 65 2'%3E%3Cdefs%3E%3Cstyle%3E.cls-1{fill:%23fd2d5e;}%3C/style%3E%3C/defs%3E%3Ctitle%3Earrow-top%3C/title%3E%3Cg id='Capa_2' data-name='Capa 2'%3E%3Cg id='home'%3E%3Cpath class='cls-1' d='M0,1Q8.13.42,16.25.22C21.67.06,27.08,0,32.5,0S43.33.06,48.75.22,59.58.61,65,1q-8.13.59-16.25.78C43.33,1.94,37.92,2,32.5,2s-10.83-.06-16.25-.22S5.42,1.39,0,1Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+    background-size contain
+    background-repeat no-repeat
+    background-position center
+    width 100%
+    content ''
+    position absolute
+    top -5px
+  &:after
+    height 33px
+    background-image url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 65 34.15'%3E%3Cdefs%3E%3Cstyle%3E.cls-1{fill:%23fd2d5e;}%3C/style%3E%3C/defs%3E%3Ctitle%3ERecurso 3%3C/title%3E%3Cg id='Capa_2' data-name='Capa 2'%3E%3Cg id='home'%3E%3Cpath class='cls-1' d='M33.72,8.83Q31,12.51,28.22,16.2a1,1,0,0,0,.66,1.69c3.12.15,3.59-2.19,4.65-4.28-.24,1.64,0,3.35-.23,5a18,18,0,0,1-.63,2.91,15,15,0,0,1-17.6,8.12c-.75-.21-1.26.81-.51,1.14l.22.09c-.45,1.89,1.47,3,3.35,3.22,3.39.35,7.16-1.12,9.92-3a17,17,0,0,0,6.48-8.52c.13-.38.26-.78.38-1.21A16.27,16.27,0,0,0,36.17,15,22.7,22.7,0,0,1,40,19.29l.94,1.49c.7,1.15,2.37-.12,1.71-1.26-.26-.44-.52-.86-.8-1.27-2-3.22-4.08-6.36-6.33-9.4A1.12,1.12,0,0,0,33.72,8.83Zm-17,22.71a13.68,13.68,0,0,0,6,.21C20.41,32.69,18.15,32.92,16.71,31.54Z'/%3E%3Cpath class='cls-1' d='M0,1Q8.13.42,16.25.22C21.67.06,27.08,0,32.5,0S43.33.06,48.75.22,59.58.61,65,1q-8.13.59-16.25.78C43.33,1.94,37.92,2,32.5,2s-10.83-.06-16.25-.22S5.42,1.39,0,1Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+    background-size contain
+    background-repeat no-repeat
+    background-position center
+    width 100%
+    content ''
+    position absolute
+    bottom -35px
+    right 0
+    left 0    
+
+.title-arrow-line-secondary
+  display inline-block
+  color #282d46
+  font-size 30px
+  position relative
+  font-family font-secondary
+  &:before
+    height 2px
+    background-image url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 65 2'%3E%3Cdefs%3E%3Cstyle%3E.cls-1{fill:%23282d46;}%3C/style%3E%3C/defs%3E%3Ctitle%3Earrow-top%3C/title%3E%3Cg id='Capa_2' data-name='Capa 2'%3E%3Cg id='home'%3E%3Cpath class='cls-1' d='M0,1Q8.13.42,16.25.22C21.67.06,27.08,0,32.5,0S43.33.06,48.75.22,59.58.61,65,1q-8.13.59-16.25.78C43.33,1.94,37.92,2,32.5,2s-10.83-.06-16.25-.22S5.42,1.39,0,1Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+    background-size contain
+    background-repeat no-repeat
+    background-position center
+    width 100%
+    content ''
+    position absolute
+    top -5px
+  &:after
+    height 33px
+    background-image url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 65 34.15'%3E%3Cdefs%3E%3Cstyle%3E.cls-1{fill:%23282d46;}%3C/style%3E%3C/defs%3E%3Ctitle%3ERecurso 3%3C/title%3E%3Cg id='Capa_2' data-name='Capa 2'%3E%3Cg id='home'%3E%3Cpath class='cls-1' d='M33.72,8.83Q31,12.51,28.22,16.2a1,1,0,0,0,.66,1.69c3.12.15,3.59-2.19,4.65-4.28-.24,1.64,0,3.35-.23,5a18,18,0,0,1-.63,2.91,15,15,0,0,1-17.6,8.12c-.75-.21-1.26.81-.51,1.14l.22.09c-.45,1.89,1.47,3,3.35,3.22,3.39.35,7.16-1.12,9.92-3a17,17,0,0,0,6.48-8.52c.13-.38.26-.78.38-1.21A16.27,16.27,0,0,0,36.17,15,22.7,22.7,0,0,1,40,19.29l.94,1.49c.7,1.15,2.37-.12,1.71-1.26-.26-.44-.52-.86-.8-1.27-2-3.22-4.08-6.36-6.33-9.4A1.12,1.12,0,0,0,33.72,8.83Zm-17,22.71a13.68,13.68,0,0,0,6,.21C20.41,32.69,18.15,32.92,16.71,31.54Z'/%3E%3Cpath class='cls-1' d='M0,1Q8.13.42,16.25.22C21.67.06,27.08,0,32.5,0S43.33.06,48.75.22,59.58.61,65,1q-8.13.59-16.25.78C43.33,1.94,37.92,2,32.5,2s-10.83-.06-16.25-.22S5.42,1.39,0,1Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+    background-size contain
+    background-repeat no-repeat
+    background-position center
+    width 100%
+    content ''
+    position absolute
+    bottom -35px
+    right 0
+    left 0   
+    
+.fondo-share
+  background-color $secondary
+  background-image url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 423.58 657.25'%3E%3Cdefs%3E%3Cstyle%3E.cls-1{fill:%23333951;}%3C/style%3E%3C/defs%3E%3Ctitle%3Eshare-right%3C/title%3E%3Cg id='Capa_2' data-name='Capa 2'%3E%3Cg id='home'%3E%3Cpath class='cls-1' d='M274.23,212.25a2.79,2.79,0,0,1-2.79-2.79v-12a4.77,4.77,0,0,1,4.76-4.76h13.35V178a4.77,4.77,0,0,1,4.76-4.76h14.75V159.88a4.77,4.77,0,0,1,4.76-4.76h13.35v-13.5a4.8,4.8,0,0,1,4.4-4.75l13.72-1.05V122.26a4.76,4.76,0,0,1,4.76-4.76h14.74a2.79,2.79,0,1,1,0,5.57H350.86v13.5a4.79,4.79,0,0,1-4.4,4.75l-13.71,1.05v13.56a4.76,4.76,0,0,1-4.76,4.76H314.63v13.36a4.76,4.76,0,0,1-4.76,4.76H295.13v14.74a4.76,4.76,0,0,1-4.76,4.76H277v11.15A2.78,2.78,0,0,1,274.23,212.25Z'/%3E%3Cpath class='cls-1' d='M289.25,25.08a2.77,2.77,0,0,1-2-.82l-9.75-9.75a2.78,2.78,0,0,1,0-3.94L287.28.82a2.79,2.79,0,0,1,3.94,3.94l-7.78,7.78,7.78,7.78a2.78,2.78,0,0,1,0,3.94A2.74,2.74,0,0,1,289.25,25.08Z'/%3E%3Cpath class='cls-1' d='M273.93,25.08a2.75,2.75,0,0,1-2-.82l-9.76-9.75a2.8,2.8,0,0,1,0-3.94L272,.82a2.79,2.79,0,0,1,3.94,3.94l-7.78,7.78,7.78,7.78a2.79,2.79,0,0,1-2,4.76Z'/%3E%3Cpath class='cls-1' d='M258.6,25.08a2.75,2.75,0,0,1-2-.82l-9.75-9.75a2.78,2.78,0,0,1,0-3.94L256.63.82a2.79,2.79,0,1,1,3.94,3.94l-7.78,7.78,7.78,7.78a2.79,2.79,0,0,1-2,4.76Z'/%3E%3Cpath class='cls-1' d='M243.27,25.08a2.77,2.77,0,0,1-2-.82l-9.75-9.75a2.78,2.78,0,0,1,0-3.94L241.3.82a2.79,2.79,0,0,1,3.94,3.94l-7.78,7.78,7.78,7.78a2.78,2.78,0,0,1,0,3.94A2.74,2.74,0,0,1,243.27,25.08Z'/%3E%3Cpath class='cls-1' d='M72.58,92.32a3.43,3.43,0,0,1-2.44-1L58,79.22a3.46,3.46,0,0,1,0-4.89l12.1-12.1A3.46,3.46,0,1,1,75,67.12l-9.65,9.65L75,86.42a3.46,3.46,0,0,1-2.45,5.9Z'/%3E%3Cpath class='cls-1' d='M53.57,92.32a3.43,3.43,0,0,1-2.44-1L39,79.22a3.46,3.46,0,0,1,0-4.89l12.1-12.1A3.46,3.46,0,1,1,56,67.12l-9.65,9.65L56,86.42a3.46,3.46,0,0,1-2.45,5.9Z'/%3E%3Cpath class='cls-1' d='M34.56,92.32a3.41,3.41,0,0,1-2.44-1L20,79.22a3.46,3.46,0,0,1,0-4.89l12.1-12.1A3.46,3.46,0,1,1,37,67.12l-9.65,9.65L37,86.42a3.46,3.46,0,0,1-2.45,5.9Z'/%3E%3Cpath class='cls-1' d='M15.55,92.32a3.41,3.41,0,0,1-2.44-1L1,79.22a3.46,3.46,0,0,1,0-4.89l12.1-12.1A3.46,3.46,0,1,1,18,67.12L8.34,76.77,18,86.42a3.46,3.46,0,0,1-2.45,5.9Z'/%3E%3Cpath class='cls-1' d='M261.69,128.49a4.18,4.18,0,0,1-3-7.08l29.26-30.34a4.18,4.18,0,0,1,6,5.8L264.7,127.21A4.18,4.18,0,0,1,261.69,128.49Z'/%3E%3Cpath class='cls-1' d='M291,128.49a4.17,4.17,0,0,1-3-1.28L258.68,96.87a4.18,4.18,0,0,1,6-5.8L294,121.41a4.18,4.18,0,0,1-3,7.08Z'/%3E%3Cpath class='cls-1' d='M385.69,222a18.12,18.12,0,1,1,18.12-18.11A18.14,18.14,0,0,1,385.69,222Zm0-27.87a9.76,9.76,0,1,0,9.76,9.76A9.77,9.77,0,0,0,385.69,194.13Z'/%3E%3Cpath class='cls-1' d='M330.23,657.25a2.79,2.79,0,0,1-2.79-2.79v-12a4.77,4.77,0,0,1,4.76-4.76h13.35V623a4.77,4.77,0,0,1,4.76-4.76h14.75V604.88a4.77,4.77,0,0,1,4.76-4.76h13.35v-13.5a4.8,4.8,0,0,1,4.4-4.75l13.72-1V567.26a4.76,4.76,0,0,1,4.76-4.76h14.74a2.79,2.79,0,1,1,0,5.57H406.86v13.5a4.79,4.79,0,0,1-4.4,4.75l-13.71,1v13.56a4.76,4.76,0,0,1-4.76,4.76H370.63v13.36a4.76,4.76,0,0,1-4.76,4.76H351.13v14.74a4.76,4.76,0,0,1-4.76,4.76H333v11.15A2.78,2.78,0,0,1,330.23,657.25Z'/%3E%3Cpath class='cls-1' d='M236.1,430.25a3.66,3.66,0,0,1-3.66-3.66V410.91a6.25,6.25,0,0,1,6.24-6.24h17.51V385.33a6.25,6.25,0,0,1,6.25-6.24h19.33V361.58a6.26,6.26,0,0,1,6.25-6.25h17.51v-17.7a6.27,6.27,0,0,1,5.76-6.22l18-1.39V312.24a6.25,6.25,0,0,1,6.24-6.24h19.34a3.66,3.66,0,1,1,0,7.31H336.59V331a6.26,6.26,0,0,1-5.77,6.22l-18,1.39V356.4a6.25,6.25,0,0,1-6.25,6.24H289.08v17.51a6.25,6.25,0,0,1-6.24,6.24H263.5v19.34a6.25,6.25,0,0,1-6.24,6.24H239.75v14.62A3.66,3.66,0,0,1,236.1,430.25Z'/%3E%3Cpath class='cls-1' d='M399.93,431.08a2.75,2.75,0,0,1-2-.82l-9.76-9.75a2.8,2.8,0,0,1,0-3.94l9.76-9.75a2.79,2.79,0,0,1,3.94,3.94l-7.78,7.78,7.78,7.78a2.79,2.79,0,0,1-2,4.76Z'/%3E%3Cpath class='cls-1' d='M384.6,431.08a2.75,2.75,0,0,1-2-.82l-9.75-9.75a2.78,2.78,0,0,1,0-3.94l9.75-9.75a2.79,2.79,0,1,1,3.94,3.94l-7.78,7.78,7.78,7.78a2.79,2.79,0,0,1-2,4.76Z'/%3E%3Cpath class='cls-1' d='M369.27,431.08a2.77,2.77,0,0,1-2-.82l-9.75-9.75a2.78,2.78,0,0,1,0-3.94l9.75-9.75a2.79,2.79,0,0,1,3.94,3.94l-7.78,7.78,7.78,7.78a2.78,2.78,0,0,1,0,3.94A2.74,2.74,0,0,1,369.27,431.08Z'/%3E%3Cpath class='cls-1' d='M285.69,540.49a4.18,4.18,0,0,1-3-7.08l29.26-30.34a4.18,4.18,0,1,1,6,5.8L288.7,539.21A4.18,4.18,0,0,1,285.69,540.49Z'/%3E%3Cpath class='cls-1' d='M315,540.49a4.17,4.17,0,0,1-3-1.28l-29.26-30.34a4.18,4.18,0,1,1,6-5.8L318,533.41a4.18,4.18,0,0,1-3,7.08Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"), url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 454.14 641.25'%3E%3Cdefs%3E%3Cstyle%3E.cls-1{fill:%23333951;}%3C/style%3E%3C/defs%3E%3Ctitle%3Eshare-left%3C/title%3E%3Cg id='Capa_2' data-name='Capa 2'%3E%3Cg id='home'%3E%3Cpath class='cls-1' d='M32.79,199.25A2.79,2.79,0,0,1,30,196.46v-12a4.77,4.77,0,0,1,4.76-4.76H48.11V165a4.77,4.77,0,0,1,4.76-4.76H67.62V146.88a4.77,4.77,0,0,1,4.76-4.76H85.73v-13.5a4.79,4.79,0,0,1,4.4-4.75l13.72-1.05V109.26a4.76,4.76,0,0,1,4.76-4.76h14.74a2.79,2.79,0,1,1,0,5.57H109.42v13.5a4.79,4.79,0,0,1-4.4,4.75l-13.71,1.05v13.56a4.76,4.76,0,0,1-4.76,4.76H73.19v13.36a4.76,4.76,0,0,1-4.76,4.76H53.69v14.74a4.76,4.76,0,0,1-4.76,4.76H35.57v11.15A2.78,2.78,0,0,1,32.79,199.25Z'/%3E%3Cpath class='cls-1' d='M110.81,25.08a2.77,2.77,0,0,1-2-.82l-9.75-9.75a2.78,2.78,0,0,1,0-3.94L108.84.82a2.79,2.79,0,0,1,3.94,3.94L105,12.54l7.78,7.78a2.78,2.78,0,0,1,0,3.94A2.74,2.74,0,0,1,110.81,25.08Z'/%3E%3Cpath class='cls-1' d='M95.49,25.08a2.74,2.74,0,0,1-2-.82l-9.76-9.75a2.78,2.78,0,0,1,0-3.94L93.52.82a2.79,2.79,0,0,1,3.94,3.94l-7.79,7.78,7.79,7.78a2.79,2.79,0,0,1-2,4.76Z'/%3E%3Cpath class='cls-1' d='M80.16,25.08a2.75,2.75,0,0,1-2-.82l-9.75-9.75a2.78,2.78,0,0,1,0-3.94L78.19.82a2.79,2.79,0,0,1,3.94,3.94l-7.78,7.78,7.78,7.78a2.79,2.79,0,0,1-2,4.76Z'/%3E%3Cpath class='cls-1' d='M64.83,25.08a2.77,2.77,0,0,1-2-.82l-9.75-9.75a2.78,2.78,0,0,1,0-3.94L62.86.82A2.79,2.79,0,0,1,66.8,4.76L59,12.54l7.78,7.78a2.78,2.78,0,0,1,0,3.94A2.74,2.74,0,0,1,64.83,25.08Z'/%3E%3Cpath class='cls-1' d='M20.25,115.49a4.18,4.18,0,0,1-3-7.08L46.5,78.07a4.18,4.18,0,0,1,6,5.8L23.26,114.21A4.18,4.18,0,0,1,20.25,115.49Z'/%3E%3Cpath class='cls-1' d='M49.51,115.49a4.17,4.17,0,0,1-3-1.28L17.24,83.87a4.18,4.18,0,1,1,6-5.8l29.26,30.34a4.18,4.18,0,0,1-3,7.08Z'/%3E%3Cpath class='cls-1' d='M144.25,209a18.12,18.12,0,1,1,18.12-18.11A18.14,18.14,0,0,1,144.25,209Zm0-27.87a9.76,9.76,0,1,0,9.76,9.76A9.77,9.77,0,0,0,144.25,181.13Z'/%3E%3Cpath class='cls-1' d='M171.79,641.25a2.79,2.79,0,0,1-2.79-2.79v-12a4.77,4.77,0,0,1,4.76-4.76h13.35V607a4.77,4.77,0,0,1,4.76-4.76h14.75V588.88a4.77,4.77,0,0,1,4.76-4.76h13.35v-13.5a4.79,4.79,0,0,1,4.4-4.75l13.72-1V551.26a4.76,4.76,0,0,1,4.76-4.76h14.74a2.79,2.79,0,1,1,0,5.57H248.42v13.5a4.79,4.79,0,0,1-4.4,4.75l-13.71,1v13.56a4.76,4.76,0,0,1-4.76,4.76H212.19v13.36a4.76,4.76,0,0,1-4.76,4.76H192.69v14.74a4.76,4.76,0,0,1-4.76,4.76H174.57v11.15A2.78,2.78,0,0,1,171.79,641.25Z'/%3E%3Cpath class='cls-1' d='M360.79,115.25a2.79,2.79,0,0,1-2.79-2.79v-12a4.77,4.77,0,0,1,4.76-4.76h13.35V81a4.77,4.77,0,0,1,4.76-4.76h14.75V62.88a4.77,4.77,0,0,1,4.76-4.76h13.35V44.62a4.79,4.79,0,0,1,4.4-4.75l13.72-1V25.26a4.76,4.76,0,0,1,4.76-4.76h14.74a2.79,2.79,0,1,1,0,5.57H437.42v13.5a4.79,4.79,0,0,1-4.4,4.75l-13.71,1V58.93a4.76,4.76,0,0,1-4.76,4.76H401.19V77.05a4.76,4.76,0,0,1-4.76,4.76H381.69V96.55a4.76,4.76,0,0,1-4.76,4.76H363.57v11.15A2.78,2.78,0,0,1,360.79,115.25Z'/%3E%3Cpath class='cls-1' d='M3.65,429.25A3.66,3.66,0,0,1,0,425.59V409.91a6.25,6.25,0,0,1,6.24-6.24H23.75V384.33A6.25,6.25,0,0,1,30,378.09H49.33V360.58a6.25,6.25,0,0,1,6.25-6.25H73.09v-17.7a6.27,6.27,0,0,1,5.76-6.22l18-1.39V311.24a6.25,6.25,0,0,1,6.24-6.24h19.34a3.66,3.66,0,0,1,0,7.31H104.15V330a6.26,6.26,0,0,1-5.77,6.22l-18,1.39V355.4a6.25,6.25,0,0,1-6.24,6.24H56.64v17.51a6.25,6.25,0,0,1-6.24,6.24H31.06v19.34A6.25,6.25,0,0,1,24.82,411H7.31v14.62A3.66,3.66,0,0,1,3.65,429.25Z'/%3E%3Cpath class='cls-1' d='M250.81,376.08a2.77,2.77,0,0,1-2-.82l-9.75-9.75a2.78,2.78,0,0,1,0-3.94l9.75-9.75a2.79,2.79,0,1,1,3.94,3.94L245,363.54l7.78,7.78a2.78,2.78,0,0,1,0,3.94A2.74,2.74,0,0,1,250.81,376.08Z'/%3E%3Cpath class='cls-1' d='M235.49,376.08a2.74,2.74,0,0,1-2-.82l-9.76-9.75a2.78,2.78,0,0,1,0-3.94l9.76-9.75a2.79,2.79,0,1,1,3.94,3.94l-7.79,7.78,7.79,7.78a2.79,2.79,0,0,1-2,4.76Z'/%3E%3Cpath class='cls-1' d='M220.16,376.08a2.75,2.75,0,0,1-2-.82l-9.75-9.75a2.78,2.78,0,0,1,0-3.94l9.75-9.75a2.79,2.79,0,1,1,3.94,3.94l-7.78,7.78,7.78,7.78a2.79,2.79,0,0,1-2,4.76Z'/%3E%3Cpath class='cls-1' d='M204.83,376.08a2.77,2.77,0,0,1-2-.82l-9.75-9.75a2.78,2.78,0,0,1,0-3.94l9.75-9.75a2.79,2.79,0,1,1,3.94,3.94L199,363.54l7.78,7.78a2.78,2.78,0,0,1,0,3.94A2.74,2.74,0,0,1,204.83,376.08Z'/%3E%3Cpath class='cls-1' d='M171.25,496.49a4.18,4.18,0,0,1-3-7.08l29.26-30.34a4.18,4.18,0,0,1,6,5.8l-29.26,30.34A4.18,4.18,0,0,1,171.25,496.49Z'/%3E%3Cpath class='cls-1' d='M200.51,496.49a4.17,4.17,0,0,1-3-1.28l-29.26-30.34a4.18,4.18,0,0,1,6-5.8l29.26,30.34a4.18,4.18,0,0,1-3,7.08Z'/%3E%3Cpath class='cls-1' d='M374.25,636a18.12,18.12,0,1,1,18.12-18.11A18.14,18.14,0,0,1,374.25,636Zm0-27.87a9.76,9.76,0,1,0,9.76,9.76A9.77,9.77,0,0,0,374.25,608.13Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+  background-size contain, contain
+  background-position right center, left center
+  background-repeat no-repeat
+  & .line
+    background bg-degradado  
+    height 15px
+    width 100%
+
+.q-icon-round    
+  border-radius 50%
+  border 1px solid $primary
+  padding 10px
+  margin-right 15px
+  width 60px
+  height 60px
+  
+.stairs
+  .step
+    margin-left -10px
+  & .step:nth-child(odd)
+    z-index 9
+    position relative
+    margin-bottom -0px
+  & .step:nth-child(even)
+    z-index 8
+    position relative
+    margin-bottom -20px
+  @media screen and (max-width: $breakpoint-sm)
+    .step
+      margin-left 0 !important
+    
+
+.stairs-d
+  .step
+    margin-left -10px
+  & .step:nth-child(1n)
+    z-index 9
+    position relative
+  & .step:nth-child(2n)
+    z-index 8
+    position relative
+  & .step:nth-child(3n)
+    z-index 7
+    position relative
+  @media screen and (max-width: $breakpoint-sm)
+    .step
+      margin-left 0 !important
