@@ -14,7 +14,7 @@
                     <div class="circulo bg-secondary text-white round flex items-center justify-center">
                       <div class="points font-family-secondary">100</div>
                     </div>
-                    <h5 class="font-family-secondary text-secondary q-mt-md">Puntos historicos</h5>
+                    <h5 class="font-family-secondary text-secondary q-my-md">Puntos historicos</h5>
                   </div>
               </div>
     </div>
@@ -27,7 +27,7 @@
                 <upload-image v-model="imgUser" class="q-mt-lg q-mb-md"/>
                
                 <!--FullName-->
-                <h5 class="fullname text-center relative-position">{{form.firstName}} {{form.lastName}}</h5>
+                <h5 class="fullname font-family-secondary text-center relative-position">{{form.firstName}} {{form.lastName}}</h5>
 
                 <!--Links-->
                 <q-list no-border inset-delimiter class="q-px-lg">

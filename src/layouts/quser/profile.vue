@@ -2,7 +2,7 @@
   <div class="quser-profile" v-if="success">
 
     <div class="title-principal q-mb-xl">
-      <h3 class="q-mt-none q-mb-md">Completa el formulario y <span class="text-tertiary">obten 10 puntos</span> para obtener <span class="text-tertiary">Premios y Descuentos.</span></h3>
+      <h3 class="font-family-secondary q-mt-none q-mb-md">Completa el formulario y <span class="text-tertiary">obten 10 puntos</span> para obtener <span class="text-tertiary">Premios y Descuentos.</span></h3>
       <small class="q-mb-xl">Los datos de este formulario seran usados para adaptar las promociones y busquedas de tiendas a sus necesidades</small>
     </div>
     
@@ -82,7 +82,7 @@
                   <q-select 
                     v-model="form.fields.country.value" 
                     :options="countryOptions"
-                    @input="getCities()"/>
+                    @input="getCities(form.fields.country.value,'CiO')"/>
                     
                 </q-field>
             </div>
@@ -141,20 +141,21 @@
         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 q-mt-lg">
 
           <!-- Phone-->
-          <q-field :error="$v.form.fields.phone.value.$error"
-                   :error-label="$tr('ui.message.fieldMinLeng', {num : 7})">
-            <p class="caption q-mb-xs"><span class="text-primary">*</span> Número de Teléfono </p>
-            <q-input type="text" v-model="form.fields.phone.value" pattern="[0-9]*"
+          <q-field :error="$v.form.fields.cellularPhone.value.$error"
+                   :error-label="$tr('ui.message.fieldMinLeng', {num : 10})">
+            <p class="caption q-mb-xs"><span class="text-primary">*</span> {{`${$tr('ui.form.phone')}`}}</p>
+            <q-input type="text" v-model="form.fields.cellularPhone.value" pattern="[0-9]*"
                      @input="maskPhone" :maxlength="14" inputmode="numeric"
-                     placeholder="Número de Teléfono"/>
+                     :placeholder="`${$tr('ui.form.phone')}`"/>
           </q-field>
 
-          <!-- City ​​of residence -->
-          <q-field :error="$v.form.fields.cityResidence.value.$error" :error-label="$tr('ui.message.fieldRequired')">
-                  <p class="caption q-mb-xs"><span class="text-primary">*</span> Ciudad de Residencia</p>
+          <!-- Country of residence -->
+          <q-field :error="$v.form.fields.countryResidence.value.$error" :error-label="$tr('ui.message.fieldRequired')">
+                  <p class="caption q-mb-xs"><span class="text-primary">*</span> País de Residencia</p>
                   <q-select 
-                    v-model="form.fields.cityResidence.value" 
-                    :options="cityResidenceOptions"/>
+                    v-model="form.fields.countryResidence.value" 
+                    :options="countryResidenceOptions"
+                    @input="getCities(form.fields.countryResidence.value,'CiRO')"/>
           </q-field>
 
         </div>
@@ -168,13 +169,23 @@
             <q-input v-model="form.email" :placeholder="`${$trp('ui.form.email')}`"/>
           </q-field>
 
+          <!-- City ​​of residence -->
+          <q-field :error="$v.form.fields.cityResidence.value.$error" :error-label="$tr('ui.message.fieldRequired')">
+                  <p class="caption q-mb-xs"><span class="text-primary">*</span> Ciudad de Residencia</p>
+                  <q-select 
+                    v-model="form.fields.cityResidence.value" 
+                    :options="cityResidenceOptions"/>
+          </q-field>
+
           <!-- Neighborhood -->
+          <!--
           <q-field :error="$v.form.fields.neighborhood.value.$error" :error-label="$tr('ui.message.fieldRequired')">
                   <p class="caption q-mb-xs"><span class="text-primary">*</span> Barrio</p>
                   <q-select 
                     v-model="form.fields.neighborhood.value" 
                     :options="neighborhoodOptions"/>
           </q-field>
+          -->
         
         </div>
 
@@ -428,7 +439,7 @@
           <!-- NEW PASS -->
           <q-field
             :error="$v.form.newPassword.$error"
-            error-label="Min 8 digitos"
+            :error-label="$tr('ui.message.fieldMinLeng', {num : 8})"
             :count="8"
             :class="[classError]"
           >
@@ -437,25 +448,8 @@
                      type="password"
                      autocomplete="off"
                      name="password"
-                     @keyup="checkNewPassword()"
             />
           </q-field>
-
-        <!-- OLD PASS -->
-        <!--
-          <q-field
-            :error="$v.form.password.$error"
-            error-label="Este campo es requerido"
-          >
-            <p class="caption q-mb-xs">Contraseña actual</p>
-            <q-input v-model="form.password"
-                     type="password" 
-                     ref="currentPassword"
-                     autocomplete="off"
-                     @keyup.enter="changePassword()"
-            />
-          </q-field>
-         -->
 
         </div>
 
@@ -465,7 +459,7 @@
           <!-- CONFIRM NEW PASS -->
           <q-field
             :error="$v.form.confirmNewPassword.$error"
-            error-label="Min 8 digitos"
+            :error-label="$tr('ui.message.fieldCheckPassword')"
             :count="8"
             :class="[classError]"
           >
@@ -473,9 +467,7 @@
             <q-input v-model="form.confirmNewPassword"
                      type="password"
                      name="password"
-                     autocomplete="off"
-                     @keyup="checkNewPassword()"
-                    
+                     autocomplete="off"   
             />
           </q-field>
 
@@ -502,7 +494,7 @@
               <!--Update button-->
               <div class="text-right q-mt-sm">
                   <q-btn color="primary" :loading="loading" 
-                    class="btn-update text-white no-border" 
+                    class="font-family-secondary btn-update text-white no-border" 
                     @click="updateData"
                   label="Actualizar"/>
               </div>
@@ -519,8 +511,8 @@
 
 <script>
 
-   //Plugins
-  import {required, email, minLength} from 'vuelidate/lib/validators'
+  //Plugins
+  import {required, email, sameAs, minLength} from 'vuelidate/lib/validators'
   import NotResult from "src/components/notResults";
   import alert from '@imagina/qhelper/_plugins/alert'
 
@@ -541,7 +533,7 @@
           lastName: {required},
           email: {required, email},
           newPassword: {minLength: minLength(8)},
-          confirmNewPassword: {minLength: minLength(8)},
+          confirmNewPassword: {minLength: minLength(8),sameAsPassword: sameAs('newPassword')},
           fields: {
             nickName: {
               value: {required}
@@ -555,13 +547,13 @@
             city: {
               value: {required}
             },
-            phone: {
-              value: {required, minLength: minLength(7)}
+            cellularPhone: {
+              value: {required, minLength: minLength(10)}
             },
-            cityResidence: {
+            countryResidence: {
               value: {required}
             },
-            neighborhood: {
+            cityResidence: {
               value: {required}
             },
             address: {
@@ -622,18 +614,8 @@
         ],
         countryOptions: [],
         cityOptions: [],
-        cityResidenceOptions: [
-          {
-            label: 'Rioacha',
-            value: 'rioacha'
-          },
-        ],
-        neighborhoodOptions: [
-          {
-            label: 'Barrio 1',
-            value: 'barrio 1'
-          },
-        ],
+        countryResidenceOptions: [],
+        cityResidenceOptions: [],
         leisureOptions: [
           {
             label: 'Gusto 1',
@@ -678,9 +660,9 @@
           {name: 'country', value: null},
           {name: 'sex', value: null},
           {name: 'sons', value: null},
-          {name: 'phone', value: null},
+          {name: 'cellularPhone', value: null},
+          {name: 'countryResidence', value: null},
           {name: 'cityResidence', value: null},
-          {name: 'neighborhood', value: null},
           {name: 'address', value: null},
           {name: 'twitter', value: null},
           {name: 'facebook', value: null},
@@ -707,8 +689,10 @@
         this.form.fields = this.$clone(this.defaultFields)//Set default fields
         await this.setUserData()//Set user data
         await this.getCountries()// Get countries
-        if(this.form.fields.country.value!="")
-          await this.getCities()
+        if(this.form.fields.country.value!="" && this.form.fields.country.value!=null)
+          await this.getCities(this.form.fields.country.value,'CiO')
+        if(this.form.fields.countryResidence.value!="" && this.form.fields.countryResidence.value!=null)
+          await this.getCities(this.form.fields.countryResidence.value,'CiRO')
         this.success = true//Success page
         this.loading = false//Loading
       },
@@ -767,9 +751,9 @@
       //Mask phone
       maskPhone() {
         this.$nextTick(() => {
-          let phone = this.$clone(this.form.fields.phone.value)
+          let phone = this.$clone(this.form.fields.cellularPhone.value)
           let maskedPhone = this.$helper.maskPhone(phone)
-          this.form.fields.phone.value = this.$clone(maskedPhone)
+          this.form.fields.cellularPhone.value = this.$clone(maskedPhone)
         })
       },
       //Check if new password is same with confirmation
@@ -796,6 +780,8 @@
                   value:data.id
                 })
 
+                this.countryResidenceOptions = this.countryOptions
+
               })
               resolve(true);
             })
@@ -805,25 +791,38 @@
         })
       },
       // Get Cities from ilocations
-      getCities(){
+      getCities(countryModel,cityOptions){
         return new Promise((resolve, reject) => {
 
             let apiUrl = '/provinces'
             let params = {
               params: {
-                filter: {country: this.form.fields.country.value}
+                filter: {country: countryModel}
               }
             }
 
-            this.cityOptions = []
-
+            if(cityOptions == 'CiO')
+              this.cityOptions = []
+            if(cityOptions == 'CiRO')
+              this.cityResidenceOptions = []
+          
             http.get(config('apiRoutes.api.api_ilocations') + apiUrl, params)
             .then(response => {
               response.data.data.forEach(data => {
-                this.cityOptions.push({
-                  label:data.name,
-                  value:data.id
-                })
+
+                if(cityOptions == 'CiO'){
+                  this.cityOptions.push({
+                    label:data.name,
+                    value:data.id
+                  })
+                }
+                if(cityOptions == 'CiRO'){
+                  this.cityResidenceOptions.push({
+                    label:data.name,
+                    value:data.id
+                  })
+                }
+
               })
               resolve(true);
             })

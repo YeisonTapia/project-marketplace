@@ -72,11 +72,20 @@ pages.quser.userRoles.containerLayout=admin
 pages.quser.userRoles.path= '/admin/usuarios/roles'
 pages.quser.userProfile.containerLayout=admin
 pages.quser.userProfile.path='admin/me/profile'
-pages.quser.login.layout=require('@imagina/quser/_layouts/login').default
 
 pages.frontquser.userProfile.path='/account/me/profile'
 pages.frontquser.userProfile.containerLayout=account
 pages.frontquser.userProfile.layout=require('src/layouts/quser/profile').default
+pages.frontquser.login.containerLayout=frontend
+pages.frontquser.login.layout=require('src/layouts/quser/login').default
+pages.frontquser.logout.containerLayout=frontend
+pages.frontquser.logout.layout=require('src/layouts/quser/logout').default
+pages.frontquser.changePassword.containerLayout=frontend
+pages.frontquser.changePassword.layout=require('src/layouts/quser/passwordChange').default
+pages.frontquser.resetPassword.containerLayout=frontend
+pages.frontquser.resetPassword.layout=require('src/layouts/quser/password/reset').default
+pages.frontquser.resetCompleted.containerLayout=frontend
+pages.frontquser.resetCompleted.layout=require('src/layouts/quser/password/completed').default
 
 //pages.frontqquiz.test.path='account/iquiz/test' // Testing Route Frontend Account Iquiz
 
