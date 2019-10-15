@@ -14,7 +14,7 @@
           <div class="row gutter-xs"> 
             <div class="col-sm-12 col-md-6 col-lg-4 q-pb-lg" v-for="trivia in trivias" :key="trivia.id">
                 <q-card square  class="card-trivia-item no-shadow q-ma-sm" >
-                  <div  @click="trivia.opened = !trivia.opened">
+                  <div @click="trivia.opened = !trivia.opened">
                   <q-card-media>
                     <div class="ratio-4-3">
                       <img :src="trivia.image">
@@ -25,7 +25,27 @@
                   </q-card-main>
                   </div>
                 </q-card>
-                <modal-trivia :trivia="trivia" :opened="trivia.opened" @closedModal="trivia.opened=$event"></modal-trivia>
+
+                <q-modal  :content-css="{borderRadius: '20px', minWidth: '30vw'}" v-model="trivia.opened">
+                  <q-modal-layout>
+                    <div class="text-right q-pa-md">
+                      <q-btn round  size="sm"
+                        color="primary"
+                            @click="trivia.opened = !trivia.opened"
+                            icon="fas fa-times"
+                          />
+                    </div>
+
+                    <div class="layout-padding">
+                      <trivia :trivia="trivia" 
+                              isModal="true" 
+                              className="modaltrivia" 
+                              @closedModal="trivia.opened=$event">
+                      </trivia>
+                    </div>
+                 
+                  </q-modal-layout>
+                </q-modal>
             </div>
           </div>
         </div>
@@ -37,11 +57,11 @@
   </q-page>
 </template>
 <script>
-import modalTrivia from 'src/components/master/modalTrivia'
+import trivia from 'src/components/master/home/trivia'
 export default {
   name: 'PageTrivia',
   components: {
-    modalTrivia
+    trivia
   },
   data() {
     return {
@@ -54,7 +74,7 @@ export default {
           summary: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy',
           questions: [
               {
-                title: '¿titulo de la pregunta ?',
+                title: '1¿titulo de la pregunta ?',
                 options: [
                   {
                       label: '1920',
@@ -72,7 +92,7 @@ export default {
                 answer: ''
               },
               {
-                title: '¿titulo de la segunta pregunta?',
+                title: '1¿titulo de la segunta pregunta?',
                 options: [
                   {
                       label: '1920',
@@ -98,7 +118,7 @@ export default {
           summary: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy',
           questions: [
               {
-                title: '¿titulo de la pregunta?',
+                title: '2¿titulo de la pregunta?',
                 options: [
                   {
                       label: '1920',
@@ -116,7 +136,7 @@ export default {
                 answer: ''
               },
               {
-                title: '¿titulo de la segunta pregunta?',
+                title: '2¿titulo de la segunta pregunta?',
                 options: [
                   {
                       label: '1920',
@@ -420,7 +440,13 @@ export default {
       ]
     }
   },
-  methods: {}
+  methods: {
+    onCloseSend() {
+      /* Enviar los datos de la trivia*/
+      this.currentStep=0;
+      this.$emit('closedModal',false);
+    }
+  }
 }
 </script>
 <style lang="stylus">

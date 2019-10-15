@@ -545,8 +545,16 @@ footer
       padding 10px 
       
 .line-grey
-  border 1.5px solid #E1E1E1  
+  border 1px solid #E1E1E1  
+
+.line-primary
+  border 1px solid $primary
   
+.line-secondary
+  border 1px solid $secondary 
+
+.line-tertiary
+  border 1px solid $tertiary  
 
 /* Bottons arrows */      
 .btn-arrow-send-pink
@@ -593,6 +601,8 @@ footer
   .caption
     font-size 18px
     color #555555
+  .q-subheading
+    color #666666  
   .q-input-target 
     font-size 18px
     color #777777
@@ -974,3 +984,35 @@ footer
   @media screen and (max-width: $breakpoint-sm)
     .step
       margin-left 0 !important
+      
+.select-border 
+  border 1px solid $secondary
+  padding 5px    
+
+.q-breadcrumbs
+  & .q-breadcrumbs-el
+    font-size 14px
+    color $secondary !important
+    font-weight 700 
+  & .q-breadcrumbs-separator
+    font-weight 700   
+    
+.modal-subscription
+  .form-general
+    margin -30px 10px
+    border-width 2px 
+    .btn-arrow-send-pink
+      &:after 
+        right 100px
+    .line-text
+      position relative    
+      .line-grey
+        position absolute
+        top 50%
+        z-index 1
+        @media screen and (max-width: $breakpoint-xs)
+          display none
+      span  
+        position relative
+        z-index 2    
+    

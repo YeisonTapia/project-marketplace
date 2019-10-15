@@ -15,7 +15,7 @@
 
     </q-card-main>
     <q-card-actions  align="end" class="send q-pa-md">
-      <q-btn class="bg-primary">Enviar</q-btn>
+      <q-btn class="bg-primary font-family-secondary">Enviar</q-btn>
     </q-card-actions>
   </q-card>
 </template>
