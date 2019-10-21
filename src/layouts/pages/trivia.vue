@@ -10,442 +10,117 @@
 
           <p class="caption">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commod.</p>
         </div>
-        <div class="col-12 q-pb-xl">
+
+        <div v-if="success" class="col-12 q-pb-xl">
           <div class="row gutter-xs"> 
+          
             <div class="col-sm-12 col-md-6 col-lg-4 q-pb-lg" v-for="trivia in trivias" :key="trivia.id">
                 <q-card square  class="card-trivia-item no-shadow q-ma-sm" >
-                  <div @click="trivia.opened = !trivia.opened">
+                  <div @click="openModal(trivia)">
                   <q-card-media>
                     <div class="ratio-4-3">
-                      <img :src="trivia.image">
+                      <img :src="trivia.mainImage.path">
                     </div>
                   </q-card-media>
                   <q-card-main class="bg-white">
-                    {{trivia.summary}}           
+                    <div>{{trivia.description}}</div>
                   </q-card-main>
                   </div>
                 </q-card>
-
-                <q-modal  :content-css="{borderRadius: '20px', minWidth: '30vw'}" v-model="trivia.opened">
-                  <q-modal-layout>
-                    <div class="text-right q-pa-md">
-                      <q-btn round  size="sm"
-                        color="primary"
-                            @click="trivia.opened = !trivia.opened"
-                            icon="fas fa-times"
-                          />
-                    </div>
-
-                    <div class="layout-padding">
-                      <trivia :trivia="trivia" 
-                              isModal="true" 
-                              className="modaltrivia" 
-                              @closedModal="trivia.opened=$event">
-                      </trivia>
-                    </div>
-                 
-                  </q-modal-layout>
-                </q-modal>
             </div>
+
+             <triviaModal v-if="trivia" :trivia="trivia" @trivia="trivia = $event"></triviaModal>
+           
           </div>
         </div>
       </div>
-
+      <q-inner-loading :visible="loading" />
     </div>
 
 
   </q-page>
 </template>
 <script>
-import trivia from 'src/components/master/home/trivia'
+import triviaModal from 'src/components/master/triviaModal'
 export default {
   name: 'PageTrivia',
   components: {
-    trivia
+    triviaModal
+  },
+  beforeMount() {
+    this.$nextTick(function () {
+      this.init()
+    })
   },
   data() {
     return {
       lang: this.$q.i18n.lang,
-      trivias:  [
-        {
-          id: '1',
-          opened: false,
-          image: '/assets/img/banner.png',
-          summary: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy',
-          questions: [
-              {
-                title: '1¿titulo de la pregunta ?',
-                options: [
-                  {
-                      label: '1920',
-                      value: 'op1'
-                  },
-                  {
-                      label: '1916',
-                      value: 'op2'
-                  },
-                  {
-                      label: '1926',
-                      value: 'op3'
-                  },
-                ],
-                answer: ''
-              },
-              {
-                title: '1¿titulo de la segunta pregunta?',
-                options: [
-                  {
-                      label: '1920',
-                      value: 'op1'
-                  },
-                  {
-                      label: '1916',
-                      value: 'op2'
-                  },
-                  {
-                      label: '1826',
-                      value: 'op3'
-                  },
-                ],
-                answer: ''
-              }
-          ]
-        },
-        {
-          id: '2',
-          opened: false,
-          image: '/assets/img/banner.png',
-          summary: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy',
-          questions: [
-              {
-                title: '2¿titulo de la pregunta?',
-                options: [
-                  {
-                      label: '1920',
-                      value: 'op1'
-                  },
-                  {
-                      label: '1916',
-                      value: 'op2'
-                  },
-                  {
-                      label: '1926',
-                      value: 'op3'
-                  },
-                ],
-                answer: ''
-              },
-              {
-                title: '2¿titulo de la segunta pregunta?',
-                options: [
-                  {
-                      label: '1920',
-                      value: 'op1'
-                  },
-                  {
-                      label: '1916',
-                      value: 'op2'
-                  },
-                  {
-                      label: '1826',
-                      value: 'op3'
-                  },
-                ],
-                answer: ''
-              }
-          ]
-        },
-        {
-          id: '3',
-          opened: false,
-          image: '/assets/img/banner.png',
-          summary: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy',
-          questions: [
-              {
-                title: '¿titulo de la pregunta?',
-                options: [
-                  {
-                      label: '1920',
-                      value: 'op1'
-                  },
-                  {
-                      label: '1916',
-                      value: 'op2'
-                  },
-                  {
-                      label: '1926',
-                      value: 'op3'
-                  },
-                ],
-                answer: ''
-              },
-              {
-                title: '¿titulo de la segunta pregunta?',
-                options: [
-                  {
-                      label: '1920',
-                      value: 'op1'
-                  },
-                  {
-                      label: '1916',
-                      value: 'op2'
-                  },
-                  {
-                      label: '1826',
-                      value: 'op3'
-                  },
-                ],
-                answer: ''
-              }
-          ]
-        },
-        {
-          id: '4',
-          opened: false,
-          image: '/assets/img/banner.png',
-          summary: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy',
-          questions: [
-              {
-                title: '¿titulo de la pregunta?',
-                options: [
-                  {
-                      label: '1920',
-                      value: 'op1'
-                  },
-                  {
-                      label: '1916',
-                      value: 'op2'
-                  },
-                  {
-                      label: '1926',
-                      value: 'op3'
-                  },
-                ],
-                answer: ''
-              },
-              {
-                title: '¿titulo de la segunta pregunta?',
-                options: [
-                  {
-                      label: '1920',
-                      value: 'op1'
-                  },
-                  {
-                      label: '1916',
-                      value: 'op2'
-                  },
-                  {
-                      label: '1826',
-                      value: 'op3'
-                  },
-                ],
-                answer: ''
-              }
-          ]
-        },
-        {
-          id: '5',
-          opened: false,
-          image: '/assets/img/banner.png',
-          summary: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy',
-          questions: [
-              {
-                title: '¿Pregunta 1?',
-                options: [
-                  {
-                      label: '1920',
-                      value: 'op1'
-                  },
-                  {
-                      label: '1916',
-                      value: 'op2'
-                  },
-                  {
-                      label: '1926',
-                      value: 'op3'
-                  },
-                ],
-                answer: ''
-              },
-              {
-                title: '¿pregunta 2?',
-                options: [
-                  {
-                      label: '1920',
-                      value: 'op1'
-                  },
-                  {
-                      label: '1916',
-                      value: 'op2'
-                  },
-                  {
-                      label: '1826',
-                      value: 'op3'
-                  },
-                ],
-                answer: ''
-              },
-              {
-                title: '¿pregunta3?',
-                options: [
-                  {
-                      label: '1920',
-                      value: 'op1'
-                  },
-                  {
-                      label: '1916',
-                      value: 'op2'
-                  },
-                  {
-                      label: '1826',
-                      value: 'op3'
-                  },
-                ],
-                answer: ''
-              }
-          ]
-        },
-        {
-          id: '6',
-          opened: false,
-          image: '/assets/img/banner.png',
-          summary: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy',
-          questions: [
-              {
-                title: '¿titulo de la pregunta?',
-                options: [
-                  {
-                      label: '1920',
-                      value: 'op1'
-                  },
-                  {
-                      label: '1916',
-                      value: 'op2'
-                  },
-                  {
-                      label: '1926',
-                      value: 'op3'
-                  },
-                ],
-                answer: ''
-              },
-              {
-                title: '¿titulo de la segunta pregunta?',
-                options: [
-                  {
-                      label: '1920',
-                      value: 'op1'
-                  },
-                  {
-                      label: '1916',
-                      value: 'op2'
-                  },
-                  {
-                      label: '1826',
-                      value: 'op3'
-                  },
-                ],
-                answer: ''
-              }
-          ]
-        },
-        {
-          id: '7',
-          opened: false,
-          image: '/assets/img/banner.png',
-          summary: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy',
-          questions: [
-              {
-                title: '¿titulo de la pregunta?',
-                options: [
-                  {
-                      label: '1920',
-                      value: 'op1'
-                  },
-                  {
-                      label: '1916',
-                      value: 'op2'
-                  },
-                  {
-                      label: '1926',
-                      value: 'op3'
-                  },
-                ],
-                answer: ''
-              },
-              {
-                title: '¿titulo de la segunta pregunta?',
-                options: [
-                  {
-                      label: '1920',
-                      value: 'op1'
-                  },
-                  {
-                      label: '1916',
-                      value: 'op2'
-                  },
-                  {
-                      label: '1826',
-                      value: 'op3'
-                  },
-                ],
-                answer: ''
-              }
-          ]
-        },
-        {
-          id: '8',
-          opened: false,
-          image: '/assets/img/banner.png',
-          summary: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy',
-          questions: [
-              {
-                title: '¿titulo de la pregunta?',
-                options: [
-                  {
-                      label: '1920',
-                      value: 'op1'
-                  },
-                  {
-                      label: '1916',
-                      value: 'op2'
-                  },
-                  {
-                      label: '1926',
-                      value: 'op3'
-                  },
-                ],
-                answer: ''
-              },
-              {
-                title: '¿titulo de la segunta pregunta?',
-                options: [
-                  {
-                      label: '1920',
-                      value: 'op1'
-                  },
-                  {
-                      label: '1916',
-                      value: 'op2'
-                  },
-                  {
-                      label: '1826',
-                      value: 'op3'
-                  },
-                ],
-                answer: ''
-              }
-          ]
-        }
-      ]
+      loading: false,
+      success: false,
+      trivias:[],
+      trivia:null,
+      userId: this.$store.state.quserAuth.userId ? this.$store.state.quserAuth.userId : null
     }
   },
   methods: {
-    onCloseSend() {
-      /* Enviar los datos de la trivia*/
-      this.currentStep=0;
-      this.$emit('closedModal',false);
+    // Init Method
+    async init() {
+      
+      this.loading = true
+
+      await this.getTrivias()
+
+      //set Opened all trivias
+      await this.setOpenedAttribute()
+
+      this.loading = false
+      this.success = true
+
+    },
+    // Get Trivias with all questions
+    // Loggin - not Limit - not Exclude
+    getTrivias(){
+      return new Promise((resolve, reject) => {
+
+        //filter: 
+        let fixFilter = {}
+
+        fixFilter =  {allTranslations: true,status: 1,order:true}
+
+        //Params
+        let params = {
+          refresh: true,
+          params: {
+            include: 'questions',
+            filter: fixFilter,
+            take: 12
+          }
+        }
+
+        this.$crud.index("apiRoutes.qtrivia.trivias",params).then(response => {
+          this.trivias = response.data
+          resolve(true)//Resolve
+        }).catch(error => {
+          this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+          reject(false)//Resolve
+        })
+
+      })
+    },
+    // set parameter Opened()
+    setOpenedAttribute(){
+      this.trivias.forEach((trivia, index) => {
+          trivia.opened = false
+      });
+    },
+    // Open Modal
+    openModal(trivia){
+      this.loading = true
+      trivia.opened = true
+      this.trivia = trivia
+      this.loading = false
     }
+    
   }
 }
 </script>

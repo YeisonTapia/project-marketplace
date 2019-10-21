@@ -2,6 +2,12 @@
 <template>
   <div id="masterHeaderFrontend" class="font-family-secondary">
     <q-layout-header reveal class="no-shadow" v-if="desktop">
+      <!-- PRUEBA DE WIDGET USER-->
+      <!--
+      <div class="bg-green"><p>Prueba Widget User</p>
+        <WidgetUser/>
+      </div>
+      -->
       <q-toolbar-title>
         <div class="row gutter-sm bg-degradado">
           <div class="col-3 bg-white self-center logo-circle">
@@ -110,7 +116,7 @@
   </div>
 </template>
 <script>
-import WidgetUser from "@imagina/quser/_components/widget-user";
+import WidgetUser from "src/components/quser/widget-user";
 import configList from '../configList';
 import imSocial from 'src/components/master/imSocial';
 import menuComponent from 'src/components/master/frontend/menu';

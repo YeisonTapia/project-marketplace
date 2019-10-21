@@ -11,7 +11,7 @@
         <top-users></top-users>
       </div>
       <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-        <trivia :trivia="trivia" :isModal="false" className="home-trivia"></trivia>
+        <trivia v-if="success" :trivia="trivia" :isModal="false" className="home-trivia"></trivia>
       </div>
     </div>
   </div>
@@ -29,37 +29,95 @@ export default {
       topUsers,
       trivia
   },
+  beforeMount() {
+    this.$nextTick(function () {
+      this.init()
+    })
+  },
   data() {
     return {
       lang: this.$q.i18n.lang,
-      trivia:  
-        {
-          id: '1',
-          opened: false,
-          image: '/assets/img/banner.png',
-          summary: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy',
-          questions: [
-              {
-                title: '¿En que año se inició la Copa América de fútbol?',
-                options: [
-                  {
-                      label: '1920',
-                      value: 'op1'
-                  },
-                  {
-                      label: '1916',
-                      value: 'op2'
-                  },
-                  {
-                      label: '1926',
-                      value: 'op3'
-                  },
-                ],
-                answer: ''
-              }
-          ]
-        }
+      loading: false,
+      success: false,
+      triviaUserIds:[],
+      trivias:[],
+      trivia:null,
+      userId: this.$store.state.quserAuth.userId ? this.$store.state.quserAuth.userId : null
     }
-  }  
+  },
+  methods:{
+    // Init Method
+    async init() {
+      
+      this.loading = true
+
+      if(this.userId!=null){
+        await this.getUserTrivias()
+        await this.getTrivias()
+        if(this.trivias.length>0)
+              this.trivia = this.trivias[0]
+      }
+      
+      this.loading = false
+      this.success = true
+
+    },
+    // Get Trivias with all questions
+    // Loggin - Limit 1 Trivia - Exclude Trivias
+    getTrivias(){
+      return new Promise((resolve, reject) => {
+
+        //filter: 
+        let fixFilter = {}
+
+        fixFilter =  {allTranslations: true,status: 1,exclude:this.triviaUserIds}
+
+        //Params
+        let params = {
+          refresh: true,
+          params: {
+            include: 'questions',
+              filter: fixFilter,
+              take: 1
+          }
+        }
+
+        this.$crud.index("apiRoutes.qtrivia.trivias",params).then(response => {
+          this.trivias = response.data
+          resolve(true)//Resolve
+        }).catch(error => {
+          this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+          reject(false)//Resolve
+        })
+
+      })
+    },
+    //Get trivias Ids from User
+    getUserTrivias(){
+      return new Promise((resolve, reject) => {
+        //Params
+        let params = {
+          refresh: true,
+          params: {
+            filter: {userId:this.userId},
+            fields: 'trivia_id'
+          }
+        }
+
+        this.$crud.index("apiRoutes.qtrivia.userTrivias",params).then(response => {
+          response.data.forEach((userTrivias, index) => {
+            this.triviaUserIds.push(userTrivias.trivia_id)
+          });
+          resolve(true)//Resolve
+        }).catch(error => {
+          this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+          reject(false)//Resolve
+        })
+
+      })
+    }
+
+  } 
+  
 }
 </script>
