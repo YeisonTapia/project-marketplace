@@ -1,5 +1,5 @@
 <template>
-  <q-card class="card-product q-ma-sm q-pa-sm">
+  <q-card :class="className">
     <q-card-media>
       <div class="ratio-1">
         <img :src="product.image">
@@ -19,28 +19,40 @@
       <p class="q-my-none text-truncate"><small>{{product.tienda}}</small></p>
     </q-card-main>
   </q-card>
-  </q-card>
 </template>
 <script>
-    export default {
-        name: 'ProductComponent',
-        props: ['product']
-    }
+export default {
+    name: 'ProductComponent',
+    props: ['product','className']
+}
 </script>
 <style lang="stylus">
-@import "~variables"
-.card-product
+@import "~variables";
+.cardProductOne
   border-radius 0
-  box-shadow none
-  &:hover
-    background-color #FFFFFF
-    box-shadow 0 1px 5px rgba(0,0,0,0.2), 0 2px 2px rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12)
+  background-color #ffffff
+  h5
+    color $primary
   & .q-card-main
     font-size 16px
   & .q-card-actions
-    float right   
+    background-color $secondary
+    float right  
+    margin-top -15px
+    z-index 9
+    position relative
+    .q-btn
+      color #fff
+      border-radius 0
     .q-btn:first-child
-      color $primary      
+      border-left 1px solid #fff      
     .q-btn:last-child
-      color $blue-grey
+      border-right 1px solid #fff
+  &:hover
+    background-color $secondary
+    color #fff    
+    h5
+      color #fff
+    & .q-card-actions
+      background-color $primary  
 </style>

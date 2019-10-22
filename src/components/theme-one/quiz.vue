@@ -1,33 +1,37 @@
 <template>
-  <q-card flat class="card-quiz bg-primary w-100 h-100">
-    <img class="img-title w-100" src="/assets/img/quiz-title.png">
+  <q-card class="card-quiz-1 rounded-sm w-100 q-mb-xl">
+
+    <div class="q-card-title bg-primary rounded-sm text-center text-white q-py-sm">
+      ENCUENTA
+    </div>
+
+
 
     <q-stepper v-if="success && answers.length>0 && !alertContent.active" ref="stepper" v-model="currentStep" class="no-shadow">
       
 
       <q-step :name="question.id" :order="index" :title="question.title" v-for="(question, index) in poll.questions" :key="index">
 
-        <q-card-main class="image">
+        <q-card-main>
 
-        <h2 class="q-mb-0 text-light">{{question.title}}</h2>
+        <h2 class="q-mb-0">{{question.title}}</h2>
           
         <q-option-group  dark
           v-model="selectedOptions"
           :options="answers[index]"
-          color="light"
           type="checkbox"
         />
 
         </q-card-main>
 
-        <q-card-actions  align="end" class="q-pa-md" v-if="index < poll.questions.length - 1" >
-          <div class="text-light text-center cursor-pointer" @click="next()">
+        <q-card-actions  align="center" class="q-pa-md" v-if="index < poll.questions.length - 1" >
+          <div class="text-center cursor-pointer" @click="next()">
             <div class="font-family-secondary">Siguiente</div>
             <img src="assets/img/arrow-right-blue.png" style="width:25px;">
           </div>
         </q-card-actions>
-        <q-card-actions align="end" v-else class="send q-pa-md" >
-           <q-btn class="bg-primary text-light font-family-secondary" @click="saveData">Enviar</q-btn>
+        <q-card-actions align="center" v-else class="send q-pa-md" >
+           <q-btn class="bg-secondary text-white font-family-secondary" @click="saveData">Enviar</q-btn>
         </q-card-actions>
         
       </q-step>
@@ -292,33 +296,33 @@
     }
 </script>
 <style lang="stylus">
-.card-quiz
-  border-radius 10px
-  & .image
-    background-image url('/assets/img/quiz-fondo.png')
-    background-repeat no-repeat
-    background-position right bottom
-    font-family 'Trebuchet MS'
-    & h2
-      font-size 18px
-      position relative
-      &:before 
-        position absolute
-        content "•"
-        left -15px
-        font-weight bold
-    & .q-option-group  
-      font-size 17px
-      color var(--q-color-light)
-  & .send
-    background-image url('/assets/img/arrow-send-white.png')
-    background-repeat no-repeat
-    background-position 72% 68%
-    background-size 25%
-  & .img-title
-    margin-top -22px
+.card-quiz-1
+  & .q-card-title
+    position relative
+    font-weight bold
+    &:before
+      content ''
+      background-image url('/assets/img/icon-quiz.png')
+      position absolute
+      bottom 0
+      left 5px
+      height 60px
+      width 60px
+      background-size contain
+      background-repeat no-repeat
+      background-position bottom
   & .q-card-main
     padding 10px 25px 15px 25px
+    & h2
+      font-size 18px
+      text-align center  
+    & .q-option-group  
+      font-size 17px
+  & .send
+    background-image url('/assets/img/arrow-send-pink.png')
+    background-repeat no-repeat
+    background-position 22% 68%
+    background-size 25%
     
   .q-stepper
     .q-stepper-header

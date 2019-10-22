@@ -114,8 +114,9 @@ export default {
       display inline-block
       padding 15px
       border-bottom 2px solid $tertiary
-      & a
-        margin 15px
+      a
+      & i
+        margin 10px
         font-size 2rem
         color $tertiary
         &:hover 

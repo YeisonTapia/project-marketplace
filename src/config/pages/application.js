@@ -80,6 +80,46 @@ export default {
 		title: 'Editar Tienda',
 		icon: 'far fa-store'
 	},
+	layout1: {
+		permission: null,
+		activated: true,
+		path: '/layout1',
+		name: 'app.layout1',
+		layout: require('src/layouts/themes/index1').default,
+		containerLayout: master,
+		title: 'layout1',
+		icon: 'far fa-store'
+	},
+	layout2: {
+		permission: null,
+		activated: true,
+		path: '/layout2',
+		name: 'app.layout2',
+		layout: require('src/layouts/themes/index2').default,
+		containerLayout: master,
+		title: 'layout2',
+		icon: 'far fa-store'
+	},
+	blogIndex: {
+		permission: null,
+		activated: true,
+		path: '/blog-index',
+		name: 'app.blog-index',
+		layout: require('src/layouts/qblog/index').default,
+		containerLayout: master,
+		title: 'blog index',
+		icon: 'far fa-store'
+	},
+   blogShow: {
+		permission: null,
+		activated: true,
+		path: '/blog-show',
+		name: 'app.blog-show',
+		layout: require('src/layouts/qblog/show').default,
+		containerLayout: master,
+		title: 'blog show',
+		icon: 'far fa-store'
+	},
     admin: {
         permission: null,
         activated: true,

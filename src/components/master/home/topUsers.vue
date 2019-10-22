@@ -1,5 +1,5 @@
 <template>
-  <q-card flat  class="card-top-users bg-primary text-white w-100 h-100">
+  <q-card flat  class="card-top-users bg-primary text-light w-100 h-100">
     <div class="text-center">
       <img class="img-title" src="/assets/img/copa.png">
     </div>

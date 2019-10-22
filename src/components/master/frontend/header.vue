@@ -263,7 +263,7 @@ export default {
         {
           icon: 'far fa-newspaper',
           title: 'Blog',
-          name: 'app.blog',
+          name: 'app.blog-index',
           activated: true,
           permission: true,
         },
@@ -351,11 +351,12 @@ export default {
       -webkit-transform  skew(-20deg)
       transform skew(-20deg)
       padding 5px
-    & a
-      margin 5px
-      color $primary
-      & :hover
-       color $warning
+      a
+      & i
+        margin 3px
+        color $primary
+        & :hover
+         color $warning
 
   .profile
     display inline-block
