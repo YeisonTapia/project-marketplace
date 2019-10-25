@@ -20,7 +20,8 @@ export default {
     'qsite',
     'qsubscription',
     'qquiz',
-    'qtrivia'
+    'qtrivia',
+    'qmarketplace'
   ],
   //Storage
   saveStorage : {

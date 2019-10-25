@@ -71,7 +71,7 @@ export default {
 		icon: 'far fa-envelope-open'
 	},
 	editartienda: {
-		permission: null,
+		permission: auth,
 		activated: true,
 		path: '/editartienda',
 		name: 'app.editartienda',
