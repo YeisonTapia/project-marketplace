@@ -105,6 +105,15 @@ pages.qtrivia.rangepoints.containerLayout=admin
 pages.qtrivia.rangepoints.path= '/admin/itrivia/rangepoints/index/trivia/:id'
 
 
+pages.qform.forms.containerLayout=admin
+pages.qform.forms.path=  '/admin/iform/form'
+pages.qform.leads.containerLayout=admin
+pages.qform.leads.path=  '/admin/iform/leads/index'
+pages.qform.leadsShow.containerLayout=admin
+pages.qform.leadsShow.path=  '/admin//iform/lead/:id'
+pages.qform.fields.containerLayout=admin
+pages.qform.fields.path=  '/admin/iform/fields/:id'
+
 //======= Add or update extra apiRoutes
 //#example: pages.<name-page> = require('path-page').default
 

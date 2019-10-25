@@ -21,7 +21,8 @@ export default {
     'qsubscription',
     'qquiz',
     'qtrivia',
-    'qmarketplace'
+    'qmarketplace',
+    'qform'
   ],
   //Storage
   saveStorage : {

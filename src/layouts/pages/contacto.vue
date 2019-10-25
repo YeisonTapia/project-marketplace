@@ -59,14 +59,25 @@
                 <div>Escríbenos</div>
               </h3>
               <q-card-main class="q-px-xl q-pb-xl form-general">
-                <q-input v-model="contact.name" float-label="Nombre:" />
-                <q-input v-model="contact.phone" float-label="Teléfono:" />
-                <q-input v-model="contact.email" float-label="Email:" />
-                <q-input v-model="contact.subject" float-label="Asunto:" />
-                <q-input v-model="contact.message" float-label="Mensaje:" />
+                <q-field :error="$v.form.name.$error" error-label="Campo Requerido">
+                  <q-input v-model="form.name" float-label="Nombre:" />
+                </q-field>
+                <q-field :error="$v.form.phone.$error" error-label="Campo Requerido">
+                  <q-input v-model="form.phone" float-label="Teléfono:" />
+                </q-field>
+                <q-field :error="$v.form.email.$error" error-label="Escriba un Correo válido">
+                  <q-input v-model="form.email" float-label="Email:" />
+                </q-field>
+                <!--
+                <q-input v-model="form.subject" float-label="Asunto:" />
+                -->
+                <q-field :error="$v.form.message.$error" error-label="Campo Requerido">
+                  <q-input v-model="form.message" float-label="Mensaje:" />
+                </q-field>
+
               </q-card-main>
               <q-card-actions  align="end" no-caps class="q-pr-xl">
-                <q-btn class="bg-primary btn-arrow-send-yellow">Enviar</q-btn>
+                <q-btn class="bg-primary btn-arrow-send-yellow" @click="sendEmail()">Enviar</q-btn>
               </q-card-actions>
             </q-card>
           </div>
@@ -77,23 +88,93 @@
 </template>
 <script>
 import imSocial from 'src/components/master/imSocial';
+import {required, email} from 'vuelidate/lib/validators';
+import {alert} from '@imagina/qhelper/_plugins/alert'
+// Form
+import iform from "../../config/apiRoutes/iform";
+//import iformService from 'src/services/iform/index'
+
 export default {
   name: 'PageContacto',
   components: {
     imSocial
   },
+  validations: {
+    form: {
+      name: {required},
+      phone: {required},
+      email: {required, email},
+      message: {required},
+    }
+  },
   data() {
     return {
       lang: this.$q.i18n.lang,
-      contact: {
-        name: '',
-        phone: '',
-        email: '',
-        subject: '',
-        message: ''
-      }
+      form: {
+        name: null,
+        phone: null,
+        email: null,
+        //subject: null,
+        message: null,
+        form_id: 1
+      },
+      loading: false
     }
+  },
+  methods: {
+    async sendEmail() {
+      this.$v.$touch();
+      if (this.$v.$error) {
+        this.$alert.error({message: 'Por favor revisa de nuevo los campos.', pos: 'bottom'});
+      } else {
+        
+        this.loading = true;
+        this.$crud.create('apiRoutes.iform.send', this.form).then(response => {
+
+            if (response.status === "error") {
+              this.loading = false;
+              this.$alert.error({message: 'Ha ocurrido un error al enviar el correo.'});
+            } else {
+              this.loading = false;
+              this.$alert.success({message: 'Mensaje enviado exitosamente. Pronto nos pondremos en contacto con usted.'});
+              this.$router.push({name: 'app.home'})
+            }
+        });
+       
+        /*
+        this.loading = true;
+        iformService.crud.create('apiRoutes.iform.send', this.form).then(response => {
+          if (response.status === "error") {
+            this.loading = false;
+            this.$alert.error({message: 'Ha ocurrido un error al enviar el correo.', pos: 'bottom'});
+          } else {
+            this.loading = false;
+            this.$alert.success({message: 'Mensaje enviado exitosamente. Pronto nos pondremos en contacto con usted.', pos: 'bottom'});
+            this.$router.push({name: 'app.home'})
+          }
+        })
+        */
+       
+      }
+    },
+    clearForm(){
+      this.form = {
+        name: null,
+        phone: null,
+        email: null,
+        message: null,
+        form_id: 1
+      }
+      this.$v.form.$reset()
+    },
+    forceSet(field, value) {
+      this.$nextTick(() => {
+        this.form[field] = value
+      })
+    },
+     
   }
+
 }
 </script>
 <style lang="stylus">
