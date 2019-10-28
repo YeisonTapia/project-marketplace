@@ -18,7 +18,7 @@ if(appConfig && appConfig.modules){
 //#example: apiRoutes.<name> = require('path-api-route').default
 apiRoutes.api = require('src/config/apiRoutes/api').default
 apiRoutes.api = require('src/config/apiRoutes/iform').default
-apiRoutes.api = require('src/config/apiRoutes/ilocations').default
+apiRoutes.ilocations = require('src/config/apiRoutes/ilocations').default
 
 //Ilocations api routes
 /*
