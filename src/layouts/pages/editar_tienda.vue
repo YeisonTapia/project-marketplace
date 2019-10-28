@@ -124,7 +124,7 @@
                           </q-tooltip>
                         </q-btn>
                       </p>
-                      <q-input  v-model="company.map" placeholder="google maps"  />
+                      <q-input  v-model="company.options.map" placeholder="google maps"  />
                     </q-field>
                     <q-field  class="q-mb-xl">
                       <p class="caption q-mb-sm">Horario de atención
@@ -134,7 +134,7 @@
                           </q-tooltip>
                         </q-btn>
                       </p>
-                      <q-input  v-model="company.shedule" placeholder="Lunes - Sabado 7am - 6pm"
+                      <q-input  v-model="company.schedules[0]" placeholder="Lunes - Sabado 7am - 6pm"
                         :before="[{ icon: 'far fa-clock'}]" />
                     </q-field>
                     <q-field  class="q-mb-xl">
@@ -145,7 +145,7 @@
                           </q-tooltip>
                         </q-btn>
                       </p>
-                      <q-input  v-model="company.youtube" placeholder="youtube.com"  />
+                      <q-input  v-model="company.options.youtube" placeholder="youtube.com"  />
                     </q-field>
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
@@ -161,7 +161,18 @@
                       <q-select multiple v-model="company.categories" :options="categoryOptions" />
                     </q-field>
 
-                    <q-field  class="q-mb-xl">
+                    <q-field class="q-mb-xl">
+                      <p class="caption q-mb-sm">Barrio
+                        <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
+                          <q-tooltip>
+                            Some text as content of Tooltip
+                          </q-tooltip>
+                        </q-btn>
+                      </p>
+                      <q-input v-model="company.neighborhood" placeholder="Lorem Ipsum" />
+                    </q-field>
+
+                    <!-- <q-field  class="q-mb-xl">
                       <p class="caption q-mb-sm">Barrio
                         <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
                           <q-tooltip>
@@ -170,6 +181,16 @@
                         </q-btn>
                       </p>
                       <q-select v-model="company.neighborhood" :options="sectorOptions" />
+                    </q-field> -->
+                    <q-field  class="q-mb-xl">
+                      <p class="caption q-mb-sm">Provincia
+                        <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
+                          <q-tooltip>
+                            Some text as content of Tooltip
+                          </q-tooltip>
+                        </q-btn>
+                      </p>
+                      <q-select @input="val => { getCities() }" v-model="company.province_id" :options="provincesOptions" />
                     </q-field>
 
                     <q-field  class="q-mb-xl">
@@ -180,7 +201,7 @@
                           </q-tooltip>
                         </q-btn>
                       </p>
-                      <q-select v-model="company.city" :options="cityOptions" />
+                      <q-select v-model="company.city_id" :options="cityOptions" />
                     </q-field>
                     <q-field  class="q-mb-xl">
                       <p class="caption q-mb-sm">Correo electrónico
@@ -190,10 +211,10 @@
                           </q-tooltip>
                         </q-btn>
                       </p>
-                      <q-input v-model="company.email" placeholder="info@lorem.com"
+                      <q-input v-model="company.options.email" placeholder="info@lorem.com"
                         :before="[{ icon: 'fas fa-envelope'}]" />
                     </q-field>
-                    <q-field class="q-mb-lg">
+                    <q-field class="q-mb-lg" v-if="company.gallery.length>0">
                         <p class="caption q-mb-md">Galeria de la empresa
                           <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
                           <q-tooltip>
@@ -239,7 +260,7 @@
 
                   <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7">
-                      <div v-for="(item,index) in company.social_networks" :key="index">
+                      <div v-for="(item,index) in company.social" :key="index">
                         <div class="row items-center q-mb-md">
                           <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
                             <q-checkbox v-model="item.active">
@@ -271,7 +292,7 @@
                     </q-btn>
                   </p>
 
-                  <div v-for="(item,index) in company.payment_methods" :key="index">
+                  <div v-for="(item,index) in company.options.payment_methods" :key="index">
                     <div class="row items-center q-py-md border-bottom-gray">
                       <div class="col">
                         <q-checkbox v-model="item.active">
@@ -301,7 +322,7 @@
                     </q-btn>
                   </p>
 
-                  <div v-for="(item,index) in company.shipping_methods" :key="index">
+                  <div v-for="(item,index) in company.options.shipping_methods" :key="index">
                     <div class="row items-center q-py-md border-bottom-gray">
                       <div class="col">
                         <q-checkbox v-model="item.active">
@@ -323,8 +344,8 @@
 
           <div class="col-12 text-right">
               <q-field class="q-mb-xl">
-                <q-btn class="bg-primary text-white btn-arrow-send-pink" v-if="selectedStore>=0">Actualizar</q-btn>
-                <q-btn class="bg-primary text-white btn-arrow-send-pink" @click="createStore()" v-else-if="selectedStore==-2">Crear</q-btn>
+                <q-btn class="bg-primary text-white btn-arrow-send-pink" @click="updateStore()" v-if="parseInt(selectedStore)>=0">Actualizar</q-btn>
+                <q-btn class="bg-primary text-white btn-arrow-send-pink" @click="createStore()" v-else-if="parseInt(selectedStore)==-2">Crear</q-btn>
               </q-field>
           </div>
 
@@ -492,7 +513,7 @@
                         </q-tooltip>
                       </q-btn>
                     </p>
-                    <div class="row gutter-sm">
+                    <div class="row gutter-sm" >
                       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                         <q-field class="q-mb-xl">
                           <div class="images ratio-4-3">
@@ -504,7 +525,7 @@
                           </div>
                         </q-field>
                       </div>
-                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6" >
                          <q-field class="q-mb-xl">
                             <div class="images" style="position:relative;">
                               <q-carousel
@@ -724,18 +745,18 @@ export default {
       drawer: true,
       userId: this.$store.state.quserAuth.userId,
       company: {
-        user_id: this.$store.state.quserAuth.userId,
         name:'Nombre de tienda',
         slogan: '',
         description: '',
+        user_id: this.$store.state.quserAuth.userId,
         address: '',
-        map: '',
-        schedule: '',
-        schedules: [],
-        youtube: '',
+        schedules: [
+          ""
+        ],
         city: '',
+        city_id: null,
+        province_id: null,
         neighborhood: '',
-        email: '',
         categories:[],
         logo: '/assets/img/fondo.jpg',
         category: '',
@@ -745,61 +766,43 @@ export default {
         gallery: [
           {image:'/assets/img/fondo.jpg'},{image:'/assets/img/fondo.jpg'},{image:'/assets/img/fondo.jpg'}
         ],
-        payment_methods: [
-          {
-            name: 'Contraentrega',
-            active: false
-          },
-          {
-            name: 'Paypal',
-            active: false
-          },
-          {
-            name: 'Entrega de Tienda',
-            active: false
-          },
-          {
-            name: 'PayU',
-            active: false
-          }
-        ],
-        shipping_methods: [
-          {
-            name: 'Recoger en Tienda',
-            active: false
-          },
-          {
-            name: 'Servicio a Domicilio',
-            active: false
-          },
-          {
-            name: 'A convenir',
-            active: false
-          }
-        ],
-        social_networks: [
-          {
-            icon: 'fab fa-twitter',
-            name: 'Twitter',
-            color: 'blue-4',
-            url: '',
-            active: false
-          },
-          {
-            icon: 'fab fa-facebook',
-            name: 'Facebook',
-            color: 'indigo',
-            url: '',
-            active: false
-          },
-          {
-            icon: 'fab fa-instagram',
-            name: 'Instagram',
-            color: 'primary',
-            url: '',
-            active: false
-          }
-        ],
+        options:{
+          youtube: '',
+          email: '',
+          map: '',
+          payment_methods: [
+            {
+              name: 'Contraentrega',
+              active: false
+            },
+            {
+              name: 'Paypal',
+              active: false
+            },
+            {
+              name: 'Entrega de Tienda',
+              active: false
+            },
+            {
+              name: 'PayU',
+              active: false
+            }
+          ],
+          shipping_methods: [
+            {
+              name: 'Recoger en Tienda',
+              active: false
+            },
+            {
+              name: 'Servicio a Domicilio',
+              active: false
+            },
+            {
+              name: 'A convenir',
+              active: false
+            }
+          ]
+        },
         social: [
           {
             icon: 'fab fa-twitter',
@@ -829,29 +832,17 @@ export default {
       showingBackground: false,
       searchModel: '',
       sectorOptions: [
-        {
-          label: 'Barrios',
-          value: '1'
-        },
-        {
-          label: 'Barrioswert',
-          value: '2'
-        }
+        // {
+        //   label: 'Barrios',
+        //   value: '1'
+        // },
+        // {
+        //   label: 'Barrioswert',
+        //   value: '2'
+        // }
       ],
-      cityOptions: [
-        {
-          label: 'Rioacha',
-          value: '1'
-        },
-        {
-          label: 'Playaacha',
-          value: '2'
-        },
-        {
-          label: 'Lagoacha',
-          value: '3'
-        }
-      ],
+      cityOptions: [],
+      provincesOptions: [],
       categoryOptions: [
         {
           label: 'Comida',
@@ -930,7 +921,30 @@ export default {
     }
   },
   methods: {
+    slugable: function(title) {
+      var slug = "";
+      // Change to lower case
+      var titleLower = title.toLowerCase();
+      // Letter "e"
+      slug = titleLower.replace(/e|é|è|ẽ|ẻ|ẹ|ê|ế|ề|ễ|ể|ệ/gi, 'e');
+      // Letter "a"
+      slug = slug.replace(/a|á|à|ã|ả|ạ|ă|ắ|ằ|ẵ|ẳ|ặ|â|ấ|ầ|ẫ|ẩ|ậ/gi, 'a');
+      // Letter "o"
+      slug = slug.replace(/o|ó|ò|õ|ỏ|ọ|ô|ố|ồ|ỗ|ổ|ộ|ơ|ớ|ờ|ỡ|ở|ợ/gi, 'o');
+      // Letter "u"
+      slug = slug.replace(/u|ú|ù|ũ|ủ|ụ|ư|ứ|ừ|ữ|ử|ự/gi, 'u');
+      // Letter "d"
+      slug = slug.replace(/đ/gi, 'd');
+      // Trim the last whitespace
+      slug = slug.replace(/\s*$/g, '');
+      // Change whitespace to "-"
+      slug = slug.replace(/\s+/g, '-');
+
+      return slug;
+    },
     getStores(){
+      this.selectedStore=-1;//Reset index store
+      this.storesOptions=[];//Clear array stores
       this.storesOptions.push({
         label:"Seleccionar Tienda",
         value:-1
@@ -945,6 +959,7 @@ export default {
         params: {
           include: '',
           filter:{
+            allTranslations: true,
             userId:this.userId,
           }
         }
@@ -953,10 +968,31 @@ export default {
         this.stores=response.data;
         for(var i=0;i<this.stores.length;i++){
           this.storesOptions.push({
-            label:this.stores[i].name,
+            label:this.stores[i][this.lang].name,
             value:i
           });
         }//for
+      });
+    },
+    getStoreCategories(){
+      //Get stores of user
+      let params = {
+        remember: false,
+        params: {
+          include: '',
+          filter:{
+            allTranslations: true,
+          }
+        }
+      };//params
+      this.$crud.index("apiRoutes.qmarketplace.category",params).then(response => {
+        this.categoryOptions=response.data;//
+        // for(var i=0;i<this.stores.length;i++){
+        //   this.storesOptions.push({
+        //     label:this.stores[i][this.lang].name,
+        //     value:i
+        //   });
+        // }//for
       });
 
     },
@@ -967,47 +1003,125 @@ export default {
       this.company.slogan="";
       this.company.description="";
       this.company.address="";
-      this.company.map="";
-      this.company.schedule="";
-      this.company.youtube="";
+      this.company.options.map="";
+      this.company.schedules[0]="";
+      this.company.options.youtube="";
       this.company.categories=[];
       this.company.city="";
+      this.company.city_id=null;
+      this.company.province_id=null;
       this.company.neighborhood="";
-      this.company.email="";
-      for(var i=0;i<this.company.social_networks.length;i++){
-        this.company.social_networks[i].active=false;
+      this.company.options.email="";
+      for(var i=0;i<this.company.social.length;i++){
+        this.company.social[i].active=false;
       }
-      for(var i=0;i<this.company.payment_methods.length;i++){
-        this.company.payment_methods[i].active=false;
+      for(var i=0;i<this.company.options.payment_methods.length;i++){
+        this.company.options.payment_methods[i].active=false;
       }
-      for(var i=0;i<this.company.shipping_methods.length;i++){
-        this.company.shipping_methods[i].active=false;
+      for(var i=0;i<this.company.options.shipping_methods.length;i++){
+        this.company.options.shipping_methods[i].active=false;
       }
 
     },
     onChangeStore(){
       if(this.selectedStore>=0){
         //Clone data
+        this.company=this.stores[this.selectedStore];
+        this.company[this.lang]=this.stores[this.selectedStore][this.lang];
+        this.company.name=this.stores[this.selectedStore][this.lang].name;
+        this.company.slogan=this.stores[this.selectedStore][this.lang].slogan;
+        this.company.description=this.stores[this.selectedStore][this.lang].description;
+        this.company.categories=[];//
+        for(var i=0;i<this.stores[this.selectedStore].categories.length;i++){
+          this.company.categories.push(this.stores[this.selectedStore].categories[i].id);
+        }
       }else{
         //Clear inputs
         this.clearForm();
       }
     },
     createStore(){
+      this.company[this.lang]={
+        name:this.company.name,
+        slogan:this.company.slogan,
+        description:this.company.description,
+        slug:this.slugable(this.company.name)
+      };
+      // this.company.schedules=[this.company.schedule];
       this.$crud.create("apiRoutes.qmarketplace.store", this.company).then(response => {
         this.$alert.success({message: this.$tr('ui.message.recordCreated'), pos: 'bottom'})
-        this.initForm()
+        this.getStores();
         this.loading = false
       }).catch(error => {
         this.$alert.error({message: this.$tr('ui.message.recordNoCreated'), pos: 'bottom'})
         this.loading = false
       })
+    },
+    updateStore(){
+      this.company[this.lang]={
+        name:this.company.name,
+        slogan:this.company.slogan,
+        description:this.company.description,
+        slug:this.slugable(this.company.name)
+      };
+      this.$crud.update("apiRoutes.qmarketplace.store", this.stores[this.selectedStore].id,this.company).then(response => {
+        this.$alert.success({message: this.$tr('ui.message.recordUpdated'), pos: 'bottom'})
+        this.clearForm();
+        this.getStores();
+        this.loading = false
+      }).catch(error => {
+        this.$alert.error({message: this.$tr('ui.message.recordNoCreated'), pos: 'bottom'})
+        this.loading = false
+      })
+    },
+    getProvinces(){
+      // cityOptions
+      // sectorOptions
+      let params = {
+        remember: false,
+        params: {
+          include: '',
+          filter:{
+            allTranslations: true,
+            country:48
+          }
+        }
+      };//params
+      this.$crud.index("apiRoutes.ilocations.provinces",params).then(response => {
+        this.provincesOptions=[];
+        this.provincesOptions.push({label:"Selecciona una provincia",value:null});
+        for(var i=0;response.data.length;i++){
+          this.provincesOptions.push({label:response.data[i].name,value:response.data[i].id});
+        }
+      });
+    },
+    getCities(){
+      let params = {
+        remember: false,
+        params: {
+          include: '',
+          filter:{
+            allTranslations: true,
+            province_id:this.company.province_id
+          }
+        }
+      };//params
+      this.$crud.index("apiRoutes.ilocations.cities",params).then(response => {
+        this.cityOptions=[];
+        this.cityOptions.push({label:"Selecciona una ciudad",value:null});
+        for(var i=0;response.data.length;i++){
+          this.cityOptions.push({label:response.data[i].name,value:response.data[i].id});
+        }
+      });
     }
 
 
   },
   mounted(){
     this.getStores();
+    this.getStoreCategories();//
+    this.getProvinces();//
+
   }
 }
 </script>

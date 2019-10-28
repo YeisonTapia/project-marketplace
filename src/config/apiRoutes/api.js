@@ -5,5 +5,6 @@ export default {
   base_url,
   api_url,
   token_url: base_url + '/api/login',
-  api_ilocations: api_url + '/v2/ilocations'
+  api_ilocations: api_url + '/v2/ilocations',
+  ilocations_provinces: api_url + '/v2/ilocations/provinces'
 }
