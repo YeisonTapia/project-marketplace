@@ -49,10 +49,10 @@
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                      <q-field class="q-mb-lg">
-                        <p class="caption q-mb-md">Agregar imágenes para slider
+                        <p class="caption q-mb-md">Agregar imagenes para slider
                           <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
                           <q-tooltip>
-                            Agrega imágenes promociones de tu tienda
+                            Some text as content of Tooltip
                           </q-tooltip>
                         </q-btn>
                         </p>
@@ -93,7 +93,7 @@
                       <p class="caption q-mb-sm">Nombre de tu empresa
                         <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
                           <q-tooltip>
-                            Ingresa el nombre de tu tienda
+                            Some text as content of Tooltip
                           </q-tooltip>
                         </q-btn>
                       </p>
@@ -103,7 +103,7 @@
                       <p class="caption q-mb-sm">Slogan
                         <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
                           <q-tooltip>
-                            Agrega un slogan para tu tienda
+                            Some text as content of Tooltip
                           </q-tooltip>
                         </q-btn>
                       </p>
@@ -113,7 +113,7 @@
                       <p class="caption q-mb-sm">Descripción de la empresa
                         <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
                           <q-tooltip>
-                            Ingresa una breve descripción de tu empresa
+                            Some text as content of Tooltip
                           </q-tooltip>
                         </q-btn>
                       </p>
@@ -123,7 +123,7 @@
                       <p class="caption q-mb-sm">Dirección de la empresa
                         <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
                           <q-tooltip>
-                            Ingresa la dirección de tu empresa
+                            Some text as content of Tooltip
                           </q-tooltip>
                         </q-btn>
                       </p>
@@ -134,7 +134,7 @@
                       <p class="caption q-mb-sm">Url mapa
                         <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
                           <q-tooltip>
-                            Ingresa la dirección de tu empresa vía google maps
+                            Some text as content of Tooltip
                           </q-tooltip>
                         </q-btn>
                       </p>
@@ -144,7 +144,7 @@
                       <p class="caption q-mb-sm">Horario de atención
                         <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
                           <q-tooltip>
-                            Aquí puedes ingresar tu horario de atención al público
+                            Some text as content of Tooltip
                           </q-tooltip>
                         </q-btn>
                       </p>
@@ -155,7 +155,7 @@
                       <p class="caption q-mb-sm">Enlace de youtube
                         <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
                           <q-tooltip>
-                            Aquí puedes ingresar el link de un video promocional
+                            Some text as content of Tooltip
                           </q-tooltip>
                         </q-btn>
                       </p>
@@ -167,7 +167,7 @@
                       <p class="caption q-mb-xs">Categoría
                         <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
                           <q-tooltip>
-                            Selecciona las categorías a las que pertenece tu empresa
+                            Some text as content of Tooltip
                           </q-tooltip>
                         </q-btn>
                       </p>
@@ -179,7 +179,7 @@
                       <p class="caption q-mb-sm">Barrio
                         <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
                           <q-tooltip>
-                            Selecciona el barrio al que pertenece tu empresa
+                            Some text as content of Tooltip
                           </q-tooltip>
                         </q-btn>
                       </p>
@@ -200,7 +200,7 @@
                       <p class="caption q-mb-sm">Provincia
                         <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
                           <q-tooltip>
-                            Selecciona la provincia a la que pertenece tu empresa
+                            Some text as content of Tooltip
                           </q-tooltip>
                         </q-btn>
                       </p>
@@ -211,7 +211,7 @@
                       <p class="caption q-mb-sm">Cuidad
                         <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
                           <q-tooltip>
-                            Selecciona la ciudad a la que pertenece tu empresa
+                            Some text as content of Tooltip
                           </q-tooltip>
                         </q-btn>
                       </p>
@@ -221,7 +221,7 @@
                       <p class="caption q-mb-sm">Correo electrónico
                         <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
                           <q-tooltip>
-                            Ingresa un correo electrónico para el contacto cliente - tienda
+                            Some text as content of Tooltip
                           </q-tooltip>
                         </q-btn>
                       </p>
@@ -232,7 +232,7 @@
                         <p class="caption q-mb-md">Galeria de la empresa
                           <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
                           <q-tooltip>
-                            Ingresa múltiples imágenes promocionales de tu empresa
+                            Some text as content of Tooltip
                           </q-tooltip>
                         </q-btn>
                         </p>
@@ -275,7 +275,7 @@
                   <p class="caption q-mb-lg">Redes sociales de tu tienda
                     <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
                       <q-tooltip>
-                        Puedes seleccionar las redes sociales disponibles de tu empresa
+                        Some text as content of Tooltip
                       </q-tooltip>
                     </q-btn>
                   </p>
@@ -309,7 +309,7 @@
                   <p class="caption q-mb-lg">¿Que metodos de pago aceptas?
                     <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
                       <q-tooltip>
-                        Puedes seleccionar los métodos de pago disponibles en tu empresa
+                        Some text as content of Tooltip
                       </q-tooltip>
                     </q-btn>
                   </p>
@@ -339,7 +339,7 @@
                   <p class="caption q-mb-lg">¿Cuales son los medotos de envío?
                     <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
                       <q-tooltip>
-                        Puedes seleccionar los métodos de envío disponibles en tu empresa
+                        Some text as content of Tooltip
                       </q-tooltip>
                     </q-btn>
                   </p>
@@ -357,6 +357,7 @@
                     </div>
                   </div>
 
+
                 </q-field>
               </q-card-main>
             </q-card>
@@ -368,6 +369,362 @@
                 <q-btn class="bg-primary text-white btn-arrow-send-pink" @click="updateStore()" v-if="parseInt(selectedStore)>=0">Actualizar</q-btn>
                 <q-btn class="bg-primary text-white btn-arrow-send-pink" @click="createStore()" v-else-if="parseInt(selectedStore)==-2">Crear</q-btn>
               </q-field>
+          </div>
+
+
+          <div class="col-12" v-show="selectedStore>=0">
+            <h3 class="text-center q-my-xl">Diseño</h3>
+          </div>
+
+          <div class="col-12" v-show="selectedStore>=0">
+
+            <q-card  class="rounded-md bg-white w-100 q-mb-xl">
+
+              <q-card-actions  align="end" no-caps class="q-pa-lg">
+                <q-btn class="rounded-sm  font-family-secondary" no-caps color="primary" icon="fas fa-eye" label="Vista previa"/>
+              </q-card-actions>
+
+              <q-card-main class="q-px-xl q-pb-xl form-general">
+                <div class="q-headline text-primary q-mb-xs">Eligue tu tema</div>
+                <div class="q-subheading text-secondary">
+                  Completa la configuración de tu tienda, ¡es muy fácil!
+                </div>
+                <div class="q-my-lg line-grey w-100"></div>
+
+                <div class="row gutter-md justify-center">
+                  <div @click="theme.image = t.image" class="col-xs-12 col-sm-12 col-md-6 col-lg-5 q-mb-md cursor-pointer" v-for="(t,index) in themes_option" :key="index">
+                    <div class="ratio-1 line-grey">
+                      <img :src="t.image">
+                    </div>
+                    <div class="q-pa-md" :class="[theme.image == t.image ? 'bg-secondary text-light' : 'bg-light text-secondary']">
+                       Tienda #{{index+1}}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="q-my-lg line-grey w-100"></div>
+
+                <div class="q-headline text-primary q-mb-xs">Personaliza ti sitio web</div>
+                <div class="q-subheading text-secondary q-mb-lg">
+                  Elige los colores de acuerdo a la imagen de tu empresa
+                </div>
+
+                <div class="row gutter-sm items-center  q-mb-sm">
+                  <div class="col-xs-6 col-sm-5 col-md-3">
+                    <p class="caption q-mb-none">Primario</p>
+                  </div>
+                  <div class="col-xs-6 col-sm-5 col-md-3">
+                    <div @click="showingPrimary = true"  class="q-pa-md line-grey text-center" :style="{ 'background-color': theme.primary }">
+                      {{theme.primary}}
+
+                      <q-popover v-model="showingPrimary" anchor="bottom right" self="bottom left">
+                        <q-tabs align="justify">
+                          <q-tab default  slot="title" name="tab-1" label="HEX" :style="{ 'background-color': theme.primary }"/>
+                          <q-tab  slot="title" name="tab-2" label="RGB" :style="{ 'background-color': theme.primary }"/>
+                          <q-tab-pane name="tab-1" class="q-pa-none" style="min-width: 80px;">
+                              <div class="text-center q-pa-md" :style="{ 'background-color': theme.primary }">
+                                {{theme.primary}}
+                              </div>
+                              <q-color-picker v-model="theme.primary" format-model="hex" />
+                          </q-tab-pane>
+                          <q-tab-pane name="tab-2" class="q-pa-none" style="min-width: 80px;">
+                              <div class="text-center q-pa-md" :style="{ 'background-color': theme.primary }">
+                                {{theme.primary}}
+                              </div>
+                              <q-color-picker v-model="theme.primary" format-model="rgb" />
+                          </q-tab-pane>
+                        </q-tabs>
+                      </q-popover>
+                    </div>
+                  </div>
+                </div>
+                <div class="row gutter-sm items-center  q-mb-sm">
+                  <div class="col-xs-6 col-sm-5 col-md-3">
+                    <p class="caption q-mb-none">Secondario</p>
+                  </div>
+                  <div class="col-xs-6 col-sm-5 col-md-3">
+                    <div @click="showingSecondary = true" class="q-pa-md line-grey text-center line" :style="{ 'background-color': theme.secondary }">
+                      {{theme.secondary}}
+
+                      <q-popover v-model="showingSecondary" anchor="bottom right" self="bottom left">
+                        <q-tabs align="justify">
+                          <q-tab default  slot="title" name="tab-1" label="HEX" :style="{ 'background-color': theme.secondary }"/>
+                          <q-tab  slot="title" name="tab-2" label="RGB" :style="{ 'background-color': theme.secondary }"/>
+                          <q-tab-pane name="tab-1" class="q-pa-none" style="min-width: 80px;">
+                              <div class="text-center q-pa-md" :style="{ 'background-color': theme.secondary }">
+                                {{theme.secondary}}
+                              </div>
+                              <q-color-picker v-model="theme.secondary" format-model="hex" />
+                          </q-tab-pane>
+                          <q-tab-pane name="tab-2" class="q-pa-none" style="min-width: 80px;">
+                              <div class="text-center q-pa-md" :style="{ 'background-color': theme.secondary }">
+                                {{theme.secondary}}
+                              </div>
+                              <q-color-picker v-model="theme.secondary" format-model="rgb" />
+                          </q-tab-pane>
+                        </q-tabs>
+                      </q-popover>
+                    </div>
+                  </div>
+                </div>
+                <div class="row gutter-sm items-center  q-mb-sm">
+                  <div class="col-xs-6 col-sm-5 col-md-3">
+                    <p class="caption q-mb-none">Fondo</p>
+                  </div>
+                  <div class="col-xs-6 col-sm-5 col-md-3">
+                    <div @click="showingBackground = true" class="q-pa-md line-grey text-center" :style="{ 'background-color': theme.background }">
+                      {{theme.background}}
+
+                      <q-popover v-model="showingBackground" anchor="bottom right" self="bottom left">
+                        <q-tabs align="justify">
+                          <q-tab default  slot="title" name="tab-1" label="HEX" :style="{ 'background-color': theme.background }"/>
+                          <q-tab  slot="title" name="tab-2" label="RGB" :style="{ 'background-color': theme.background }"/>
+                          <q-tab-pane name="tab-1" class="q-pa-none" style="min-width: 80px;">
+                              <div class="text-center q-pa-md" :style="{ 'background-color': theme.background }">
+                                {{theme.background}}
+                              </div>
+                              <q-color-picker v-model="theme.background" format-model="hex" />
+                          </q-tab-pane>
+                          <q-tab-pane name="tab-2" class="q-pa-none" style="min-width: 80px;">
+                              <div class="text-center q-pa-md" :style="{ 'background-color': theme.background }">
+                                {{theme.background}}
+                              </div>
+                              <q-color-picker v-model="theme.background" format-model="rgb" />
+                          </q-tab-pane>
+                        </q-tabs>
+                      </q-popover>
+                    </div>
+                  </div>
+                </div>
+
+              </q-card-main>
+            </q-card>
+
+            <h5 class="text-primary q-ma-lg">Crear Producto</h5>
+
+            <q-card  class="rounded-md bg-white w-100 q-my-xl">
+
+              <q-card-main class="q-px-xl  q-py-none form-general">
+
+                <div class="row gutter-md justify-center">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 card-border-right">
+
+                    <q-field class="q-mb-xl">
+                      <p class="caption q-mb-sm">Nombre de producto</p>
+                      <q-input v-model="product.name" placeholder="Lorem Ipsum" />
+                    </q-field>
+                    <q-field class="q-mb-xl">
+                      <p class="caption q-mb-sm">Descripción corta</p>
+                      <q-input v-model="product.summary" placeholder="Lorem Ipsum" />
+                    </q-field>
+                    <q-field class="q-mb-xl">
+                      <p class="caption q-mb-sm">Descripción completa
+                        <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
+                          <q-tooltip>
+                            Some text as content of Tooltip
+                          </q-tooltip>
+                        </q-btn>
+                      </p>
+                      <q-editor v-model="product.description" />
+                    </q-field>
+
+                    <p class="caption q-mb-md">Imagen
+                      <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question" >
+                        <q-tooltip>
+                          Some text as content of Tooltip
+                        </q-tooltip>
+                      </q-btn>
+                    </p>
+                    <div class="row gutter-sm" >
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                        <q-field class="q-mb-xl">
+                          <div class="images ratio-4-3">
+                            <img class="rounded-md" :src="product.image" alt="default">
+
+                            <div class="absolute-bottom-right">
+                              <q-btn class="rounded-sm btn" color="primary" icon="fas fa-camera"/>
+                            </div>
+                          </div>
+                        </q-field>
+                      </div>
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6" >
+                         <q-field class="q-mb-xl">
+                            <div class="images" style="position:relative;">
+                              <q-carousel
+                                color="white"
+                                quick-nav
+                                class="img-ratio-4-3"
+                              >
+
+                                <q-carousel-slide class="rounded-md" v-for="(s,index) in product.gallery" :key="index" :img-src="s.image" />
+
+                              </q-carousel>
+                              <div class="absolute-bottom-right">
+                                <q-btn class="rounded-sm btn q-mr-sm" color="primary" icon="fas fa-edit"/>
+                                <q-btn class="rounded-sm btn" color="primary" icon="fas fa-trash"/>
+                              </div>
+                            </div>
+
+                          </q-field>
+                      </div>
+                    </div>
+
+                    <q-field class="q-mb-xl">
+                      <p class="caption q-mb-sm">Video
+                        <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
+                          <q-tooltip>
+                            Some text as content of Tooltip
+                          </q-tooltip>
+                        </q-btn>
+                      </p>
+                      <q-input v-model="product.video" placeholder="Lorem Ipsum"  />
+                    </q-field>
+
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 col-xl-4">
+                    <q-field  class="q-mb-xl">
+                      <p class="caption q-mb-sm">Estado</p>
+                      <q-select v-model="product.status" :options="statusOptions" />
+                    </q-field>
+
+                    <q-field  class="q-mb-xl">
+                      <p class="caption q-mb-sm">Categoria Principal</p>
+                      <q-select v-model="product.category" :options="categoryOptions" />
+                    </q-field>
+
+                    <q-field  class="q-mb-xl">
+                      <p class="caption q-mb-sm">Categoria </p>
+                      <q-search
+                          v-model="searchModel"
+                          placeholder="Buscar categorías"
+                          icon="search"
+                          inverted-light
+                          color="white"
+                          hide-underline  no-parent-field
+                          class="border">
+                        </q-search>
+                    </q-field>
+
+
+                  </div>
+                </div>
+
+
+              </q-card-main>
+            </q-card>
+
+            <q-card  class="rounded-md bg-white w-100 q-mb-xl">
+
+              <q-card-main class="q-px-xl q-py-xl form-general">
+
+                <div class="row gutter-md justify-center">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+
+                    <q-field class="q-mb-xl">
+                      <p class="caption q-mb-sm">Precio</p>
+                      <q-input  helper="Helper" count="10" prefix="$" v-model="product.price" placeholder="000.00" />
+                    </q-field>
+                    <q-field class="q-mb-xl">
+                      <p class="caption q-mb-sm">Cantidad</p>
+                      <q-input v-model="product.quantity" placeholder="1" />
+                    </q-field>
+                    <q-field class="q-mb-xl">
+                      <p class="caption q-mb-sm">Peso</p>
+                       <q-input v-model="product.weight" placeholder="1" />
+                    </q-field>
+                    <q-field class="q-mb-xl">
+                      <p class="caption q-mb-sm">Longitud</p>
+                       <q-input v-model="product.length" placeholder="1" />
+                    </q-field>
+                    <q-field class="q-mb-xl">
+                      <p class="caption q-mb-sm">Anchura</p>
+                       <q-input v-model="product.width" placeholder="1" />
+                    </q-field>
+                    <q-field class="q-mb-xl">
+                      <p class="caption q-mb-sm">Altura</p>
+                       <q-input v-model="product.height" placeholder="1" />
+                    </q-field>
+                  </div>
+
+
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                    <q-field class="q-mb-xl">
+                      <p class="caption q-mb-sm">Referencia</p>
+                       <q-input v-model="product.reference" placeholder="" />
+                    </q-field>
+
+                    <q-field  class="q-mb-xl">
+                      <q-toggle v-model="product.stock" color="primary" label="Stock" />
+                    </q-field>
+
+                    <q-field  class="q-mb-xl">
+                      <p class="caption q-mb-sm">Orden minima</p>
+                      <q-input v-model="product.order_min" placeholder="1" />
+                    </q-field>
+                    <q-field class="q-mb-xl">
+                      <p class="caption q-mb-sm">Puntos</p>
+                       <q-input v-model="product.points" placeholder="1" />
+                    </q-field>
+                    <q-field class="q-mb-xl">
+                      <div class="row gutter-sm">
+                        <div class="col-auto">
+                           <q-checkbox v-model="product.active_home"></q-checkbox>
+                        </div>
+                        <div class="col">
+                          <p class="caption q-mb-none">Agregar producto a la página inicial de "Donde esta tu vaina" </p>
+                          <p><small class="text-primary">Disponibles (2)</small></p>
+                        </div>
+                      </div>
+                    </q-field>
+
+                    <q-card-actions no-caps class="q-pa-lg">
+                      <q-btn class="rounded-sm q-px-md" size="lg" no-caps color="primary" label="Opción de Producto"/>
+                    </q-card-actions>
+
+                  </div>
+                </div>
+
+              </q-card-main>
+            </q-card>
+
+            <q-card  class="rounded-md bg-white w-100 q-mb-xl">
+
+              <q-card-main class="q-px-xl q-py-xl form-general">
+
+                <div class="row gutter-md justify-center">
+                  <div class="col-12">
+                    <p class="caption q-mb-sm">Editar SEO
+                      <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
+                        <q-tooltip>
+                          Some text as content of Tooltip
+                        </q-tooltip>
+                      </q-btn>
+                    </p>
+                  </div>
+                </div>
+
+              </q-card-main>
+            </q-card>
+
+            <q-card  class="rounded-md bg-white w-100 q-mb-xl">
+
+              <q-card-main class="q-px-xl q-py-xl form-general">
+
+                <div class="row gutter-md justify-center">
+                  <div class="col-12">
+                    <p class="caption q-mb-sm">Relacionados
+                      <q-btn round class="no-shadow" size="6px" color="tertiary" icon="fas fa-question">
+                        <q-tooltip>
+                          Some text as content of Tooltip
+                        </q-tooltip>
+                      </q-btn>
+                    </p>
+                  </div>
+                </div>
+
+              </q-card-main>
+            </q-card>
+
           </div>
 
         </div>
