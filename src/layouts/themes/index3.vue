@@ -125,22 +125,22 @@
       <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-3">
           <div class="ratio-4-3" style="border: 2px solid #fff;">
-              <img src="/statics/img/theme-two/work1.jpg" alt="">
+              <img src="/statics/img/theme-three/work1.jpg" alt="">
             </div>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-3">
           <div class="ratio-4-3" style="border: 2px solid #fff;">
-              <img src="/statics/img/theme-two/work2.jpg" alt="">
+              <img src="/statics/img/theme-three/work2.jpg" alt="">
             </div>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-3">
           <div class="ratio-4-3" style="border: 2px solid #fff;">
-              <img src="/statics/img/theme-two/work3.jpg" alt="">
+              <img src="/statics/img/theme-three/work3.jpg" alt="">
             </div>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-3">
           <div class="ratio-4-3" style="border: 2px solid #fff;">
-              <img src="/statics/img/theme-two/work4.jpg" alt="">
+              <img src="/statics/img/theme-three/work4.jpg" alt="">
             </div>
         </div>
       </div>

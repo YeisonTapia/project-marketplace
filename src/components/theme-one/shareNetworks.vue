@@ -1,5 +1,5 @@
 <template>
-  <div class="share-networks bg-white">
+  <div class="share-networks">
     <div class="row items-center">
       <div class="col-12">
         <div class="networks text-center">
@@ -21,13 +21,25 @@ export default {
 @import "~variables";
 .theme-layout-01
   .share-networks
-    padding 2% 0
+    background-image url('/assets/img/theme-one/share-network.jpg')
+    background-size cover
+    padding 10% 0
+    position relative
+    &:before
+      height 100%
+      width 100%    
+      background-color  rgba(#282d46, 0.7)
+      content ''
+      position absolute
+      top 0
     .networks  
+      position relative
+      z-index 3
       a
       & i
         margin 10px
         font-size 2rem
-        color $secondary
+        color #ffffff 
         &:hover 
-          color $primary
+          color $secondary
 </style>
