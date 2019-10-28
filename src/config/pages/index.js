@@ -104,6 +104,12 @@ pages.qtrivia.questions.path= '/admin/itrivia/questions/index/trivia/:id'
 pages.qtrivia.rangepoints.containerLayout=admin
 pages.qtrivia.rangepoints.path= '/admin/itrivia/rangepoints/index/trivia/:id'
 
+/*
+pages.qredeems.items.containerLayout=admin
+pages.qredeems.items.path=  '/admin/iredeems/items/index'
+pages.qredeems.redeems.containerLayout=admin
+pages.qredeems.redeems.path=  '/admin/iredeems/redeems/index'
+*/
 
 pages.qform.forms.containerLayout=admin
 pages.qform.forms.path=  '/admin/iform/form'

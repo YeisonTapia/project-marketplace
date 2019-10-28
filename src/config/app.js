@@ -22,7 +22,7 @@ export default {
     'qquiz',
     'qtrivia',
     'qmarketplace',
-    'qform'
+    'qform',
   ],
   //Storage
   saveStorage : {
