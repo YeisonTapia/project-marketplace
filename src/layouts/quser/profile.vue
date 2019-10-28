@@ -770,9 +770,9 @@
       getCountries(){
         return new Promise((resolve, reject) => {
 
-            let apiUrl = '/countries'
+            //let apiUrl = '/countries'
 
-            http.get(config('apiRoutes.api.api_ilocations') + apiUrl)
+            http.get(config('apiRoutes.ilocations.countries'))
             .then(response => {
               response.data.data.forEach(data => {
                 this.countryOptions.push({
@@ -788,13 +788,15 @@
             .catch(error => {
               reject(error);
             });
+            
+
         })
       },
       // Get Cities from ilocations
       getCities(countryModel,cityOptions){
         return new Promise((resolve, reject) => {
 
-            let apiUrl = '/provinces'
+            //let apiUrl = '/provinces'
             let params = {
               params: {
                 filter: {country: countryModel}
@@ -806,7 +808,7 @@
             if(cityOptions == 'CiRO')
               this.cityResidenceOptions = []
           
-            http.get(config('apiRoutes.api.api_ilocations') + apiUrl, params)
+            http.get(config('apiRoutes.ilocations.provinces'), params)
             .then(response => {
               response.data.data.forEach(data => {
 
