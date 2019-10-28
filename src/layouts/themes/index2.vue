@@ -7,15 +7,17 @@
     <div class="q-pa-md">
       <div class="q-container">
         <div class="row gutter-md">
-          <div class="col-xs-12 col-sm-12 col-md-4 q-mb-xl">
+          <div class="col-xs-12 col-sm-12 col-md-4 q-mb-xl text-center">
             <div class="ratio-1">
-              <img src="/assets/img/theme-one/banner-bottom.jpg" alt="">
+              <img src="/statics/img/theme-two/banner1.jpg" alt="">
             </div>
+            <q-btn no-caps class="rounded-lg btn-banner"  color="secondary" label="Lorem ipsum" />
           </div>
-          <div class="col-xs-12 col-sm-12 col-md-4 q-mb-xl">
+          <div class="col-xs-12 col-sm-12 col-md-4 q-mb-xl text-center">
             <div class="ratio-1">
-              <img src="/assets/img/theme-one/banner-bottom.jpg" alt="">
+              <img src="/statics/img/theme-two/banner2.jpg" alt="">
             </div>
+            <q-btn no-caps class="rounded-lg btn-banner"  color="secondary" label="Lorem ipsum" />
           </div>
           <div class="col-xs-12 col-sm-12 col-md-4">
             <quiz></quiz>
@@ -24,12 +26,11 @@
       </div>
     </div>  
 
-    <!-- Compartir -->
-    <div class="share-networks q-mb-xl">
+    <div class="banner-two q-mb-xl">
       <div class="q-container">
         <div class="row justify-center">
           <div class="col-xs-12 col-sm-12 col-md-7 col-lg-6">
-            <div class="networks text-center">
+            <div class="content text-center">
               <h4 class="q-my-md text-white">CONOCENOS</h4>
               <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur architecto cumque fugit placeat assumenda illum debitis minima ducimus fuga enim quod nihil, ullam non vitae iusto repellat libero voluptate. Cumque.</p>
             </div>
@@ -46,23 +47,7 @@
             <featured-products></featured-products>
           </div>
           <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
-            <q-list class="q-mb-lg border-0">
-              <q-list-header>Compartir</q-list-header>
-              <q-item>
-                <q-item-side icon="fab fa-facebook" />
-                <q-item-main label="Facebook" />
-              </q-item>
-              <q-item-separator />
-              <q-item>
-                <q-item-side icon="fab fa-twitter" />
-                <q-item-main label="Twitter" />
-              </q-item>
-              <q-item-separator />
-              <q-item>
-                <q-item-side icon="fab fa-instagram" />
-                <q-item-main label="Instagram" />
-              </q-item>
-            </q-list>
+            <share></share>
 
             <q-btn color="secondary" no-caps class="rounded-sm q-py-lg q-px-xl">
               <div class="q-subheading q-mb-md w-100">¿Tienes alguna duda?</div>
@@ -88,17 +73,17 @@
   </q-page>
 </template>
 <script>
-import imSocial from 'src/components/master/imSocial';
 import generalProducts from 'src/components/theme-two/generalProducts'
 import featuredProducts from 'src/components/theme-two/featuredProducts'
 import newProducts from 'src/components/theme-two/newProducts'
 import quiz from 'src/components/theme-two/quiz'
 import top from 'src/components/theme-two/top'
 import contact from 'src/components/theme-two/contact'
+import share from 'src/components/theme-two/shareNetworks'
 export default {
-  name: 'PageLayout1',
+  name: 'PageLayout2',
   components: {
-    imSocial,
+    share,
     featuredProducts,
     generalProducts,
     newProducts,
@@ -116,8 +101,14 @@ export default {
 <style lang="stylus">
 @import "~variables";
 .theme-layout-02
-  .share-networks
-    background-image url('/assets/img/theme-one/share-network.jpg')
+  .btn-banner
+    border 2px solid #fff
+    padding 5px 25px
+    font-size 22px
+    font-weight bold
+    margin-top -25px
+  .banner-two
+    background-image url('/statics/img/theme-two/conocenos.jpg')
     background-size cover
     padding 10% 0
     position relative
@@ -128,7 +119,7 @@ export default {
       content ''
       position absolute
       top 0
-    .networks  
+    .content 
       position relative
       z-index 3
       .imsocial

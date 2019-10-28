@@ -1,21 +1,33 @@
 <template>
     <div class="q-mb-lg">
-        <div class="row">
-          <div class="col-12">
-            <div class="q-container">
+      <div class="row">
+        <div class="col-12">
+          <div class="q-container">
+            <div class="q-mb-md" style="border: 10px solid #fff; position: relative; z-index: 9;">
               <full-width-gallery system-name="principal"></full-width-gallery>
             </div>
           </div>
-          <div class="col-12 bg-primary">
-            <div class="q-container">
-              <div class="bg-white rounded-lg text-white">
-                submenu
-              </div>
-              <p class="text-center q-my-lg">Lorem ipsum dolor sit amet, consectetur adipisicing elit..</p>
+        </div>
+        <div class="col-12 bg-primary" style="min-height: 300px; margin-top: -150px; padding-top: 150px;">
+          <div class="q-container">
+            <div class="bg-white rounded-lg text-white q-mx-xl q-py-sm">
+              <div class="row">
+                <div class="col">
+                  <q-btn flat icon="fas fa-home" no-caps color="primary"/>
+                  <q-btn flat icon="fas fa-bars" no-caps label="Category" color="primary"/>
+                  <q-btn flat icon="fas fa-map-marker-alt" no-caps label="Info Empresa" color="primary"/>
+                  <q-btn flat icon="far fa-comment-dots" no-caps label="Chatea con la tienda" color="primary"/>
+                </div>
+                <div class="col-auto">
+                  <q-btn flat icon="fas fa-heart" color="primary "/>
+                  <q-btn flat icon="fa fa-shopping-cart" color="primary "/>
+                </div>
+              </div>  
             </div>
+            <p class="text-center text-white q-my-xl">Tu pizzería por excelencia, con vista y vientos del mar </p>
           </div>
         </div>
-
+      </div>
     </div>
 </template>
 <script>

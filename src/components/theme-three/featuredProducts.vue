@@ -1,18 +1,17 @@
 <template>
     <div class="q-mb-xl">
-        <h4 class="line-text q-mb-lg"> 
-            <hr class="line-secondary q-my-none w-100">
-            <span class="bg-white q-pr-lg">LO MÁS RECOMENDADO</span>
-        </h4>
+        <div class="bg-primary rounded-sm text-weight-bold q-inline-block text-white q-px-lg q-py-md">
+            DESTACADOS
+        </div>
         <div class="row gutter-md q-py-lg">
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4" v-for="product in products">
-            <product :product="product" className="cardProductTwo"></product>
+            <product :product="product" className="cardProductOne"></product>
           </div>
         </div>
     </div>
 </template>
 <script>
-import product from 'src/components/theme-two/product'
+import product from 'src/components/theme-one/product'
 export default {
   name: 'FeaturedProductsComponent',
   components: {

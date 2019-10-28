@@ -1,8 +1,9 @@
 <template>
-  <q-card class="card-quiz-1 rounded-sm w-100 q-mb-xl">
+  <q-card class="card-quiz-3 w-100 q-mb-xl">
 
-    <div class="q-card-title bg-primary rounded-sm text-center text-white q-py-sm">
-      ENCUENTA
+    <div class="q-card-title font-family-secondary text-center text-primary q-py-sm">
+      <h6 class="q-mt-md q-mb-none">Participa en </h6>
+      <h4 class="q-my-none">Encuenta</h4>
     </div>
 
 
@@ -16,7 +17,7 @@
 
         <h2 class="q-mb-0">{{question.title}}</h2>
           
-        <q-option-group  color="primary" keep-color
+        <q-option-group  color="positive" keep-color
           v-model="selectedOptions"
           :options="answers[index]"
           type="checkbox"
@@ -24,14 +25,14 @@
 
         </q-card-main>
 
-        <q-card-actions  align="center" class="q-pa-md" v-if="index < poll.questions.length - 1" >
+        <q-card-actions  align="end" class="q-pa-md" v-if="index < poll.questions.length - 1" >
           <div class="text-center cursor-pointer" @click="next()">
             <div class="font-family-secondary">Siguiente</div>
             <img src="assets/img/arrow-right-blue.png" style="width:25px;">
           </div>
         </q-card-actions>
-        <q-card-actions align="center" v-else class="q-ma-md">
-           <q-btn class="bg-secondary text-white btn-arrow-send-pink" @click="saveData">Enviar</q-btn>
+        <q-card-actions align="end" v-else class=" q-ma-md" >
+          <q-btn class="bg-primary text-white btn-arrow-send-pink" @click="saveData">Enviar</q-btn>
         </q-card-actions>
         
       </q-step>
@@ -296,16 +297,18 @@
     }
 </script>
 <style lang="stylus">
-.card-quiz-1
+@import "~variables";
+.card-quiz-3
   & .q-card-title
     position relative
     font-weight bold
+    border-top 5px solid $secondary
     &:before
       content ''
       background-image url('/assets/img/icon-quiz.png')
       position absolute
-      bottom 0
-      left 5px
+      bottom 15px
+      left 25px
       height 60px
       width 60px
       background-size contain
@@ -314,10 +317,16 @@
   & .q-card-main
     padding 10px 25px 15px 25px
     & h2
-      font-size 18px
-      text-align center  
+      font-size 18px 
     & .q-option-group  
       font-size 17px
+  & .send
+    background-image url('/assets/img/arrow-send-pink.png')
+    background-repeat no-repeat
+    background-position 82% 68%
+    background-size 25%
+    @media screen and (max-width: $breakpoint-md)
+      background-image none
     
   .q-stepper
     .q-stepper-header

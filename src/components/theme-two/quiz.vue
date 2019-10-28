@@ -1,7 +1,7 @@
 <template>
-  <q-card class="card-quiz-2 rounded-sm w-100 q-mb-xl">
+  <q-card class="card-quiz-2 w-100 q-mb-xl">
 
-    <div class="q-card-title text-center text-primary q-py-sm">
+    <div class="q-card-title font-family-secondary text-center text-primary q-py-sm">
       <h6 class="q-mt-md q-mb-none">Participa en </h6>
       <h3 class="q-my-none">Encuenta</h3>
     </div>
@@ -16,7 +16,7 @@
 
         <h2 class="q-mb-0">{{question.title}}</h2>
           
-        <q-option-group  dark
+        <q-option-group keep-color
           v-model="selectedOptions"
           :options="answers[index]"
           type="checkbox" color="primary"
@@ -298,6 +298,7 @@
 <style lang="stylus">
 .card-quiz-2
   background-color var(--q-color-light)
+  border-radius 30px 0 30px 0
   & .q-card-title
     font-weight bold
   & .q-card-main

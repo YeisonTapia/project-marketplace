@@ -34,16 +34,7 @@
     <general-products></general-products>
 
     <!-- Compartir -->
-    <div class="share-networks">
-      <div class="row">
-        <div class="col-12">
-          <div class="networks text-center">
-            <h4 class="q-my-md text-white">COMPARTIR</h4>
-            <im-social></im-social>
-          </div>
-        </div>
-      </div>
-    </div>
+    <share></share>
 
     <!-- direcciones -->
     <contact></contact>
@@ -58,6 +49,7 @@ import newProducts from 'src/components/theme-one/newProducts'
 import quiz from 'src/components/theme-one/quiz'
 import top from 'src/components/theme-one/top'
 import contact from 'src/components/theme-one/contact'
+import share from 'src/components/theme-one/shareNetworks'
 export default {
   name: 'PageLayout1',
   components: {
@@ -67,7 +59,8 @@ export default {
     newProducts,
     quiz,
     top,
-    contact
+    contact,
+    share
   },
   data() {
     return {

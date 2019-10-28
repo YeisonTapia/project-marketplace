@@ -9,19 +9,19 @@
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 q-mb-lg">
 
                   <q-card class="card-rounded text-center q-mb-sm">
-                    <q-card-title>
+                    <q-card-title class="q-pa-sm row items-center">
                       Seguir Tienda
-                      <div slot="right" class="row items-center">
-                        <q-icon color="secondary" round name="far fa-thumbs-up" /> 
+                      <div slot="right" class="row items-center bg-secondary q-pa-sm rounded-circle">
+                        <q-icon color="white" round name="far fa-thumbs-up" /> 
                       </div>
                     </q-card-title>
                   </q-card>
 
                   <q-card class="card-rounded text-center">
-                    <q-card-title>
+                    <q-card-title class="q-pa-sm row items-center">
                       7.5 de 200 usuarios
-                      <div slot="right" class="row items-center">
-                        <q-icon color="secondary" round name="grade" /> 
+                      <div slot="right" class="row items-center bg-secondary q-pa-sm rounded-circle">
+                        <q-icon color="white" round name="grade" /> 
                       </div>
                     </q-card-title>
                   </q-card>
@@ -31,8 +31,19 @@
             </div>
           </div>
           <div class="col-12 bg-primary">
-            <div class="q-container text-primary">
-               submenu 
+            <div class="q-container text-primary q-py-sm">
+              <div class="row">
+                <div class="col">
+                  <q-btn flat icon="fas fa-home" no-caps label="Inicio" color="white"/>
+                  <q-btn flat icon="fas fa-bars" no-caps label="Category" color="white"/>
+                  <q-btn flat icon="fas fa-map-marker-alt" no-caps label="Info Empresa" color="white"/>
+                  <q-btn flat icon="far fa-comment-dots" no-caps label="Chatea con la tienda" color="white"/>
+                </div>
+                <div class="col-auto">
+                  <q-btn flat icon="fas fa-heart" color="white "/>
+                  <q-btn flat icon="fa fa-shopping-cart" color="white "/>
+                </div>
+              </div>   
             </div>
           </div>
         </div>

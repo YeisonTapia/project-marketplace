@@ -100,6 +100,16 @@ export default {
 		title: 'layout2',
 		icon: 'far fa-store'
 	},
+	layout3: {
+		permission: null,
+		activated: true,
+		path: '/layout3',
+		name: 'app.layout3',
+		layout: require('src/layouts/themes/index3').default,
+		containerLayout: master,
+		title: 'layout3',
+		icon: 'far fa-store'
+	},
 	blogIndex: {
 		permission: null,
 		activated: true,
