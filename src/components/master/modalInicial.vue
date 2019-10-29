@@ -4,7 +4,7 @@
 
 			<div class="layout-padding">
 				<div class="q-mb-lg">
-					<img :src="logo" :alt="projectName" style="height:150px;">
+					<img :src="logo" style="height:150px;">
 				</div>
 
 				<div class="bg-white q-pa-md shadow-2 rounded-lg q-mb-lg" >
@@ -36,9 +36,9 @@
 <script>
 export default {
 	name: 'modalInicialComponent',
+	props: ['opened'],
 	data () {
 		return {
-			opened: true,
 			logo: this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo2').path,
 		}
 	}

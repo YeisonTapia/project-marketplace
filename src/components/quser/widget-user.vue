@@ -1,58 +1,38 @@
 <template>
-  <div class="widget-user" v-if="userData">
-    <p>
-      Data: <br>
-      {{userData.firstName}} <br>
-      {{userData.lastName}} <br>
-      {{userData.fullName}} <br>
-      <img :src="userData.mediumImage" width="32px" style="border-radius: 100%">
-    </p>
-    <!--= USER/LOGIN =-->
-    <q-btn-dropdown
-      color="white" split flat v-if="userData"
-      :label="userData.firstName" id="user-dropdown">
-      <q-list>
+  <div class="q-inline-block">
+    <q-btn-dropdown class="q-pa-none" flat no-caps icon="fas fa-user-alt" v-if="userData">
+      <q-list class="q-pa-none bg-light">
         <q-item tag="label" :to="{name: 'user.profile.me'}">
-          <q-item-side>
-            <img :src="userData.mediumImage" width="32px" style="border-radius: 100%">
-          </q-item-side>
-          <q-item-main>
-            <q-item-tile tag="a"
-                         color="tertiary"
-                         style="text-decoration: none">
+          <q-item-side class="img-user">
+            <q-item-tile avatar >
+              <img :src="userData.mediumImage" >
             </q-item-tile>
-          </q-item-main>
+          </q-item-side>
+          <q-item-main :label="userData.fullName" />
         </q-item>
-        <hr>
-
+        <q-item-separator />
         <q-item tag="label" link :to="{name:'auth.logout'}">
           <q-item-side>
-            <q-icon color="negative" name="fas fa-sign-out-alt" size="25px"></q-icon>
+            <q-icon color="tertiary" name="fas fa-sign-out-alt" ></q-icon>
           </q-item-side>
-          <q-item-main>
-            <q-item-tile tag="a"
-                         color="tertiary"
-                         style="text-decoration: none">
-              Sign out
-            </q-item-tile>
-          </q-item-main>
+          <q-item-main label="Sign out" />
         </q-item>
-
       </q-list>
     </q-btn-dropdown>
-    <div class="q-my-xl">
-      asd
-    </div>
-  </div>
+    <q-btn v-else class="q-pa-none" round @click="opened = !opened" flat icon="fas fa-user-alt" />
+    <modalInicial :opened="opened"></modalInicial>
+</div>
 </template>
 
 
 <script>
   import {helper} from '@imagina/qhelper/_plugins/helper'
-
+  import modalInicial from 'src/components/master/modalInicial';
   export default {
     props: {},
-    components: {},
+    components: {
+      modalInicial
+    },
     watch: {},
     mounted() {
       this.$nextTick(function () {
@@ -61,7 +41,8 @@
     },
     data() {
       return {
-        userData: false
+        userData: false,
+        opened: false
       }
     },
     methods: {
