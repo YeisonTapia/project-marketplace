@@ -151,13 +151,22 @@
                      :placeholder="`${$tr('ui.form.phone')}`"/>
           </q-field>
 
-          <!-- Country of residence -->
-          <q-field :error="$v.form.fields.countryResidence.value.$error" :error-label="$tr('ui.message.fieldRequired')">
+          <!-- Country of residence ADDRESS -->
+          <q-field :error="$v.address.countryId.$error" :error-label="$tr('ui.message.fieldRequired')">
                   <p class="caption q-mb-xs"><span class="text-primary">*</span> País de Residencia</p>
                   <q-select 
-                    v-model="form.fields.countryResidence.value" 
+                    v-model="address.countryId" 
                     :options="countryResidenceOptions"
-                    @input="getCities(form.fields.countryResidence.value,'CiRO')"/>
+                    @input="getCities(address.countryId,'CiRO')"
+                    />
+          </q-field>
+
+          <!-- Neighborhood -->
+          <q-field :error="$v.address.neighborhoodId.$error" :error-label="$tr('ui.message.fieldRequired')">
+                  <p class="caption q-mb-xs"><span class="text-primary">*</span> Barrio</p>
+                  <q-select 
+                    v-model="address.neighborhoodId" 
+                    :options="neighborhoodOptions"/>
           </q-field>
 
         </div>
@@ -171,32 +180,23 @@
             <q-input v-model="form.email" :placeholder="`${$trp('ui.form.email')}`"/>
           </q-field>
 
-          <!-- City ​​of residence -->
-          <q-field :error="$v.form.fields.cityResidence.value.$error" :error-label="$tr('ui.message.fieldRequired')">
+          <!-- City ​​of residence ADDRESS STATE -->
+          <q-field :error="$v.address.stateId.$error" :error-label="$tr('ui.message.fieldRequired')">
                   <p class="caption q-mb-xs"><span class="text-primary">*</span> Ciudad de Residencia</p>
                   <q-select 
-                    v-model="form.fields.cityResidence.value" 
+                    v-model="address.stateId" 
                     :options="cityResidenceOptions"/>
+          </q-field>  
+         
+          <!--Address NEW ADDRESS-->
+          <q-field class="q-mb-lg" :error="$v.address.address1.$error" :error-label="$tr('ui.message.fieldRequired')">
+              <p class="caption q-mb-xs"><span class="text-primary">*</span> Dirección </p>
+              <q-input v-model="address.address1" placeholder="Direccion" />
           </q-field>
-
-          <!-- Neighborhood -->
-          <!--
-          <q-field :error="$v.form.fields.neighborhood.value.$error" :error-label="$tr('ui.message.fieldRequired')">
-                  <p class="caption q-mb-xs"><span class="text-primary">*</span> Barrio</p>
-                  <q-select 
-                    v-model="form.fields.neighborhood.value" 
-                    :options="neighborhoodOptions"/>
-          </q-field>
-          -->
         
         </div>
 
         <div class="col-12 q-py-sm">
-          <!--Address-->
-          <q-field class="q-mb-lg" :error="$v.form.fields.address.value.$error" :error-label="$tr('ui.message.fieldRequired')">
-              <p class="caption q-mb-xs"><span class="text-primary">*</span> Dirección </p>
-              <q-input v-model="form.fields.address.value" placeholder="Direccion" />
-          </q-field>
 
           <!--Social-->
           <div class="row gutter-md social">
@@ -553,6 +553,7 @@
             cellularPhone: {
               value: {required, minLength: minLength(10)}
             },
+            /*
             countryResidence: {
               value: {required}
             },
@@ -562,6 +563,7 @@
             address: {
               value: {required}
             },
+            */
             leisures: {
               value: {required}
             },
@@ -569,6 +571,12 @@
               value: {required}
             },
           }
+        },
+        address:{
+            countryId:{required},
+            stateId:{required},
+            address1:{required},
+            neighborhoodId:{required},
         }
       }
     },
@@ -589,7 +597,23 @@
           password: '',
           newPassword: '',
           confirmNewPassword: '',
-          fields: {}
+          fields: {},
+          addresses:[]
+        },
+        address: {
+            id: null,
+            firstName: null,
+            lastName: null,
+            type: 'contact',
+            address1: null,
+            country: null,
+            countryId: null,
+            state: null,
+            stateId: null,
+            city: null,
+            cityId: null,
+            neighborhood: null,
+            neighborhoodId: null
         },
         civilStateOptions: [
           {
@@ -619,6 +643,20 @@
         cityOptions: [],
         countryResidenceOptions: [],
         cityResidenceOptions: [],
+        neighborhoodOptions: [
+          {
+            label: 'Barrio 1',
+            value: 1
+          },
+          {
+            label: 'Barrio 2',
+            value: 2
+          },
+          {
+            label: 'Barrio 3',
+            value: 3
+          }
+        ],
         leisureOptions: [
           {
             label: 'Gusto 1',
@@ -664,9 +702,9 @@
           {name: 'sex', value: null},
           {name: 'sons', value: null},
           {name: 'cellularPhone', value: null},
-          {name: 'countryResidence', value: null},
-          {name: 'cityResidence', value: null},
-          {name: 'address', value: null},
+          //{name: 'countryResidence', value: null},
+          //{name: 'cityResidence', value: null},
+          //{name: 'address', value: null},
           {name: 'twitter', value: null},
           {name: 'facebook', value: null},
           {name: 'instagram', value: null},
@@ -695,8 +733,9 @@
         await this.getCountries()// Get countries
         if(this.form.fields.country.value!="" && this.form.fields.country.value!=null)
           await this.getCities(this.form.fields.country.value,'CiO')
-        if(this.form.fields.countryResidence.value!="" && this.form.fields.countryResidence.value!=null)
-          await this.getCities(this.form.fields.countryResidence.value,'CiRO')
+
+        if(this.address.countryId!="" && this.address.countryId!=null)
+          await this.getCities(this.address.countryId,'CiRO')
         this.success = true//Success page
         this.loading = false//Loading
         
@@ -715,20 +754,51 @@
         this.form.email = this.$clone(userData.email)
         this.form.fields = this.$helper.convertToFrontField(this.defaultFields, userData.fields)
 
+        //Add address infor
+        if(userData.addresses.length>0){
+          for (let i=0;i<userData.addresses.length;i++) {
+            // Get just Address Contact
+            if(userData.addresses[i].type=="contact"){
+
+              this.address.id = userData.addresses[i].id
+              this.address.firstName = userData.addresses[i].firstName
+              this.address.lastName = userData.addresses[i].lastName
+              this.address.type = userData.addresses[i].type
+              this.address.address1 = userData.addresses[i].address1
+              this.address.country = userData.addresses[i].country
+              this.address.countryId = parseInt(userData.addresses[i].country_id)
+              this.address.state = userData.addresses[i].state
+              this.address.stateId = parseInt(userData.addresses[i].state_id)
+              this.address.neighborhood = userData.addresses[i].neighborhood
+              this.address.neighborhoodId = parseInt(userData.addresses[i].neighborhood_id)
+              break
+            }
+          }
+        }else{
+          this.address.firstName = this.form.firstName
+          this.address.lastName = this.form.lastName
+        }
+
+        //console.warn(this.address)
+
       },
       //update data
       updateData() {
         this.$v.$touch()//Validate form
         //Check validation
         if (!this.$v.$error) {
-          this.loading = true//Loading
+          
+          //this.loading = true//Loading
           let data = this.$clone(this.form)//Fet form data
           data.fields = this.$helper.convertToBackField(data.fields)//Convert fields
 
           // Add new password
           if(data.newPassword!="" && this.checkNewPassword())
             data.password = data.newPassword
-          
+
+          // Add adress infor
+          data.addresses.push(this.address)
+
           //Request
           this.$crud.update('apiRoutes.quser.users', data.id, data).then(response => {
             this.$alert.success({message: this.$tr('ui.message.recordUpdated')})
@@ -739,7 +809,7 @@
             this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
             this.loading = false
           })
-          
+         
 
         } else {
           this.$alert.error({message: this.$tr('ui.message.formInvalid'), pos: 'bottom'})
