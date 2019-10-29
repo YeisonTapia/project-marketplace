@@ -298,10 +298,12 @@ export default {
     },
     createStore() {
       //Crear Tienda
+      this.$router.push({ name: 'app.editartienda'});
+
     },
     searchStore() {
       // Buscar tienda
-    } 
+    }
   }
 }
 </script>
@@ -320,7 +322,7 @@ export default {
         height auto
         width 100%
         z-index 9
-        position relative    
+        position relative
         object-fit contain
         max-height 184px
       &:before
@@ -386,21 +388,21 @@ export default {
     .q-input
       box-shadow none
       border-radius 0
-      margin-right 1px    
+      margin-right 1px
       border-top 1px solid $warning
       border-bottom 1px solid $warning
       & .q-input-target
         padding-left 15px
         color #fd2d5e
-        &::-webkit-input-placeholder 
+        &::-webkit-input-placeholder
           color $primary !important
-        &::-moz-placeholder 
+        &::-moz-placeholder
           opacity 1
           color $primary !important
-        &:-moz-placeholder 
-          color $primary !important  
-        &:-ms-input-placeholder 
-          color $primary !important  
+        &:-moz-placeholder
+          color $primary !important
+        &:-ms-input-placeholder
+          color $primary !important
     .select-cities
       font-size 20px
       & .q-input-target
@@ -431,7 +433,7 @@ export default {
       bottom -30px
     & .q-icon
       color #f7c837
-    & .q-focus-helper  
+    & .q-focus-helper
       opacity 0
 
 
@@ -439,12 +441,12 @@ export default {
     .icon-center-start
       -ms-flex-item-align center
       align-self center
-    .logo-circle  
+    .logo-circle
       .logo
         padding 5px
         img
           height 50px
-          
+
 
   @media screen and (max-width: $breakpoint-lg)
     .btn-tienda
@@ -463,7 +465,7 @@ export default {
     .logo-circle
       .logo
         &:before
-          right -12%       
+          right -12%
 
   .logo-movil
     position relative
