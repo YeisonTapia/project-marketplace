@@ -1,13 +1,7 @@
 
 <template>
   <div id="masterHeaderFrontend" class="font-family-secondary">
-    <q-layout-header reveal class="no-shadow" v-if="desktop">
-      <!-- PRUEBA DE WIDGET USER-->
-      <!--
-      <div class="bg-green"><p>Prueba Widget User</p>
-        <WidgetUser/>
-      </div>
-      -->
+    <q-layout-header reveal class="no-shadow" v-if="desktop">      
       <q-toolbar-title>
         <div class="row gutter-sm bg-degradado">
           <div class="col-3 bg-white self-center logo-circle">
@@ -22,9 +16,9 @@
               <div class="col-auto icon-center-start">
                 <im-social class="q-hide q-sm-inline-show"></im-social>
                 <div class="profile">
-                  <a href=""><i class="fas fa-user-alt"></i></a>
-                  <span class="q-px-sm font-family-primary">|</span>
-                  <a href=""><i class="fas fa-heart"></i></a>
+                  <WidgetUser/>
+                  <span class="q-px-sm font-family-primary line">|</span>
+                  <q-btn class="q-pa-none" round flat icon="fas fa-heart" />
                   <span class="q-lg-hide">
                     <span class="q-px-sm font-family-primary">|</span>
                     <a @click="createStore()"><i class="fas fa-store"></i></a>
@@ -362,11 +356,17 @@ export default {
     display inline-block
     font-size: 1em
     color #ffffff
-    padding 10px 15px
-    & a
-      color #ffffff
+    padding 10px 25px
+    & .q-btn
+      height 1.5em
+      width 1.5em
       & :hover
         color $warning
+    & .q-focus-helper  
+      background none !important
+    & .line
+      position relative
+      top 3px
 
   .search
     .select-neighborhood
