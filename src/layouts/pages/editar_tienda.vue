@@ -386,7 +386,7 @@
                 <div class="row gutter-md justify-center">
                   <div @click="theme.id=t.id;" class="col-xs-12 col-sm-12 col-md-6 col-lg-5 q-mb-md cursor-pointer" v-for="(t,index) in themes_option" :key="index">
                     <div class="ratio-1 line-grey">
-                      <img :src="t.image">
+                      <img :src="t.mainImage.path">
                     </div>
                     <div class="q-pa-md" :class="[theme.id == t.id ? 'bg-secondary text-light' : 'bg-light text-secondary']">
                        Diseño #{{index+1}} - {{t.name}}
@@ -521,13 +521,16 @@
 
         <!-- CONFIG THEME OF STORE -->
         <div class="q-pa-md text-center">
+
+          <img class="responsive rounded-circle" style="border-style:solid;border-color:#ff6351;"  :src="stores[selectedStore].logo.path" alt="stores[selectedStore].name" v-if="stores.length>0 && selectedStore>=0">
+
           <q-field class="q-mb-xl">
-            <q-btn icon="store" class="bg-primary text-white " @click="changeMenu('myStore')" v-if="stores.length>0 && selectedStore>=0">
+            <q-btn icon="store" class="bg-white text-dark full-width" @click="changeMenu('myStore')" v-if="stores.length>0 && selectedStore>=0">
               Mi tienda
             </q-btn>
           </q-field>
           <q-field class="q-mb-xl">
-            <q-btn icon="palette" class="bg-primary text-white " @click="changeMenu('configTheme')" v-if="stores.length>0 && selectedStore>=0">
+            <q-btn icon="palette" class="bg-white text-dark full-width" @click="changeMenu('configTheme')" v-if="stores.length>0 && selectedStore>=0">
               Diseño
             </q-btn>
           </q-field>
@@ -740,12 +743,18 @@ export default {
         {
           id: 1,
           name: 'Tienda personal',
-          image: '/assets/img/product.jpg'
+          mainImage:{
+            path:'/assets/img/product.jpg',
+            mimeType:'jpg'
+          }
         },
         {
           id: 2,
           name: 'Tienda corporativa',
-          image: '/assets/img/pregunta.jpg'
+          mainImage:{
+            path:'/assets/img/pregunta.jpg',
+            mimeType:'jpg'
+          }
         }
       ],
       product: {
@@ -820,7 +829,7 @@ export default {
       let params = {
         remember: false,
         params: {
-          include: '',
+          include: 'categories',
           filter:{
             allTranslations: true,
             userId:this.userId,
@@ -850,6 +859,28 @@ export default {
       };//params
       this.$crud.index("apiRoutes.qmarketplace.category",params).then(response => {
         this.categoryOptions=response.data;//
+        // for(var i=0;i<this.stores.length;i++){
+        //   this.storesOptions.push({
+        //     label:this.stores[i][this.lang].name,
+        //     value:i
+        //   });
+        // }//for
+      });
+
+    },
+    getThemes(){
+      //Get stores of user
+      let params = {
+        remember: false,
+        params: {
+          include: '',
+          filter:{
+            allTranslations: true,
+          }
+        }
+      };//params
+      this.$crud.index("apiRoutes.qmarketplace.theme",params).then(response => {
+        this.themes_option=response.data;//
         // for(var i=0;i<this.stores.length;i++){
         //   this.storesOptions.push({
         //     label:this.stores[i][this.lang].name,
@@ -922,16 +953,17 @@ export default {
       if(this.selectedStore>=0){
         //Clone data
         this.storeId=this.stores[this.selectedStore].id;
-        this.company=this.stores[this.selectedStore];
+        // this.company=this.stores[this.selectedStore];
+        this.company = this.$clone(this.stores[this.selectedStore]);
         this.company[this.lang]=this.stores[this.selectedStore][this.lang];
         this.company.name=this.stores[this.selectedStore][this.lang].name;
         this.company.slogan=this.stores[this.selectedStore][this.lang].slogan;
         this.company.description=this.stores[this.selectedStore][this.lang].description;
-        this.company.categories=[];//
         this.theme.id=this.company.theme_id;
         this.theme.primary=this.stores[this.selectedStore].options.theme_config.color_primary;
         this.theme.secondary=this.stores[this.selectedStore].options.theme_config.color_secondary;
         this.theme.background=this.stores[this.selectedStore].options.theme_config.background;
+        this.company.categories=[];
         for(var i=0;i<this.stores[this.selectedStore].categories.length;i++){
           this.company.categories.push(parseInt(this.stores[this.selectedStore].categories[i].id));
         }
@@ -1030,6 +1062,7 @@ export default {
     this.getStores();
     this.getStoreCategories();//
     this.getProvinces();//
+    this.getThemes();//
 
   }
 }
