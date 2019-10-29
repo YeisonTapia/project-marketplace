@@ -25,7 +25,7 @@
 				<div class="q-body-1 q-mb-lg text-white">¿Ya estás registrado?</div>	
 
 				
-				<q-btn label="Entra aquí" text-color="white" outline style="border-left:0;border-right:0; border-radius:0;" />
+				<q-btn label="Entra aquí" :to="{name : 'auth.login'}" text-color="white" outline style="border-left:0;border-right:0; border-radius:0;" />
 
 
 			</div>

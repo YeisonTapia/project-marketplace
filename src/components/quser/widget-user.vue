@@ -15,7 +15,7 @@
           <q-item-side>
             <q-icon color="tertiary" name="fas fa-sign-out-alt" ></q-icon>
           </q-item-side>
-          <q-item-main label="Sign out" />
+          <q-item-main :label="$t('ui.configList.signOut')" />
         </q-item>
       </q-list>
     </q-btn-dropdown>
