@@ -3,7 +3,7 @@
 
       <div class="q-container" style="padding-top: 40px;">
         <div class="row gutter-md">
-          <div class="col-12" v-show="selectedStore>=0 || selectedStore==-2">
+          <div class="col-12" v-if="(selectedStore>=0 || selectedStore==-2) && myStore">
 
             <q-card  class="rounded-md bg-white w-100 q-mb-xl">
 
@@ -363,6 +363,141 @@
 
           </div>
 
+          <!-- DISENO -->
+          <div class="col-12" v-if="!myStore && configTheme">
+            <h3 class="text-center q-my-xl">Diseño</h3>
+          </div>
+
+          <div class="col-12" v-if="!myStore && configTheme">
+
+            <q-card  class="rounded-md bg-white w-100 q-mb-xl">
+
+              <q-card-actions  align="end" no-caps class="q-pa-lg">
+                <q-btn class="rounded-sm  font-family-secondary" no-caps color="primary" icon="fas fa-eye" label="Vista previa"/>
+              </q-card-actions>
+
+              <q-card-main class="q-px-xl q-pb-xl form-general">
+                <div class="q-headline text-primary q-mb-xs">Eligue tu tema</div>
+                <div class="q-subheading text-secondary">
+                  Elige el tema que más se adapte a tu empresa y personalizalo
+                </div>
+                <div class="q-my-lg line-grey w-100"></div>
+
+                <div class="row gutter-md justify-center">
+                  <div @click="theme.id=t.id;" class="col-xs-12 col-sm-12 col-md-6 col-lg-5 q-mb-md cursor-pointer" v-for="(t,index) in themes_option" :key="index">
+                    <div class="ratio-1 line-grey">
+                      <img :src="t.image">
+                    </div>
+                    <div class="q-pa-md" :class="[theme.id == t.id ? 'bg-secondary text-light' : 'bg-light text-secondary']">
+                       Diseño #{{index+1}} - {{t.name}}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="q-my-lg line-grey w-100"></div>
+
+                <div class="q-headline text-primary q-mb-xs">Personaliza tu sitio web</div>
+                <div class="q-subheading text-secondary q-mb-lg">
+                  Elige los colores de acuerdo a la imagen corporativa de tu empresa
+                </div>
+
+                <div class="row gutter-sm items-center  q-mb-sm">
+                  <div class="col-xs-6 col-sm-5 col-md-3">
+                    <p class="caption q-mb-none">Primario</p>
+                  </div>
+                  <div class="col-xs-6 col-sm-5 col-md-3">
+                    <q-color class="q-pa-md line-grey text-center" v-model="theme.primary" :style="{ 'background-color': theme.primary }" />
+                    <!-- <div @click="showingPrimary = true"  class="q-pa-md line-grey text-center" :style="{ 'background-color': theme.primary }">
+                      {{theme.primary}}
+
+                      <q-popover v-model="showingPrimary" anchor="bottom right" self="bottom left">
+                        <q-tabs align="justify">
+                          <q-tab default  slot="title" name="tab-1" label="HEX" :style="{ 'background-color': theme.primary }"/>
+                          <q-tab  slot="title" name="tab-2" label="RGB" :style="{ 'background-color': theme.primary }"/>
+                          <q-tab-pane name="tab-1" class="q-pa-none" style="min-width: 80px;">
+                              <div class="text-center q-pa-md" :style="{ 'background-color': theme.primary }">
+                                {{theme.primary}}
+                              </div>
+                              <q-color-picker v-model="theme.primary" format-model="hex" />
+                          </q-tab-pane>
+                          <q-tab-pane name="tab-2" class="q-pa-none" style="min-width: 80px;">
+                              <div class="text-center q-pa-md" :style="{ 'background-color': theme.primary }">
+                                {{theme.primary}}
+                              </div>
+                              <q-color-picker v-model="theme.primary" format-model="rgb" />
+                          </q-tab-pane>
+                        </q-tabs>
+                      </q-popover>
+                    </div> -->
+                  </div>
+                </div>
+                <div class="row gutter-sm items-center  q-mb-sm">
+                  <div class="col-xs-6 col-sm-5 col-md-3">
+                    <p class="caption q-mb-none">Secondario</p>
+                  </div>
+                  <div class="col-xs-6 col-sm-5 col-md-3">
+                    <q-color class="q-pa-md line-grey text-center" v-model="theme.secondary" :style="{ 'background-color': theme.secondary }" />
+                    <!-- <div @click="showingSecondary = true" class="q-pa-md line-grey text-center line" :style="{ 'background-color': theme.secondary }">
+                      {{theme.secondary}}
+
+                      <q-popover v-model="showingSecondary" anchor="bottom right" self="bottom left">
+                        <q-tabs align="justify">
+                          <q-tab default  slot="title" name="tab-1" label="HEX" :style="{ 'background-color': theme.secondary }"/>
+                          <q-tab  slot="title" name="tab-2" label="RGB" :style="{ 'background-color': theme.secondary }"/>
+                          <q-tab-pane name="tab-1" class="q-pa-none" style="min-width: 80px;">
+                              <div class="text-center q-pa-md" :style="{ 'background-color': theme.secondary }">
+                                {{theme.secondary}}
+                              </div>
+                              <q-color-picker v-model="theme.secondary" format-model="hex" />
+                          </q-tab-pane>
+                          <q-tab-pane name="tab-2" class="q-pa-none" style="min-width: 80px;">
+                              <div class="text-center q-pa-md" :style="{ 'background-color': theme.secondary }">
+                                {{theme.secondary}}
+                              </div>
+                              <q-color-picker v-model="theme.secondary" format-model="rgb" />
+                          </q-tab-pane>
+                        </q-tabs>
+                      </q-popover>
+                    </div> -->
+                  </div>
+                </div>
+                <div class="row gutter-sm items-center  q-mb-sm">
+                  <div class="col-xs-6 col-sm-5 col-md-3">
+                    <p class="caption q-mb-none">Fondo</p>
+                  </div>
+                  <div class="col-xs-6 col-sm-5 col-md-3">
+                    <q-color class="q-pa-md line-grey text-center" v-model="theme.background" :style="{ 'background-color': theme.background }" />
+                    <!-- <div @click="showingBackground = true" class="q-pa-md line-grey text-center" :style="{ 'background-color': theme.background }">
+                      {{theme.background}}
+
+                      <q-popover v-model="showingBackground" anchor="bottom right" self="bottom left">
+                        <q-tabs align="justify">
+                          <q-tab default  slot="title" name="tab-1" label="HEX" :style="{ 'background-color': theme.background }"/>
+                          <q-tab  slot="title" name="tab-2" label="RGB" :style="{ 'background-color': theme.background }"/>
+                          <q-tab-pane name="tab-1" class="q-pa-none" style="min-width: 80px;">
+                              <div class="text-center q-pa-md" :style="{ 'background-color': theme.background }">
+                                {{theme.background}}
+                              </div>
+                              <q-color-picker v-model="theme.background" format-model="hex" />
+                          </q-tab-pane>
+                          <q-tab-pane name="tab-2" class="q-pa-none" style="min-width: 80px;">
+                              <div class="text-center q-pa-md" :style="{ 'background-color': theme.background }">
+                                {{theme.background}}
+                              </div>
+                              <q-color-picker v-model="theme.background" format-model="rgb" />
+                          </q-tab-pane>
+                        </q-tabs>
+                      </q-popover>
+                    </div> -->
+                  </div>
+                </div>
+
+              </q-card-main>
+            </q-card>
+
+          </div>
+          <!-- DISENO -->
+
           <div class="col-12 text-right">
               <q-field class="q-mb-xl">
                 <q-btn class="bg-primary text-white btn-arrow-send-pink" @click="updateStore()" v-if="parseInt(selectedStore)>=0">Actualizar</q-btn>
@@ -374,6 +509,7 @@
       </div>
 
       <q-layout-drawer behavior="desktop"  v-model="drawer">
+
         <!-- SELECT STORE -->
         <div class="q-pa-md text-center">
           <q-select
@@ -381,6 +517,20 @@
           :options="storesOptions"
           @input="val => { onChangeStore() }"
           />
+        </div>
+
+        <!-- CONFIG THEME OF STORE -->
+        <div class="q-pa-md text-center">
+          <q-field class="q-mb-xl">
+            <q-btn icon="store" class="bg-primary text-white " @click="changeMenu('myStore')" v-if="stores.length>0 && selectedStore>=0">
+              Mi tienda
+            </q-btn>
+          </q-field>
+          <q-field class="q-mb-xl">
+            <q-btn icon="palette" class="bg-primary text-white " @click="changeMenu('configTheme')" v-if="stores.length>0 && selectedStore>=0">
+              Diseño
+            </q-btn>
+          </q-field>
         </div>
       </q-layout-drawer>
 
@@ -411,6 +561,11 @@ export default {
       stores:[],
       storesOptions:[],
       storeId:false,
+      //Vars to active tab of menu
+      myStore:false,
+      configTheme:false,
+      productsStore:false,
+      //Vars to active tab of menu
       selectedStore:-1,
       lang: this.$q.i18n.lang,
       drawer: true,
@@ -575,6 +730,7 @@ export default {
         }
       ],
       theme: {
+        id: null,
         image: '/assets/img/product.jpg',
         primary: '#4CAF50',
         secondary: '#E91E63',
@@ -582,9 +738,13 @@ export default {
       },
       themes_option: [
         {
+          id: 1,
+          name: 'Tienda personal',
           image: '/assets/img/product.jpg'
         },
         {
+          id: 2,
+          name: 'Tienda corporativa',
           image: '/assets/img/pregunta.jpg'
         }
       ],
@@ -614,6 +774,16 @@ export default {
     }
   },
   methods: {
+    changeMenu(option){
+      this.myStore=false;
+      this.configTheme=false;
+      if(option=="myStore"){
+        this.myStore=true;
+      }
+      else if(option=="configTheme"){
+        this.configTheme=true;
+      }
+    },
     slugable: function(title) {
       var slug = "";
       // Change to lower case
@@ -729,6 +899,10 @@ export default {
           mimeType:''
         }
       ];
+      this.theme.id=null;
+      this.theme.primary='#4CAF50';
+      this.theme.secondary='#E91E63';
+      this.theme.background='#FFFFFF';
 
       for(var i=0;i<this.company.social.length;i++){
         this.company.social[i].active=false;
@@ -741,11 +915,11 @@ export default {
         this.company.options.shipping_methods[i].active=false;
       }
       this.storeId=false;
+      this.myStore=false;
+      this.configTheme=false;
     },
     onChangeStore(){
-      console.log('on change store');
       if(this.selectedStore>=0){
-        console.log('selected store');
         //Clone data
         this.storeId=this.stores[this.selectedStore].id;
         this.company=this.stores[this.selectedStore];
@@ -754,19 +928,19 @@ export default {
         this.company.slogan=this.stores[this.selectedStore][this.lang].slogan;
         this.company.description=this.stores[this.selectedStore][this.lang].description;
         this.company.categories=[];//
-        console.log(this.stores);
-        console.log(this.stores[this.selectedStore].categories.length);
+        this.theme.id=this.company.theme_id;
+        this.theme.primary=this.stores[this.selectedStore].options.theme_config.color_primary;
+        this.theme.secondary=this.stores[this.selectedStore].options.theme_config.color_secondary;
+        this.theme.background=this.stores[this.selectedStore].options.theme_config.background;
         for(var i=0;i<this.stores[this.selectedStore].categories.length;i++){
           this.company.categories.push(parseInt(this.stores[this.selectedStore].categories[i].id));
         }
         this.getCities();
-        console.log(this.company);
       }else{
         //Clear inputs
         this.clearForm();
-        console.log('clear form');
-        console.log(this.company);
       }
+      this.myStore=true;
     },
     createStore(){
       this.company[this.lang]={
@@ -793,6 +967,12 @@ export default {
         description:this.company.description,
         slug:this.slugable(this.company.name)
       };
+      if(this.theme.id!=null){
+        this.company.theme_id=this.theme.id;
+        this.company.options.theme_config.color_primary=this.theme.primary;
+        this.company.options.theme_config.color_secondary=this.theme.secondary;
+        this.company.options.theme_config.background=this.theme.background;
+      }
       this.$crud.update("apiRoutes.qmarketplace.store", this.stores[this.selectedStore].id,this.company).then(response => {
         this.$alert.success({message: this.$tr('ui.message.recordUpdated'), pos: 'bottom'})
         this.clearForm();
