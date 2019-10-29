@@ -23,6 +23,7 @@ export default {
     'qtrivia',
     'qmarketplace',
     'qform',
+    'qredeems',
   ],
   //Storage
   saveStorage : {

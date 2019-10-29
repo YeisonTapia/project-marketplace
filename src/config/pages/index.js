@@ -64,6 +64,7 @@ pages.qsite.index.path= '/admin/site/index'
 pages.qslider.index.containerLayout=admin
 pages.qslider.index.path= '/admin/site/index'
 
+// QUSER
 pages.quser.userIndex.containerLayout=admin
 pages.quser.userIndex.path= '/admin/usuarios/index'
 pages.quser.userDepartments.containerLayout=admin
@@ -73,6 +74,7 @@ pages.quser.userRoles.path= '/admin/usuarios/roles'
 pages.quser.userProfile.containerLayout=admin
 pages.quser.userProfile.path='admin/me/profile'
 
+// QUSER FRONTEND
 pages.frontquser.userProfile.path='/account/me/profile'
 pages.frontquser.userProfile.containerLayout=account
 pages.frontquser.userProfile.layout=require('src/layouts/quser/profile').default
@@ -87,8 +89,7 @@ pages.frontquser.resetPassword.layout=require('src/layouts/quser/password/reset'
 pages.frontquser.resetCompleted.containerLayout=frontend
 pages.frontquser.resetCompleted.layout=require('src/layouts/quser/password/completed').default
 
-//pages.frontqquiz.test.path='account/iquiz/test' // Testing Route Frontend Account Iquiz
-
+// QQUIZ
 pages.qquiz.polls.containerLayout=admin
 pages.qquiz.polls.path= '/admin/iquiz/polls/index'
 pages.qquiz.pollsCreate.containerLayout=admin
@@ -97,6 +98,8 @@ pages.qquiz.pollsUpdate.containerLayout=admin
 pages.qquiz.pollsUpdate.path= '/admin/iquiz/polls/:id'
 pages.qquiz.questions.containerLayout=admin
 pages.qquiz.questions.path= '/admin/iquiz/questions/index/poll/:id'
+
+// QTRIVIA
 pages.qtrivia.trivias.containerLayout=admin
 pages.qtrivia.trivias.path= '/admin/itrivia/trivias/index'
 pages.qtrivia.questions.containerLayout=admin
@@ -104,13 +107,17 @@ pages.qtrivia.questions.path= '/admin/itrivia/questions/index/trivia/:id'
 pages.qtrivia.rangepoints.containerLayout=admin
 pages.qtrivia.rangepoints.path= '/admin/itrivia/rangepoints/index/trivia/:id'
 
-/*
+// QREDEEMS
 pages.qredeems.items.containerLayout=admin
 pages.qredeems.items.path=  '/admin/iredeems/items/index'
 pages.qredeems.redeems.containerLayout=admin
 pages.qredeems.redeems.path=  '/admin/iredeems/redeems/index'
-*/
 
+// QREDEEMS FRONTEND
+pages.frontqredeems.userAccount.path='account/points'
+pages.frontqredeems.userAccount.layout=require('src/layouts/qredeems/account/index').default,
+
+//QFORM
 pages.qform.forms.containerLayout=admin
 pages.qform.forms.path=  '/admin/iform/form'
 pages.qform.leads.containerLayout=admin
