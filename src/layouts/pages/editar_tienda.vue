@@ -511,7 +511,7 @@
       <q-layout-drawer behavior="desktop"  v-model="drawer">
 
         <!-- SELECT STORE -->
-        <div class="q-pa-md text-center">
+        <div class="q-pa-md" style="background-color:#ededed;color:ff6351;">
           <q-select
           v-model="selectedStore"
           :options="storesOptions"
@@ -522,7 +522,9 @@
         <!-- CONFIG THEME OF STORE -->
         <div class="q-pa-md text-center">
 
-          <img class="responsive rounded-circle" style="border-style:solid;border-color:#ff6351;"  :src="stores[selectedStore].logo.path" alt="stores[selectedStore].name" v-if="stores.length>0 && selectedStore>=0">
+          <div class="logo-tienda text-center">
+            <img class="responsive" :src="stores[selectedStore].logo.path" alt="stores[selectedStore].name" v-if="stores.length>0 && selectedStore>=0">
+          </div>
 
           <q-field class="q-mb-xl">
             <q-btn icon="store" class="bg-white text-dark full-width" @click="changeMenu('myStore')" v-if="stores.length>0 && selectedStore>=0">
@@ -986,10 +988,8 @@ export default {
       this.$crud.create("apiRoutes.qmarketplace.store", this.company).then(response => {
         this.$alert.success({message: this.$tr('ui.message.recordCreated'), pos: 'bottom'})
         this.getStores();
-        this.loading = false
       }).catch(error => {
         this.$alert.error({message: this.$tr('ui.message.recordNoCreated'), pos: 'bottom'})
-        this.loading = false
       })
     },
     updateStore(){
@@ -1009,10 +1009,8 @@ export default {
         this.$alert.success({message: this.$tr('ui.message.recordUpdated'), pos: 'bottom'})
         this.clearForm();
         this.getStores();
-        this.loading = false
       }).catch(error => {
         this.$alert.error({message: this.$tr('ui.message.recordNoCreated'), pos: 'bottom'})
-        this.loading = false
       })
     },
     getProvinces(){
