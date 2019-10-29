@@ -32,81 +32,13 @@
                 <!--Links-->
                 <q-list no-border inset-delimiter class="q-px-lg">
 
-                  <!-- Editar Perfil-->
-                  <q-item class=" q-mb-lg round-borders" :to="{name:'user.profile.me'}">
+                 <q-item v-for="(item, index) in menuAccount" class=" q-mb-lg round-borders" :to="{name:item.to}">
                     <q-item-side>
-                      <q-icon name="far fa-edit" size="20px"></q-icon>
+                      <q-icon :name="item.icon" size="20px"></q-icon>
                     </q-item-side>
                     <q-item-main>
-                       <q-item-tile tag="a"
-                                   color="grey-10"
-                                   style="text-decoration: none">
-                        Editar Perfil
-                      </q-item-tile>
-                    </q-item-main>
-                  </q-item>
-
-                  <!-- Mis Puntos-->
-                  <q-item class="q-mb-lg round-borders">
-                    <q-item-side>
-                      <q-icon name="fas fa-dot-circle" size="20px"></q-icon>
-                    </q-item-side>
-                    <q-item-main>
-                       <q-item-tile tag="a"
-                                   style="text-decoration: none">
-                        Mis Puntos
-                      </q-item-tile>
-                    </q-item-main>
-                  </q-item>
-
-                  <!-- Mis Premios-->
-                  <q-item class="q-mb-lg round-borders">
-                    <q-item-side>
-                      <q-icon name="fas fa-award" size="20px"></q-icon>
-                    </q-item-side>
-                    <q-item-main>
-                       <q-item-tile tag="a"
-                                   style="text-decoration: none">
-                        Mis Premios
-                      </q-item-tile>
-                    </q-item-main>
-                  </q-item>
-
-                  <!-- Mis Mensajes-->
-                  <q-item class=" q-mb-lg round-borders">
-                    <q-item-side>
-                      <q-icon name="far fa-envelope" size="20px"></q-icon>
-                    </q-item-side>
-                    <q-item-main>
-                       <q-item-tile tag="a"
-                                   style="text-decoration: none">
-                        Mis Mensajes
-                      </q-item-tile>
-                    </q-item-main>
-                  </q-item>
-
-                  <!-- Mis Compras-->
-                  <q-item class="q-mb-lg round-borders">
-                    <q-item-side>
-                      <q-icon name="fas fa-shopping-bag" size="20px"></q-icon>
-                    </q-item-side>
-                    <q-item-main>
-                       <q-item-tile tag="a"
-                                   style="text-decoration: none">
-                        Mis Compras
-                      </q-item-tile>
-                    </q-item-main>
-                  </q-item>
-
-                  <!-- Mis Tiendas Favoritas-->
-                  <q-item class="q-mb-lg round-borders">
-                    <q-item-side>
-                      <q-icon name="far fa-star" size="20px"></q-icon>
-                    </q-item-side>
-                    <q-item-main>
-                       <q-item-tile tag="a"
-                                   style="text-decoration: none">
-                        Mis Tiendas Favoritas
+                       <q-item-tile tag="a" color="grey-10" style="text-decoration: none">
+                        {{item.title}}
                       </q-item-tile>
                     </q-item-main>
                   </q-item>
@@ -188,7 +120,39 @@
           lastName: null,
           email: null,
           fields: {}
-        }
+        },
+        menuAccount:[
+          {
+            title: 'Editar Perfil',
+            icon: 'far fa-edit',
+            to: 'user.profile.me'
+          },
+          {
+            title: 'Mis Puntos',
+            icon: 'fas fa-dot-circle',
+            to: 'qredeems.account.points'
+          },
+          {
+            title: 'Mis Premios',
+            icon: 'fas fa-award',
+            to: 'app.home'
+          },
+          {
+            title: 'Mis Mensajes',
+            icon: 'far fa-envelope',
+            to: 'app.home'
+          },
+          {
+            title: 'Mis Compras',
+            icon: 'fas fa-shopping-bag',
+            to: 'app.home'
+          },
+          {
+            title: 'Mis Tiendas Favoritas',
+            icon: 'far fa-star',
+            to: 'app.home'
+          }
+        ]
       }
     },
     computed: {

@@ -1,5 +1,7 @@
 <template>
-  <div class="quser-profile" v-if="success">
+  <div class="quser-profile">
+
+    <div v-if="success" class="quser-content">
 
     <div class="title-principal q-mb-xl">
       <h3 class="font-family-secondary q-mt-none q-mb-md">Completa el formulario y <span class="text-tertiary">obten 10 puntos</span> para obtener <span class="text-tertiary">Premios y Descuentos.</span></h3>
@@ -502,10 +504,11 @@
       </div>
     </div>
 
+    </div>
+
     <!--Inner loading-->
     <inner-loading :visible="loading"/>
    
-    
   </div>
 </template>
 
@@ -686,6 +689,7 @@
       //init
       async init() {
         this.loading = true//Loading
+        
         this.form.fields = this.$clone(this.defaultFields)//Set default fields
         await this.setUserData()//Set user data
         await this.getCountries()// Get countries
@@ -695,6 +699,7 @@
           await this.getCities(this.form.fields.countryResidence.value,'CiRO')
         this.success = true//Success page
         this.loading = false//Loading
+        
       },
       //Set user data
       async setUserData() {
