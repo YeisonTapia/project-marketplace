@@ -1,7 +1,7 @@
 
 <template>
   <div id="masterHeaderFrontend" class="font-family-secondary">
-    <q-layout-header reveal class="no-shadow" v-if="desktop">      
+    <q-layout-header class="no-shadow" v-if="desktop">      
       <q-toolbar-title>
         <div class="row gutter-sm bg-degradado">
           <div class="col-3 bg-white self-center logo-circle">
@@ -20,10 +20,10 @@
                   <span class="q-px-sm font-family-primary line">|</span>
                   <q-btn class="q-pa-none" round flat icon="fas fa-heart" />
                   <span class="q-lg-hide">
-                    <span class="q-px-sm font-family-primary">|</span>
-                    <a @click="createStore()"><i class="fas fa-store"></i></a>
-                    <span class="q-px-sm font-family-primary">|</span>
-                    <a @click="toggleDrawer('menu',!drawer.menu)"><i class="fas fa-bars"></i></a>
+                    <span class="q-px-sm font-family-primary line">|</span>
+                    <q-btn  @click="createStore()" round flat icon="fas fa-store" />
+                    <span class="q-px-sm font-family-primary line">|</span>
+                    <q-btn  @click="toggleDrawer('menu',!drawer.menu)" round flat icon="fas fa-bars" />
                   </span>
                 </div>
               </div>

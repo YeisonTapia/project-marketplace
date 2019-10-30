@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh LpR lFr"
+  <q-layout view="hhh LpR lFr"
             v-if="$store.state.app.active">
     <!-- HEADER -->
 

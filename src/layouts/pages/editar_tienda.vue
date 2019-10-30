@@ -37,13 +37,6 @@
                       :entity-id="storeId ? storeId : null"
                       zone='mainimage'
                       />
-                      <div class="images ratio-4-3">
-                        <!-- <img class="rounded-md" :src="company.logo" alt="default">
-
-                        <div class="absolute-bottom-right">
-                          <q-btn class="rounded-sm btn" color="primary" icon="fas fa-camera"/>
-                        </div> -->
-                      </div>
                     </q-field>
 
                   </div>
@@ -64,22 +57,6 @@
                           :entity-id="storeId ? storeId : null"
                           zone='slider'
                         />
-
-                        <!-- <div class="images" style="position:relative;">
-                          <q-carousel
-                            color="white"
-                            quick-nav
-                            class="img-ratio-4-3"
-                          >
-
-                            <q-carousel-slide class="rounded-md" v-for="(s,index) in company.slider" :key="index" :img-src="s.image" />
-
-                          </q-carousel>
-                          <div class="absolute-bottom-right">
-                            <q-btn class="rounded-sm btn q-mr-sm" color="primary" icon="fas fa-edit"/>
-                            <q-btn class="rounded-sm btn" color="primary" icon="fas fa-trash"/>
-                          </div>
-                        </div> -->
 
                       </q-field>
                   </div>
@@ -245,19 +222,6 @@
                           zone='gallery'
                         />
 
-                        <!-- <div class="images" style="position:relative;">
-                          <q-carousel
-                            color="white"
-                            quick-nav
-                            class="img-ratio-4-3"
-                          >
-                            <q-carousel-slide class="rounded-md" v-for="(s,index) in company.gallery" :key="index" :img-src="s.image" />
-                          </q-carousel>
-                          <div class="absolute-bottom-right">
-                            <q-btn class="rounded-sm btn q-mr-sm" color="primary" icon="fas fa-edit"/>
-                            <q-btn class="rounded-sm btn" color="primary" icon="fas fa-trash"/>
-                          </div>
-                        </div> -->
                       </q-field>
 
                   </div>
@@ -554,7 +518,8 @@
   </q-page>
 </template>
 <script>
-import uploadMedia from '@imagina/qmedia/_components/form'
+import uploadMedia from 'src/components/qmedia/form'
+
 
 export default {
   name: 'PageTienda',
