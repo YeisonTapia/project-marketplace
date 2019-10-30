@@ -133,7 +133,7 @@
               if(this.userId!=null)
                 fixFilter =  {allTranslations: true,status: 1,exclude:this.pollUserIds}
               else
-                fixFilter = {allTranslations: true,status: 1,random:true}
+                fixFilter = {allTranslations: true,status: 1,random:true,logged:0}
 
               //Params
               let params = {
