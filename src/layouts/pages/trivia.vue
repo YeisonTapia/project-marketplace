@@ -137,7 +137,7 @@ export default {
     padding 15px 35px
     &:after
       content ''
-      background-image url('/assets/img/icon-trivia.png')
+      background-image url('/statics/img/icon-trivia.png')
       position absolute
       left 6px
       width 81px
@@ -148,7 +148,7 @@ export default {
       background-position bottom
     &:before
       content ''
-      background-image url('/assets/img/arrow-down-pink.png')
+      background-image url('/statics/img/arrow-down-pink.png')
       position absolute
       right -13px
       width 65px

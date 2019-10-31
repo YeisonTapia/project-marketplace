@@ -27,7 +27,7 @@
         <q-card-actions  align="end" class="q-pa-md" v-if="index < poll.questions.length - 1" >
           <div class="text-center cursor-pointer" @click="next()">
             <div class="font-family-secondary">Siguiente</div>
-            <img src="assets/img/arrow-right-blue.png" style="width:25px;">
+            <img src="statics/img/arrow-right-blue.png" style="width:25px;">
           </div>
         </q-card-actions>
         <q-card-actions align="end" v-else class="send q-pa-md" >
@@ -309,7 +309,7 @@
     & .q-option-group  
       font-size 17px
   & .send
-    background-image url('/assets/img/arrow-send-pink.png')
+    background-image url('/statics/img/arrow-send-pink.png')
     background-repeat no-repeat
     background-position 82% 68%
     background-size 25%

@@ -415,7 +415,7 @@ export default {
     font-size 20px
     &:before
       height 2px
-      background-image url('/assets/img/btn-arrow-1.png')
+      background-image url('/statics/img/btn-arrow-1.png')
       background-size contain
       width 65px
       content ''
@@ -424,7 +424,7 @@ export default {
       border-radius 50%
     &:after
       height 33px
-      background-image url('/assets/img/btn-arrow-2.png')
+      background-image url('/statics/img/btn-arrow-2.png')
       background-size contain
       background-repeat no-repeat
       width 65px

@@ -1,7 +1,7 @@
 <template>
   <q-card flat  class="card-top bg-light w-100 h-100">
     <div class="text-center">
-      <img class="img-title" src="/assets/img/top-companies.png">
+      <img class="img-title" src="/statics/img/top-companies.png">
     </div>
     <q-card-main>
       <h2 class="text-primary font-family-secondary">Mejores Empresas</h2>
@@ -38,6 +38,7 @@
   }
 </script>
 <style lang="stylus">
+@import "~variables";
 .card-top
   border-radius 10px
   & .img-title
@@ -59,9 +60,12 @@
       li 
         counter-increment my-awesome-counter
         margin-bottom 20px
+        display flex
         &:before 
           content counter(my-awesome-counter)
-          color #FD2D5E
-          margin-right 6px
+          color $primary
+          margin-right 8px
           font-family 'Carter One'
+          top -3px
+          position relative
 </style>

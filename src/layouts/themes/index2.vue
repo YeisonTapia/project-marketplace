@@ -131,22 +131,5 @@ export default {
           color #ffffff 
           &:hover 
             color $secondary
-
-  .banner-bottom
-    background-image url('/assets/img/theme-one/banner-bottom.jpg')
-    background-size cover
-    padding-top 60%
-    padding-bottom 40%
-    position relative
-    .content 
-      position relative
-      z-index 3
-    &:before
-      height 100%
-      width 100%    
-      background-color  rgba(#282d46, 0.7)
-      content ''
-      position absolute
-      top 0
       
 </style>

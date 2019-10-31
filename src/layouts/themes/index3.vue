@@ -155,9 +155,6 @@
   </q-page>
 </template>
 <script>
-import generalProducts from 'src/components/theme-three/generalProducts'
-import featuredProducts from 'src/components/theme-three/featuredProducts'
-import newProducts from 'src/components/theme-three/newProducts'
 import quiz from 'src/components/theme-three/quiz'
 import contact from 'src/components/theme-three/contact'
 import share from 'src/components/theme-three/shareNetworks'
@@ -165,9 +162,6 @@ import top from 'src/components/theme-three/top'
 export default {
   name: 'PageLayout3',
   components: {
-    featuredProducts,
-    generalProducts,
-    newProducts,
     quiz,
     contact,
     share,

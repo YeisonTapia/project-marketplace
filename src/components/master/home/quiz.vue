@@ -1,6 +1,6 @@
 <template>
   <q-card flat class="card-quiz bg-primary w-100 h-100">
-    <img class="img-title w-100" src="/assets/img/quiz-title.png">
+    <img class="img-title w-100" src="/statics/img/quiz-title.png">
 
     <q-stepper v-if="success && answers.length>0 && !alertContent.active" ref="stepper" v-model="currentStep" class="no-shadow">
       
@@ -23,7 +23,7 @@
         <q-card-actions  align="end" class="q-pa-md" v-if="index < poll.questions.length - 1" >
           <div class="text-light text-center cursor-pointer" @click="next()">
             <div class="font-family-secondary">Siguiente</div>
-            <img src="assets/img/arrow-right-blue.png" style="width:25px;">
+            <img src="statics/img/arrow-right-blue.png" style="width:25px;">
           </div>
         </q-card-actions>
         <q-card-actions align="end" v-else class="send q-pa-md" >
@@ -295,7 +295,7 @@
 .card-quiz
   border-radius 10px
   & .image
-    background-image url('/assets/img/quiz-fondo.png')
+    background-image url('/statics/img/quiz-fondo.png')
     background-repeat no-repeat
     background-position right bottom
     font-family 'Trebuchet MS'
@@ -311,7 +311,7 @@
       font-size 17px
       color var(--q-color-light)
   & .send
-    background-image url('/assets/img/arrow-send-white.png')
+    background-image url('/statics/img/arrow-send-white.png')
     background-repeat no-repeat
     background-position 72% 68%
     background-size 25%
