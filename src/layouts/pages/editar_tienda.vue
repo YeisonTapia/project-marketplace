@@ -519,19 +519,31 @@
           />
         </div>
 
+        <!-- Bloque Nivel-->
+        <div class="row bloque-nivel-club" v-if="suscription">
+                  <div class="col-12">
+                      <div class="nivel relative-position text-white text-center q-pt-lg ">
+                          <h4 class="uppercase q-my-sm font-family-secondary">nivel</h4>
+                          <h5 class="uppercase q-mb-xs q-mt-md">{{suscription.plan.name}}</h5>
+                      </div>
+                      <div class="club text-center" v-if="stores.length>0 && selectedStore>=0">
+                        <div class="logo-tienda text-center q-mt-lg">
+                          <img class="responsive" :src="stores[selectedStore].logo.path" alt="stores[selectedStore].name" >
+                        </div>
+                      </div>
+                  </div>
+        </div>
+
+
         <!-- CONFIG THEME OF STORE -->
         <div class="q-pa-md text-center">
 
-          <div class="logo-tienda text-center">
-            <img class="responsive" :src="stores[selectedStore].logo.path" alt="stores[selectedStore].name" v-if="stores.length>0 && selectedStore>=0">
-          </div>
-
-          <q-field class="q-mb-xl">
+          <q-field class="q-mb-xl" :class="{'bg-primary':myStore}">
             <q-btn icon="store" class="bg-white text-dark full-width" @click="changeMenu('myStore')" v-if="stores.length>0 && selectedStore>=0">
               Mi tienda
             </q-btn>
           </q-field>
-          <q-field class="q-mb-xl">
+          <q-field class="q-mb-xl" :class="{'bg-primary':configTheme}">
             <q-btn icon="palette" class="bg-white text-dark full-width" @click="changeMenu('configTheme')" v-if="stores.length>0 && selectedStore>=0">
               Diseño
             </q-btn>
@@ -563,6 +575,7 @@ export default {
   },
   data() {
     return {
+      suscription:null,
       stores:[],
       storesOptions:[],
       storeId:false,
@@ -785,6 +798,7 @@ export default {
     }
   },
   methods: {
+    /*CONTROL LATERAL MENU*/
     changeMenu(option){
       this.myStore=false;
       this.configTheme=false;
@@ -795,27 +809,170 @@ export default {
         this.configTheme=true;
       }
     },
-    slugable: function(title) {
-      var slug = "";
-      // Change to lower case
-      var titleLower = title.toLowerCase();
-      // Letter "e"
-      slug = titleLower.replace(/e|é|è|ẽ|ẻ|ẹ|ê|ế|ề|ễ|ể|ệ/gi, 'e');
-      // Letter "a"
-      slug = slug.replace(/a|á|à|ã|ả|ạ|ă|ắ|ằ|ẵ|ẳ|ặ|â|ấ|ầ|ẫ|ẩ|ậ/gi, 'a');
-      // Letter "o"
-      slug = slug.replace(/o|ó|ò|õ|ỏ|ọ|ô|ố|ồ|ỗ|ổ|ộ|ơ|ớ|ờ|ỡ|ở|ợ/gi, 'o');
-      // Letter "u"
-      slug = slug.replace(/u|ú|ù|ũ|ủ|ụ|ư|ứ|ừ|ữ|ử|ự/gi, 'u');
-      // Letter "d"
-      slug = slug.replace(/đ/gi, 'd');
-      // Trim the last whitespace
-      slug = slug.replace(/\s*$/g, '');
-      // Change whitespace to "-"
-      slug = slug.replace(/\s+/g, '-');
-
-      return slug;
+    clearForm(){
+      //Clear data of form create store
+      this.company.name="Nombre de tienda";
+      this.company.slogan="";
+      this.company.description="";
+      this.company.address="";
+      this.company.schedules[0]="";
+      this.company.options.map="";
+      this.company.options.youtube="";
+      this.company.categories=[];
+      this.company.city="";
+      this.company.city_id=null;
+      this.company.province_id=null;
+      this.company.neighborhood="";
+      this.company.options.email="";
+      this.company.mediasSingle={};
+      this.company.mediasMulti={};
+      this.company.logo={
+        path:'/assets/img/fondo.jpg',
+        mimeType:""
+      };
+      this.company.slider=[
+        {
+          path:'/assets/img/fondo.jpg',
+          mimeType:''
+        },{
+          path:'/assets/img/fondo.jpg',
+          mimeType:''
+        }
+      ];
+      this.company.gallery=[
+        {
+          path:'/assets/img/fondo.jpg',
+          mimeType:''
+        },{
+          path:'/assets/img/fondo.jpg',
+          mimeType:''
+        }
+      ];
+      this.theme.id=null;
+      this.theme.primary='#4CAF50';
+      this.theme.secondary='#E91E63';
+      this.theme.background='#FFFFFF';
+      for(var i=0;i<this.company.social.length;i++){
+        this.company.social[i].active=false;
+        this.company.social[i].url=null;
+      }
+      for(var i=0;i<this.company.options.payment_methods.length;i++){
+        this.company.options.payment_methods[i].active=false;
+      }
+      for(var i=0;i<this.company.options.shipping_methods.length;i++){
+        this.company.options.shipping_methods[i].active=false;
+      }
+      this.storeId=false;
+      this.myStore=false;
+      this.configTheme=false;
     },
+    onChangeStore(){
+      if(this.selectedStore>=0){
+        //Clone data
+        this.storeId=this.stores[this.selectedStore].id;
+        this.company = this.$clone(this.stores[this.selectedStore]);
+        this.company[this.lang]=this.stores[this.selectedStore][this.lang];
+        this.company.name=this.stores[this.selectedStore][this.lang].name;
+        this.company.slogan=this.stores[this.selectedStore][this.lang].slogan;
+        this.company.description=this.stores[this.selectedStore][this.lang].description;
+        this.theme.id=this.company.theme_id;
+        this.theme.primary=this.stores[this.selectedStore].options.theme_config.color_primary;
+        this.theme.secondary=this.stores[this.selectedStore].options.theme_config.color_secondary;
+        this.theme.background=this.stores[this.selectedStore].options.theme_config.background;
+        this.company.categories=[];
+        for(var i=0;i<this.stores[this.selectedStore].categories.length;i++){
+          this.company.categories.push(parseInt(this.stores[this.selectedStore].categories[i].id));
+        }
+        this.getCities();
+      }else{
+        //Clear inputs
+        this.clearForm();
+      }
+      this.myStore=true;
+    },
+    validateForm(updateForm=false){
+      if(!this.company.mediasSingle.hasOwnProperty('mainimage')){
+        this.$alert.error({message: "Debes cargar un logo de tienda", pos: 'bottom'});
+        return false;
+      }else if(this.company.name==""){
+        this.$alert.error({message: "Debes ingresar un nombre de tienda", pos: 'bottom'});
+        return false;
+      }else if(this.company.categories.length==0){
+        this.$alert.error({message: "Debes seleccionar al menos una categoría", pos: 'bottom'});
+        return false;
+      }else if(this.company.slogan==""){
+        this.$alert.error({message: "Debes ingresar un texto de slogan", pos: 'bottom'});
+        return false;
+      }else if(this.company.neighborhood==""){
+        this.$alert.error({message: "Debes escribir el nombre del barrío", pos: 'bottom'});
+        return false;
+      }else if(this.company.description==""){
+        this.$alert.error({message: "Debes escribir al menos una breve descripción de tu tienda", pos: 'bottom'});
+        return false;
+      }else if(this.company.province_id==null){
+        this.$alert.error({message: "Debes seleccionar una provincia", pos: 'bottom'});
+        return false;
+      }else if(this.company.city_id==null){
+        this.$alert.error({message: "Debes seleccionar una ciudad", pos: 'bottom'});
+        return false;
+      }else if(this.company.email==""){
+        this.$alert.error({message: "Debes escribir un correo electrónico de contacto", pos: 'bottom'});
+        return false;
+      }else if(this.company.address==""){
+        this.$alert.error({message: "Debes escribir la dirección de tu tienda", pos: 'bottom'});
+        return false;
+      }else if(this.company.schedules[0]==""){
+        this.$alert.error({message: "Debes escribir el horario de atención", pos: 'bottom'});
+        return false;
+      }
+      if(updateForm){
+        if(this.theme.id==null){
+          this.$alert.error({message: "Debes seleccionar un tema para tu tienda", pos: 'bottom'});
+        }
+      }
+      return true;
+    },
+    createStore(){
+      if(this.validateForm()){
+        this.company[this.lang]={
+          name:this.company.name,
+          slogan:this.company.slogan,
+          description:this.company.description,
+          slug:this.slugable(this.company.name)
+        };
+        this.company.user_id=this.userId;
+        this.$crud.create("apiRoutes.qmarketplace.store", this.company).then(response => {
+          this.$alert.success({message: this.$tr('ui.message.recordCreated'), pos: 'bottom'})
+          this.getStores();
+        }).catch(error => {
+          this.$alert.error({message: this.$tr('ui.message.recordNoCreated'), pos: 'bottom'})
+        })
+      }
+    },
+    updateStore(){
+      if(this.validateForm(true)){
+        this.company[this.lang]={
+          name:this.company.name,
+          slogan:this.company.slogan,
+          description:this.company.description,
+          slug:this.slugable(this.company.name)
+        };
+        if(this.theme.id!=null){
+          this.company.theme_id=this.theme.id;
+          this.company.options.theme_config.color_primary=this.theme.primary;
+          this.company.options.theme_config.color_secondary=this.theme.secondary;
+          this.company.options.theme_config.background=this.theme.background;
+        }
+        this.$crud.update("apiRoutes.qmarketplace.store", this.stores[this.selectedStore].id,this.company).then(response => {
+          this.$alert.success({message: this.$tr('ui.message.recordUpdated'), pos: 'bottom'})
+          this.clearForm();
+          this.getStores();
+        }).catch(error => {
+          this.$alert.error({message: this.$tr('ui.message.recordNoCreated'), pos: 'bottom'})
+        })
+      }
+    },
+    /*INIT GET METHODS*/
     getStores(){
       this.selectedStore=-1;//Reset index store
       this.storesOptions=[];//Clear array stores
@@ -883,139 +1040,10 @@ export default {
       };//params
       this.$crud.index("apiRoutes.qmarketplace.theme",params).then(response => {
         this.themes_option=response.data;//
-        // for(var i=0;i<this.stores.length;i++){
-        //   this.storesOptions.push({
-        //     label:this.stores[i][this.lang].name,
-        //     value:i
-        //   });
-        // }//for
       });
 
     },
-
-    clearForm(){
-      //Clear data of form create store
-      this.company.name="Nombre de tienda";
-      this.company.slogan="";
-      this.company.description="";
-      this.company.address="";
-      this.company.schedules[0]="";
-      this.company.options.map="";
-      this.company.options.youtube="";
-      this.company.categories=[];
-      this.company.city="";
-      this.company.city_id=null;
-      this.company.province_id=null;
-      this.company.neighborhood="";
-      this.company.options.email="";
-      this.company.mediasSingle={};
-      this.company.mediasMulti={};
-      this.company.logo={
-        path:'/assets/img/fondo.jpg',
-        mimeType:""
-      };
-      this.company.slider=[
-        {
-          path:'/assets/img/fondo.jpg',
-          mimeType:''
-        },{
-          path:'/assets/img/fondo.jpg',
-          mimeType:''
-        }
-      ];
-      this.company.gallery=[
-        {
-          path:'/assets/img/fondo.jpg',
-          mimeType:''
-        },{
-          path:'/assets/img/fondo.jpg',
-          mimeType:''
-        }
-      ];
-      this.theme.id=null;
-      this.theme.primary='#4CAF50';
-      this.theme.secondary='#E91E63';
-      this.theme.background='#FFFFFF';
-
-      for(var i=0;i<this.company.social.length;i++){
-        this.company.social[i].active=false;
-        this.company.social[i].url=null;
-      }
-      for(var i=0;i<this.company.options.payment_methods.length;i++){
-        this.company.options.payment_methods[i].active=false;
-      }
-      for(var i=0;i<this.company.options.shipping_methods.length;i++){
-        this.company.options.shipping_methods[i].active=false;
-      }
-      this.storeId=false;
-      this.myStore=false;
-      this.configTheme=false;
-    },
-    onChangeStore(){
-      if(this.selectedStore>=0){
-        //Clone data
-        this.storeId=this.stores[this.selectedStore].id;
-        // this.company=this.stores[this.selectedStore];
-        this.company = this.$clone(this.stores[this.selectedStore]);
-        this.company[this.lang]=this.stores[this.selectedStore][this.lang];
-        this.company.name=this.stores[this.selectedStore][this.lang].name;
-        this.company.slogan=this.stores[this.selectedStore][this.lang].slogan;
-        this.company.description=this.stores[this.selectedStore][this.lang].description;
-        this.theme.id=this.company.theme_id;
-        this.theme.primary=this.stores[this.selectedStore].options.theme_config.color_primary;
-        this.theme.secondary=this.stores[this.selectedStore].options.theme_config.color_secondary;
-        this.theme.background=this.stores[this.selectedStore].options.theme_config.background;
-        this.company.categories=[];
-        for(var i=0;i<this.stores[this.selectedStore].categories.length;i++){
-          this.company.categories.push(parseInt(this.stores[this.selectedStore].categories[i].id));
-        }
-        this.getCities();
-      }else{
-        //Clear inputs
-        this.clearForm();
-      }
-      this.myStore=true;
-    },
-    createStore(){
-      this.company[this.lang]={
-        name:this.company.name,
-        slogan:this.company.slogan,
-        description:this.company.description,
-        slug:this.slugable(this.company.name)
-      };
-      this.company.user_id=this.userId;
-      // this.company.schedules=[this.company.schedule];
-      this.$crud.create("apiRoutes.qmarketplace.store", this.company).then(response => {
-        this.$alert.success({message: this.$tr('ui.message.recordCreated'), pos: 'bottom'})
-        this.getStores();
-      }).catch(error => {
-        this.$alert.error({message: this.$tr('ui.message.recordNoCreated'), pos: 'bottom'})
-      })
-    },
-    updateStore(){
-      this.company[this.lang]={
-        name:this.company.name,
-        slogan:this.company.slogan,
-        description:this.company.description,
-        slug:this.slugable(this.company.name)
-      };
-      if(this.theme.id!=null){
-        this.company.theme_id=this.theme.id;
-        this.company.options.theme_config.color_primary=this.theme.primary;
-        this.company.options.theme_config.color_secondary=this.theme.secondary;
-        this.company.options.theme_config.background=this.theme.background;
-      }
-      this.$crud.update("apiRoutes.qmarketplace.store", this.stores[this.selectedStore].id,this.company).then(response => {
-        this.$alert.success({message: this.$tr('ui.message.recordUpdated'), pos: 'bottom'})
-        this.clearForm();
-        this.getStores();
-      }).catch(error => {
-        this.$alert.error({message: this.$tr('ui.message.recordNoCreated'), pos: 'bottom'})
-      })
-    },
     getProvinces(){
-      // cityOptions
-      // sectorOptions
       let params = {
         remember: false,
         params: {
@@ -1052,11 +1080,54 @@ export default {
           this.cityOptions.push({label:response.data[i].name,value:response.data[i].id});
         }
       });
-    }
+    },
+    getSuscription(){
+      let params = {
+        remember: false,
+        params: {
+          include: 'plan',
+          filter:{
+            userId: this.user_id,
+            status:1
+          }
+        }
+      };//params
+      this.$crud.index("apiRoutes.qsubscription.suscriptions",params).then(response => {
+        if(response.data.length>0){
+          this.suscription=response.data[0];
+        }else{
+          this.$alert.error({message: "No posees un plan activo, debes suscribirte a uno.", pos: 'bottom'})
+          this.$router.push({name: 'products.show',params:{slug:'tiendas-en-linea'}});
+        }
+      });
+    },
+    /*SLUGABLE*/
+    slugable: function(title) {
+      var slug = "";
+      // Change to lower case
+      var titleLower = title.toLowerCase();
+      // Letter "e"
+      slug = titleLower.replace(/e|é|è|ẽ|ẻ|ẹ|ê|ế|ề|ễ|ể|ệ/gi, 'e');
+      // Letter "a"
+      slug = slug.replace(/a|á|à|ã|ả|ạ|ă|ắ|ằ|ẵ|ẳ|ặ|â|ấ|ầ|ẫ|ẩ|ậ/gi, 'a');
+      // Letter "o"
+      slug = slug.replace(/o|ó|ò|õ|ỏ|ọ|ô|ố|ồ|ỗ|ổ|ộ|ơ|ớ|ờ|ỡ|ở|ợ/gi, 'o');
+      // Letter "u"
+      slug = slug.replace(/u|ú|ù|ũ|ủ|ụ|ư|ứ|ừ|ữ|ử|ự/gi, 'u');
+      // Letter "d"
+      slug = slug.replace(/đ/gi, 'd');
+      // Trim the last whitespace
+      slug = slug.replace(/\s*$/g, '');
+      // Change whitespace to "-"
+      slug = slug.replace(/\s+/g, '-');
+
+      return slug;
+    },
 
 
   },
   mounted(){
+    this.getSuscription();//
     this.getStores();
     this.getStoreCategories();//
     this.getProvinces();//
