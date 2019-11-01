@@ -377,7 +377,7 @@
   .btn-register
     &:after
       content ''
-      background-image url('/assets/img/arrow-send-pink.png')
+      background-image url('/statics/img/arrow-send-pink.png')
       background-repeat no-repeat
       background-size contain
       width 74px
