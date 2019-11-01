@@ -207,7 +207,7 @@
         .q-btn
           background-color $primary !important
   .nivel
-    background-image url('/assets/img/label-primary.png')
+    background-image url('/statics/img/label-primary.png')
     background-size 100% 100%
     height 200px
     h4
