@@ -11,8 +11,19 @@ let pages = {
     page: () => import('pages/master/index.vue'),
     title: 'sidebar.pageHome',
     icon: 'fas fa-home',
-    authenticated : appConfig.isBackend
-  }
+    authenticated : false
+  },
+    admin: {
+        permission: null,
+        activated: true,
+        path: '/admin',
+        name: 'app.admin',
+        layout: () => import('src/layouts/admin'),
+        page: () => import('pages/admin/index.vue'),
+        title: 'Administrador',
+        icon: 'far fa-envelope-open',
+        authenticated: true
+    }
 }
 
 //Add pages "not found" only when it isn't SSR mode. Always leave this as last one

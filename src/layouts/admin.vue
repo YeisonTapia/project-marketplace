@@ -1,24 +1,24 @@
 <template>
-  <q-layout :view="$q.platform.is.mobile ? 'lHh LpR lff' : 'hhh LpR lFr'">
+  <q-layout view="lHh LpR lff"  class="bg-grey-1">
     <!-- HEADER -->
-    <frontend-header v-if="appState.loadPage" />
+    <admin-header v-if="appState.loadPage"/>
 
     <!-- ROUTER VIEW -->
     <q-page-container>
       <q-pull-to-refresh @refresh="refreshPage">
-        <router-view v-if="appState.loadPage" />
+        <router-view v-if="appState.loadPage" class="layout-padding"/>
       </q-pull-to-refresh>
     </q-page-container>
 
     <!-- FOOTER -->
-    <frontend-footer v-if="appState.loadPage" />
+    <admin-footer/>
   </q-layout>
 </template>
 
 <script>
   /*Components*/
-  import frontendHeader from 'src/components/master/frontend/header'
-  import frontendFooter from 'src/components/master/frontend/footer'
+  import adminHeader from 'src/components/master/admin/header'
+  import adminFooter from 'src/components/master/admin/footer'
 
   export default {
     meta () {
@@ -36,8 +36,8 @@
       }
     },
     components: {
-      frontendHeader,
-      frontendFooter
+      adminHeader,
+      adminFooter,
     },
     mounted () {
       this.$nextTick(async function () {
