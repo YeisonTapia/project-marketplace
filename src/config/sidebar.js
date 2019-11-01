@@ -5,7 +5,7 @@ const appConfig = config('app')
 //Not edit
 let localSidebar = []//Response
 
-
+if (appConfig.isBackend) {
   let modules = appConfig.modules
   modules.forEach((name) => {
     try {
@@ -13,10 +13,10 @@ let localSidebar = []//Response
       if (moduleSidebar && moduleSidebar[0]) {
         localSidebar = localSidebar.concat(moduleSidebar)
       }
-    } catch (e) {
-    }
+    } catch (e) {}
   })
-console.warn(modules)
+}
+
 
 //Add extra items to sidebar
 /*Example group item. April 04, 2019
@@ -38,7 +38,7 @@ console.warn(modules)
 
 //Add items tu sidebar
 let sidebar = [
-  pages.app.admin,//Home
+  pages.app.home,//Home
 ]
 
 //Return merge between local sidebar and sidebar of qMenu

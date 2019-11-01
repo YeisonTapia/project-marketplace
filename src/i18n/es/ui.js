@@ -67,6 +67,8 @@ export default {
     address : 'Dirección | Direcciones',
     contact : 'Contacto | Contactos',
     sociaNetwork : 'Red Social | Redes Sociales',
+    success : 'Realizado',
+    ready : 'Listo',
   },
   message: {
     notFound: 'Lo sentimos, no hay nada aquí',
@@ -108,7 +110,7 @@ export default {
     password : 'Contraseña | Contraseñas',
     checkPassword : 'Confirmar Contraseña | Confirmar Contraseñas',
     name: 'Nombre | Nombres',
-    email: 'Email',
+    email: 'Email | Emails',
     slug: 'Slug',
     summary: 'Resumen | Resumenes',
     description: 'Descripción | Descripciones',
@@ -164,7 +166,13 @@ export default {
     city : 'Ciudad | Ciudades',
     state : 'Departamento | Departamentos',
     zipCode : 'Codigo Postal',
-    socialNetwork : 'Red Social | Redes Sociales'
+    socialNetwork : 'Red Social | Redes Sociales',
+    startDate : 'Fecha Inicio',
+    endDate : 'Fecha Fin',
+    code : 'Codigo | Codigos',
+    increase : 'Incrementar',
+    date : 'Fecha | Fechas',
+    dueDate : 'Fecha de vencimiento',
   },
   configList: {
     loggedAs: 'registrado como',

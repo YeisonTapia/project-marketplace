@@ -67,6 +67,8 @@ export default {
     address : 'Address | Addresses',
     contacts : 'contact | Contacts',
     sociaNetwork : 'Social Network | Social Networks',
+    success : 'Success',
+    ready : 'Ready',
   },
   message: {
     notFound: 'Sorry, nothing here',
@@ -108,7 +110,7 @@ export default {
     password : 'Pasword | Paswords',
     checkPassword : 'Check Pasword | Check Paswords',
     name: 'Name | Names',
-    email: 'Email',
+    email: 'Email | Emails',
     slug: 'Slug',
     summary: 'Summary | Summaries',
     description: 'Description Descriptions',
@@ -164,7 +166,13 @@ export default {
     city : 'City | cities',
     state : 'State | State',
     zipCode : 'Zip Code',
-    socialNetwork : 'Social Network | Social Networks'
+    socialNetwork : 'Social Network | Social Networks',
+    startDate : 'Start Date',
+    endDate : 'End Date',
+    code : 'Code | Codes',
+    increase : 'Increase',
+    date : 'Dates | Dates',
+    dueDate : 'Due date'
   },
   configList: {
     loggedAs: 'logged as',

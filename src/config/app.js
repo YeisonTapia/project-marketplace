@@ -1,6 +1,6 @@
 export default {
-  version: '1.0.1',
-  isBackend : false, //Define if project is to admin
+  version: '2.0.1',
+  isBackend : true, //Define if project is to admin
   //UI Languages
   languages : {
     default : 'es',
@@ -14,33 +14,28 @@ export default {
     'qblog',
     'qcommerce',
     'qplace',
+    'qform',
     'qmenu',
     'qmedia',
     'qslider',
-    'qsite',
-    'qsubscription',
-    'qquiz',
-    'qtrivia',
-    'qmarketplace',
-    'qform',
-    'qredeems',
+    'qsite'
   ],
-  //Storage
-  saveStorage : {
+  //Cache
+  saveCache : {
     refresh : [
       'sessionData',
-      'offlineRequests',
-      'notifications',
       'auth.department.id',
       'auth.role.id',
-      'redirect.to.from.login',
       'site.default.locale',
-      'dataAddress',
       'impersonatorData'
     ],
     logout : [
       'offlineRequests',
       'site.default.locale',
     ]
-  }
+  },
+  //Reset Store
+  resetStores : [
+    'quserAuth/RESET'
+  ]
 }
