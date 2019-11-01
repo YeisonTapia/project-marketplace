@@ -2,7 +2,7 @@
   <div id="masterHeader">
     <!-- ============= HEADER ======================= -->
     <q-layout-header class="no-shadow">
-      <q-toolbar color="primary">
+      <q-toolbar color="transparent" class="bg-degradado">
         <!--= BUTTON MENU =-->
         <q-btn flat dense round
                @click="drawer.menu = !drawer.menu"

@@ -3,7 +3,7 @@
     <q-card class="shadow-no banner-category">
       <q-card-media>
         <div class="ratio-21-9">
-          <img  src="/assets/img/comida.jpg">
+          <img  src="/statics/img/comida.jpg">
         </div>
         <div class="absolute-center q-mt-xl">
           <h1 class="title-label q-my-none bg-secondary text-white text-center text-uppercase">
@@ -30,7 +30,7 @@
     </div>
 
     <div class="q-container banner q-py-xl text-center">
-      <img class="w-100" src="/assets/img/publicidad2-100.jpg" alt="banner">
+      <img class="w-100" src="/statics/img/publicidad2-100.jpg" alt="banner">
     </div>
 
   </q-page>
@@ -54,56 +54,56 @@ export default {
         {
             name: 'BELLE TIENDA 1',
             avatar: 'https://cdn.quasar.dev/img/avatar.png',
-            image: '/assets/img/banner.png',
+            image: '/statics/img/banner.png',
             summary: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
             pts: 9
         },
         {
             name: 'BELLE TIENDA 2',
             avatar: 'https://cdn.quasar.dev/img/avatar.png',
-            image: '/assets/img/banner.png',
+            image: '/statics/img/banner.png',
             summary: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
             pts: 9
         },
                         {
             name: 'BELLE TIENDA 3',
             avatar: 'https://cdn.quasar.dev/img/avatar.png',
-            image: '/assets/img/banner.png',
+            image: '/statics/img/banner.png',
             summary: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
             pts: 3
         },
         {
             name: 'BELLE TIENDA 4',
             avatar: 'https://cdn.quasar.dev/img/avatar.png',
-            image: '/assets/img/banner.png',
+            image: '/statics/img/banner.png',
             summary: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
             pts: 9
         },
                         {
             name: 'BELLE TIENDA 5',
             avatar: 'https://cdn.quasar.dev/img/avatar.png',
-            image: '/assets/img/banner.png',
+            image: '/statics/img/banner.png',
             summary: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
             pts: 1
         },
         {
             name: 'BELLE TIENDA 6',
             avatar: 'https://cdn.quasar.dev/img/avatar.png',
-            image: '/assets/img/banner.png',
+            image: '/statics/img/banner.png',
             summary: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
             pts: 1
         },
         {
             name: 'BELLE TIENDA 7',
             avatar: 'https://cdn.quasar.dev/img/avatar.png',
-            image: '/assets/img/banner.png',
+            image: '/statics/img/banner.png',
             summary: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
             pts: 9
         },
         {
             name: 'BELLE TIENDA 8',
             avatar: 'https://cdn.quasar.dev/img/avatar.png',
-            image: '/assets/img/banner.png',
+            image: '/statics/img/banner.png',
             summary: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
             pts: 9
         }

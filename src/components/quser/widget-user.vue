@@ -1,7 +1,7 @@
 <template>
   <div class="q-inline-block">
     <q-btn-dropdown class="q-pa-none" flat no-caps icon="fas fa-user-alt" v-if="userData">
-      <q-list class="q-pa-none bg-light">
+      <q-list class="bg-light">
         <q-item tag="label" :to="{name: 'user.profile.me'}">
           <q-item-side class="img-user">
             <q-item-tile avatar >

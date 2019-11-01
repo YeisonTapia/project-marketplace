@@ -22,14 +22,14 @@ export default {
         products:  [
         {
             name: 'Mochila 1',
-            image: '/assets/img/product.jpg',
+            image: '/statics/img/product.jpg',
             tienda: 'artesanias',
             price: 10.00,
             rating: 3
         },
         {
             name: 'Mochila 2',
-            image: '/assets/img/contacto.jpg',
+            image: '/statics/img/contacto.jpg',
             tienda: 'artesanias',
             price: 10.00,
             rating: 3

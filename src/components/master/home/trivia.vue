@@ -1,6 +1,6 @@
 <template>
   <q-card flat :class="className" class="relative-position">
-    <img class="img-title w-100" v-show="!isModal" src="/assets/img/trivia-title.png">
+    <img class="img-title w-100" v-show="!isModal" src="/statics/img/trivia-title.png">
     <div class="content-stepper">
 
      <q-stepper v-if="success && answers.length>0 && !alertContent.active" ref="stepper" v-model="currentStep" class="no-shadow">
@@ -32,7 +32,7 @@
             <div class="col-6 text-right">
               <div class="text-primary cursor-pointer" @click="next()">
                 <div class="font-family-secondary">Siguiente</div>
-                <img src="assets/img/arrow-right-blue.png" style="width:25px;">
+                <img src="statics/img/arrow-right-blue.png" style="width:25px;">
               </div>
             </div>
           </div>
@@ -270,7 +270,7 @@ export default {
   height 100%
   background-color var(--q-color-light)
   & .send
-    background-image url('/assets/img/arrow-send-yellow.png')
+    background-image url('/statics/img/arrow-send-yellow.png')
     background-repeat no-repeat
     background-position 73% 74%
     background-size: 25%

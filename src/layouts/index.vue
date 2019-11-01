@@ -8,13 +8,13 @@
       <featured-stores></featured-stores>
 
       <div class="q-container banner q-py-xl text-center">
-        <img class="w-100" src="/assets/img/publicidad1-100.jpg" alt="banner">
+        <img class="w-100" src="/statics/img/publicidad1-100.jpg" alt="banner">
       </div>
 
       <interest-stores></interest-stores>
 
       <div class="q-container banner q-py-xl text-center">
-        <img class="w-100" src="/assets/img/publicidad2-100.jpg" alt="banner">
+        <img class="w-100" src="/statics/img/publicidad2-100.jpg" alt="banner">
       </div>
 
       <independents-stores></independents-stores>
@@ -22,7 +22,7 @@
       <virtual-directory></virtual-directory>
 
       <div class="q-container banner q-py-xl text-center">
-        <img class="w-100" src="/assets/img/publicidad3-100.jpg" alt="banner">
+        <img class="w-100" src="/statics/img/publicidad3-100.jpg" alt="banner">
       </div>
 
       <featured-products></featured-products>

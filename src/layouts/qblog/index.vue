@@ -26,7 +26,7 @@
                   <q-card class="bg-white">
                     <q-card-media>
                       <div class="ratio-16-9">
-                      <img src="/assets/img/blog.jpg">
+                      <img src="/statics/img/blog.jpg">
                     </div>
                     </q-card-media>
                     <q-card-title>
@@ -50,7 +50,7 @@
                   <q-card class="bg-white">
                     <q-card-media>
                       <div class="ratio-16-9">
-                      <img src="/assets/img/blog.jpg">
+                      <img src="/statics/img/blog.jpg">
                     </div>
                     </q-card-media>
                     <q-card-title>
@@ -74,7 +74,7 @@
                   <q-card class="bg-white">
                     <q-card-media>
                       <div class="ratio-16-9">
-                      <img src="/assets/img/blog.jpg">
+                      <img src="/statics/img/blog.jpg">
                     </div>
                     </q-card-media>
                     <q-card-title>
@@ -129,7 +129,7 @@
                 <q-card-separator />
                 <q-card-media>
                   <div class="ratio-16-9">
-                  <img src="/assets/img/blog.jpg">
+                  <img src="/statics/img/blog.jpg">
                 </div>
                 </q-card-media>
                 <q-card-title class="q-pb-none">
@@ -159,7 +159,7 @@
                         <div class="col-6">
                           <q-card-media>
                             <div class="ratio-4-3">
-                              <img src="/assets/img/blog.jpg">
+                              <img src="/statics/img/blog.jpg">
                             </div>
                           </q-card-media>
                         </div>
@@ -176,7 +176,7 @@
                         <div class="col-6">
                           <q-card-media>
                             <div class="ratio-4-3">
-                              <img src="/assets/img/blog.jpg">
+                              <img src="/statics/img/blog.jpg">
                             </div>
                           </q-card-media>
                         </div>
@@ -204,7 +204,7 @@
       </div>
 
       <div class="q-container banner q-py-xl text-center">
-        <img class="w-100" src="/assets/img/publicidad1-100.jpg" alt="banner">
+        <img class="w-100" src="/statics/img/publicidad1-100.jpg" alt="banner">
       </div>  
     </div>
 

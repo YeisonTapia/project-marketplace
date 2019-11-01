@@ -72,33 +72,8 @@ export default {
 <style lang="stylus">
 @import "~variables";
 .theme-layout-01
-  .share-networks
-    background-image url('/assets/img/theme-one/share-network.jpg')
-    background-size cover
-    padding 10% 0
-    position relative
-    &:before
-      height 100%
-      width 100%    
-      background-color  rgba(#282d46, 0.7)
-      content ''
-      position absolute
-      top 0
-    .networks  
-      position relative
-      z-index 3
-      .imsocial
-        display inline-block
-        a
-        & i
-          margin 10px
-          font-size 2rem
-          color #ffffff 
-          &:hover 
-            color $secondary
-
   .banner-bottom
-    background-image url('/assets/img/theme-one/banner-bottom.jpg')
+    background-image url('/statics/img/theme-one/banner-bottom.jpg')
     background-size cover
     padding-top 60%
     padding-bottom 40%

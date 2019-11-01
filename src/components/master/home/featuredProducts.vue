@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="q-container banner q-py-xl text-center">
-        <img class="w-100" src="/assets/img/publicidad2-100.jpg" alt="banner">
+        <img class="w-100" src="/statics/img/publicidad2-100.jpg" alt="banner">
       </div>
     </div>
   </div>
@@ -29,73 +29,73 @@
             products:  [
             {
                 name: 'Mochila 1',
-                image: '/assets/img/product.jpg',
+                image: '/statics/img/product.jpg',
                 tienda: 'artesanias',
                 price: 10.00
             },
             {
                 name: 'Mochila 2',
-                image: '/assets/img/product.jpg',
+                image: '/statics/img/product.jpg',
                 tienda: 'artesanias',
                 price: 10.00
             },
             {
                 name: 'Mochila 3',
-                image: '/assets/img/product.jpg',
+                image: '/statics/img/product.jpg',
                 tienda: 'artesanias',
                 price: 10.00
             },
             {
                 name: 'Mochila 4',
-                image: '/assets/img/product.jpg',
+                image: '/statics/img/product.jpg',
                 tienda: 'artesanias',
                 price: 10.00
             },
                         {
                 name: 'Mochila 5',
-                image: '/assets/img/product.jpg',
+                image: '/statics/img/product.jpg',
                 tienda: 'artesanias',
                 price: 10.00
             },
             {
                 name: 'Mochila 6',
-                image: '/assets/img/product.jpg',
+                image: '/statics/img/product.jpg',
                 tienda: 'artesanias',
                 price: 10.00
             },
             {
                 name: 'Mochila 7',
-                image: '/assets/img/product.jpg',
+                image: '/statics/img/product.jpg',
                 tienda: 'artesanias',
                 price: 10.00
             },
             {
                 name: 'Mochila 8',
-                image: '/assets/img/product.jpg',
+                image: '/statics/img/product.jpg',
                 tienda: 'artesanias',
                 price: 10.00
             },
                         {
                 name: 'Mochila 9',
-                image: '/assets/img/product.jpg',
+                image: '/statics/img/product.jpg',
                 tienda: 'artesanias',
                 price: 10.00
             },
             {
                 name: 'Mochila 10',
-                image: '/assets/img/product.jpg',
+                image: '/statics/img/product.jpg',
                 tienda: 'artesanias',
                 price: 10.00
             },
             {
                 name: 'Mochila 11',
-                image: '/assets/img/product.jpg',
+                image: '/statics/img/product.jpg',
                 tienda: 'artesanias',
                 price: 10.00
             },
             {
                 name: 'Mochila 12',
-                image: '/assets/img/product.jpg',
+                image: '/statics/img/product.jpg',
                 tienda: 'artesanias',
                 price: 10.00
             }

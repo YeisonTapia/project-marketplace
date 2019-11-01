@@ -37,13 +37,6 @@
                       :entity-id="storeId ? storeId : null"
                       zone='mainimage'
                       />
-                      <div class="images ratio-4-3">
-                        <!-- <img class="rounded-md" :src="company.logo" alt="default">
-
-                        <div class="absolute-bottom-right">
-                          <q-btn class="rounded-sm btn" color="primary" icon="fas fa-camera"/>
-                        </div> -->
-                      </div>
                     </q-field>
 
                   </div>
@@ -64,22 +57,6 @@
                           :entity-id="storeId ? storeId : null"
                           zone='slider'
                         />
-
-                        <!-- <div class="images" style="position:relative;">
-                          <q-carousel
-                            color="white"
-                            quick-nav
-                            class="img-ratio-4-3"
-                          >
-
-                            <q-carousel-slide class="rounded-md" v-for="(s,index) in company.slider" :key="index" :img-src="s.image" />
-
-                          </q-carousel>
-                          <div class="absolute-bottom-right">
-                            <q-btn class="rounded-sm btn q-mr-sm" color="primary" icon="fas fa-edit"/>
-                            <q-btn class="rounded-sm btn" color="primary" icon="fas fa-trash"/>
-                          </div>
-                        </div> -->
 
                       </q-field>
                   </div>
@@ -245,19 +222,6 @@
                           zone='gallery'
                         />
 
-                        <!-- <div class="images" style="position:relative;">
-                          <q-carousel
-                            color="white"
-                            quick-nav
-                            class="img-ratio-4-3"
-                          >
-                            <q-carousel-slide class="rounded-md" v-for="(s,index) in company.gallery" :key="index" :img-src="s.image" />
-                          </q-carousel>
-                          <div class="absolute-bottom-right">
-                            <q-btn class="rounded-sm btn q-mr-sm" color="primary" icon="fas fa-edit"/>
-                            <q-btn class="rounded-sm btn" color="primary" icon="fas fa-trash"/>
-                          </div>
-                        </div> -->
                       </q-field>
 
                   </div>
@@ -407,28 +371,6 @@
                   </div>
                   <div class="col-xs-6 col-sm-5 col-md-3">
                     <q-color class="q-pa-md line-grey text-center" v-model="theme.primary" :style="{ 'background-color': theme.primary }" />
-                    <!-- <div @click="showingPrimary = true"  class="q-pa-md line-grey text-center" :style="{ 'background-color': theme.primary }">
-                      {{theme.primary}}
-
-                      <q-popover v-model="showingPrimary" anchor="bottom right" self="bottom left">
-                        <q-tabs align="justify">
-                          <q-tab default  slot="title" name="tab-1" label="HEX" :style="{ 'background-color': theme.primary }"/>
-                          <q-tab  slot="title" name="tab-2" label="RGB" :style="{ 'background-color': theme.primary }"/>
-                          <q-tab-pane name="tab-1" class="q-pa-none" style="min-width: 80px;">
-                              <div class="text-center q-pa-md" :style="{ 'background-color': theme.primary }">
-                                {{theme.primary}}
-                              </div>
-                              <q-color-picker v-model="theme.primary" format-model="hex" />
-                          </q-tab-pane>
-                          <q-tab-pane name="tab-2" class="q-pa-none" style="min-width: 80px;">
-                              <div class="text-center q-pa-md" :style="{ 'background-color': theme.primary }">
-                                {{theme.primary}}
-                              </div>
-                              <q-color-picker v-model="theme.primary" format-model="rgb" />
-                          </q-tab-pane>
-                        </q-tabs>
-                      </q-popover>
-                    </div> -->
                   </div>
                 </div>
                 <div class="row gutter-sm items-center  q-mb-sm">
@@ -437,28 +379,6 @@
                   </div>
                   <div class="col-xs-6 col-sm-5 col-md-3">
                     <q-color class="q-pa-md line-grey text-center" v-model="theme.secondary" :style="{ 'background-color': theme.secondary }" />
-                    <!-- <div @click="showingSecondary = true" class="q-pa-md line-grey text-center line" :style="{ 'background-color': theme.secondary }">
-                      {{theme.secondary}}
-
-                      <q-popover v-model="showingSecondary" anchor="bottom right" self="bottom left">
-                        <q-tabs align="justify">
-                          <q-tab default  slot="title" name="tab-1" label="HEX" :style="{ 'background-color': theme.secondary }"/>
-                          <q-tab  slot="title" name="tab-2" label="RGB" :style="{ 'background-color': theme.secondary }"/>
-                          <q-tab-pane name="tab-1" class="q-pa-none" style="min-width: 80px;">
-                              <div class="text-center q-pa-md" :style="{ 'background-color': theme.secondary }">
-                                {{theme.secondary}}
-                              </div>
-                              <q-color-picker v-model="theme.secondary" format-model="hex" />
-                          </q-tab-pane>
-                          <q-tab-pane name="tab-2" class="q-pa-none" style="min-width: 80px;">
-                              <div class="text-center q-pa-md" :style="{ 'background-color': theme.secondary }">
-                                {{theme.secondary}}
-                              </div>
-                              <q-color-picker v-model="theme.secondary" format-model="rgb" />
-                          </q-tab-pane>
-                        </q-tabs>
-                      </q-popover>
-                    </div> -->
                   </div>
                 </div>
                 <div class="row gutter-sm items-center  q-mb-sm">
@@ -467,28 +387,6 @@
                   </div>
                   <div class="col-xs-6 col-sm-5 col-md-3">
                     <q-color class="q-pa-md line-grey text-center" v-model="theme.background" :style="{ 'background-color': theme.background }" />
-                    <!-- <div @click="showingBackground = true" class="q-pa-md line-grey text-center" :style="{ 'background-color': theme.background }">
-                      {{theme.background}}
-
-                      <q-popover v-model="showingBackground" anchor="bottom right" self="bottom left">
-                        <q-tabs align="justify">
-                          <q-tab default  slot="title" name="tab-1" label="HEX" :style="{ 'background-color': theme.background }"/>
-                          <q-tab  slot="title" name="tab-2" label="RGB" :style="{ 'background-color': theme.background }"/>
-                          <q-tab-pane name="tab-1" class="q-pa-none" style="min-width: 80px;">
-                              <div class="text-center q-pa-md" :style="{ 'background-color': theme.background }">
-                                {{theme.background}}
-                              </div>
-                              <q-color-picker v-model="theme.background" format-model="hex" />
-                          </q-tab-pane>
-                          <q-tab-pane name="tab-2" class="q-pa-none" style="min-width: 80px;">
-                              <div class="text-center q-pa-md" :style="{ 'background-color': theme.background }">
-                                {{theme.background}}
-                              </div>
-                              <q-color-picker v-model="theme.background" format-model="rgb" />
-                          </q-tab-pane>
-                        </q-tabs>
-                      </q-popover>
-                    </div> -->
                   </div>
                 </div>
 
@@ -511,8 +409,8 @@
       <q-layout-drawer behavior="desktop"  v-model="drawer">
 
         <!-- SELECT STORE -->
-        <div class="q-pa-md" style="background-color:#ededed;color:ff6351;">
-          <q-select
+        <div class="q-pa-md selectStore bg-light">
+          <q-select color="light" class="no-shadow" inverted
           v-model="selectedStore"
           :options="storesOptions"
           @input="val => { onChangeStore() }"
@@ -536,19 +434,44 @@
 
 
         <!-- CONFIG THEME OF STORE -->
-        <div class="q-pa-md text-center">
 
-          <q-field class="q-mb-xl" :class="{'bg-primary':myStore}">
-            <q-btn icon="store" class="bg-white text-dark full-width" @click="changeMenu('myStore')" v-if="stores.length>0 && selectedStore>=0">
-              Mi tienda
-            </q-btn>
-          </q-field>
-          <q-field class="q-mb-xl" :class="{'bg-primary':configTheme}">
-            <q-btn icon="palette" class="bg-white text-dark full-width" @click="changeMenu('configTheme')" v-if="stores.length>0 && selectedStore>=0">
-              Diseño
-            </q-btn>
-          </q-field>
+        <q-list no-border link inset-delimiter class="q-pa-none" v-if="stores.length>0 && selectedStore>=0">
+
+          <q-list-header class="q-px-lg q-pt-lg q-pb-none">
+            <div class="label-primary text-center text-white">
+              <div class="title q-pb-md font-family-secondary">
+                <span>NIVEL</span>
+              </div>
+              <div class="subtitle q-pt-md " >
+                TIENDA PROFESIONAL
+              </div>
+            </div>
+          </q-list-header>
+
+          <!-- === LOGO === -->
+          <q-list-header class="logo-tienda text-center">
+                <img :src="stores[selectedStore].logo.path" alt="stores[selectedStore].name" >
+          </q-list-header>
+
+          <q-list separator link no-border id="listMenuAdmin" class="q-pa-none">
+            <!--Single Item-->
+            <q-item :class="[myStore ? 'selected-item' : ' ']" @click="changeMenu('myStore')">
+              <q-item-side icon="fas fa-store"/>
+              <q-item-main>Mi Tienda</q-item-main>
+            </q-item>
+            <q-item :class="[configTheme ? 'selected-item' : ' ']" @click="changeMenu('configTheme')">
+              <q-item-side icon="fas fa-palette"/>
+              <q-item-main>Diseño</q-item-main>
+            </q-item>
+          </q-list>
+
+        </q-list>
+        <div class="bg-light text-center q-py-lg border-top-contact">
+          <div class="q-headline text-primary text-weight-bold">¿NECESITAS AYUDA </div>
+          <div class="q-subheading text-primary  text-weight-bold q-mb-md">PARA EDITAR TU TIENDA?</div>
+          <q-btn rounded to="/contacto" color="primary" label="Contáctanos aquí"/>
         </div>
+
       </q-layout-drawer>
 
       <q-page-sticky class="q-ma-md" expand position="bottom-right">
@@ -561,12 +484,11 @@
         />
       </q-page-sticky>
 
-
-
   </q-page>
 </template>
 <script>
-import uploadMedia from '@imagina/qmedia/_components/form'
+import uploadMedia from 'src/components/qmedia/form'
+
 
 export default {
   name: 'PageTienda',
@@ -603,7 +525,7 @@ export default {
         neighborhood: '',
         categories:[],
         logo: {
-          path:'/assets/img/fondo.jpg',
+          path:'/statics/img/fondo.jpg',
           mimeType:''
         },
         category: '',
@@ -611,19 +533,19 @@ export default {
         mediasMulti: {},
         slider: [
           {
-            path:'/assets/img/fondo.jpg',
+            path:'/statics/img/fondo.jpg',
             mimeType:''
           },{
-            path:'/assets/img/fondo.jpg',
+            path:'/statics/img/fondo.jpg',
             mimeType:''
           }
         ],
         gallery: [
           {
-            path:'/assets/img/fondo.jpg',
+            path:'/statics/img/fondo.jpg',
             mimeType:''
           },{
-            path:'/assets/img/fondo.jpg',
+            path:'/statics/img/fondo.jpg',
             mimeType:''
           }
         ],
@@ -749,7 +671,7 @@ export default {
       ],
       theme: {
         id: null,
-        image: '/assets/img/product.jpg',
+        image: '/statics/img/product.jpg',
         primary: '#4CAF50',
         secondary: '#E91E63',
         background: '#FFFFFF'
@@ -759,7 +681,7 @@ export default {
           id: 1,
           name: 'Tienda personal',
           mainImage:{
-            path:'/assets/img/product.jpg',
+            path:'/statics/img/product.jpg',
             mimeType:'jpg'
           }
         },
@@ -767,7 +689,7 @@ export default {
           id: 2,
           name: 'Tienda corporativa',
           mainImage:{
-            path:'/assets/img/pregunta.jpg',
+            path:'/statics/img/pregunta.jpg',
             mimeType:'jpg'
           }
         }
@@ -776,9 +698,9 @@ export default {
         name: '',
         summary: '',
         description: '',
-        image: '/assets/img/fondo.jpg',
+        image: '/statics/img/fondo.jpg',
         gallery: [
-          {image:'/assets/img/fondo.jpg'},{image:'/assets/img/fondo.jpg'}
+          {image:'/statics/img/fondo.jpg'},{image:'/statics/img/fondo.jpg'}
         ],
         status:'',
         category: '',
@@ -827,24 +749,24 @@ export default {
       this.company.mediasSingle={};
       this.company.mediasMulti={};
       this.company.logo={
-        path:'/assets/img/fondo.jpg',
+        path:'/statics/img/fondo.jpg',
         mimeType:""
       };
       this.company.slider=[
         {
-          path:'/assets/img/fondo.jpg',
+          path:'/statics/img/fondo.jpg',
           mimeType:''
         },{
-          path:'/assets/img/fondo.jpg',
+          path:'/statics/img/fondo.jpg',
           mimeType:''
         }
       ];
       this.company.gallery=[
         {
-          path:'/assets/img/fondo.jpg',
+          path:'/statics/img/fondo.jpg',
           mimeType:''
         },{
-          path:'/assets/img/fondo.jpg',
+          path:'/statics/img/fondo.jpg',
           mimeType:''
         }
       ];
@@ -1163,6 +1085,22 @@ export default {
     border 1px solid #E1E1E1
     box-shadow none !important
     border-radius 5px
-
+  .border-top-contact
+    border-top 1px solid #e0e0e0
+  .selectStore
+    border-bottom 2px solid $tertiary
+    .q-input-target
+      color $tertiary
+      font-weight bold
+      font-size 1.2rem
+    .q-icon
+      color $tertiary
+      font-size 2rem
+#listMenuAdmin
+  .selected-item
+    background-color $tertiary
+    color #ffffff
+    .q-icon
+      color #ffffff !important
 
 </style>

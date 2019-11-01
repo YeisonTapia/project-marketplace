@@ -21,7 +21,7 @@ export default {
 @import "~variables";
 .theme-layout-01
   .share-networks
-    background-image url('/assets/img/theme-one/share-network.jpg')
+    background-image url('/statics/img/theme-one/share-network.jpg')
     background-size cover
     padding 10% 0
     position relative

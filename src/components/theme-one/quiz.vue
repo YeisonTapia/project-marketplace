@@ -27,7 +27,7 @@
         <q-card-actions  align="center" class="q-pa-md" v-if="index < poll.questions.length - 1" >
           <div class="text-center cursor-pointer" @click="next()">
             <div class="font-family-secondary">Siguiente</div>
-            <img src="assets/img/arrow-right-blue.png" style="width:25px;">
+            <img src="statics/img/arrow-right-blue.png" style="width:25px;">
           </div>
         </q-card-actions>
         <q-card-actions align="center" v-else class="q-ma-md">
@@ -302,7 +302,7 @@
     font-weight bold
     &:before
       content ''
-      background-image url('/assets/img/icon-quiz.png')
+      background-image url('/statics/img/icon-quiz.png')
       position absolute
       bottom 0
       left 5px
