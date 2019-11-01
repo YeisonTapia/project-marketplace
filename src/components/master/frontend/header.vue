@@ -1,7 +1,7 @@
 <template>
   <div id="masterHeader">
     <!-- ============= HEADER ======================= -->
-    <q-layout-header class="no-shadow">
+    <q-header class="no-shadow">
       <q-toolbar color="primary">
 
         <!--= BUTTON MENU =-->
@@ -20,7 +20,7 @@
         <q-toolbar-title class="text-center">
           <!--= MENU =-->
           <menu-list class="q-hide q-md-show" :show-icons="false"
-                     :menu="menu" id="menuDesktop"/>
+                     :menu="menuItems" id="menuDesktop"/>
         </q-toolbar-title>
 
         <!--Right toolbar-->
@@ -44,24 +44,24 @@
         </div>
         <hr class="q-hr q-my-none">
       </div>
-    </q-layout-header>
+    </q-header>
 
     <!-- MENU LEFT -->
-    <q-layout-drawer id="menu_master" class="no-shadow q-md-hide" v-model="drawer.menu">
+    <q-drawer id="menu_master" class="no-shadow q-md-hide" v-model="drawer.menu">
       <q-list no-border link inset-delimiter>
         <!-- === LOGO === -->
-        <q-list-header class="text-center">
+        <q-item class="text-center">
           <router-link :to="{ name: 'app.home'}">
             <a>
               <img :src="logo" width="90%">
             </a>
           </router-link>
-        </q-list-header>
+        </q-item>
 
         <!--= MENU =-->
-        <menu-list :menu="menu"/>
+        <menu-list :menu="menuItems"/>
       </q-list>
-    </q-layout-drawer>
+    </q-drawer>
   </div>
 </template>
 <script>
@@ -83,7 +83,6 @@
         drawer: {
           menu: false
         },
-        menu: config('sidebar'),
         logo: '',//this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo1').path,
         modal: {
           show: true,
@@ -93,6 +92,26 @@
       }
     },
     computed: {
+        menuItems() {
+            let menu = this.$store.state.qcrudMaster.show['qmenu-menus-main']
+            let items = []
+            //Transform data
+            if (menu && menu.data.menuitems) {
+                menu.data.menuitems.forEach(item => {
+                    if (parseInt(item.status))
+                        items.push({
+                            permission: null,
+                            activated: true,
+                            name: item.uri,
+                            title: item.title,
+                            icon: item.icon
+                        })
+                })
+            }
+
+            console.warn(items)
+            return items
+        },
       getImageUrl() {
         return config('apiRoutes.api.base_url') + '/' + this.userData.smallImage;
       },
