@@ -417,22 +417,6 @@
           />
         </div>
 
-        <!-- Bloque Nivel-->
-        <div class="row bloque-nivel-club" v-if="suscription">
-                  <div class="col-12">
-                      <div class="nivel relative-position text-white text-center q-pt-lg ">
-                          <h4 class="uppercase q-my-sm font-family-secondary">nivel</h4>
-                          <h5 class="uppercase q-mb-xs q-mt-md">{{suscription.plan.name}}</h5>
-                      </div>
-                      <div class="club text-center" v-if="stores.length>0 && selectedStore>=0">
-                        <div class="logo-tienda text-center q-mt-lg">
-                          <img class="responsive" :src="stores[selectedStore].logo.path" alt="stores[selectedStore].name" >
-                        </div>
-                      </div>
-                  </div>
-        </div>
-
-
         <!-- CONFIG THEME OF STORE -->
 
         <q-list no-border link inset-delimiter class="q-pa-none" v-if="stores.length>0 && selectedStore>=0">
@@ -442,8 +426,8 @@
               <div class="title q-pb-md font-family-secondary">
                 <span>NIVEL</span>
               </div>
-              <div class="subtitle q-pt-md " >
-                TIENDA PROFESIONAL
+              <div class="subtitle q-pt-md ">
+                {{suscription.plan.name}}
               </div>
             </div>
           </q-list-header>
@@ -455,14 +439,20 @@
 
           <q-list separator link no-border id="listMenuAdmin" class="q-pa-none">
             <!--Single Item-->
-            <q-item :class="[myStore ? 'selected-item' : ' ']" @click="changeMenu('myStore')">
+            <q-item :class="[myStore ? 'selected-item' : ' ']" @click.native="changeMenu('myStore')">
               <q-item-side icon="fas fa-store"/>
               <q-item-main>Mi Tienda</q-item-main>
             </q-item>
-            <q-item :class="[configTheme ? 'selected-item' : ' ']" @click="changeMenu('configTheme')">
+            <q-item :class="[configTheme ? 'selected-item' : ' ']" @click.native="changeMenu('configTheme')">
               <q-item-side icon="fas fa-palette"/>
               <q-item-main>Diseño</q-item-main>
             </q-item>
+            <!-- <q-collapsible group="somegroup" icon="fas fa-shopping-basket" label="Productos">
+              <q-item :class="[configTheme ? 'selected-item' : ' ']" @click.native="changeMenu('configTheme')">
+                <q-item-side icon="fas fa-angle-right"/>
+                <q-item-main>Editar Categorías</q-item-main>
+              </q-item>
+            </q-collapsible> -->
           </q-list>
 
         </q-list>
