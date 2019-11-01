@@ -685,6 +685,7 @@
             value: 'promo3'
           },
         ],
+        checkPU: null
       }
     },
     computed: {
@@ -738,7 +739,7 @@
           await this.getCities(this.address.countryId,'CiRO')
         this.success = true//Success page
         this.loading = false//Loading
-        
+
       },
       //Set user data
       async setUserData() {
@@ -803,6 +804,7 @@
           this.$crud.update('apiRoutes.quser.users', data.id, data).then(response => {
             this.$alert.success({message: this.$tr('ui.message.recordUpdated')})
             this.loading = false//Login
+            this.checkPointsProccess() // Check points to register
             this.updateUserData()//update local userData
           }).catch(error => {
             console.error('[UPDATE PROFILE] ', error)
@@ -908,7 +910,72 @@
             });
         })
         
-      }
+      },
+      // Check Points Proccess
+      async checkPointsProccess(){
+
+        let checkPointRegister = this.$store.getters['qsiteSettings/getSettingValueByName']('iredeems::points-per-register-user-checkbox')
+
+        // Check active register user points
+        if(checkPointRegister) {
+          let pointPerRegister = this.$store.getters['qsiteSettings/getSettingValueByName']('iredeems::points-per-register-user')
+          if(pointPerRegister>0){
+
+            await this.getPointsRegister()
+            // User hasn't points for register
+            if(this.checkPU.length==0){
+              this.savePointsRegister(pointPerRegister)
+            }
+            
+          }
+        } 
+         
+      },
+      // Get if the user has points per register
+      getPointsRegister(){
+        return new Promise((resolve, reject) => {
+
+          //Params
+          let params = {
+            params: {
+              filter: {
+                userId: this.form.id,
+                pointableType: 'Modules\\User\\Entities\\Sentinel\\User'
+              }
+            }
+          }
+
+          this.$crud.index("apiRoutes.qredeems.points",params).then(response => {
+               
+            this.checkPU = response.data
+            resolve(true)//Resolve
+
+          }).catch(error => {
+                this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+                
+            reject(false)//Resolve
+          })
+        })
+      },
+      // Save Points
+      savePointsRegister(pointPerRegister){
+
+        let data = {
+          user_id: this.form.id,
+          pointable_id: this.form.id,
+          pointable_type: 'Modules\\User\\Entities\\Sentinel\\User',
+          points: pointPerRegister,
+          description: 'Puntos por completar registro'
+        }
+
+        this.$crud.create('apiRoutes.qredeems.points', data).then(response => {
+          //console.warn("SAVE IREDEEMS - POINTS PER REGISTER")
+        }).catch(error => {
+          console.error('[CREATE IREDEEMS - POINTS PER REGISTER] ', error)
+          this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
+        })
+
+      } 
 
 
     }
@@ -943,7 +1010,7 @@
   .btn-update
     &:after
       content ''
-      background-image url('/statics/img/arrow-send-pink.png')
+      background-image url('/assets/img/arrow-send-pink.png')
       background-repeat no-repeat
       background-size contain
       width 74px
