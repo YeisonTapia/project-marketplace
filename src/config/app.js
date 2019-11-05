@@ -18,7 +18,9 @@ export default {
     'qmenu',
     'qmedia',
     'qslider',
-    'qsite'
+    'qsite',
+    'qticket',
+    'qsubscription'
   ],
   //Cache
   saveCache : {
