@@ -19,7 +19,7 @@
         <!--= TITLE =-->
         <q-toolbar-title class="text-center">
           <!--= MENU =-->
-          <menu-list class="q-hide q-md-show" :show-icons="false"
+          <menu-list class="q-hide q-md-show"
                      :menu="menuItems" id="menuDesktop"/>
         </q-toolbar-title>
 
@@ -39,6 +39,7 @@
       <!--Sub header-->
       <div class="text-center bg-white">
         <!--Logo-->
+
         <div class="q-py-sm q-hide q-md-show">
           <img :src="logo" style="max-height: 150px">
         </div>

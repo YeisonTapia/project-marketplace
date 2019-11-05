@@ -42,8 +42,8 @@ pages.qcommerce.paymentMethods.layout= () => import('src/layouts/admin')
 pages.qcommerce.paymentMethods.path= '/admin/ecommerce/metodo-de-pago'
 pages.qcommerce.shippingMethods.layout= () => import('src/layouts/admin')
 pages.qcommerce.shippingMethods.path= '/admin/ecommerce/metodos-de-envio'
-//pages.qcommerce.orders.layout= () => import('src/layouts/admin')
-//pages.qcommerce.orders.path= '/admin/ecommerce/ordenes'
+pages.qcommerce.orders.layout= () => import('src/layouts/admin')
+pages.qcommerce.orders.path= '/admin/ecommerce/ordenes'
 pages.qmedia.index.layout= () => import('src/layouts/admin')
 pages.qmedia.index.path= '/admin/media'
 //pages.qmenu.menus.layout= () => import('src/layouts/admin')
