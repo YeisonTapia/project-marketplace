@@ -46,8 +46,14 @@ pages.qcommerce.orders.layout= () => import('src/layouts/admin')
 pages.qcommerce.orders.path= '/admin/ecommerce/ordenes'
 pages.qmedia.index.layout= () => import('src/layouts/admin')
 pages.qmedia.index.path= '/admin/media'
-//pages.qmenu.menus.layout= () => import('src/layouts/admin')
-//pages.qmenu.menus.path= '/admin/menu'
+pages.qmenu.menus.layout= () => import('src/layouts/admin')
+pages.qmenu.menus.path= '/admin/menu'
+pages.qmenu.menusShow.layout= () => import('src/layouts/admin')
+pages.qmenu.menusShow.path= '/admin/menus/menu/:id'
+pages.qmenu.menuItemsCreate.layout= () => import('src/layouts/admin')
+pages.qmenu.menuItemsCreate.path= '/admin/menus/item/:menuId'
+pages.qmenu.menuItemsUpdate.layout= () => import('src/layouts/admin')
+pages.qmenu.menuItemsUpdate.path= '/admin/menus/menu/:menuId/item/:id'
 //pages.qmenu.menuitems.layout= () => import('src/layouts/admin')
 //pages.qmenu.menuitems.path= '/admin/menu/menu-items'
 pages.qsite.index.layout= () => import('src/layouts/admin')
@@ -109,7 +115,7 @@ pages.frontqredeems.userAccount.path='account/points'
 pages.frontqredeems.userAccount.layout=require('src/layouts/qredeems/account/index').default,
 */
 //QFORM
-    pages.qform.forms.layout= () => import('src/layouts/admin')
+pages.qform.forms.layout= () => import('src/layouts/admin')
 pages.qform.forms.path=  '/admin/iform/form'
 pages.qform.leads.layout= () => import('src/layouts/admin')
 pages.qform.leads.path=  '/admin/iform/leads/index'
