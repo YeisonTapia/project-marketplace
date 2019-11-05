@@ -1,5 +1,5 @@
 <template>
-    <q-layout :view="$q.platform.is.mobile ? 'lHh LpR lff' : 'hhh LpR lFr'">
+    <q-layout :view="$q.platform.is.mobile ? 'lHh LpR lFf' : 'hhh LpR lff'">
         <!-- HEADER -->
         <frontend-header v-if="appState.loadPage"/>
 

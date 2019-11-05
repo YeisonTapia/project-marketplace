@@ -2,17 +2,28 @@ import appConfig from 'src/config/app'
 
 let pages = {
   //Home Page
-  home: {
-    permission: null,
-    activated: true,
-    path: '/home',
-    name: 'app.home',
-    layout: () => import('src/layouts/master'),
-    page: () => import('pages/master/index.vue'),
-    title: 'sidebar.pageHome',
-    icon: 'fas fa-home',
-    authenticated : false
-  },
+    home: {
+        permission: null,
+        activated: true,
+        path: '/home',
+        name: 'app.home',
+        layout: () => import('src/layouts/master'),
+        page: () => import('pages/master/index.vue'),
+        title: 'sidebar.pageHome',
+        icon: 'fas fa-home',
+        authenticated : false
+    },
+    layout1: {
+        permission: null,
+        activated: true,
+        path: '/layout1',
+        name: 'app.layout1',
+        layout: () => import('src/layouts/master'),
+        page: () => import('pages/master/index1.vue'),
+        title: 'sidebar.pageHome',
+        icon: 'fas fa-home',
+        authenticated : false
+    },
     admin: {
         permission: null,
         activated: true,
