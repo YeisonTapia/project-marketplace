@@ -20,8 +20,8 @@ export default {
         'qmedia',
         'qslider',
         'qsite',
-        'qticket',
-        'qsubscription'
+        // 'qticket',
+        // 'qsubscription'
         // 'qtrivias',
         // 'qquiz',
         // 'qmarketplace',
