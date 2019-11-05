@@ -279,3 +279,204 @@
 
       .q-field__control-container
         min-height max-content !important
+
+
+.font-family-primary
+  font-family $font-primary
+
+.font-family-secondary
+  font-family $font-secondary
+  
+body
+  font-family $font-primary
+  
+footer
+  font-size 13px
+
+.bg-degradado
+  background $bg-degradado
+  
+.bg-fondo
+  background-color #F0F0F0
+  background-image url('/statics/img/fondo.jpg')
+  background-size cover       
+
+.bg-fondo-q 
+  background #e4e0c7
+  background -moz-linear-gradient(top, #e4e0c7 0%, #e4e0c7 1%, #e2dec5 1%, #e4e0c7 1%, #e3dfc6 3%, #e3deca 3%, #e4dfcb 9%, #dfdec9 9%, #e0dfcb 16%, #dcddcb 17%, #e1e0cc 17%, #e0dfcb 21%, #dcdfca 21%, #dcded1 22%, #dcded0 29%, #d8dfcf 30%, #d9e0d0 33%, #d9dfd3 33%, #d9dfd3 36%, #d7ddd1 36%, #d8ded2 37%, #d9dfd5 38%, #d9dfd5 42%, #d5e0d0 42%, #d5e0d2 47%, #d5dfd6 47%, #d7ded7 47%, #d7ded6 52%, #d7ded7 52%, #d2dfd6 52%, #cfe0d8 61%, #cfdfdc 61%, #cfdfdc 63%, #ccdcd9 63%, #d0e0dd 63%, #cfdfdc 68%, #cbe2dc 68%, #c9dfdc 68%, #cbe1de 73%, #c7dfdf 73%, #cadedf 73%, #c7dfdf 81%, #c7dfe3 81%, #c7dfe3 82%, #c6dfe3 82%, #c2dfe3 82%, #c4dfe6 91%, #bedfe4 91%, #c2e1e6 92%, #c1e0e5 92%, #c1dfe9 92%, #c1dfe9 100%)
+  background -webkit-linear-gradient(top, #e4e0c7 0%,#e4e0c7 1%,#e2dec5 1%,#e4e0c7 1%,#e3dfc6 3%,#e3deca 3%,#e4dfcb 9%,#dfdec9 9%,#e0dfcb 16%,#dcddcb 17%,#e1e0cc 17%,#e0dfcb 21%,#dcdfca 21%,#dcded1 22%,#dcded0 29%,#d8dfcf 30%,#d9e0d0 33%,#d9dfd3 33%,#d9dfd3 36%,#d7ddd1 36%,#d8ded2 37%,#d9dfd5 38%,#d9dfd5 42%,#d5e0d0 42%,#d5e0d2 47%,#d5dfd6 47%,#d7ded7 47%,#d7ded6 52%,#d7ded7 52%,#d2dfd6 52%,#cfe0d8 61%,#cfdfdc 61%,#cfdfdc 63%,#ccdcd9 63%,#d0e0dd 63%,#cfdfdc 68%,#cbe2dc 68%,#c9dfdc 68%,#cbe1de 73%,#c7dfdf 73%,#cadedf 73%,#c7dfdf 81%,#c7dfe3 81%,#c7dfe3 82%,#c6dfe3 82%,#c2dfe3 82%,#c4dfe6 91%,#bedfe4 91%,#c2e1e6 92%,#c1e0e5 92%,#c1dfe9 92%,#c1dfe9 100%)
+  background linear-gradient(to bottom, #e4e0c7 0%,#e4e0c7 1%,#e2dec5 1%,#e4e0c7 1%,#e3dfc6 3%,#e3deca 3%,#e4dfcb 9%,#dfdec9 9%,#e0dfcb 16%,#dcddcb 17%,#e1e0cc 17%,#e0dfcb 21%,#dcdfca 21%,#dcded1 22%,#dcded0 29%,#d8dfcf 30%,#d9e0d0 33%,#d9dfd3 33%,#d9dfd3 36%,#d7ddd1 36%,#d8ded2 37%,#d9dfd5 38%,#d9dfd5 42%,#d5e0d0 42%,#d5e0d2 47%,#d5dfd6 47%,#d7ded7 47%,#d7ded6 52%,#d7ded7 52%,#d2dfd6 52%,#cfe0d8 61%,#cfdfdc 61%,#cfdfdc 63%,#ccdcd9 63%,#d0e0dd 63%,#cfdfdc 68%,#cbe2dc 68%,#c9dfdc 68%,#cbe1de 73%,#c7dfdf 73%,#cadedf 73%,#c7dfdf 81%,#c7dfe3 81%,#c7dfe3 82%,#c6dfe3 82%,#c2dfe3 82%,#c4dfe6 91%,#bedfe4 91%,#c2e1e6 92%,#c1e0e5 92%,#c1dfe9 92%,#c1dfe9 100%)
+  
+/* Title label*/
+.title-label-primary
+  -webkit-transform skew(10deg)
+  transform skew(10deg)
+  border-radius 10px
+  padding 10px 20px
+  display inline-block
+  min-width 40%
+  margin -58px 0 10px 0
+  background-color $primary
+  color #FFFFFF
+  font-size 30px
+  position relative
+  font-family $font-secondary
+  & > div
+    -webkit-transform  skew(-10deg)
+    transform skew(-10deg)
+  @media screen and (max-width: $breakpoint-md)
+      min-width 60%
+      font-size 20px
+      padding 0 15px
+
+.title-label-secondary
+  -webkit-transform skew(10deg)
+  transform skew(10deg)
+  border-radius 10px
+  padding 10px 20px
+  display inline-block
+  min-width 40%
+  margin -58px 0 10px 0
+  background-color $secondary
+  color #FFFFFF
+  font-size 30px
+  position relative
+  font-family $font-secondary
+  &:before
+    content ''
+    background-image url('/statics/img/arrow-down.png')
+    position absolute
+    right 15px
+    width 38px
+    height 70px
+    background-repeat no-repeat
+    top 27px
+  @media screen and (max-width: $breakpoint-md)
+    min-width 60%
+    font-size 20px
+    padding 0 15px
+    &:before
+        display none !important    
+  & > div
+    -webkit-transform  skew(-10deg)
+    transform skew(-10deg)      
+        
+.title-label-tertiary
+  -webkit-transform skew(10deg)
+  transform skew(10deg)
+  border-radius 10px
+  padding 10px 20px
+  display inline-block
+  min-width 40%
+  margin -58px 0 10px 0
+  background-color $tertiary
+  color #FFFFFF
+  font-size 30px
+  position relative
+  font-family $font-secondary
+  &:before
+    content ''
+    background-image url('/statics/img/arrow-down-blue.png')
+    position absolute
+    right -5px
+    width 55px
+    height 70px
+    background-repeat no-repeat
+    top 27px
+  @media screen and (max-width: $breakpoint-md)
+    min-width 60%
+    font-size 20px
+    padding 0 15px
+    &:before
+        display none !important      
+  & > div
+    -webkit-transform  skew(-10deg)
+    transform skew(-10deg)          
+   
+.title-label-secondary-none
+  -webkit-transform skew(10deg)
+  transform skew(10deg)
+  border-radius 10px
+  padding 10px 20px
+  display inline-block
+  min-width 40%
+  margin -58px 0 10px 0
+  background-color #282D46
+  font-size 30px
+  position relative
+  font-family $font-secondary
+  @media screen and (max-width: $breakpoint-md)
+    min-width 60%  
+    font-size 20px 
+    padding 0 15px
+  & > div
+    -webkit-transform  skew(-10deg)
+    transform skew(-10deg)
+        
+.title-label
+  -webkit-transform skew(10deg)
+  transform skew(10deg)
+  border-radius 10px
+  padding 10px 20px
+  display inline-block
+  width 80%
+  font-size 25px
+  position relative
+  font-family $font-secondary
+  & > div
+    -webkit-transform  skew(-10deg)
+    transform skew(-10deg)
+
+.q-inline-block
+  display inline-block !important
+  
+.text-light   
+  color $light
+
+.bg-light  
+  background $light
+  
+.text-truncate
+  white-space nowrap
+  overflow hidden
+  text-overflow ellipsis 
+
+/* Bottons arrows */      
+.btn-arrow-send-pink
+  font-family $font-secondary
+  &:after
+    content ''
+    background-image url('/statics/img/arrow-send-pink.png')
+    background-repeat no-repeat
+    background-size contain
+    width 74px
+    height 100px
+    top -4px
+    right 63px
+    position absolute
+    
+.btn-arrow-send-yellow
+  font-family $font-secondary
+  &:after
+    content ''
+    background-image url('/statics/img/arrow-send-yellow.png')
+    background-repeat no-repeat
+    background-size contain
+    width 74px
+    height 100px
+    top -4px
+    right 63px
+    position absolute    
+
+.btn-arrow-send-white
+  font-family $font-secondary
+  &:after
+    content ''
+    background-image url('/statics/img/arrow-send-white.png')
+    background-repeat no-repeat
+    background-size contain
+    width 74px
+    height 100px
+    top -4px
+    right 63px
+    position absolute

@@ -1,24 +1,34 @@
 <template>
-  <div id="footer">
-    <!-- Menu -->
-    <div class="menuFooter">
-      <menu-list class="q-container" :menu="menu"/>
-    </div>
+  <footer>
+    <!--=== Copyright ===-->
+    <q-footer class="bg-degradado" v-if="$q.platform.is.desktop">
+      <div class="row flex flex-center gutter-x-sm q-py-md">
+        <div class="q-px-md">
+          <logo-imagina></logo-imagina>
+        </div>
+        <div class="text-white text-center">
+          Copyright {{ new Date().getFullYear() }} © Donde esta esa vaina. Todos Los Derechos Reservados.
+        </div>
+      </div>
+    </q-footer>
 
-    <!-- Copi right -->
-    <div class="q-hide q-md-show text-center bg-dark q-caption text-white q-pb-sm">
-      <!--Copyright 2019 © {{ $store.getters['qsiteSettings/getSettingValueByName']('core::site-name') }}. Todos Los
-      Derechos Reservados-->
-    </div>
-  </div>
+    <q-footer bordered v-else>
+      <q-tabs no-caps color="transparent" class="bg-degradado text-white">
+        <q-tab name="home" icon="home" />
+        <q-tab name="xtab-1" icon="search" />
+      </q-tabs>
+    </q-footer>
+  </footer>
 </template>
 <script>
-  import menuList from "../recursiveItem";
+  import menuList from "../recursiveItem"
+  import logoImagina from 'src/components/master/imaginaSVG'
 
   export default {
     props: {},
     components: {
-      menuList
+      menuList,
+      logoImagina
     },
     watch: {},
     mounted() {
