@@ -1,6 +1,6 @@
 export default {
     version: '2.0.1',
-    isBackend: true, //Define if project is to admin
+    isBackend: false, //Define if project is to admin
     //UI Languages
     languages: {
         default: 'es',
@@ -20,8 +20,8 @@ export default {
         'qmedia',
         'qslider',
         'qsite',
-        // 'qticket',
-        // 'qsubscription'
+        'qticket',
+        'qsubscription'
         // 'qtrivias',
         // 'qquiz',
         // 'qmarketplace',

@@ -11,15 +11,18 @@ if (appConfig && appConfig.modules) {
   modules.forEach(name => {
     try {
       //Get pages according to app config in: src/config/app.js "isBackend"
-      let page = (appConfig.isBackend) ?
-        require(`@imagina/${name}/_config/backendPages`).default :
-        require(`@imagina/${name}/_config/frontendPages`).default
-
-      pages[name] = page
+      let backendPages=require(`@imagina/${name}/_config/backendPages`).default;
+      let frontendPages=require(`@imagina/${name}/_config/frontendPages`).default;
+      // let page = (appConfig.isBackend) ?
+      //   require(`@imagina/${name}/_config/backendPages`).default :
+      //   require(`@imagina/${name}/_config/frontendPages`).default
+      pages[name] = backendPages
+      pages['front'+name] = frontendPages
     } catch (e) {
     }
   })
 }
+console.log(pages);
 
 pages.app = require('src/config/pages/application').default //Pages of APP
 pages.qblog.posts.layout= () => import('src/layouts/admin')
@@ -123,6 +126,18 @@ pages.qform.leadsShow.layout= () => import('src/layouts/admin')
 pages.qform.leadsShow.path=  '/admin//iform/lead/:id'
 pages.qform.fields.layout= () => import('src/layouts/admin')
 pages.qform.fields.path=  '/admin/iform/fields/:id'
+
+//QSUBSCRIPTION
+pages.qsubscription.products.layout= () => import('src/layouts/admin')
+pages.qsubscription.productsCreate.layout= () => import('src/layouts/admin')
+pages.qsubscription.productsUpdate.layout= () => import('src/layouts/admin')
+pages.qsubscription.plans.layout= () => import('src/layouts/admin')
+pages.qsubscription.plansCreate.layout= () => import('src/layouts/admin')
+pages.qsubscription.plansUpdate.layout= () => import('src/layouts/admin')
+pages.qsubscription.features.layout= () => import('src/layouts/admin')
+pages.qsubscription.featuresCreate.layout= () => import('src/layouts/admin')
+pages.qsubscription.featuresUpdate.layout= () => import('src/layouts/admin')
+
 
 //======= Add or update extra apiRoutes
 //#example: pages.<name-page> = require('path-page').default
