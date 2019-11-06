@@ -88,24 +88,23 @@ pages.frontquser.resetPassword.containerLayout=frontend
 pages.frontquser.resetPassword.layout=require('src/layouts/quser/password/reset').default
 pages.frontquser.resetCompleted.containerLayout=frontend
 pages.frontquser.resetCompleted.layout=require('src/layouts/quser/password/completed').default
-/*
+*/
+
 // QQUIZ
 pages.qquiz.polls.layout= () => import('src/layouts/admin')
 pages.qquiz.polls.path= '/admin/iquiz/polls/index'
-pages.qquiz.pollsCreate.layout= () => import('src/layouts/admin')
-pages.qquiz.pollsCreate.path= '/admin/iquiz/polls/create'
-pages.qquiz.pollsUpdate.layout= () => import('src/layouts/admin')
-pages.qquiz.pollsUpdate.path= '/admin/iquiz/polls/:id'
 pages.qquiz.questions.layout= () => import('src/layouts/admin')
 pages.qquiz.questions.path= '/admin/iquiz/questions/index/poll/:id'
 
 // QTRIVIA
+/*
 pages.qtrivia.trivias.layout= () => import('src/layouts/admin')
 pages.qtrivia.trivias.path= '/admin/itrivia/trivias/index'
 pages.qtrivia.questions.layout= () => import('src/layouts/admin')
 pages.qtrivia.questions.path= '/admin/itrivia/questions/index/trivia/:id'
 pages.qtrivia.rangepoints.layout= () => import('src/layouts/admin')
 pages.qtrivia.rangepoints.path= '/admin/itrivia/rangepoints/index/trivia/:id'
+*/
 
 // QREDEEMS
 pages.qredeems.items.layout= () => import('src/layouts/admin')
@@ -113,10 +112,18 @@ pages.qredeems.items.path=  '/admin/iredeems/items/index'
 pages.qredeems.redeems.layout= () => import('src/layouts/admin')
 pages.qredeems.redeems.path=  '/admin/iredeems/redeems/index'
 
+
 // QREDEEMS FRONTEND
+/*
 pages.frontqredeems.userAccount.path='account/points'
 pages.frontqredeems.userAccount.layout=require('src/layouts/qredeems/account/index').default,
 */
+/*
+pages.frontqredeems.userAccount.layout= () => import('src/layouts/qredeems/account/index')
+pages.frontqredeems.userAccount.path='account/points'
+*/
+
+
 //QFORM
 pages.qform.forms.layout= () => import('src/layouts/admin')
 pages.qform.forms.path=  '/admin/iform/form'
@@ -139,7 +146,10 @@ pages.qsubscription.featuresCreate.layout= () => import('src/layouts/admin')
 pages.qsubscription.featuresUpdate.layout= () => import('src/layouts/admin')
 
 
+
 //======= Add or update extra apiRoutes
 //#example: pages.<name-page> = require('path-page').default
+
+//console.warn(pages)
 
 export default pages
