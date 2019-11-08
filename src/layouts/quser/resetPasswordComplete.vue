@@ -1,10 +1,10 @@
 <template>
-  <div id="authResetPassword" class="bg-grey-2 flex flex-center">
+  <div id="authResetPassword" class="bg-fondo flex flex-center">
     <!--Form-->
     <q-card>
-      <q-card-section class="q-py-sm">
+      <q-card-section class="q-px-xl q-py-lg">
         <!--Title-->
-        <div class="text-primary text-h6">{{$tr('quser.layout.label.reset')}}</div>
+        <div class="text-primary font-family-secondary text-h6">{{$tr('quser.layout.label.reset')}}</div>
 
         <q-separator class="q-mt-xs q-mb-md"/>
 
@@ -12,12 +12,12 @@
         <q-form @submit="changePassword()" autocomplete="off"
                 @validation-error="$alert.error($tr('ui.message.formInvalid'))">
           <!--Password-->
-          <q-input name="username" autofocus ref="username" autocomplete="off" outlined dense
+          <q-input name="username" autofocus ref="username" autocomplete="off"
                    :label="`${$tr('ui.form.password')} *`" v-model="form.password" type="password" color="blue-grey"
                    :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
 
           <!--Email field-->
-          <q-input name="username" ref="username" autocomplete="off" outlined dense
+          <q-input name="username" ref="username" autocomplete="off"
                    :label="`${$tr('ui.form.checkPassword')} *`" v-model="form.passwordConfirmation"
                    type="password" color="blue-grey" :rules="[
                     val => !!val || $tr('ui.message.fieldRequired'),
@@ -25,8 +25,8 @@
                    ]"/>
 
           <!--Button submit-->
-          <div class="text-center">
-            <q-btn :loading="loading" color="primary" type="submit"
+          <div class="text-center q-mt-lg">
+            <q-btn :loading="loading" color="primary" type="submit" class="font-family-secondary btn-arrow"
                    :label="$tr('quser.layout.label.resetPassword')">
               <div slot="loading">
                 <q-spinner-oval class="on-left"/>
@@ -109,4 +109,17 @@
 <style lang="stylus">
   #authResetPassword
     min-height 100vh
+    
+  .btn-arrow
+    &:after
+      content ''
+      background-image url('/statics/img/arrow-send-pink.png')
+      background-repeat no-repeat
+      background-size contain
+      width 74px
+      height 100px
+      top -4px
+      left -50px
+      position absolute
+      
 </style>
