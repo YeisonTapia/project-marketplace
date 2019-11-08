@@ -73,22 +73,19 @@ pages.quser.userRoles.layout= () => import('src/layouts/admin')
 pages.quser.userRoles.path= '/admin/usuarios/roles'
 pages.quser.userProfile.layout= () => import('src/layouts/admin')
 pages.quser.userProfile.path='admin/me/profile'
-/*
+
 // QUSER FRONTEND
-pages.frontquser.userProfile.path='/account/me/profile'
-pages.frontquser.userProfile.containerLayout=account
-pages.frontquser.userProfile.layout=require('src/layouts/quser/profile').default
-pages.frontquser.login.containerLayout=frontend
-pages.frontquser.login.layout=require('src/layouts/quser/login').default
-pages.frontquser.logout.containerLayout=frontend
-pages.frontquser.logout.layout=require('src/layouts/quser/logout').default
-pages.frontquser.changePassword.containerLayout=frontend
-pages.frontquser.changePassword.layout=require('src/layouts/quser/passwordChange').default
-pages.frontquser.resetPassword.containerLayout=frontend
-pages.frontquser.resetPassword.layout=require('src/layouts/quser/password/reset').default
-pages.frontquser.resetCompleted.containerLayout=frontend
-pages.frontquser.resetCompleted.layout=require('src/layouts/quser/password/completed').default
-*/
+pages.frontquser.userProfile.path ='/account/me/profile'
+pages.frontquser.userProfile.layout = () => import('src/layouts/account.vue')
+pages.frontquser.userProfile.page = () => import('src/layouts/quser/profile')
+pages.frontquser.login.layout = () => import('src/layouts/master.vue')
+pages.frontquser.login.page = () => import('src/layouts/quser/login')
+pages.frontquser.logout.layout = () => import('src/layouts/master.vue')
+pages.frontquser.logout.page =  () => import('src/layouts/quser/logout')
+pages.frontquser.resetPassword.layout = () => import('src/layouts/master.vue')
+pages.frontquser.resetPassword.page = () => import('src/layouts/quser/resetPassword')
+pages.frontquser.resetPasswordComplete.layout = () => import('src/layouts/master.vue')
+pages.frontquser.resetPasswordComplete.page = () => import('src/layouts/quser/resetPasswordComplete')
 
 // QQUIZ
 pages.qquiz.polls.layout= () => import('src/layouts/admin')
@@ -97,14 +94,12 @@ pages.qquiz.questions.layout= () => import('src/layouts/admin')
 pages.qquiz.questions.path= '/admin/iquiz/questions/index/poll/:id'
 
 // QTRIVIA
-/*
 pages.qtrivia.trivias.layout= () => import('src/layouts/admin')
 pages.qtrivia.trivias.path= '/admin/itrivia/trivias/index'
 pages.qtrivia.questions.layout= () => import('src/layouts/admin')
 pages.qtrivia.questions.path= '/admin/itrivia/questions/index/trivia/:id'
 pages.qtrivia.rangepoints.layout= () => import('src/layouts/admin')
 pages.qtrivia.rangepoints.path= '/admin/itrivia/rangepoints/index/trivia/:id'
-*/
 
 // QREDEEMS
 pages.qredeems.items.layout= () => import('src/layouts/admin')
@@ -112,16 +107,10 @@ pages.qredeems.items.path=  '/admin/iredeems/items/index'
 pages.qredeems.redeems.layout= () => import('src/layouts/admin')
 pages.qredeems.redeems.path=  '/admin/iredeems/redeems/index'
 
-
 // QREDEEMS FRONTEND
-/*
 pages.frontqredeems.userAccount.path='account/points'
-pages.frontqredeems.userAccount.layout=require('src/layouts/qredeems/account/index').default,
-*/
-/*
-pages.frontqredeems.userAccount.layout= () => import('src/layouts/qredeems/account/index')
-pages.frontqredeems.userAccount.path='account/points'
-*/
+pages.frontqredeems.userAccount.layout = () => import('src/layouts/account.vue')
+pages.frontqredeems.userAccount.page= () => import('src/layouts/qredeems/account/index')
 
 
 //QFORM
