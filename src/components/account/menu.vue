@@ -32,7 +32,7 @@
         <!--Links-->
         <q-list no-border inset-delimiter class="q-px-lg">
 
-                 <q-item v-for="(item, index) in menuAccount" class=" q-mb-lg round-borders" :to="{name:item.to}">
+                 <q-item v-for="(item, index) in menuAccount" :key="index" class=" q-mb-lg round-borders" :to="{name:item.to}">
                     <q-item-section avatar>
                       <q-icon :name="item.icon" size="20px"></q-icon>
                     </q-item-section>

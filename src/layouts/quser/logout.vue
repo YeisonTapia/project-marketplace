@@ -11,7 +11,7 @@
           </div>
           <q-btn :label="$tr('quser.layout.label.login')" color="primary"
                  :loading="loading"
-                 class="q-mt-md" :to="{name : 'auth.login'}"/>
+                 class="q-mt-md font-family-secondary btn-arrow" :to="{name : 'auth.login'}"/>
         </div>
       </div>
     </div>
@@ -38,4 +38,17 @@
 </script>
 
 <style lang="stylus">
+
+.btn-arrow
+    &:after
+      content ''
+      background-image url('/statics/img/arrow-send-pink.png')
+      background-repeat no-repeat
+      background-size contain
+      width 74px
+      height 100px
+      top -4px
+      left -50px
+      position absolute
+      
 </style>
