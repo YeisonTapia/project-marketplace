@@ -1,7 +1,7 @@
 <template>
 
   <div class="account-menu" v-if="success">
-    
+
     <!-- Bloque Nivel-->
     <div class="row bloque-nivel-club">
       <div class="col-12">
@@ -25,14 +25,14 @@
 
         <!--Image-->
         <upload-image v-model="imgUser" class="q-mt-lg q-mb-md"/>
-               
+
         <!--FullName-->
         <h5 class="fullname font-family-secondary text-center relative-position">{{form.firstName}} {{form.lastName}}</h5>
 
         <!--Links-->
         <q-list no-border inset-delimiter class="q-px-lg">
 
-                 <q-item v-for="(item, index) in menuAccount" class=" q-mb-lg round-borders" :to="{name:item.to}">
+                 <q-item :key="item.to" v-for="(item, index) in menuAccount" class=" q-mb-lg round-borders" :to="{name:item.to}">
                     <q-item-section avatar>
                       <q-icon :name="item.icon" size="20px"></q-icon>
                     </q-item-section>
@@ -75,32 +75,32 @@
 <script>
   //Plugins
   import {required, email, minLength} from 'vuelidate/lib/validators'
-  
+
   export default {
     props: {},
     components: {},
     watch: {
       imgUser(val,oldval){
-        
+
         this.form.fields.mainImage.value = val
 
         if(this.success==true){
-          
+
           let data = this.$clone(this.form)//Fet form data
           data.fields = this.$helper.convertToBackField(data.fields)//Convert fields
 
           this.$crud.update('apiRoutes.quser.users', data.id, data).then(response => {
               this.$alert.success({message: this.$tr('ui.message.recordUpdated')})
               this.loading = false//Login
-             
+
             }).catch(error => {
               console.error('[UPDATE PROFILE] ', error)
               this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
               this.loading = false
           })
-          
+
         }
-        
+
       }
     },
     validations() {
@@ -200,22 +200,22 @@
 </script>
 
 <style lang="stylus">
- 
+
   #profilePage
     .form-title
       color $primary
 
-  #uploadImageComponent 
+  #uploadImageComponent
     margin-top 35px
-    .img-file 
+    .img-file
       .content-manage-file
         text-align: left
         .q-btn
           background-color $primary !important
-          
+
   .account-menu
     max-width 245px
-    
+
   .nivel
     background-image url('/statics/img/label-primary.png')
     background-size 100% 100%
@@ -238,14 +238,14 @@
     margin-top -20px
     z-index 1
     position relative
-    
+
   .circulo
     width 70px
     height 70px
     border-radius 50%
     margin auto
     font-size 20px
-    
+
   .bloque-op-profile
     border 1px solid $tertiary
     margin-left 10px
@@ -298,8 +298,8 @@
         margin-right auto
         bottom -12px
         box-shadow 0px 0px 1px #000
-        
-          
+
+
 
 
 </style>

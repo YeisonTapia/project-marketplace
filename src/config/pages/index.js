@@ -134,6 +134,10 @@ pages.qsubscription.features.layout= () => import('src/layouts/admin')
 pages.qsubscription.featuresCreate.layout= () => import('src/layouts/admin')
 pages.qsubscription.featuresUpdate.layout= () => import('src/layouts/admin')
 
+//QMARKETPLACE
+pages.qmarketplace.stores.layout= () => import('src/layouts/admin')
+
+
 
 
 //======= Add or update extra apiRoutes

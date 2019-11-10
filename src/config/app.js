@@ -25,7 +25,7 @@ export default {
         'qquiz',
         'qtrivia',
         'qredeems',
-        //'qmarketplace',
+        'qmarketplace',
     ],
     //Cache
     saveCache: {
