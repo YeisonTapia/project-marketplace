@@ -13,105 +13,121 @@
       </div>
 
       <!-- Name field -->
-      <div :class="columnsFieldsClass">
-        <q-input dense v-model="form.firstName" color="primary" outlined
+      <div :class="columnsFieldsClass" class="q-mt-xs">
+        <q-input v-model="form.firstName" color="primary"
                  :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                  :label="`${$tr('ui.form.firstName')} *`">
+          <!--
           <template v-slot:prepend>
             <q-icon name="fas fa-user"/>
           </template>
+        -->
         </q-input>
       </div>
 
       <!-- Last Name field -->
       <div :class="columnsFieldsClass">
-        <q-input dense v-model="form.lastName" color="primary"
-                 outlined :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+        <q-input v-model="form.lastName" color="primary"
+                 :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                  :label="`${$tr('ui.form.lastName')} *`">
+          <!--
           <template v-slot:prepend>
             <q-icon name="fas fa-user-friends"/>
           </template>
+          -->
         </q-input>
       </div>
 
       <!-- Email field -->
       <div :class="columnsFieldsClass">
-        <q-input dense v-model="form.email" color="primary" outlined type="email"
+        <q-input v-model="form.email" color="primary" type="email"
                  :label="`${$tr('ui.form.email')} *`"
                  :rules="[
                   val => !!val || $tr('ui.message.fieldRequired'),
                   val => $helper.validateEmail(val) || $tr('ui.message.fieldEmail')
                  ]">
+          <!--
           <template v-slot:prepend>
             <q-icon name="fas fa-at"/>
           </template>
+          -->
         </q-input>
       </div>
 
       <!-- Password field -->
       <div :class="columnsFieldsClass">
-        <q-input dense v-model="form.password" type="password" color="primary" outlined
+        <q-input v-model="form.password" type="password" color="primary"
                  :label="`${$tr('ui.form.password')} *`" :rules="[
                   val => !!val || $tr('ui.message.fieldRequired'),
                   val => val.length >= 8 || $tr('ui.message.fieldMinLeng', {num : 8})
                  ]">
+          <!--
           <template v-slot:prepend>
             <q-icon name="fas fa-lock"/>
           </template>
+          -->
         </q-input>
       </div>
 
       <!-- comfirm Password field -->
       <div :class="columnsFieldsClass">
-        <q-input dense v-model="form.passwordConfirmation" type="password"
-                 color="primary" outlined :label="`${$tr('ui.form.checkPassword')} *`"
+        <q-input v-model="form.passwordConfirmation" type="password"
+                 color="primary" :label="`${$tr('ui.form.checkPassword')} *`"
                  :rules="[
                   val => !!val || $tr('ui.message.fieldRequired'),
                   val => val == form.password || $tr('ui.message.fieldCheckPassword')
                   ]">
+          <!--
           <template v-slot:prepend>
             <q-icon name="fas fa-user-lock"/>
           </template>
+          -->
         </q-input>
       </div>
 
       <!-- Phone field -->
       <div :class="columnsFieldsClass" v-if="form.fields.cellularPhone">
-        <q-input dense mask="phone"
+        <q-input  mask="phone"
                  :label="`${$tr('ui.form.phone')} ${isFieldRequired('cellularPhone') ? '*' : ''}`"
-                 v-model="form.fields.cellularPhone.value" color="primary" outlined
+                 v-model="form.fields.cellularPhone.value" color="primary"
                  unmasked-value :rules="[
                   val => !isValueRequired('cellularPhone',val) || $tr('ui.message.fieldRequired'),
                   val => !val || val.length == 10 || $tr('ui.message.fieldMinLeng',{num : 10})
                  ]">
+          <!--
           <template v-slot:prepend>
             <q-icon name="fas fa-phone"/>
           </template>
+          -->
         </q-input>
       </div>
 
       <!-- Identification field -->
       <div :class="columnsFieldsClass" v-if="form.fields.identification">
-        <q-input dense v-model.number="form.fields.identification.value" type="number"
+        <q-input  v-model.number="form.fields.identification.value" type="number"
                  :label="`${$tr('ui.form.identification')} ${isFieldRequired('identification') ? '*' : ''}`"
-                 color="primary" outlined :rules="[
+                 color="primary" :rules="[
                   val => !isValueRequired('identification',val) || $tr('ui.message.fieldRequired')
                  ]">
+          <!--
           <template v-slot:prepend>
             <q-icon name="fas fa-id-card"/>
           </template>
+          -->
         </q-input>
       </div>
 
       <!-- Birthday field -->
       <div :class="columnsFieldsClass" v-if="form.fields.birthday">
-        <q-input dense mask="date" v-model="form.fields.birthday.value" color="primary"
+        <q-input  mask="date" v-model="form.fields.birthday.value" color="primary"
                  :rules="[val => !isValueRequired('birthday',val) || $tr('ui.message.fieldRequired')]"
                  :label="`${$tr('ui.form.birthday')} ${isFieldRequired('birthday') ? '*' : ''}`"
-                 outlined placeholder="YYYY/MM/DD">
+                  placeholder="YYYY/MM/DD">
+          <!--
           <template v-slot:prepend>
             <q-icon name="fas fa-birthday-cake"/>
           </template>
+          -->
           <template v-slot:append>
             <q-icon name="fas fa-calendar-day"/>
             <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
@@ -125,8 +141,8 @@
       <captcha v-model="form.captcha" class="full-width" ref="captcha"/>
 
       <!-- Button Register -->
-      <div class="full-width text-center q-mt-sm">
-        <q-btn :loading="loading" type="submit" color="primary" name="submit">
+      <div class="full-width text-center q-my-md">
+        <q-btn :loading="loading" type="submit" color="primary" name="submit" class="font-family-secondary">
           {{$tr('quser.layout.label.createAccount')}}
           <div slot="loading">
             <q-spinner class="on-left"/>
@@ -311,4 +327,24 @@
 </script>
 
 <style lang="stylus">
+
+#pageCaptcha
+  //margin-top 5px
+  .text-info-v3
+    text-align center
+    font-size 10px
+    line-height 1.2
+
+.btn-arrow2
+    &:after
+      content ''
+      background-image url('/statics/img/arrow-send-pink.png')
+      background-repeat no-repeat
+      background-size contain
+      width 74px
+      height 100px
+      top -4px
+      left -50px
+      position absolute
+
 </style>

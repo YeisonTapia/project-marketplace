@@ -32,7 +32,8 @@
         <!--Links-->
         <q-list no-border inset-delimiter class="q-px-lg">
 
-                 <q-item :key="item.to" v-for="(item, index) in menuAccount" class=" q-mb-lg round-borders" :to="{name:item.to}">
+                 <q-item :key="'menu'+index" v-for="(item, index) in menuAccount" class=" q-mb-lg round-borders" :to="{name:item.to}">
+
                     <q-item-section avatar>
                       <q-icon :name="item.icon" size="20px"></q-icon>
                     </q-item-section>
@@ -94,7 +95,7 @@
               this.loading = false//Login
 
             }).catch(error => {
-              console.error('[UPDATE PROFILE] ', error)
+              /*console.error('[UPDATE PROFILE] ', error)*/
               this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
               this.loading = false
           })

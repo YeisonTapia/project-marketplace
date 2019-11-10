@@ -4,31 +4,35 @@
             autocorrect="off" autocomplete="off" @validation-error="$alert.error($tr('ui.message.formInvalid'))">
       <!-- User field -->
       <div :class="columnsFieldsClass">
-        <q-input name="username" autofocus ref="username" dense
-                 v-model="form.username" type="text" color="primary" outlined
+        <q-input name="username" autofocus ref="username"
+                 v-model="form.username" type="text" color="primary"
                  :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                  :label="$tr('ui.form.email')">
+          <!--
           <template v-slot:prepend>
             <q-icon name="fas fa-user"/>
           </template>
+          -->
         </q-input>
       </div>
 
       <!-- Password field -->
       <div :class="columnsFieldsClass">
-        <q-input name="password" ref="password" dense v-model="form.password"
-                 type="password" color="primary" outlined
+        <q-input name="password" ref="password" v-model="form.password"
+                 type="password" color="primary"
                  :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                  :label="$tr('ui.form.password')">
+          <!--
           <template v-slot:prepend>
             <q-icon name="fas fa-lock"/>
           </template>
+          -->
         </q-input>
       </div>
 
       <!-- Button login -->
       <div class="text-center col-12">
-        <q-btn :loading="loading" type="submit" color="primary">
+        <q-btn :loading="loading" type="submit" color="primary" class="btn-arrow q-mt-lg font-family-secondary">
           {{$tr('quser.layout.label.login')}}
           <template v-slot:loading>
             <q-spinner-oval class="on-left"/>
@@ -36,7 +40,7 @@
           </template>
         </q-btn>
 
-        <q-btn flat :label="$tr('quser.layout.label.resetPassword')" class="q-mt-sm"
+        <q-btn flat :label="$tr('quser.layout.label.resetPassword')" class="q-mt-md"
                :to="{name : 'auth.reset.password'}" color="grey-8"/>
       </div>
     </q-form>
@@ -120,4 +124,17 @@
   }
 </script>
 <style lang="stylus">
+
+.btn-arrow
+    &:after
+      content ''
+      background-image url('/statics/img/arrow-send-pink.png')
+      background-repeat no-repeat
+      background-size contain
+      width 74px
+      height 100px
+      top -4px
+      left -50px
+      position absolute
+      
 </style>

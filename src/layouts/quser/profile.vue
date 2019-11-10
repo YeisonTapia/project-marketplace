@@ -164,7 +164,11 @@
           <!-- Phone-->
           <q-input v-model="form.fields.cellularPhone.value" unmasked-value
                    inputmode="numeric" mask="(###) ### - ####" :label="`* ${$tr('ui.form.phone')} *`"
-                   :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
+                   :rules="[
+                    val => !!val || $tr('ui.message.fieldRequired'),
+                    val => !val || val.length == 10 || $tr('ui.message.fieldMinLeng',{num : 10})
+                   ]"
+                   />
 
         </div>
         <div class="col">
@@ -464,7 +468,8 @@
           <q-input stack-label :label="`Confirmar Contraseña`" v-model="form.confirmNewPassword"
                      :type="isPwd ? 'password' : 'text'"
                      name="password"
-                     autocomplete="off">
+                     autocomplete="off"
+                     :rules="[ val => val == form.newPassword || $tr('ui.message.fieldCheckPassword')]">
             <template v-slot:append>
                <q-icon
                   :name="isPwd ? 'visibility_off' : 'visibility'"

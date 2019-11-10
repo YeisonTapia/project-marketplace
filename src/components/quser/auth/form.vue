@@ -1,10 +1,10 @@
 <template>
-  <q-card class="q-px-md">
+  <q-card class="q-px-md rounded-sm">
     <!--Tab-->
-    <q-tabs v-model="tabModel" dense class="text-grey" active-color="primary"
+    <q-tabs v-model="tabModel" active-color="primary"
             indicator-color="primary" align="justify">
-      <q-tab name="tab-login" :label="$tr('quser.layout.label.login')"/>
-      <q-tab name="tab-register" v-if="withRegister" :label="$tr('quser.layout.label.createAccount')"/>
+      <q-tab name="tab-login" :label="$tr('quser.layout.label.login')" class="font-family-secondary"/>
+      <q-tab name="tab-register" v-if="withRegister" class="font-family-secondary" :label="$tr('quser.layout.label.createAccount')" />
     </q-tabs>
 
     <q-separator />
