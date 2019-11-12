@@ -1,11 +1,9 @@
 <template>
   <q-card :class="className" class="q-pa-md">
-    <q-card-main class="q-pb-lg">
+    <q-card-section class="q-pb-lg">
       <div class="row">
         <div class="col-6">
-          <q-card-media>
             <q-img :ratio="1" :src="product.image" />
-          </q-card-media>
         </div>
         <div class="col-6">
           <q-card-section>
@@ -19,7 +17,7 @@
           </q-card-actions>
         </div>
       </div>     
-    </q-card-main>
+    </q-card-section>
   </q-card>
 </template>
 <script>

@@ -1,8 +1,6 @@
 <template>
   <q-card :class="className">
-    <q-card-media>
-      <q-img :ratio="1" :src="product.image" />
-    </q-card-media>
+    <q-img :ratio="1" :src="product.image" />
     <q-card-actions>
       <q-btn flat dense icon="favorite"/>
       <q-btn flat dense icon="shopping_cart"/>
