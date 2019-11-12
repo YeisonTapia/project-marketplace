@@ -1,53 +1,105 @@
 <template>
-  <div id="mediaForm" class="row full-width">
+  <div id="mediaFormStore" class="row full-width">
     <div v-if="label" class="col-12 q-heading q-caption q-my-sm label" >{{ this.label }}</div>
+
     <!--= image viewer =-->
     <div class="col-12">
       <!--= if is multiple =-->
-      <q-scroll-area
-        v-if="multiple"
-        style="width: 100%; height: 150px;">
-      <div class="row gutter-xs">
-        <div
-          v-for="(file,index) in files"
-          :key="index"
-          class="column col-xs-6 col-sm-4 col-md-3 col-lg-2"
-        >
-          <div class="image-multiple"
-               :style="'background-image:url(' + file.medium_thumb + ')'">
-            <q-btn round color="red" @click="deleteFile(index)" icon="fas fa-times" size="sm"/>
+      <div v-if="multiple">
+
+        <div class="images relative-position" v-if="files.length == 0">
+          <q-carousel
+            color="white"
+            v-model="slide"
+            animated
+            navigation
+            infinite
+          >
+
+          <q-carousel-slide :name="1" class="rounded-md image-multiple" img-src="/statics/img/img-default.jpg" >
+        </q-carousel-slide>
+          </q-carousel>
+          <div class="absolute-bottom-right" >
+            <q-btn 
+              :icon="buttonIcon ? buttonIcon : 'fas fa-camera'"
+              color="primary"
+              class="rounded-sm btn q-mr-sm"
+              @click="modalMedia = true">
+              <q-tooltip :delay="300">Añadir Imagen</q-tooltip>
+            </q-btn>
           </div>
         </div>
-      </div>
-      </q-scroll-area>
-      <!--= if not multiple =-->
-        <div v-else class="row gutter-xs">
-        <div v-for="(file,index) in files"
-             :key="index"
-             class="col-12 col-md-6 relative-position">
-          <img class="img-fluid" :src="file ? file.medium_thumb : ''" />
+  
+        <div class="images relative-position" v-else>
+          <q-carousel
+            color="white"
+            v-model="slide"
+            animated
+            navigation
+            infinite
+          >
+          <q-carousel-slide :name="index+1" class="rounded-md image-multiple" v-for="(file,index) in files" 
+            :key="index" :img-src="file ? file.medium_thumb : ''" >
+            <div class="absolute-top-right q-ma-md" >
+              <q-btn round color="red" @click="deleteFile(index)" icon="fas fa-times" size="sm"/>
+            </div>
+          </q-carousel-slide>
+          </q-carousel>
 
-          <q-btn
-            class="absolute-top-left"
-            style="top: 0; left: 0;"
-            round
-            color="red"
-            @click="deleteFile(index)"
-            icon="fas fa-times"
-            size="sm"/>
+          <div class="absolute-bottom-right" >
+            <q-btn
+              icon="fas fa-edit"
+              color="primary"
+              class="rounded-sm btn q-mr-sm"
+              @click="modalMedia = true">
+              <q-tooltip :delay="300">Editar Imagen</q-tooltip>
+            </q-btn>
+          </div>
+         
         </div>
+
+
+      </div>
+      <!--= if not multiple =-->
+
+      <div v-else>
+        
+        <div class="images ratio-4-3" v-if="files.length == 0">
+          
+          <img class="rounded-md" src="/statics/img/img-default.jpg" alt="logo">
+
+          <div class="absolute-bottom-right">
+            <!--= Add File Button =-->
+            <q-btn
+              :icon="buttonIcon ? buttonIcon : 'fas fa-camera'"
+              color="primary"
+              class="rounded-sm btn"
+              @click="modalMedia = true">
+              <q-tooltip :delay="300">Añadir Imagen</q-tooltip>
+            </q-btn>
+          </div> 
+        </div>
+
+        <div class="images ratio-4-3" v-for="(file,index) in files" :key="index" v-else>
+          <img  class="rounded-md" :src="file ? file.medium_thumb : ''" style="object-fit: contain;" />
+
+          <div class="absolute-bottom-right">
+            <q-btn
+              icon="fas fa-edit"
+              color="primary"
+              class="rounded-sm btn"
+              @click="modalMedia = true"/>
+            <q-btn
+              color="primary"
+              class="rounded-sm btn q-ml-sm"
+              @click="deleteFile(index)"
+              icon="fas fa-trash" />
+          </div> 
+        </div>
+
+
       </div>
     </div>
-
-    <!--= Add File Button =-->
-    <q-btn
-      :label="buttonLabel ? buttonLabel : $tr('ui.label.addFile')"
-      :icon="buttonIcon ? buttonIcon : 'fas fa-upload'"
-      color="primary"
-      class="q-my-xs"
-      size="sm"
-      @click="modalMedia = true"/>
-
 
     <!--= Media List Modal =-->
     <q-dialog id="modalMedia" v-model="modalMedia" :content-css="{minWidth: '80vw', minHeight: '80vh'}">
@@ -119,7 +171,8 @@
       return {
         modalMedia: false,
         ids: [],
-        files: []
+        files: [],
+        slide: 1
       }
     },
     methods: {
@@ -197,13 +250,13 @@
   }
 </script>
 <style lang="stylus">
-  #mediaForm
+  #mediaFormStore
+    .q-carousel
+      height auto
     .image-multiple
-      background-repeat no-repeat
-      background-size 100% auto
-      background-position center center
-      height 150px
+      padding-top 71%
       overflow hidden
+      height 0
 
     .label
       text-transform capitalize
