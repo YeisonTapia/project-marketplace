@@ -5,25 +5,29 @@
             <full-width-gallery system-name="principal"></full-width-gallery>
 
             <div class="q-container info-tienda">
-              <div class="row gutter-md justify-end q-mx-sm">
+              <div class="row q-col-gutter-lg justify-end q-mx-sm">
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 q-mb-lg">
 
                   <q-card class="card-rounded text-center q-mb-sm">
-                    <q-card-title class="q-pa-sm row items-center">
+                    <q-card-section class="full-height text-center">
                       Seguir Tienda
-                      <div slot="right" class="row items-center bg-secondary q-pa-sm rounded-circle">
-                        <q-icon color="white" round name="far fa-thumbs-up" /> 
-                      </div>
-                    </q-card-title>
+                    </q-card-section>
+                    <div class="absolute-bottom text-right">
+                      <q-card-actions align="right">
+                        <q-btn unelevated size="13px" round color="secondary" icon="far fa-thumbs-up" />
+                      </q-card-actions>
+                    </div>
                   </q-card>
 
                   <q-card class="card-rounded text-center">
-                    <q-card-title class="q-pa-sm row items-center">
+                    <q-card-section class="full-height text-center">
                       7.5 de 200 usuarios
-                      <div slot="right" class="row items-center bg-secondary q-pa-sm rounded-circle">
-                        <q-icon color="white" round name="grade" /> 
+                    </q-card-section>
+                    <div class="absolute-bottom text-right">
+                        <q-card-actions align="right">
+                          <q-btn unelevated size="13px" round color="secondary" icon="grade" />
+                        </q-card-actions>
                       </div>
-                    </q-card-title>
                   </q-card>
 
                 </div>
@@ -46,7 +50,7 @@
                       placeholder="¿Qué buscas?"
                       color="primary" outlined  >
                       <template v-slot:append>
-                        <q-icon name="search" />
+                        <q-icon name="search" color="white" />
                       </template>
                       </q-input>
                   </div>
@@ -111,4 +115,8 @@ export default {
       border-bottom 0
       border-right 1px solid #fff 
       border-radius 0
+    .q-field--outlined .q-field__control:before  
+      border 0
+    .q-placeholder  
+      color #ffffff
 </style>

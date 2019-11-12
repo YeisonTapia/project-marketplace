@@ -32,6 +32,7 @@
 
     </q-list>
   </q-btn-dropdown>
+  <q-btn  icon="fas fa-user-alt" flat round dense v-else />
 </template>
 
 

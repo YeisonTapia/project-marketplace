@@ -1,11 +1,11 @@
 <template>
   <div>
     <div id="listMenu">
-      <q-no-ssr>
+      <q-list>
         <!--Single Item-->
-        <q-item :class="getClassItem(item)" v-if="checkItemSingle(item)"
+        <q-item  :class="getClassItem(item)" v-if="checkItemSingle(item)"
                 v-for="(item,key) in props.menu" :key="key"
-                @click.native="redirectTo(item)" clickable>
+                @click.native="redirectTo(item)" clickable v-ripple >
           <q-item-section v-if="item.icon && props.showIcons" avatar>
             <q-icon :name="item.icon"/>
           </q-item-section>
@@ -21,7 +21,7 @@
           <recursive-menu :translatable="props.translatable" :show-icons="props.showIcons"
                           :key="key" :menu="item.children"/>
         </q-expansion-item>
-      </q-no-ssr>
+      </q-list>
     </div>
   </div>
 </template>
@@ -120,36 +120,6 @@
   }
 </script>
 <style lang="stylus">
-  #listMenu
-    .q-expansion-item__container
-      .q-expansion-item__content
-        padding 0 0 0 7px
-        border-left 8px solid white
-
-    .q-item
-      cursor pointer
-      background-color white
-      color $grey-9
-
-      .q-item__section--avatar
-        min-width 20px
-        padding-right 10px
-
-      .q-icon
-        font-size 16px
-
-      &:hover
-        background-color $grey-4
-        color $primary
-
-        .q-icon
-          color $primary
-
-      &.item-is-active
-        background-color $primary
-
-        .q-item__section, .q-icon
-          color white
 </style>
 
 
