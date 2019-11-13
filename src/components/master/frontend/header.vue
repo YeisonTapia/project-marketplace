@@ -239,7 +239,7 @@
           z-index 9
           position relative
           object-fit contain
-          height 184px
+          height 165px
 
     .imsocial
       display inline-block
@@ -358,7 +358,7 @@
         padding 10px 15px
         margin -14px 0 10px 0
         background-color $warning
-        font-size 18px
+        font-size 1rem
         position relative
         z-index 99
         > .q-list
