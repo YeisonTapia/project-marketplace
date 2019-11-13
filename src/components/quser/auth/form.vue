@@ -6,7 +6,7 @@
 
         <div class="col-md-5 column-logo q-p-md flex ">
           <div class="self-center">
-            <router-link :to="{name:'home'}">
+            <router-link :to="{name:'app.home'}">
               <img :src="logo" :alt="projectName">
             </router-link>
           </div>
@@ -99,14 +99,14 @@
           .q-icon
             margin-right 5px
             
-  .q-card
-    background none !important
-    box-shadow none !important
-    
-  #formInit
-    max-width 800px
+    .q-card
+      background none !important
+      box-shadow none !important
+      
+    #formInit
+      max-width 800px
 
-  .column-form
-    border 1px solid $tertiary
+    .column-form
+      border 1px solid $tertiary
     
 </style>
