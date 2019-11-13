@@ -13,6 +13,39 @@ let pages = {
         icon: 'fas fa-home',
         authenticated : false
     },
+    nosotros: {
+        permission: null,
+        activated: true,
+        path: '/nosotros',
+        name: 'app.nosotros',
+        layout: () => import('src/layouts/master'),
+        page: () => import('pages/nosotros.vue'),
+        title: 'Nosotros',
+        icon: 'fas fa-user-friends',
+        authenticated : false
+    },
+    busqueda: {
+        permission: null,
+        activated: true,
+        path: '/busqueda',
+        name: 'app.busqueda',
+        layout: () => import('src/layouts/master'),
+        page: () => import('pages/busqueda.vue'),
+        title: 'busqueda',
+        icon: 'far fa-envelope-open',
+        authenticated : false
+    },
+    categoria: {
+        permission: null,
+        activated: true,
+        path: '/categoria',
+        name: 'app.categoria',
+        layout: () => import('src/layouts/master'),
+        page: () => import('pages/categoria.vue'),
+        title: 'categoria',
+        icon: 'far fa-envelope-open',
+        authenticated : false
+    },
     layout1: {
         permission: null,
         activated: true,

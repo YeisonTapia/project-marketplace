@@ -16,7 +16,7 @@
         <q-expansion-item v-else-if="checkItemMultiple(item)" :icon="item.icon" :key="key"
                           :label="props.translatable ? $tr(item.title) : item.title"
                           :header-class="selectedChildren(item)"
-                          :class="selectedChildren(item) ? 'bg-primary' : ''">
+                          :class="selectedChildren(item) ? 'bg-tertiary' : ''">
           <!--Recursive item-->
           <recursive-menu :translatable="props.translatable" :show-icons="props.showIcons"
                           :key="key" :menu="item.children"/>

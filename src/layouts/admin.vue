@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh LpR lff"  class="bg-grey-1">
+  <q-layout view="hHh LpR lFf"  class="bg-grey-1">
     <!-- HEADER -->
     <admin-header v-if="appState.loadPage"/>
 
