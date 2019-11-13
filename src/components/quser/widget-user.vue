@@ -19,8 +19,11 @@
         </q-item>
       </q-list>
     </q-btn-dropdown>
+    <q-btn v-else class="q-pa-none" round flat icon="fas fa-user-alt" />
+    <!--
     <q-btn v-else class="q-pa-none" round @click="opened = !opened" flat icon="fas fa-user-alt" />
     <modalInicial :opened="opened"  @opened ="opened = $event"></modalInicial>
+    -->
 </div>
 </template>
 
