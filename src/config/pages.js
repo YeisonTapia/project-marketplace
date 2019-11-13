@@ -159,12 +159,12 @@ responsePages.quser.userProfile.layout= () => import('src/layouts/admin')
 responsePages.quser.userProfile.path='admin/me/profile'
 
 // QUSER FRONTEND
+responsePages.frontquser.login.layout = () => import('src/layouts/init.vue')
+responsePages.frontquser.login.page = () => import('src/layouts/quser/login')
 /*
 responsePages.frontquser.userProfile.path ='/account/me/profile'
 responsePages.frontquser.userProfile.layout = () => import('src/layouts/account.vue')
 responsePages.frontquser.userProfile.page = () => import('src/layouts/quser/profile')
-responsePages.frontquser.login.layout = () => import('src/layouts/init.vue')
-responsePages.frontquser.login.page = () => import('src/layouts/quser/login')
 responsePages.frontquser.logout.layout = () => import('src/layouts/init.vue')
 responsePages.frontquser.logout.page =  () => import('src/layouts/quser/logout')
 responsePages.frontquser.resetPassword.layout = () => import('src/layouts/init.vue')

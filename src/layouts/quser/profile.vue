@@ -527,10 +527,11 @@
 
 <script>
 
+  import http from "axios"
+
   //Plugins
   import {required, email, sameAs, minLength} from 'vuelidate/lib/validators'
   import alert from '@imagina/qhelper/_plugins/alert'
-
 
   export default {
     props: {},

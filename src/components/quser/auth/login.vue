@@ -61,8 +61,10 @@
 
             <!-- Button Register -->
             <div class="text-center col-12">
+              <!--
               <q-btn flat label="Registrarse" class="q-mt-md"
-                  @click="changeSelectLogin()" color="grey-8"/>
+                  @click="emitSelectForm()" color="grey-8"/>
+              -->
             </div>
           
            
@@ -76,7 +78,7 @@
     props: {
       email: {default: null},
       horizontal: {type: Boolean, default: false},
-      selectLogin2: {type: Boolean, default: true}
+      selectForm: {type: String, default: 'init'}
     },
     watch: {
       email() {
@@ -147,8 +149,8 @@
           }
         }, 200)
       },
-      changeSelectLogin(){
-        this.$emit('selectLogin2',false);
+      changeSelectForm(){
+        this.$emit('selectForm','init');
       }
     }
   }

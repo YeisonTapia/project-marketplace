@@ -4,7 +4,7 @@
     <div id="formInit">
       <div class="row">
 
-        <div class="col-md-5 column-logo q-p-md flex ">
+        <div class="col-12 col-md-5 column-logo q-p-md flex justify-center ">
           <div class="self-center">
             <router-link :to="{name:'app.home'}">
               <img :src="logo" :alt="projectName">
@@ -12,10 +12,19 @@
           </div>
         </div>
 
-        <div class="col-md-7 column-form bg-white rounded-borders">
+        <div class="col-12 col-md-7 rounded-borders" :class="{'bg-white':cBackground,'column-form':cBackground}">
+         
           <div class="content q-px-xl q-py-md">
 
+            <div v-if="selectForm=='init'">
+              <initForm :selectForm="selectForm"  @selectForm ="selectForm = $event"/>
+            </div>
 
+            <div v-if="selectForm=='login'">
+               <login-form @logged="emitLogged()" :email="email" :selectForm="selectForm" @selectForm ="selectForm = $event"/>
+            </div>
+            
+            <!--
             <div v-if="selectLogin">
               <login-form @logged="emitLogged()" :email="email" :selectLogin2="selectLogin" @selectLogin2 ="selectLogin = $event"/>
             </div>
@@ -27,6 +36,7 @@
                        @logged="emitLogged()"
                        @registered="emitRegister()"/>
             </div>
+            -->
 
           </div>
         </div>
@@ -38,6 +48,7 @@
 </template>
 <script>
   //components
+  import initForm from 'src/components/quser/auth/init-options'
   import loginForm from 'src/components/quser/auth/login'
   import registerForm from 'src/components/quser/auth/register'
 
@@ -47,10 +58,16 @@
       horizontalExtraFields: { type: Boolean, default: false }
     },
     components: {
+      initForm,
       loginForm,
       registerForm
     },
-    watch: {},
+    watch: {
+      selectForm(val,oldval){
+        if(val!='ini')
+          this.cBackground = true
+      }
+    },
     mounted () {
       this.$nextTick(function () {
       })
@@ -61,9 +78,10 @@
         withRegister: false,//this.$store.getters['qsiteSettings/getSettingValueByName']('iprofile::registerUsers'),
         tabModel: 'tab-login',//'tab-login',
         email: null,
-        selectLogin: true,
+        selectForm: 'init',
         logo : this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo2').path,
         projectName : "Donde esta esa vaina",
+        cBackground: false
       }
     },
     methods: {
@@ -106,7 +124,9 @@
     #formInit
       max-width 800px
 
+    /*
     .column-form
       border 1px solid $tertiary
+    */
     
 </style>
