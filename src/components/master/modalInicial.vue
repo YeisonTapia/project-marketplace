@@ -9,7 +9,7 @@
 				</div>
 
 				<div class="bg-white q-pa-md shadow-2 rounded-lg q-mb-lg" >
-					<router-link :to="{name:'auth.login'}">
+					<router-link :to="{name:'auth.login',params: { tform: 'register' }}">
 						<div class="q-title text-primary">REGISTRATE COMO USUARIO</div>
 						<div class="q-caption">Ganaras puntos, premios, regalos y muchas sorpresas</div>
 					</router-link>

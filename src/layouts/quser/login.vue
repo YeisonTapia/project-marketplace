@@ -17,6 +17,8 @@
       next(vm => vm.checkRedirect(from))
     },
     mounted () {
+      console.warn("inicia")
+      //this.$route.params.id
       this.$nextTick(function () {
         this.checkRedirect()
       })
