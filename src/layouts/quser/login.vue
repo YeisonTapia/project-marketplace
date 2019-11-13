@@ -1,5 +1,5 @@
 <template>
-  <div id="authLoginRegister" class="bg-fondo flex flex-center">
+  <div id="authLoginRegister" class="flex flex-center">
     <div class="q-px-md q-pt-xl q-pb-md">
       <form-auth :horizontal-extra-fields="true" @logged="redirect()"/>
     </div>

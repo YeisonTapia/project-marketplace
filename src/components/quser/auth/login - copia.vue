@@ -1,5 +1,15 @@
 <template>
-  <div id="formLoginComponent" class="relative-position">
+  <div id="formLoginComponent">
+
+
+    <div class="row">
+
+      <div class="col-md-5 column-logo q-p-md flex ">
+           <img class="self-center" :src="logo" :alt="projectName">
+      </div>
+
+      <div class="col-md-7 column-form bg-white rounded-borders">
+        <div class="content q-px-xl q-py-md">
 
         <h4 class="text-primary text-center font-family-secondary q-mt-lg q-mb-none">Login</h4>
         <div class="q-body-2 text-center">Bienvenido, tu vaina en el mundo entero</div>
@@ -59,15 +69,23 @@
               </q-btn>
             </div>
 
-            <!-- Button Register -->
+            <!-- Button Reset -->
+            <!--
             <div class="text-center col-12">
-              <q-btn flat label="Registrarse" class="q-mt-md"
-                  @click="changeSelectLogin()" color="grey-8"/>
+              <q-btn flat :label="$tr('quser.layout.label.resetPassword')" class="q-mt-md"
+                   :to="{name : 'auth.reset.password'}" color="grey-8"/>
             </div>
-          
+            -->
            
         </q-form>
-        
+
+        </div>
+
+      </div>
+
+    
+    </div>
+
   </div>
 </template>
 
@@ -75,8 +93,7 @@
   export default {
     props: {
       email: {default: null},
-      horizontal: {type: Boolean, default: false},
-      selectLogin2: {type: Boolean, default: true}
+      horizontal: {type: Boolean, default: false}
     },
     watch: {
       email() {
@@ -146,9 +163,6 @@
             this.$refs.username.focus()
           }
         }, 200)
-      },
-      changeSelectLogin(){
-        this.$emit('selectLogin2',false);
       }
     }
   }

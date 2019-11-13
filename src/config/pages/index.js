@@ -78,13 +78,13 @@ pages.quser.userProfile.path='admin/me/profile'
 pages.frontquser.userProfile.path ='/account/me/profile'
 pages.frontquser.userProfile.layout = () => import('src/layouts/account.vue')
 pages.frontquser.userProfile.page = () => import('src/layouts/quser/profile')
-pages.frontquser.login.layout = () => import('src/layouts/master.vue')
+pages.frontquser.login.layout = () => import('src/layouts/init.vue')
 pages.frontquser.login.page = () => import('src/layouts/quser/login')
-pages.frontquser.logout.layout = () => import('src/layouts/master.vue')
+pages.frontquser.logout.layout = () => import('src/layouts/init.vue')
 pages.frontquser.logout.page =  () => import('src/layouts/quser/logout')
-pages.frontquser.resetPassword.layout = () => import('src/layouts/master.vue')
+pages.frontquser.resetPassword.layout = () => import('src/layouts/init.vue')
 pages.frontquser.resetPassword.page = () => import('src/layouts/quser/resetPassword')
-pages.frontquser.resetPasswordComplete.layout = () => import('src/layouts/master.vue')
+pages.frontquser.resetPasswordComplete.layout = () => import('src/layouts/init.vue')
 pages.frontquser.resetPasswordComplete.page = () => import('src/layouts/quser/resetPasswordComplete')
 
 // QQUIZ

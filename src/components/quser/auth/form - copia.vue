@@ -1,35 +1,29 @@
 <template>
-  <q-card class="">
-    
-    <div id="formInit">
-      <div class="row">
+  <q-card class="q-px-md rounded-sm">
+    <!--Tab-->
+    <q-tabs v-model="tabModel" active-color="primary"
+            indicator-color="primary" align="justify">
+      <q-tab name="tab-login" :label="$tr('quser.layout.label.login')" class="font-family-secondary"/>
+      <q-tab name="tab-register" v-if="withRegister" class="font-family-secondary" :label="$tr('quser.layout.label.createAccount')" />
+    </q-tabs>
 
-        <div class="col-md-5 column-logo q-p-md flex ">
-          <img class="self-center" :src="logo" :alt="projectName">
-        </div>
+    <q-separator />
 
-        <div class="col-md-7 column-form bg-white rounded-borders">
-          <div class="content q-px-xl q-py-md">
-
-
-            <div v-if="selectLogin">
-              <login-form @logged="emitLogged()" :email="email" :selectLogin2="selectLogin" @selectLogin2 ="selectLogin = $event"/>
-            </div>
-
-            <div v-else="selectLogin">
-              <register-form :selectLogin2="selectLogin" @selectLogin2 ="selectLogin = $event" :horizontal-extra-fields="props.horizontalExtraFields"
+    <!--Tabs-->
+    <q-tab-panels v-model="tabModel" animated keep-alive>
+      <!--Login-->
+      <q-tab-panel name="tab-login">
+        <login-form @logged="emitLogged()" :email="email"/>
+      </q-tab-panel>
+      <!--Register-->
+      <q-tab-panel name="tab-register" v-if="withRegister">
+        <register-form :horizontal-extra-fields="props.horizontalExtraFields"
                        :horizontal="props.horizontal"
                        v-model="email"
                        @logged="emitLogged()"
                        @registered="emitRegister()"/>
-            </div>
-
-          </div>
-        </div>
-      
-      </div>
-    </div>
-   
+      </q-tab-panel>
+    </q-tab-panels>
   </q-card>
 </template>
 <script>
@@ -57,9 +51,6 @@
         withRegister: false,//this.$store.getters['qsiteSettings/getSettingValueByName']('iprofile::registerUsers'),
         tabModel: 'tab-login',//'tab-login',
         email: null,
-        selectLogin: true,
-        logo : this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo2').path,
-        projectName : "Donde esta esa vaina",
       }
     },
     methods: {
@@ -94,15 +85,4 @@
 
           .q-icon
             margin-right 5px
-            
-  .q-card
-    background none !important
-    box-shadow none !important
-    
-  #formInit
-    max-width 800px
-
-  .column-form
-    border 1px solid $tertiary
-    
 </style>
