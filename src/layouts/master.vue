@@ -56,26 +56,21 @@
             frontendHeader,
             frontendFooter
         },
-        mounted() {
+        mounted () {
             this.$nextTick(async function () {
             })
         },
-        data() {
+        data () {
             return {
-                appIsBackend: config('app.isBackend')
             }
         },
         computed: {
-
-            quserState() {
-                return this.$store.state.quserAuth
-            },
-            appState() {
+            appState () {
                 return this.$store.state.app
             }
         },
         methods: {
-            async refreshPage(done) {
+            async refreshPage(done){
                 await this.$store.dispatch('app/REFRESH_PAGE')
                 done()
             }

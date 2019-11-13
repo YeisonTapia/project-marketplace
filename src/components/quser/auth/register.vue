@@ -95,11 +95,6 @@
       <!--captcha-->
       <captcha v-model="form.captcha" class="full-width" ref="captcha"/>
 
-      <!-- Login -->
-      <div class="col-12 text-center q-my-sm">
-        <q-btn class="text-primary font-family-secondary" @click="changeSelectLogin()"  no-caps flat :label="$tr('quser.layout.label.login')" />
-      </div>
-
       <!-- Button Register -->
       <div class="full-width text-center q-my-md">
         <q-btn :loading="loading" type="submit" color="primary" name="submit" class="font-family-secondary  btn-arrow2">
@@ -119,16 +114,12 @@
 </template>
 
 <script>
-  //components
-  import captcha from '@imagina/qsite/_components/captcha'
-
   export default {
     props: {
       horizontal: {type: Boolean, default: false},
-      horizontalExtraFields: {type: Boolean, default: false},
-      selectLogin2: {type: Boolean, default: true}
+      horizontalExtraFields: {type: Boolean, default: false}
     },
-    components: {captcha},
+    components: {},
     mounted() {
       this.$nextTick(function () {
         this.init()
@@ -283,9 +274,6 @@
         let field = this.extraFields.find(item => item.field == name)
         if (field && field.required && !value) return true
         return false
-      },
-      changeSelectLogin(){
-        this.$emit('selectLogin2',true);
       }
     }
   }
