@@ -228,7 +228,7 @@
           z-index 9
           position relative
           object-fit contain
-          height 184px
+          height 165px
 
     .imsocial
       display inline-block
