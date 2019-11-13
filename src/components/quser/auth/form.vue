@@ -5,7 +5,11 @@
       <div class="row">
 
         <div class="col-md-5 column-logo q-p-md flex ">
-          <img class="self-center" :src="logo" :alt="projectName">
+          <div class="self-center">
+            <router-link :to="{name:'home'}">
+              <img :src="logo" :alt="projectName">
+            </router-link>
+          </div>
         </div>
 
         <div class="col-md-7 column-form bg-white rounded-borders">
