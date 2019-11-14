@@ -89,7 +89,7 @@ let responsePages = {
 
 if (appConfig && appConfig.modules) {
     const modules = appConfig.modules
-  
+
     // Get each config page from package
     modules.forEach(name => {
         let pageBackend = false
@@ -101,7 +101,7 @@ if (appConfig && appConfig.modules) {
       }
 
       responsePages[name] = pageBackend
-      
+
     })
 }
 
@@ -219,7 +219,6 @@ responsePages.qform.fields.path=  '/admin/iform/fields/:id'
 */
 
 //QSUBSCRIPTION
-/*
 responsePages.qsubscription.products.layout= () => import('src/layouts/admin')
 responsePages.qsubscription.productsCreate.layout= () => import('src/layouts/admin')
 responsePages.qsubscription.productsUpdate.layout= () => import('src/layouts/admin')
@@ -229,16 +228,13 @@ responsePages.qsubscription.plansUpdate.layout= () => import('src/layouts/admin'
 responsePages.qsubscription.features.layout= () => import('src/layouts/admin')
 responsePages.qsubscription.featuresCreate.layout= () => import('src/layouts/admin')
 responsePages.qsubscription.featuresUpdate.layout= () => import('src/layouts/admin')
-*/
 
 //QMARKETPLACE
-/*
 responsePages.qmarketplace.stores.layout= () => import('src/layouts/admin')
 responsePages.qmarketplace.storesCreate.layout= () => import('src/layouts/admin')
 responsePages.qmarketplace.storesEdit.layout= () => import('src/layouts/admin')
 responsePages.qmarketplace.storesTheme.layout= () => import('src/layouts/admin')
 responsePages.qmarketplace.storeProducts.layout= () => import('src/layouts/admin')
 responsePages.qmarketplace.storeProductsCreate.layout= () => import('src/layouts/admin')
-*/
 
 export default responsePages
