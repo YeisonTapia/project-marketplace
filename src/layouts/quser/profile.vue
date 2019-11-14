@@ -965,11 +965,11 @@
       // Check Points Proccess
       async checkPointsProccess(){
 
-        let checkPointRegister = this.$store.getters['qsiteSettings/getSettingValueByName']('iredeems::points-per-register-user-checkbox')
+        let checkPointRegister = this.$store.getters['qsiteSettings/getSettingValueByName']('iredeems::points-per-register-user-completed-checkbox')
 
         // Check active register user points
         if(checkPointRegister) {
-          let pointPerRegister = this.$store.getters['qsiteSettings/getSettingValueByName']('iredeems::points-per-register-user')
+          let pointPerRegister = this.$store.getters['qsiteSettings/getSettingValueByName']('iredeems::points-per-register-user-completed')
           if(pointPerRegister>0){
 
             await this.getPointsRegister()
@@ -991,7 +991,7 @@
             params: {
               filter: {
                 userId: this.form.id,
-                pointableType: 'Modules\\User\\Entities\\Sentinel\\User'
+                type: 'user-register-completed'
               }
             }
           }
@@ -1015,6 +1015,7 @@
           user_id: this.form.id,
           pointable_id: this.form.id,
           pointable_type: 'Modules\\User\\Entities\\Sentinel\\User',
+          type: 'user-register-completed',
           points: pointPerRegister,
           description: 'Puntos por completar registro'
         }
@@ -1022,7 +1023,7 @@
         this.$crud.create('apiRoutes.qredeems.points', data).then(response => {
           //console.warn("SAVE IREDEEMS - POINTS PER REGISTER")
         }).catch(error => {
-          console.error('[CREATE IREDEEMS - POINTS PER REGISTER] ', error)
+          console.error('[CREATE IREDEEMS - POINTS PER REGISTER COMPLETED] ', error)
           this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
         })
 
