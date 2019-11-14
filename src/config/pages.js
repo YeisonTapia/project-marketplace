@@ -146,7 +146,7 @@ responsePages.qmenu.menuItemsUpdate.path= '/admin/menus/menu/:menuId/item/:id'
 responsePages.qsite.index.layout= () => import('src/layouts/admin')
 responsePages.qsite.index.path= '/admin/site/index'
 responsePages.qslider.index.layout= () => import('src/layouts/admin')
-responsePages.qslider.index.path= '/admin/site/index'
+responsePages.qslider.index.path= '/admin/slider/index'
 
 // QUSER
 responsePages.quser.userIndex.layout= () => import('src/layouts/admin')
