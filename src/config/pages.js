@@ -161,53 +161,47 @@ responsePages.quser.userProfile.path='admin/me/profile'
 // QUSER FRONTEND
 responsePages.frontquser.login.layout = () => import('src/layouts/init.vue')
 responsePages.frontquser.login.page = () => import('src/layouts/quser/login')
-/*
-responsePages.frontquser.userProfile.path ='/account/me/profile'
-responsePages.frontquser.userProfile.layout = () => import('src/layouts/account.vue')
-responsePages.frontquser.userProfile.page = () => import('src/layouts/quser/profile')
+responsePages.frontquser.register.layout = () => import('src/layouts/init.vue')
+responsePages.frontquser.register.page = () => import('src/layouts/quser/register')
 responsePages.frontquser.logout.layout = () => import('src/layouts/init.vue')
 responsePages.frontquser.logout.page =  () => import('src/layouts/quser/logout')
 responsePages.frontquser.resetPassword.layout = () => import('src/layouts/init.vue')
 responsePages.frontquser.resetPassword.page = () => import('src/layouts/quser/resetPassword')
 responsePages.frontquser.resetPasswordComplete.layout = () => import('src/layouts/init.vue')
 responsePages.frontquser.resetPasswordComplete.page = () => import('src/layouts/quser/resetPasswordComplete')
+
+/*
+responsePages.frontquser.userProfile.path ='/account/me/profile'
+responsePages.frontquser.userProfile.layout = () => import('src/layouts/account.vue')
+responsePages.frontquser.userProfile.page = () => import('src/layouts/quser/profile')
 */
 
 // QQUIZ
-/*
 responsePages.qquiz.polls.layout= () => import('src/layouts/admin')
 responsePages.qquiz.polls.path= '/admin/iquiz/polls/index'
 responsePages.qquiz.questions.layout= () => import('src/layouts/admin')
 responsePages.qquiz.questions.path= '/admin/iquiz/questions/index/poll/:id'
-*/
 
 // QTRIVIA
-/*
 responsePages.qtrivia.trivias.layout= () => import('src/layouts/admin')
 responsePages.qtrivia.trivias.path= '/admin/itrivia/trivias/index'
 responsePages.qtrivia.questions.layout= () => import('src/layouts/admin')
 responsePages.qtrivia.questions.path= '/admin/itrivia/questions/index/trivia/:id'
 responsePages.qtrivia.rangepoints.layout= () => import('src/layouts/admin')
 responsePages.qtrivia.rangepoints.path= '/admin/itrivia/rangepoints/index/trivia/:id'
-*/
 
 // QREDEEMS
-/*
 responsePages.qredeems.items.layout= () => import('src/layouts/admin')
 responsePages.qredeems.items.path=  '/admin/iredeems/items/index'
 responsePages.qredeems.redeems.layout= () => import('src/layouts/admin')
 responsePages.qredeems.redeems.path=  '/admin/iredeems/redeems/index'
-*/
 
 // QREDEEMS FRONTEND
-/*
 responsePages.frontqredeems.userAccount.path='account/points'
 responsePages.frontqredeems.userAccount.layout = () => import('src/layouts/account.vue')
 responsePages.frontqredeems.userAccount.page= () => import('src/layouts/qredeems/account/index')
-*/
 
 //QFORM
-/*
 responsePages.qform.forms.layout= () => import('src/layouts/admin')
 responsePages.qform.forms.path=  '/admin/iform/form'
 responsePages.qform.leads.layout= () => import('src/layouts/admin')
@@ -216,7 +210,6 @@ responsePages.qform.leadsShow.layout= () => import('src/layouts/admin')
 responsePages.qform.leadsShow.path=  '/admin//iform/lead/:id'
 responsePages.qform.fields.layout= () => import('src/layouts/admin')
 responsePages.qform.fields.path=  '/admin/iform/fields/:id'
-*/
 
 //QSUBSCRIPTION
 responsePages.qsubscription.products.layout= () => import('src/layouts/admin')

@@ -92,6 +92,11 @@
       </div>
 
 
+      <div class="col-12 text-center q-my-sm">
+        <q-btn class="text-primary font-family-secondary" @click="$router.push({name: 'auth.login'})"  no-caps flat :label="$tr('quser.layout.label.login')" />
+      </div>
+
+
       <!--captcha-->
       <captcha v-model="form.captcha" class="full-width" ref="captcha"/>
 
@@ -166,6 +171,7 @@
     methods: {
       //Init template
       async init() {
+        
         let captcha = this.$clone(this.form.captcha)//Save captcha
         this.form = this.$clone(this.initData)//inti form
         this.form.captcha = captcha//Add captch
@@ -192,11 +198,23 @@
             this.loading = true
             let data = this.$clone(this.form)
             data.fields = this.$helper.convertToBackField(this.form.fields)
+            
+            console.warn("Entra: Antes de registrar")
+            
+            let uRol = this.$route.params.userRol
+            console.warn("Components/Quser/Register/Parametros: "+uRol)
+
+            if(uRol && uRol=="business")
+              console.warn("Cambio el rol de registro "+this.$route.params.userRol)
+
+            /*
             this.$crud.create('apiRoutes.quser.register', data).then(response => {
               this.callbackRequest(true, response.data)
             }).catch(error => {
               this.callbackRequest(false, error)
             })
+            */
+            
           }
         }
       },

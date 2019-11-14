@@ -3,8 +3,30 @@
     
     <!-- === ROUTER VIEW === -->
     <q-page-container class="bg-degradado">
-      
-      <router-view/>
+      <div id="layout-init" class="flex flex-center">
+        <div class="row q-col-gutter-lg">
+
+          <div class="col-12 col-md-5 column-logo q-p-md flex justify-center ">
+
+            <div class="self-center">
+              <router-link :to="{name:'app.home'}">
+                <img :src="logo" :alt="projectName">
+              </router-link>
+            </div>
+
+          </div>
+
+          <div class="col-12 col-md-7 rounded-borders">
+
+            <div id="formInit">
+               <router-view/>
+            </div>
+            
+          </div>
+
+        </div>
+      </div>
+     
       <q-ajax-bar />
 
     </q-page-container>
@@ -29,6 +51,21 @@
       }
     },
     async mounted () {
-    }
+    },
+    data () {
+      return {
+        
+        logo : this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo2').path,
+        projectName : "Donde esta esa vaina",
+        
+      }
+    },
   }
 </script>
+
+<style lang="stylus">
+
+#formInit
+  max-width 500px
+      
+</style>

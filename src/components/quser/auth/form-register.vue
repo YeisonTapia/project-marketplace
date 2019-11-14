@@ -1,23 +1,20 @@
 <template>
   <q-card class="q-my-xl">
+    
+    <div class="content q-px-xl q-py-md bg-white">
 
-    <div class="content q-px-xl q-py-md" :class="{'bg-white':cBackground,'column-form':cBackground}">
-
-      <div v-if="selectForm=='init'">
-        <initForm :selectForm="selectForm"  @selectForm ="selectForm = $event"/>
-      </div>
-
-      <div v-if="selectForm=='login'">
-        <login-form @logged="emitLogged()" :email="email" :selectForm="selectForm" @selectForm ="selectForm = $event"/>
-      </div>
+      <register-form :horizontal-extra-fields="props.horizontalExtraFields"
+                       :horizontal="props.horizontal"
+                       v-model="email"
+                       @logged="emitLogged()"
+                       @registered="emitRegister()"/>
             
     </div>
-    
+   
   </q-card>
 </template>
 <script>
   //components
-  import initForm from 'src/components/quser/auth/init-options'
   import loginForm from 'src/components/quser/auth/login'
   import registerForm from 'src/components/quser/auth/register'
 
@@ -27,15 +24,10 @@
       horizontalExtraFields: { type: Boolean, default: false }
     },
     components: {
-      initForm,
       loginForm,
       registerForm
     },
     watch: {
-      selectForm(val,oldval){
-        if(val!='ini')
-          this.cBackground = true
-      }
     },
     mounted () {
       this.$nextTick(function () {
@@ -93,9 +85,9 @@
     #formInit
       max-width 800px
 
-    /*
+   
     .column-form
       border 1px solid $tertiary
-    */
+   
     
 </style>

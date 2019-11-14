@@ -9,10 +9,10 @@ export default {
         ...coreApp.modules,
         'qticket',
         'qsubscription',
+        'qmarketplace',
         'qquiz',
         'qtrivia',
         'qredeems',
-        'qmarketplace',
     ]
 
 }
