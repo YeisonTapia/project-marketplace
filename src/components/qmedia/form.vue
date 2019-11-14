@@ -81,7 +81,7 @@
         </div>
 
         <div class="images ratio-4-3" v-for="(file,index) in files" :key="index" v-else>
-          <img  class="rounded-md" :src="file ? file.medium_thumb : ''" style="object-fit: contain;" />
+          <img class="rounded-md contain" :src="file ? file.medium_thumb : ''"  />
 
           <div class="absolute-bottom-right">
             <q-btn

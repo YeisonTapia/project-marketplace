@@ -158,17 +158,6 @@
       userData() {
         return []//this.$store.state.quserAuth.userData
       },
-      socialNetworks() {
-        let response = {}
-        let socialNetworks = []//this.$store.getters['qsiteSettings/getSettingValueByName']('isite::socialNetworks')
-        //format social networks
-        socialNetworks.forEach(item => {
-          if (item.label == 'facebook') response[item.label] = `https://facebook.com/${item.value}`
-          if (item.label == 'instagram') response[item.label] = `https://instagram.com/${item.value}`
-        })
-
-        return response//Response
-      }
     },
     methods: {
       //Show drawer specific
