@@ -99,6 +99,7 @@
 
       <!--captcha-->
       <captcha v-model="form.captcha" class="full-width" ref="captcha"/>
+      
 
       <!-- Button Register -->
       <div class="full-width text-center q-my-md">
@@ -207,13 +208,13 @@
             if(uRol && uRol=="business")
               console.warn("Cambio el rol de registro "+this.$route.params.userRol)
 
-            /*
+           
             this.$crud.create('apiRoutes.quser.register', data).then(response => {
               this.callbackRequest(true, response.data)
             }).catch(error => {
               this.callbackRequest(false, error)
             })
-            */
+           
             
           }
         }
@@ -237,6 +238,9 @@
         if (success) {
           if (!response.checkEmail) message = ''
           //Dialog to go to iniciar sesión when id register
+
+          //console.warn("Callback "+response)
+
           this.$q.dialog({
             title: this.$tr('ui.message.recordCreated'),
             message: message,
@@ -272,6 +276,11 @@
           }
           this.$store.dispatch('quserAuth/AUTH_REQUEST', data).then((response) => {
             this.fullLoading = false
+
+            //console.warn("REGISTER - USER LOGGED")
+            //console.warn("UserID "+this.$store.state.quserAuth.userId)
+            this.checkPointsProccess()
+
             this.$emit('logged')
           }).catch(error => {
             this.fullLoading = false
@@ -292,7 +301,42 @@
         let field = this.extraFields.find(item => item.field == name)
         if (field && field.required && !value) return true
         return false
-      }
+      },
+      // Check Points Proccess
+      async checkPointsProccess(){
+
+        let checkPointRegister = this.$store.getters['qsiteSettings/getSettingValueByName']('iredeems::points-per-register-user-checkbox')
+
+        // Check active register user points
+        if(checkPointRegister) {
+          let pointPerRegister = this.$store.getters['qsiteSettings/getSettingValueByName']('iredeems::points-per-register-user')
+          if(pointPerRegister>0){
+            await this.savePointsRegister(pointPerRegister)
+          }
+        } 
+ 
+      },
+      // Save Points
+      savePointsRegister(pointPerRegister){
+
+        let data = {
+          user_id: this.$store.state.quserAuth.userId,
+          pointable_id: this.$store.state.quserAuth.userId,
+          pointable_type: 'Modules\\User\\Entities\\Sentinel\\User',
+          type: 'user-register',
+          points: pointPerRegister,
+          description: 'Puntos por registro'
+        }
+
+        this.$crud.create('apiRoutes.qredeems.points', data).then(response => {
+          //console.warn("SAVE IREDEEMS - POINTS PER REGISTER")
+        }).catch(error => {
+          console.error('[CREATE IREDEEMS - POINTS PER REGISTER] ', error)
+          this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
+        })
+
+      } 
+
     }
   }
 </script>
