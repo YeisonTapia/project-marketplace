@@ -35,7 +35,8 @@
 </style>
 
 <script>
-import fullWidthGallery from '@imagina/qslider/_components/fullWidthGallery'
+import fullWidthGallery from 'src/components/qslider/qcarousel'
+
 import top from 'src/components/themes/top'
 import featuredStores from 'src/components/themes/featuredStores'
 import interestStores from 'src/components/themes/interestStores'
