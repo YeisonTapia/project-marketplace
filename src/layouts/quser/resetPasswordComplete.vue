@@ -1,5 +1,5 @@
 <template>
-  <div id="authResetPassword" class="bg-fondo flex flex-center">
+  <div id="authResetPassword" class="flex flex-center">
     <!--Form-->
     <q-card>
       <q-card-section class="q-px-xl q-py-lg">

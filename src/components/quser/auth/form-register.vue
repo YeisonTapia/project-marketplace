@@ -1,29 +1,16 @@
 <template>
-  <q-card class="q-px-md rounded-sm">
-    <!--Tab-->
-    <q-tabs v-model="tabModel" active-color="primary"
-            indicator-color="primary" align="justify">
-      <q-tab name="tab-login" :label="$tr('quser.layout.label.login')" class="font-family-secondary"/>
-      <q-tab name="tab-register" v-if="withRegister" class="font-family-secondary" :label="$tr('quser.layout.label.createAccount')" />
-    </q-tabs>
+  <q-card class="q-my-xl">
+    
+    <div class="content q-px-xl q-py-md bg-white">
 
-    <q-separator />
-
-    <!--Tabs-->
-    <q-tab-panels v-model="tabModel" animated keep-alive>
-      <!--Login-->
-      <q-tab-panel name="tab-login">
-        <login-form @logged="emitLogged()" :email="email"/>
-      </q-tab-panel>
-      <!--Register-->
-      <q-tab-panel name="tab-register" v-if="withRegister">
-        <register-form :horizontal-extra-fields="props.horizontalExtraFields"
+      <register-form :horizontal-extra-fields="props.horizontalExtraFields"
                        :horizontal="props.horizontal"
                        v-model="email"
                        @logged="emitLogged()"
                        @registered="emitRegister()"/>
-      </q-tab-panel>
-    </q-tab-panels>
+            
+    </div>
+   
   </q-card>
 </template>
 <script>
@@ -40,7 +27,8 @@
       loginForm,
       registerForm
     },
-    watch: {},
+    watch: {
+    },
     mounted () {
       this.$nextTick(function () {
       })
@@ -51,6 +39,10 @@
         withRegister: false,//this.$store.getters['qsiteSettings/getSettingValueByName']('iprofile::registerUsers'),
         tabModel: 'tab-login',//'tab-login',
         email: null,
+        selectForm: 'init',
+        logo : this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo2').path,
+        projectName : "Donde esta esa vaina",
+        cBackground: false
       }
     },
     methods: {
@@ -85,4 +77,17 @@
 
           .q-icon
             margin-right 5px
+            
+    .q-card
+      background none !important
+      box-shadow none !important
+      
+    #formInit
+      max-width 800px
+
+   
+    .column-form
+      border 1px solid $tertiary
+   
+    
 </style>

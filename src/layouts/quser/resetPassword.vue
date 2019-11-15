@@ -1,59 +1,64 @@
 <template>
-  <div id="authResetPassword" class="bg-fondo flex flex-center">
-    <!--Form-->
-    <q-card>
-      <q-card-section class="q-px-xl q-py-lg">
-        <!--Title-->
-        <div class="text-primary font-family-secondary text-h6">{{$tr('quser.layout.label.reset')}}</div>
+  <div id="authResetPassword" class="flex flex-center">
+    
+        <div class="content q-px-xl q-py-md">
+          <!--Form-->
+          <q-card>
+            <q-card-section class="q-px-xl q-py-lg">
+              <!--Title-->
+              <div class="text-primary font-family-secondary text-h6">{{$tr('quser.layout.label.reset')}}</div>
 
-        <q-separator class="q-mt-xs q-mb-md"/>
+              <q-separator class="q-mt-xs q-mb-md"/>
 
-        <!--Form-->
-        <q-form @submit="resetPassword()" autocomplete="off"
-                @validation-error="$alert.error($tr('ui.message.formInvalid'))">
+              <!--Form-->
+              <q-form @submit="resetPassword()" autocomplete="off"
+                      @validation-error="$alert.error($tr('ui.message.formInvalid'))">
 
 
-          <!--Email field-->
-          <q-input name="username" autofocus ref="username" autocomplete="off"
-                   :label="`${$tr('ui.form.email')} *`" v-model="form.username" type="text" color="blue-grey"
-                   class="q-mb-sm" :rules="[
-                      val => !!val || $tr('ui.message.fieldRequired'),
-                      val => $helper.validateEmail(val) || $tr('ui.message.fieldEmail')]"/>
+                <!--Email field-->
+                <q-input name="username" autofocus ref="username" autocomplete="off"
+                        :label="`${$tr('ui.form.email')} *`" v-model="form.username" type="text" color="blue-grey"
+                        class="q-mb-sm" :rules="[
+                            val => !!val || $tr('ui.message.fieldRequired'),
+                            val => $helper.validateEmail(val) || $tr('ui.message.fieldEmail')]"/>
 
-          <!--Button submit-->
-          <div class="text-center q-mt-lg">
-            <q-btn :loading="loading" color="primary" type="submit" class="font-family-secondary btn-arrow" :label="$tr('quser.layout.label.reset')">
-              <div slot="loading">
-                <q-spinner-oval class="on-left"/>
-                {{`${$tr('ui.label.validating')}...`}}
+                <!--Button submit-->
+                <div class="text-center q-mt-lg">
+                  <q-btn :loading="loading" color="primary" type="submit" class="font-family-secondary btn-arrow" :label="$tr('quser.layout.label.reset')">
+                    <div slot="loading">
+                      <q-spinner-oval class="on-left"/>
+                      {{`${$tr('ui.label.validating')}...`}}
+                    </div>
+                  </q-btn>
+                </div>
+              </q-form>
+
+              <!--Button Login-->
+              <div class="text-center q-mt-sm">
+                <q-btn flat :label="$tr('quser.layout.label.login')"
+                      :to="{name : 'auth.login'}" color="grey-8"/>
               </div>
-            </q-btn>
-          </div>
-        </q-form>
+            </q-card-section>
+          </q-card>
 
-        <!--Button Login-->
-        <div class="text-center q-mt-sm">
-          <q-btn flat :label="$tr('quser.layout.label.login')"
-                 :to="{name : 'auth.login'}" color="grey-8"/>
+          <!--Dialog message-->
+          <q-dialog persistent v-model="showMessage">
+            <q-card>
+              <q-card-section>
+                <!--Title-->
+                <div class="text-primary text-center text-h6">{{$tr('quser.layout.label.reset')}}</div>
+                <!--Message-->
+                <p class="text-subtitle1 text-justify">{{$tr('quser.layout.message.reset')}}</p>
+                <!--Button login-->
+                <div class="text-center q-mt-sm">
+                  <q-btn label="Iniciar sesion" :to="{name : 'auth.login'}" color="primary"/>
+                </div>
+              </q-card-section>
+            </q-card>
+          </q-dialog>
+
         </div>
-      </q-card-section>
-    </q-card>
 
-    <!--Dialog message-->
-    <q-dialog persistent v-model="showMessage">
-      <q-card>
-        <q-card-section>
-          <!--Title-->
-          <div class="text-primary text-center text-h6">{{$tr('quser.layout.label.reset')}}</div>
-          <!--Message-->
-          <p class="text-subtitle1 text-justify">{{$tr('quser.layout.message.reset')}}</p>
-          <!--Button login-->
-          <div class="text-center q-mt-sm">
-            <q-btn label="Iniciar sesion" :to="{name : 'auth.login'}" color="primary"/>
-          </div>
-        </q-card-section>
-      </q-card>
-    </q-dialog>
   </div>
 </template>
 
@@ -79,6 +84,8 @@
         },
         showMessage: false,
         loading: false,
+        logo : this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo2').path,
+        projectName : "Donde esta esa vaina",
       }
     },
     methods: {

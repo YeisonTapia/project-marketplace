@@ -6,7 +6,7 @@
 
 <script>
   //components
-  import formAuth from 'src/components/quser/auth/form'
+  import formAuth from 'src/components/quser/auth/form-register'
 
   export default {
     props: {},
@@ -15,6 +15,7 @@
       next(vm => vm.checkRedirect(from))
     },
     mounted () {
+      //console.warn("Quser/Register/Parametros: "+this.$route.params.userRol)
       this.$nextTick(function () {
         this.checkRedirect()
       })
@@ -48,32 +49,6 @@
       //Redirect after login
       redirect () {
         this.$cache.remove('route.after.login')
-          /*Get role user autentichated*/
-          var roles=this.$store.state.quserAuth.userData.roles;
-          var businessRole=0;
-          for (var i=0;i<roles.length;i++){
-            if(roles[i].slug=="business"){
-              //Vendedor
-              businessRole=1;
-              break;
-            }//if role business
-          }//for
-          if(businessRole){
-            //Query axios
-            //If doesn't suscription active, redirect to plans
-            let params={
-              params:{
-                filter:{
-                  userId:this.$store.state.quserAuth.userId,
-                  status:1
-                }
-              }
-            };
-            this.$crud.index("apiRoutes.qsubscription.suscriptions",params).then(response => {
-              if(response.data.length==0)
-                this.$router.push({name: 'products.show',params:{slug:'tiendas-en-linea'}});
-            })
-          }
         this.$router.push(this.redirectTo)
       }
     }
