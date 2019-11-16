@@ -3,8 +3,9 @@
       <div class="row">
         <div class="col-12">
           <div class="q-container">
-            <div class="q-mb-md border-slider">
+            <div class="q-mb-md border-slider" >
               <full-width-gallery system-name="principal"></full-width-gallery>
+              <div style=" margin-bottom: 25px;"></div>
 
               <div class="q-container info-tienda" >
                 <div class="row q-col-gutter-md justify-end q-mx-sm">
@@ -95,7 +96,7 @@
     </div>
 </template>
 <script>
-import fullWidthGallery from '@imagina/qslider/_components/fullWidthGallery'
+import fullWidthGallery from 'src/components/qslider/qcarousel'
 export default {
   name: 'TopComponent',
   components: {

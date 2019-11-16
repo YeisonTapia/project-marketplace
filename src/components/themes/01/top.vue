@@ -89,7 +89,7 @@
     </div>
 </template>
 <script>
-import fullWidthGallery from '@imagina/qslider/_components/fullWidthGallery'
+import fullWidthGallery from 'src/components/qslider/qcarousel'
 export default {
   name: 'TopComponent',
   components: {
