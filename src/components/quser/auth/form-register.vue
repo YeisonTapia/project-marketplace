@@ -1,7 +1,7 @@
 <template>
   <q-card class="q-my-xl">
     
-    <div class="content q-px-xl q-py-md bg-white">
+    <div class="content q-px-xl q-py-md bg-white rounded-md">
 
       <register-form :horizontal-extra-fields="props.horizontalExtraFields"
                        :horizontal="props.horizontal"

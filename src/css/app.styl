@@ -761,3 +761,15 @@ footer
     .ratio-4-3  
       .contain
         object-fit cover  
+
+.line-text
+  position relative    
+  .line-grey
+    position absolute
+    top 50%
+    z-index 1
+    @media screen and (max-width: $breakpoint-xs)
+      display none
+  span  
+    position relative
+    z-index 2            

@@ -1,7 +1,7 @@
 <template>
   <q-page id="pageLogout" class="flex flex-center">
 
-    <div class="row shadow-3 bg-white q-mx-xl" style="width: 350px">
+    <div class="row shadow-3 bg-white q-mx-xl rounded-md" style="width: 350px">
       <div class="flex flex-center col-12 relative-position"
            style="padding: 20px; min-height: 300px">
         <div class="text-center">

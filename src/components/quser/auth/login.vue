@@ -11,10 +11,9 @@
             <!-- User field -->
             <div :class="columnsFieldsClass">
               <p class="q-subheading q-mb-sm">{{$tr('ui.form.email')}}: </p>
-              <q-input name="username" autofocus ref="username" rounded outlined
+              <q-input name="username" autofocus ref="username" rounded outlined dense
                        v-model="form.username" type="text" color="primary"
                        :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
-                       class="line-grey no-shadow rounded-sm"
                        >
               </q-input>
             </div>
@@ -22,17 +21,16 @@
             <!-- Password field -->
             <div :class="columnsFieldsClass">
               <p class="q-subheading q-mb-sm">{{$tr('ui.form.password')}}:</p>
-              <q-input name="password" ref="password" v-model="form.password" rounded outlined
+              <q-input name="password" ref="password" v-model="form.password" rounded outlined dense
                        type="password" color="primary"
                        :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
-                       class="line-grey no-shadow rounded-sm"
                        >
               </q-input>
             </div>
 
             <!-- text -->
             <div class=" col-12 q-body-2 line-text text-center q-mt-md q-mb-lg">
-              <hr class="line-grey q-my-none w-100">
+              <hr class="line-grey q-my-none full-width">
               <span class="bg-white q-px-lg">O ingresa por medio de tu red social </span>
             </div>
 
@@ -158,10 +156,10 @@
 #formLoginComponent
   max-width 800px
 
-.column-form
-  border 1px solid $tertiary
-  
-.btn-arrow
+  .column-form
+    border 1px solid $tertiary
+    
+  .btn-arrow
     &:after
       content ''
       background-image url('/statics/img/arrow-send-pink.png')

@@ -3,26 +3,26 @@
 
     <div class="bg-white q-pa-md shadow-2 text-center rounded-lg q-mb-lg" >
       <router-link :to="{name:'auth.register',params: { userRol: 'user' }}">
-        <div class="q-title text-primary">REGISTRATE COMO USUARIO</div>
-        <div class="q-caption">Ganaras puntos, premios, regalos y muchas sorpresas</div>
+        <div class="text-h5 font-family-secondary text-primary">REGISTRATE COMO USUARIO</div>
+        <div class="text-body2 text-secondary">Ganaras puntos, premios, regalos y muchas sorpresas</div>
       </router-link>
     </div>
 
     <div class="bg-white q-pa-md shadow-2 rounded-lg q-mb-lg" >
       <router-link :to="{name:'auth.register',params: { userRol: 'business' }}">
-        <div class="q-title text-primary">CREA TU TIENDA VIRTUAL</div>
-        <div class="q-caption">Registra tu negocio o empresa local y muestralo al mundo entero</div>
+        <div class="text-h5 font-family-secondary text-primary">CREA TU TIENDA VIRTUAL</div>
+        <div class="text-body2 text-secondary">Registra tu negocio o empresa local y muestralo al mundo entero</div>
       </router-link>
     </div>
 
     <div class="bg-white q-pa-md shadow-2 rounded-lg q-mb-lg" >
       <div class="btn-guest" @click="authenticate()">
-        <div class="q-title text-primary">ENTRA SIN REGISTRARTE</div>
-        <div class="q-caption">No tendras beneficios no sorpresas</div>
+        <div class="text-h5 font-family-secondary text-primary">ENTRA SIN REGISTRARTE</div>
+        <div class="text-body2 text-secondary">No tendras beneficios no sorpresas</div>
       </div>
     </div>
 
-    <div class="q-body-1 q-mb-lg text-white">¿Ya estás registrado?</div>  
+    <div class="text-body1 q-mb-lg text-white">¿Ya estás registrado?</div>  
 
     <q-btn label="Entra aquí" @click="emitSelectForm()"text-color="white" outline style="border-left:0;border-right:0; border-radius:0;" />
 

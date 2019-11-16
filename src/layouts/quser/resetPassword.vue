@@ -1,10 +1,10 @@
 <template>
   <div id="authResetPassword" class="flex flex-center">
     
-        <div class="content q-px-xl q-py-md">
+        <div class="content q-px-xl q-py-md ">
           <!--Form-->
-          <q-card>
-            <q-card-section class="q-px-xl q-py-lg">
+          <q-card class="rounded-md">
+            <q-card-section class="q-px-xl q-py-lg ">
               <!--Title-->
               <div class="text-primary font-family-secondary text-h6">{{$tr('quser.layout.label.reset')}}</div>
 
@@ -16,8 +16,9 @@
 
 
                 <!--Email field-->
-                <q-input name="username" autofocus ref="username" autocomplete="off"
-                        :label="`${$tr('ui.form.email')} *`" v-model="form.username" type="text" color="blue-grey"
+                <p class="q-subheading q-mb-sm">{{$tr('ui.form.email')}}*</p>
+                <q-input name="username" autofocus ref="username" autocomplete="off" rounded outlined dense
+                         v-model="form.username" type="text" 
                         class="q-mb-sm" :rules="[
                             val => !!val || $tr('ui.message.fieldRequired'),
                             val => $helper.validateEmail(val) || $tr('ui.message.fieldEmail')]"/>

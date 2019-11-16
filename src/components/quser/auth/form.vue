@@ -1,7 +1,7 @@
 <template>
   <q-card class="q-my-xl">
 
-    <div class="content q-px-xl q-py-md" :class="{'bg-white':cBackground,'column-form':cBackground}">
+    <div class="content q-px-xl q-py-md rounded-sm" :class="{'bg-white':cBackground,'column-form':cBackground}">
 
       <div v-if="selectForm=='init'">
         <initForm :selectForm="selectForm"  @selectForm ="selectForm = $event"/>

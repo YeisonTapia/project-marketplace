@@ -1,8 +1,8 @@
 <template>
   <div id="authResetPassword" class="flex flex-center">
     <!--Form-->
-    <q-card>
-      <q-card-section class="q-px-xl q-py-lg">
+    <q-card class="rounded-md">
+      <q-card-section class="q-px-xl q-py-lg ">
         <!--Title-->
         <div class="text-primary font-family-secondary text-h6">{{$tr('quser.layout.label.reset')}}</div>
 
@@ -12,13 +12,15 @@
         <q-form @submit="changePassword()" autocomplete="off"
                 @validation-error="$alert.error($tr('ui.message.formInvalid'))">
           <!--Password-->
-          <q-input name="username" autofocus ref="username" autocomplete="off"
-                   :label="`${$tr('ui.form.password')} *`" v-model="form.password" type="password" color="blue-grey"
+          <p class="q-subheading q-mb-sm">{{$tr('ui.form.password')}}*</p>
+          <q-input name="username" autofocus ref="username" autocomplete="off" rounded outlined dense
+                    v-model="form.password" type="password" color="blue-grey"
                    :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
 
           <!--Email field-->
-          <q-input name="username" ref="username" autocomplete="off"
-                   :label="`${$tr('ui.form.checkPassword')} *`" v-model="form.passwordConfirmation"
+          <p class="q-subheading q-mb-sm">{{$tr('ui.form.checkPassword')}}*</p>
+          <q-input name="username" ref="username" autocomplete="off" rounded outlined dense
+                    v-model="form.passwordConfirmation"
                    type="password" color="blue-grey" :rules="[
                     val => !!val || $tr('ui.message.fieldRequired'),
                     val => val == form.password || $tr('ui.message.fieldCheckPassword')

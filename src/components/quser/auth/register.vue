@@ -12,7 +12,7 @@
       <!-- Name field -->
       <div :class="columnsFieldsClass" class="q-mt-xs">
         <p class="q-subheading q-mb-sm"> {{$tr('ui.form.name')}}: </p>
-        <q-input v-model="form.firstName" color="primary" rounded outlined
+        <q-input v-model="form.firstName" color="primary" rounded outlined dense
                  :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                  >
         </q-input>
@@ -21,7 +21,7 @@
       <!-- Last Name field -->
       <div :class="columnsFieldsClass">
         <p class="q-subheading q-mb-sm"> {{$tr('ui.form.lastName')}}: </p>
-        <q-input v-model="form.lastName" color="primary" rounded outlined
+        <q-input v-model="form.lastName" color="primary" rounded outlined dense
                  :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                   >
         </q-input>
@@ -31,7 +31,7 @@
       <div :class="columnsFieldsClass" v-if="form.fields.cellularPhone">
         <p class="q-subheading q-mb-sm">{{$tr('ui.form.phone')}}: </p>
         <q-input  mask="phone"
-                 v-model="form.fields.cellularPhone.value" color="primary" rounded outlined
+                 v-model="form.fields.cellularPhone.value" color="primary" rounded outlined dense
                  unmasked-value :rules="[
                   val => !isValueRequired('cellularPhone',val) || $tr('ui.message.fieldRequired'),
                   val => !val || val.length == 10 || $tr('ui.message.fieldMinLeng',{num : 10})
@@ -42,7 +42,7 @@
       <!-- Email field -->
       <div :class="columnsFieldsClass">
         <p class="q-subheading q-mb-sm">{{$tr('ui.form.email')}}: </p>
-        <q-input v-model="form.email" color="primary" type="email" rounded outlined
+        <q-input v-model="form.email" color="primary" type="email" rounded outlined dense
                  :rules="[
                   val => !!val || $tr('ui.message.fieldRequired'),
                   val => $helper.validateEmail(val) || $tr('ui.message.fieldEmail')
@@ -53,7 +53,7 @@
       <!-- Password field -->
       <div :class="columnsFieldsClass">
         <p class="q-subheading q-mb-sm">{{$tr('ui.form.password')}}: </p>
-        <q-input v-model="form.password" type="password" color="primary" rounded outlined
+        <q-input v-model="form.password" type="password" color="primary" rounded outlined dense
                 :rules="[
                   val => !!val || $tr('ui.message.fieldRequired'),
                   val => val.length >= 8 || $tr('ui.message.fieldMinLeng', {num : 8})
@@ -65,7 +65,7 @@
       <div :class="columnsFieldsClass">
         <p class="q-subheading q-mb-sm">{{$tr('ui.form.checkPassword')}}:</p>
         <q-input v-model="form.passwordConfirmation" type="password"
-                 color="primary" rounded outlined
+                 color="primary" rounded outlined dense
                  :rules="[
                   val => !!val || $tr('ui.message.fieldRequired'),
                   val => val == form.password || $tr('ui.message.fieldCheckPassword')
@@ -75,7 +75,7 @@
 
       <!-- text -->
       <div class=" col-12 q-body-2 line-text text-center q-mt-md q-mb-lg">
-        <hr class="line-grey q-my-none w-100">
+        <hr class="line-grey q-my-none full-width">
         <span class="bg-white q-px-lg">O ingresa por medio de tu red social </span>
       </div>
 
@@ -350,16 +350,16 @@
     font-size 10px
     line-height 1.2
 
-.btn-arrow2
-    &:after
-      content ''
-      background-image url('/statics/img/arrow-send-pink.png')
-      background-repeat no-repeat
-      background-size contain
-      width 74px
-      height 100px
-      top -4px
-      left -50px
-      position absolute
+  .btn-arrow2
+      &:after
+        content ''
+        background-image url('/statics/img/arrow-send-pink.png')
+        background-repeat no-repeat
+        background-size contain
+        width 74px
+        height 100px
+        top -4px
+        left -50px
+        position absolute
 
 </style>
