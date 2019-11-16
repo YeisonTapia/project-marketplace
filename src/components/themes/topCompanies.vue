@@ -1,14 +1,14 @@
 <template>
-  <q-card flat  class="card-top bg-light w-100 h-100">
+  <q-card flat  class="card-top bg-light full-width full-height">
     <div class="text-center">
       <img class="img-title" src="/statics/img/top-companies.png">
     </div>
-    <q-card-main>
-      <h2 class="text-primary font-family-secondary">Mejores Empresas</h2>
+    <q-card-section>
+      <div class="text-h6 text-primary font-family-secondary">Mejores Empresas</div>
       <ol>
         <li v-for="item of list">{{item.name}}</li>
       </ol>
-    </q-card-main>
+    </q-card-section>
   </q-card>
 </template>
 <script>
@@ -41,30 +41,26 @@
 .card-top
   border-radius 10px
   & .img-title
-    object-fit contain
-    width  auto
-    margin: -12px  auto 0
-    height 80px
-  & .q-card-main
-    padding 10px 25px 15px 25px
-    font-family 'Trebuchet MS'
-    & h2
-      font-size 20px
-      margin-bottom 30px 
-    & ol 
-      list-style none
-      counter-reset my-awesome-counter
-      padding-left 5px
-      font-size 17px
-      li 
-        counter-increment my-awesome-counter
-        margin-bottom 20px
-        display flex
-        &:before 
-          content counter(my-awesome-counter)
-          color $primary
-          margin-right 8px
-          font-family 'Carter One'
-          top -3px
-          position relative
+      object-fit contain
+      width  auto
+      margin: -12px  auto 0
+      height 80px
+  & .q-card__section
+      padding 10px 25px 15px 25px
+      & ol 
+        list-style none
+        counter-reset my-awesome-counter
+        padding-left 5px
+        font-size 17px
+        li 
+          counter-increment my-awesome-counter
+          margin-bottom 20px
+          display flex
+          &:before 
+            content counter(my-awesome-counter)
+            color $primary
+            margin-right 8px
+            font-family 'Carter One'
+            top 0
+            position relative
 </style>

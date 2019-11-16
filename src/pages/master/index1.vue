@@ -12,7 +12,7 @@
             <new-products></new-products>
           </div>
           <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
-            <!--<quiz></quiz> -->
+            <quiz></quiz> 
 
             <div class="banner-bottom q-mb-xl">
               <div class="row">

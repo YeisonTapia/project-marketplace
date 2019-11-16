@@ -59,6 +59,28 @@ let responsePages = {
             icon: 'fas fa-home',
             authenticated: false
         },
+        layout2: {
+            permission: null,
+            activated: true,
+            path: '/layout2',
+            name: 'app.layout2',
+            layout: () => import('src/layouts/master'),
+            page: () => import('pages/master/index2.vue'),
+            title: 'sidebar.pageHome',
+            icon: 'fas fa-home',
+            authenticated: false
+        },
+        layout3: {
+            permission: null,
+            activated: true,
+            path: '/layout3',
+            name: 'app.layout3',
+            layout: () => import('src/layouts/master'),
+            page: () => import('pages/master/index3.vue'),
+            title: 'sidebar.pageHome',
+            icon: 'fas fa-home',
+            authenticated: false
+        },
         admin: {
             permission: null,
             activated: true,

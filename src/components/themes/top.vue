@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-xl full-width shadow-2 q-mb-xl">
-    <div class="row gutter-md">
+    <div class="row q-col-gutter-lg">
       <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
         <quiz></quiz>
       </div>

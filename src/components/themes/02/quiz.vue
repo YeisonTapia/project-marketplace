@@ -1,9 +1,11 @@
 <template>
-  <q-card class="card-quiz-1 rounded-sm full-width q-mb-xl">
+  <q-card class="card-quiz-2  q-mb-xl">
 
-    <div class="q-card-title bg-primary rounded-sm text-center text-white q-py-sm">
-      ENCUENTA
+    <div class="q-card-title font-family-secondary text-center text-primary q-py-sm">
+      <h6 class="q-mt-md q-mb-none">Participa en </h6>
+      <h3 class="q-my-none">Encuenta</h3>
     </div>
+
 
     <q-stepper v-if="success && answers.length>0 && !alertContent.active" ref="stepper" v-model="currentStep" class="no-shadow">
       
@@ -12,24 +14,24 @@
 
         <q-card-section>
 
-          <div class="text-h6 q-mb-sm">{{question.title}}</div>
+          <div class="text-h6 q-mb-sm text-center">{{question.title}}</div>
             
-          <q-option-group  color="primary" keep-color
+          <q-option-group keep-color
             v-model="selectedOptions"
             :options="answers[index]"
-            type="checkbox"
+            type="checkbox" color="primary"
           />
 
         </q-card-section>
 
-        <q-stepper-navigation  align="center" class="q-pa-md" v-if="index < poll.questions.length - 1" >
+        <q-stepper-navigation  align="right" class="q-pa-md" v-if="index < poll.questions.length - 1" >
           <div class="text-center cursor-pointer" @click="next()">
             <div class="font-family-secondary">Siguiente</div>
             <img src="statics/img/arrow-right-blue.png" style="width:25px;">
           </div>
         </q-stepper-navigation>
-        <q-stepper-navigation align="center" v-else class="q-ma-md">
-           <q-btn class="bg-secondary text-white btn-arrow-send-pink" @click="saveData">Enviar</q-btn>
+        <q-stepper-navigation align="right" v-else class="send q-pa-md" >
+           <q-btn class="bg-secondary text-white font-family-secondary" @click="saveData">Enviar</q-btn>
         </q-stepper-navigation>
         
       </q-step>
@@ -296,25 +298,21 @@
     }
 </script>
 <style lang="stylus">
-.card-quiz-1
+.card-quiz-2
+  background-color var(--q-color-light)
+  border-radius 30px 0 30px 0
   & .q-card-title
-    position relative
     font-weight bold
-    &:before
-      content ''
-      background-image url('/statics/img/icon-quiz.png')
-      position absolute
-      bottom 0
-      left 5px
-      height 60px
-      width 60px
-      background-size contain
-      background-repeat no-repeat
-      background-position bottom 
     & .q-option-group  
       font-size 17px
+  & .send
+    background-image url('/statics/img/arrow-send-pink.png')
+    background-repeat no-repeat
+    background-position 82% 68%
+    background-size 25%
     
   .q-stepper
+    background-color var(--q-color-light)
     .q-stepper__header
       display none
     .q-stepper__step-inner  

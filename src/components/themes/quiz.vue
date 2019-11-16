@@ -1,34 +1,35 @@
 <template>
-  <q-card flat class="card-quiz bg-primary w-100 h-100">
-    <img class="img-title w-100" src="/statics/img/quiz-title.png">
-
+  <q-card flat class="card-quiz bg-primary full-width full-height">
+    <div>
+      <img class="img-title full-width" src="/statics/img/quiz-title.png">
+    </div>
     <q-stepper v-if="success && answers.length>0 && !alertContent.active" ref="stepper" v-model="currentStep" class="no-shadow">
       
 
       <q-step :name="question.id" :order="index" :title="question.title" v-for="(question, index) in poll.questions" :key="index">
 
-        <q-card-main class="image">
+        <q-card-section class="image">
 
-        <h2 class="q-mb-0 text-light">{{question.title}}</h2>
-          
-        <q-option-group  dark
-          v-model="selectedOptions"
-          :options="answers[index]"
-          color="light"
-          type="checkbox"
-        />
+         <div class="text-h6 q-mb-sm text-light">{{question.title}}</div>
+            
+          <q-option-group  dark
+            v-model="selectedOptions"
+            :options="answers[index]"
+            color="light"
+            type="checkbox"
+          />
 
-        </q-card-main>
+        </q-card-section>
 
-        <q-card-actions  align="end" class="q-pa-md" v-if="index < poll.questions.length - 1" >
+        <q-stepper-navigation  align="right" class="q-pa-md" v-if="index < poll.questions.length - 1" >
           <div class="text-light text-center cursor-pointer" @click="next()">
             <div class="font-family-secondary">Siguiente</div>
             <img src="statics/img/arrow-right-blue.png" style="width:25px;">
           </div>
-        </q-card-actions>
-        <q-card-actions align="end" v-else class="send q-pa-md" >
+        </q-stepper-navigation>
+        <q-stepper-navigation align="right" v-else class="send q-pa-md" >
            <q-btn class="bg-primary text-light font-family-secondary" @click="saveData">Enviar</q-btn>
-        </q-card-actions>
+        </q-stepper-navigation>
         
       </q-step>
 
@@ -38,7 +39,9 @@
 
     <!-- msj final -->
     <q-alert v-if="alertContent.active" :color="alertContent.color" :icon="alertContent.icon" class="q-mx-sm q-mt-xl">
+      <q-card-section class="text-center">
         {{alertContent.msj}}
+      </q-card-section>
     </q-alert>
 
   </q-card>
@@ -299,7 +302,7 @@
     background-repeat no-repeat
     background-position right bottom
     font-family 'Trebuchet MS'
-    & h2
+    & .text-h6 
       font-size 18px
       position relative
       &:before 
@@ -313,7 +316,7 @@
   & .send
     background-image url('/statics/img/arrow-send-white.png')
     background-repeat no-repeat
-    background-position 72% 68%
+    background-position 60% 68%
     background-size 25%
   & .img-title
     margin-top -22px
@@ -321,8 +324,9 @@
     padding 10px 25px 15px 25px
     
   .q-stepper
-    .q-stepper-header
+    background-color $primary
+    .q-stepper__header
       display none
-    .q-stepper-step-inner
-      padding 0!important  
+    .q-stepper__step-inner  
+      padding 15px
 </style>

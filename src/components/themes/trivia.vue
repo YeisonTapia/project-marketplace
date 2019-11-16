@@ -1,16 +1,18 @@
 <template>
   <q-card flat :class="className" class="relative-position">
-    <img class="img-title w-100" v-show="!isModal" src="/statics/img/trivia-title.png">
+    <div>
+      <img class="img-title full-width" v-show="!isModal" src="/statics/img/trivia-title.png">
+    </div>
     <div class="content-stepper">
 
      <q-stepper v-if="success && answers.length>0 && !alertContent.active" ref="stepper" v-model="currentStep" class="no-shadow">
       <!-- Step: -->
       <q-step :name="question.id" :order="index" :title="question.title" v-for="(question, index) in trivia.questions" :key="index">
 
-        <q-card-main>
-          <h2 class="text-primary">{{question.title}}</h2>
-          <div class="ratio-16-9" v-show="isModal">
-              <img :src="trivia.mainImage.path">
+        <q-card-section>
+          <div class="text-h6  text-primary">{{question.title}}</div>
+          <div  v-show="isModal">
+              <q-img :ratio="16-9" :src="trivia.mainImage.path" />
           </div>  
           <div class="q-py-md">
              <q-option-group
@@ -20,11 +22,11 @@
               color="primary"
             />
           </div>
-        </q-card-main>
+        </q-card-section>
 
-        <q-card-actions class="q-pa-md">
+        <q-stepper-navigation class="q-pa-md">
 
-          <div class="row justify-end items-center w-100 h-100" v-if="index < trivia.questions.length - 1">
+          <div class="row justify-end items-center full-width full-height" v-if="index < trivia.questions.length - 1">
             <div class="col-6 text-center cursor-pointer" v-show="isModal">
               <q-icon name="fas fa-share-alt"/>
                 <div>Conexion</div>
@@ -37,7 +39,7 @@
             </div>
           </div>
 
-          <div class="row justify-end items-center w-100 h-100" v-else>
+          <div class="row justify-end items-center full-width full-height" v-else>
             <div class="col-6 text-center" v-show="isModal">
               <q-icon name="fas fa-share-alt"/>
                 <div>Conexion</div>
@@ -51,7 +53,7 @@
 
             </div>
           </div>
-        </q-card-actions> 
+        </q-stepper-navigation> 
 
       </q-step>
 
@@ -63,7 +65,9 @@
 
     <!-- msj final -->
     <q-alert v-if="alertContent.active" :color="alertContent.color" :icon="alertContent.icon" class="q-mx-sm q-mt-xl">
-        {{alertContent.msj}}
+        <q-card-section class="text-center">
+          {{alertContent.msj}}
+        </q-card-section>
     </q-alert>
 
   </q-card>
@@ -243,7 +247,7 @@ export default {
 </script>
 <style lang="stylus">
 .modaltrivia
-  & .q-card-main
+  & .q-card__section
     padding 0
     h2 
       font-size 18px
@@ -258,10 +262,11 @@ export default {
       & .q-icon
         color #FD2D5E
         font-size 20px    
-  .q-stepper-header
-    display none
-  .q-stepper-step-inner
-    padding-top 0!important
+  .q-stepper
+    .q-stepper__header
+      display none
+    .q-stepper__step-inner  
+      padding 15px
 
 .home-trivia
   border-radius 10px
@@ -269,24 +274,23 @@ export default {
   height 100%
   background-color var(--q-color-light)
   & .send
-    background-image url('/statics/img/arrow-send-yellow.png')
-    background-repeat no-repeat
-    background-position 73% 74%
-    background-size: 25%
+      background-image url('/statics/img/arrow-send-yellow.png')
+      background-repeat no-repeat
+      background-position 73% 74%
+      background-size: 25%
   & .img-title
-    margin-top -22px
-  & .q-card-main
-    padding 10px 25px 15px 25px
-    & h2
-      font-size 18px
-      position relative
-      margin-bottom 0
-      &:before 
-        position absolute
-        color #FD2D5E
-        content "•"
-        left -15px
-        font-weight bold
+      margin-top -22px
+  & .q-card__section
+      padding 10px 25px 15px 25px
+      & .text-h6 
+        position relative
+        margin-bottom 0
+        &:before 
+          position absolute
+          color #FD2D5E
+          content "•"
+          left -15px
+          font-weight bold
           
   & .q-option-group
     > div
@@ -297,12 +301,13 @@ export default {
       & .q-icon
         color #FD2D5E
         font-size 20px
-  .q-stepper-header
-    display none
-  .q-stepper-step-inner
-    padding 0!important
+  .q-stepper
+    .q-stepper__header
+      display none
+    .q-stepper__step-inner  
+      padding 15px
     
-.content-stepper
-  .q-inner-loading
-    background:none
+  .content-stepper
+    .q-inner-loading
+      background none
 </style>

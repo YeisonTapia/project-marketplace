@@ -3,7 +3,7 @@
 
 	    <full-width-gallery system-name="principal" />
 
-	    <!--<top></top> -->
+	    <top></top> 
 
 		<featured-stores></featured-stores>
 

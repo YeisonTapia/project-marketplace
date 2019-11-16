@@ -1,38 +1,43 @@
 <template>
-  <q-card class="card-quiz-1 rounded-sm full-width q-mb-xl">
+  <q-card class="card-quiz-3 full-width  q-mb-xl">
 
-    <div class="q-card-title bg-primary rounded-sm text-center text-white q-py-sm">
-      ENCUENTA
+    <div class="q-card-title font-family-secondary text-center text-primary q-py-sm">
+      <h6 class="q-mt-md q-mb-none">Participa en </h6>
+      <h4 class="q-my-none">Encuenta</h4>
     </div>
 
-    <q-stepper v-if="success && answers.length>0 && !alertContent.active" ref="stepper" v-model="currentStep" class="no-shadow">
+
+
+    <q-stepper v-if="success && answers.length>0 && !alertContent.active" ref="stepper" v-model="currentStep" class="no-shadow"  animated contracted>
       
 
-      <q-step :name="question.id" :order="index" :title="question.title" v-for="(question, index) in poll.questions" :key="index">
+      <q-step :name="question.id" :order="index" :title="question.title" v-for="(question, index) in poll.questions" :key="index" >
 
         <q-card-section>
 
-          <div class="text-h6 q-mb-sm">{{question.title}}</div>
-            
-          <q-option-group  color="primary" keep-color
-            v-model="selectedOptions"
-            :options="answers[index]"
-            type="checkbox"
-          />
+        <div class="text-h6 q-mb-sm">{{question.title}}</div>
+          
+        <q-option-group  color="positive" keep-color
+          v-model="selectedOptions"
+          :options="answers[index]"
+          type="checkbox"
+        />
 
         </q-card-section>
 
-        <q-stepper-navigation  align="center" class="q-pa-md" v-if="index < poll.questions.length - 1" >
+        <q-stepper-navigation align="right" class="q-pa-md" v-if="index < poll.questions.length - 1" >
           <div class="text-center cursor-pointer" @click="next()">
             <div class="font-family-secondary">Siguiente</div>
             <img src="statics/img/arrow-right-blue.png" style="width:25px;">
           </div>
         </q-stepper-navigation>
-        <q-stepper-navigation align="center" v-else class="q-ma-md">
-           <q-btn class="bg-secondary text-white btn-arrow-send-pink" @click="saveData">Enviar</q-btn>
+        <q-stepper-navigation align="right" v-else class=" q-ma-md" >
+          <q-btn class="bg-primary text-white btn-arrow-send-pink" @click="saveData">Enviar</q-btn>
         </q-stepper-navigation>
         
       </q-step>
+
+
 
       <q-inner-loading :visible="loading" />
     </q-stepper>
@@ -296,23 +301,32 @@
     }
 </script>
 <style lang="stylus">
-.card-quiz-1
+.card-quiz-3
   & .q-card-title
     position relative
     font-weight bold
+    border-top 10px solid $secondary!important
     &:before
       content ''
-      background-image url('/statics/img/icon-quiz.png')
+      background-image url('/assets/img/icon-quiz.png')
       position absolute
-      bottom 0
-      left 5px
+      bottom 15px
+      left 25px
       height 60px
       width 60px
       background-size contain
       background-repeat no-repeat
-      background-position bottom 
+      background-position bottom
+  & .q-card__section
     & .q-option-group  
       font-size 17px
+  & .send
+    background-image url('/assets/img/arrow-send-pink.png')
+    background-repeat no-repeat
+    background-position 70% 68%
+    background-size 25%
+    @media screen and (max-width: $breakpoint-md)
+      background-image none
     
   .q-stepper
     .q-stepper__header
