@@ -200,22 +200,23 @@
             let data = this.$clone(this.form)
             data.fields = this.$helper.convertToBackField(this.form.fields)
             
-            console.warn("Entra: Antes de registrar")
-            
+            // Check rol to register
             let uRol = this.$route.params.userRol
-            console.warn("Components/Quser/Register/Parametros: "+uRol)
+            
+            if(uRol && uRol=="business"){
+              let roles = [8]
+              data['roles'] = roles
+            }
 
-            if(uRol && uRol=="business")
-              console.warn("Cambio el rol de registro "+this.$route.params.userRol)
+            //console.warn(data)
 
-           
             this.$crud.create('apiRoutes.quser.register', data).then(response => {
               this.callbackRequest(true, response.data)
             }).catch(error => {
               this.callbackRequest(false, error)
             })
            
-            
+
           }
         }
       },

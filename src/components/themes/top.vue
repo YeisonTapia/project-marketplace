@@ -36,7 +36,6 @@ export default {
   },
   data() {
     return {
-      lang: this.$q.i18n.lang,
       loading: false,
       success: false,
       triviaUserIds:[],

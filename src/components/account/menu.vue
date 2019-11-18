@@ -12,7 +12,7 @@
         </div>
         <div class="club text-center">
           <div class="circulo bg-secondary text-white round flex items-center justify-center">
-            <div class="points font-family-secondary">100</div>
+            <div class="points font-family-secondary">{{pointsHistory}}</div>
           </div>
           <h5 class="font-family-secondary text-secondary q-my-md">Puntos historicos</h5>
         </div>
@@ -74,6 +74,9 @@
 </template>
 
 <script>
+
+  import http from "axios"
+
   //Plugins
   import {required, email, minLength} from 'vuelidate/lib/validators'
 
@@ -158,7 +161,8 @@
             icon: 'far fa-star',
             to: 'app.home'
           }
-        ]
+        ],
+        pointsHistory: 0
       }
     },
     computed: {
@@ -174,6 +178,7 @@
         this.loading = true//Loading
         this.form.fields = this.$clone(this.defaultFields)//Set default fields
         await this.setUserData()//Set user data
+        await this.getPointsHistoryc()
         this.success = true//Success page
         this.loading = false//Loading
       },
@@ -195,6 +200,34 @@
         if(this.form.fields.mainImage.value!="")
           this.imgUser=this.form.fields.mainImage.value
 
+      },
+      // Get Points History
+      async getPointsHistoryc(){
+        return new Promise((resolve, reject) => {
+          //Params
+          let params = {
+            params: {
+              filter: {
+                userId: this.$store.state.quserAuth.userId,
+                type: 'availablePointsUser'
+              }
+            }
+          }
+
+          http.get(config('apiRoutes.qredeems.calculates'),params)
+            .then(response => {
+
+              if(response.data.data.points>0)
+                this.pointsHistory = response.data.data.points
+
+              resolve(true);
+
+            })
+            .catch(error => {
+              reject(error);
+            });
+        })
+        
       }
     }
   }
