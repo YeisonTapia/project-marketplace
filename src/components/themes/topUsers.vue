@@ -11,11 +11,14 @@
         </ul>
       </div>
       <div v-else>
-          <q-alert :color="alertContent.color" :icon="alertContent.icon" class="q-mx-sm q-mt-xl">
-            <q-card-section class="text-center">
+          <q-banner :class="alertContent.color" class="q-mt-md">
+            <template v-slot:avatar>
+              <q-icon :name="alertContent.icon" color="white" />
+            </template>
+            <div class="text-center text-white">
               {{alertContent.msj}}
-            </q-card-section>
-          </q-alert>
+            </div>
+          </q-banner>
       </div>
     </q-card-section>
 
@@ -37,7 +40,7 @@
         listUsers: [],
         userId: this.$store.state.quserAuth.userId ? this.$store.state.quserAuth.userId : null,
         alertContent:{
-          color:'secondary',
+          color:'bg-secondary',
           icon:'warning',
           msj:'No existen datos disponbiles'
         },

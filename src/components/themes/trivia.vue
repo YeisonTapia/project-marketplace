@@ -64,11 +64,17 @@
     </div>
 
     <!-- msj final -->
-    <q-alert v-if="alertContent.active" :color="alertContent.color" :icon="alertContent.icon" class="q-mx-sm q-mt-xl">
-        <q-card-section class="text-center">
+    <q-banner v-if="alertContent.active" :class="alertContent.color" class="q-mx-sm q-mt-xl q-py-md">
+
+      <template v-slot:avatar>
+        <q-icon :name="alertContent.icon" color="white" />
+      </template>
+
+        <div class="text-center text-white">
           {{alertContent.msj}}
-        </q-card-section>
-    </q-alert>
+        </div>
+
+    </q-banner>
 
   </q-card>
 </template>
@@ -100,7 +106,7 @@ export default {
         userId: this.$store.state.quserAuth.userId ? this.$store.state.quserAuth.userId : null,
         alertContent:{
           active: false,
-          color:'secondary',
+          color:'bg-secondary',
           icon:'check',
           msj:'Gracias por participar!!'
         },      
