@@ -243,6 +243,8 @@ responsePages.qsubscription.featuresCreate.layout= () => import('src/layouts/adm
 responsePages.qsubscription.featuresUpdate.layout= () => import('src/layouts/admin')
 
 //QMARKETPLACE
+responsePages.qmarketplace.themes.layout= () => import('src/layouts/admin')
+responsePages.qmarketplace.categories.layout= () => import('src/layouts/admin')
 responsePages.qmarketplace.stores.layout= () => import('src/layouts/admin')
 responsePages.qmarketplace.storesCreate.layout= () => import('src/layouts/admin')
 responsePages.qmarketplace.storesEdit.layout= () => import('src/layouts/admin')
