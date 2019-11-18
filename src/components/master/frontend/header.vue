@@ -12,12 +12,12 @@
                 <img :src="logo">
               </router-link>
             </div>
-          </div> 
+          </div>
           <div class="col">
 
             <div class="row full-height justify-end">
               <div class="col-auto self-start">
-                <im-social></im-social> 
+                <im-social></im-social>
                 <div class="profile">
                   <widget-user></widget-user>
                   <span class="q-px-sm font-family-primary line">|</span>
@@ -31,7 +31,7 @@
                     <search-store></search-store>
                   </div>
                   <div class="col-xs-12 col-sm-9 col-md-auto">
-                    <q-btn class="btn-tienda" flat icon="fas fa-store" color="white" no-caps label="Crea tu Tienda Virtual" @click="createStore()" />
+                    <q-btn v-if="canCreateStore" class="btn-tienda" flat icon="fas fa-store" color="white" no-caps label="Crea tu Tienda Virtual" @click="createStore()" />
                   </div>
                 </div>
               </div>
@@ -59,7 +59,7 @@
         </q-toolbar-title>
         <widget-user></widget-user>
         <q-btn flat round dense icon="fas fa-heart" />
-        <q-btn flat round dense @click="createStore()" icon="fas fa-store" />
+        <q-btn v-if="canCreateStore" flat round dense @click="createStore()" icon="fas fa-store" />
       </q-toolbar>
 
     </q-header>
@@ -92,11 +92,12 @@
       menuList,
       imSocial,
       widgetUser,
-      searchStore 
+      searchStore
     },
     watch: {},
     mounted() {
       this.$nextTick(function () {
+        this.getSuscriptionData();
       })
     },
     data() {
@@ -110,6 +111,7 @@
           show: true,
           search: ''
         },
+        canCreateStore:false,
         phones: [],//this.$store.getters['qsiteSettings/getSettingValueByName']('isite::phones')
       }
     },
@@ -142,6 +144,40 @@
       },
     },
     methods: {
+      getSuscriptionData(){
+        if(this.$store.state.quserAuth.authenticated){
+          /*Get role user autentichated*/
+          var roles=this.$store.state.quserAuth.userData.roles;
+          var businessRole=0;
+          for (var i=0;i<roles.length;i++){
+            if(roles[i].slug=="business"){
+              businessRole=1;
+              break;
+            }//if role business
+            else if(roles[i].slug=="superadmin"){
+              businessRole=1;
+              break;
+            }
+          }//for
+          if(businessRole){
+            //Query axios
+            //If doesn't suscription active, redirect to plans
+            let params={
+              params:{
+                filter:{
+                  userId:this.$store.state.quserAuth.userId,
+                  status:1
+                }
+              }
+            };
+            this.$crud.index("apiRoutes.qsubscription.suscriptions",params).then(response => {
+              if(response.data.length>0){
+                this.canCreateStore=true;
+              }
+            })
+          }//businessRole
+        }
+      },
       //Show drawer specific
       toggleDrawer(name, show) {
         //Hidden all drawers
@@ -156,7 +192,7 @@
       },
       createStore() {
         //Crear Tienda
-        this.$router.push({ name: 'app.editartienda'});
+        this.$router.push({ name: 'qmarketplace.admin.stores.index'});
       },
     }
   }
@@ -177,8 +213,8 @@
       top 0
       left 0
 
-  #menu_master    
-    .menu  
+  #menu_master
+    .menu
       font-weight 700
       font-size 16px
       border-top 1px solid #e0e0e0 !important
@@ -193,7 +229,7 @@
         &:hover
           background $tertiary!important
           color #ffffff
-          i 
+          i
             color #ffffff
 
   .header-desktop
@@ -229,8 +265,8 @@
           color $primary
           & :hover
             color $warning
-        & .q-focus-helper  
-          background none !important 
+        & .q-focus-helper
+          background none !important
     .profile
       display inline-block
       color #ffffff
@@ -240,7 +276,7 @@
         width 1.5em
         & :hover
           color $warning
-      & .q-focus-helper  
+      & .q-focus-helper
         background none !important
       & .line
         position relative
@@ -284,21 +320,21 @@
         z-index 99
         > .q-list
           -webkit-transform  skew(-10deg)
-          transform skew(-10deg)     
+          transform skew(-10deg)
           display -ms-flexbox
           display flex
           -ms-flex-wrap wrap
           flex-wrap wrap
           margin 0
           list-style none
-          padding 0 
+          padding 0
           > .q-item
             -ms-flex 1 1 auto
             flex 1 1 auto
-            cursor pointer  
+            cursor pointer
             position relative
             color $secondary
-            &:hover 
+            &:hover
               color $tertiary
               &:before
                 content ''
