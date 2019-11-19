@@ -215,14 +215,4 @@ export default {
 }
 </script>
 <style lang="stylus">
-.form-general
-  .q-chip
-    background-color $primary
-    color #fff
-    font-size 18px
-    .q-chip__content
-      padding 10px 10px
-    .q-chip__icon
-      color #ffffff!important
-      opacity 1
 </style>

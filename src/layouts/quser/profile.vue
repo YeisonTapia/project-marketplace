@@ -1,72 +1,68 @@
 <template>
-  <div class="quser-profile">
+  <div class="quser-profile ">
 
     <div v-if="success" class="quser-content">
 
-    <div class="title-principal q-mb-xl">
-      <h3 class="font-family-secondary q-mt-none q-mb-md">Completa el formulario y <span class="text-tertiary">obten 10 puntos</span> para obtener <span class="text-tertiary">Premios y Descuentos.</span></h3>
-      <small class="q-mb-xl">Los datos de este formulario seran usados para adaptar las promociones y busquedas de tiendas a sus necesidades</small>
-    </div>
-    
-    <!--Form Personal-->
-    <div class="form-personal bg-white rounded-md shadow-3 relative-position q-px-xl q-py-lg q-my-xl">
-      
-      <h3 class="title-label-orange text-center">
-        <div>Informacion Personal</div>
-      </h3>
-
-      <!--Firstname--> <!--Lastname-->
-      <div class="row q-col-gutter-lg">
-
-        <div class="col">
-          <!--Firstname-->
-          <q-input v-model="form.firstName" stack-label :label="`* ${$trp('ui.form.firstName')}`"
-                   :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
-        </div>
-
-        <div class="col">
-          <!--Lastname-->
-          <q-input v-model="form.lastName" stack-label :label="`* ${$trp('ui.form.lastName')}`"
-                   :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
-        </div>
-
+      <div class="title-principal q-mb-xl">
+        <h3 class="font-family-secondary q-mt-none q-mb-md">Completa el formulario y <span class="text-tertiary">obten 10 puntos</span> para obtener <span class="text-tertiary">Premios y Descuentos.</span></h3>
+        <small class="q-mb-xl">Los datos de este formulario seran usados para adaptar las promociones y busquedas de tiendas a sus necesidades</small>
       </div>
 
-      <!--Username-->  <!--Nickname-->
-      <div class="row q-col-gutter-lg">
-        <div class="col">
-          <!--Username-->
-          <q-input v-model="form.fields.userName.value" stack-label :label="`Nombre de Usuario`"/>
-        </div>
-        <div class="col">
-          <!--Nickname-->
-          <q-input v-model="form.fields.nickName.value" stack-label :label="`* ¿Algùn apodo?`"
+      <div class="row items-center form-general">
+        <q-card class="rounded-md q-mb-xl full-width">
+          <div class="q-pl-md">
+            <h3 class="title-label-profile bg-primary">
+              <div>Informacion personal</div>
+            </h3>
+          </div>
+          <q-card-section class="q-pa-xl">
+
+            <div class="row q-col-gutter-lg">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
+                <!--Firstname-->
+                <q-input class="requeried" v-model="form.firstName" stack-label :label="`${$trp('ui.form.firstName')}`"
                    :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
-        </div>
-      </div>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
+                <!--Lastname-->
+                <q-input class="requeried" v-model="form.lastName" stack-label :label="`${$trp('ui.form.lastName')}`"
+                   :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
+              </div>
 
-       <!--Birthday-->  <!--Country and City-->
-      <div class="row q-col-gutter-lg">
-        <div class="col">
-          <!--Birthday-->
-          <q-input v-model="form.fields.birthday.value" mask="date" placeholder="YYYY/MM/DD" label="* Fecha de Nacimiento" :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
-            <template v-slot:append>
-              <q-icon name="event" class="cursor-pointer">
-                  <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
-                    <q-date v-model="form.fields.birthday.value" @input="() => $refs.qDateProxy.hide()" />
-                  </q-popup-proxy>
-              </q-icon>
-            </template>
-          </q-input>
-        </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
+                <!--Username-->
+                <q-input v-model="form.fields.userName.value" stack-label :label="`Nombre de Usuario`"/>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
+                <!--Nickname-->
+                <q-input class="requeried" v-model="form.fields.nickName.value" stack-label :label="`¿Algùn apodo?`"
+                   :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
+              </div>
 
-        <div class="col">
-          <!--Country and City-->
-          <div class="row q-mb-lg q-col-gutter-md">
-            <!-- Country -->
-            <div class="col-12 col-sm-6">
-              <q-select 
-                    label="* País"
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
+                <!--Birthday-->
+                <q-input class="requeried" v-model="form.fields.birthday.value" mask="date" placeholder="YYYY/MM/DD" label="Fecha de Nacimiento" :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
+                  <template v-slot:append>
+                    <q-icon name="event" color="primary" class="cursor-pointer">
+                        <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
+                          <q-date v-model="form.fields.birthday.value" @input="() => $refs.qDateProxy.hide()" />
+                        </q-popup-proxy>
+                    </q-icon>
+                  </template>
+                </q-input>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
+                <!--Civil State-->
+                <q-select label="Estado Civil" stack-label
+                    v-model="form.fields.civilState.value" 
+                    :options="civilStateOptions"/>
+              </div>
+
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
+                <!-- country -->
+                <q-select 
+                    label="País"
+                    class="requeried"
                     stack-label
                     emit-value
                     map-options
@@ -74,119 +70,93 @@
                     :options="countryOptions"
                     :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                     @input="getCities(form.fields.country.value,'CiO')"/>
-            </div>
-            <!-- City -->
-            <div class="col-12 col-sm-6">
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
+                <!--City-->
                 <q-select 
-                    label="* Ciudad"
+                    label="Ciudad"
+                    class="requeried"
                     stack-label
                     emit-value
                     map-options
                     v-model="form.fields.city.value" 
                     :options="cityOptions"
                     :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
-            </div>
-          </div>
+              </div>
 
-        </div>
-
-      </div>
-
-      <!--Civil State--> <!--Sex-->
-      <div class="row q-col-gutter-lg">
-        <div class="col">
-           <!--Civil State-->
-          <q-select label="Estado Civil" stack-label
-                    v-model="form.fields.civilState.value" 
-                    :options="civilStateOptions"/>
-        </div>
-        <div class="col">
-          <!--Sex-->
-          <!--
-          <q-field borderless label="* Sexo" stack-label 
-          :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
-            <template v-slot:control>
-                <q-option-group inline left-label v-model="form.fields.sex.value" 
-                :options="sexOptions" 
-                color="primary"/>
-            </template>
-          </q-field>
-          -->
-          <!--Sex-->
-          <q-field borderless label="* Sexo" stack-label>
-            <template v-slot:control>
-                <q-option-group inline left-label v-model="form.fields.sex.value" 
-                :options="sexOptions" 
-                color="primary"/>
-            </template>
-          </q-field>
-        </div>
-      </div>
-
-      <!--Academic Leven--> <!--Sons-->
-      <div class="row q-col-gutter-lg">
-        <div class="col">
-          <!--Academic Leven-->
-          <q-select label="Nivel Académico" stack-label
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
+                <!--Academic Leven-->
+                <q-select label="Nivel Académico" stack-label
                     v-model="form.fields.academicLevel.value" 
                     :options="academicLevelOptions"/>
-        </div>
-        <div class="col">
-          <!--Sons-->
-          <q-field  borderless label="Hijos" stack-label>
-            <template v-slot:control>
-               <q-option-group inline left-label v-model="form.fields.sons.value" 
-                :options="sonsOptions" 
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <!-- Sexo -->
+                <p class="caption q-mb-sm"><span class="text-primary">*</span> Sexo</p>
+                <div class="text-center">
+                  <q-option-group inline left-label keep-color v-model="form.fields.sex.value" 
+                :options="sexOptions" 
                 color="primary"/>
-            </template>
-          </q-field>
-        </div>
-      </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row q-col-gutter-lg justify-end q-mt-md">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <!--Sons-->
+                <p class="caption q-mb-sm"> Hijos</p>
+                <div class="text-center">
+                  <q-option-group inline left-label keep-color v-model="form.fields.sons.value" 
+                  :options="sonsOptions" 
+                  color="primary"/>
+                </div>
+              </div>
+            </div>
+
+            <!-- Infor Required -->
+            <div class="row q-mt-md">
+                <small class="infor-required text-primary text-weight-medium">* Campo Obligatorio</small>
+            </div>
 
 
-      <!-- Infor Required -->
-      <div class="row q-mt-md">
-          <small class="infor-required text-primary text-weight-medium">* Campo Obligatorio</small>
-      </div>
+          </q-card-section>
+        </q-card>
 
-    </div>
+        <div class="q-my-md full-width"></div>
 
-    <!--Form Contacto-->
-    <div class="form-contact bg-white rounded-md shadow-3 relative-position q-px-xl q-py-lg q-my-xl">
-      
-      <h3 class="title-label-orange text-center">
-        <div>Información de Contacto</div>
-      </h3>
+        <q-card class="rounded-md q-mb-xl full-width">
+          <div class="q-pl-md">
+            <h3 class="title-label-profile bg-tertiary">
+              <div>Información de contacto</div>
+            </h3>
+          </div>
+          <q-card-section class="q-pa-xl">
 
-      <!-- Phone--> <!--Email-->
-      <div class="row q-col-gutter-lg">
-        <div class="col">
-          <!-- Phone-->
-          <q-input v-model="form.fields.cellularPhone.value" unmasked-value
-                   inputmode="numeric" mask="(###) ### - ####" :label="`* ${$tr('ui.form.phone')} *`"
+            <div class="row q-col-gutter-lg">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
+                <!-- Phone-->
+                <q-input class="requeried" v-model="form.fields.cellularPhone.value" unmasked-value
+                   inputmode="numeric" mask="(###) ### - ####" :label="`${$trp('ui.form.phone')}`"
                    :rules="[
                     val => !!val || $tr('ui.message.fieldRequired'),
                     val => !val || val.length == 10 || $tr('ui.message.fieldMinLeng',{num : 10})
                    ]"
                    />
-
-        </div>
-        <div class="col">
-          <!--Email-->
-          <q-input v-model="form.email" :label="`* ${$trp('ui.form.email')}`"
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
+                <!--Email-->
+                <q-input class="requeried" v-model="form.email" :label="`${$trp('ui.form.email')}`"
                    :rules="[
                      val => !!val || $tr('ui.message.fieldRequired'),
                      val => $helper.validateEmail(val) || $tr('ui.message.fieldEmail')
                    ]"/>
-        </div>
-      </div>
-
-      <!-- Country of residence ADDRESS --> <!-- City ​​of residence ADDRESS STATE -->
-      <div class="row q-col-gutter-lg">
-        <div class="col">
-          <!-- Country of residence ADDRESS -->
-          <q-select 
-                    label="* País de residencia"
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
+                <!-- Country of residence ADDRESS -->
+                <q-select 
+                    label="País de residencia"
+                    class="requeried"
                     stack-label
                     emit-value
                     map-options
@@ -194,328 +164,324 @@
                     :options="countryResidenceOptions"
                     :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                     @input="getCities(address.countryId,'CiRO')"/>
-          
-        </div>
-        <div class="col">
-          <!-- City ​​of residence ADDRESS STATE -->
-          <q-select 
-                    label="* Ciudad de residencia"
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
+                <!-- City ​​of residence ADDRESS STATE -->
+                  <q-select 
+                    label="Ciudad de residencia"
+                    class="requeried"
                     stack-label
                     emit-value
                     map-options
                     v-model="address.stateId" 
                     :options="cityResidenceOptions"
                     :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
-          
-        </div>
-      </div>
-
-      <!-- Neighborhood --> <!--Address NEW ADDRESS-->
-      <div class="row q-col-gutter-lg">
-        <div class="col">
-          <!-- Neighborhood -->
-          <q-select label="Barrio" stack-label
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
+                <!-- Neighborhood -->
+                <q-select label="Barrio" stack-label class="requeried"
                     emit-value
                     map-options
                     v-model="address.neighborhoodId" 
                     :options="neighborhoodOptions"
                     :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
-        </div>
-        <div class="col">
-          <!--Address NEW ADDRESS-->
-          <q-input v-model="address.address1" stack-label :label="`* Dirección`"
-                   :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
-        </div>
-      </div>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <!--Address NEW ADDRESS-->
+                <q-input class="requeried" v-model="address.address1" stack-label :label="`Dirección`"
+                   :rules="[val => !!val || $tr('ui.message.fieldRequired')]" />
+              </div>
+              <div class="col-12">
 
-      <!-- Social -->
-      <div class="row q-col-gutter-lg social">
+                <p class="caption q-mb-xl">Como apareces en tus redes sociales</p>
+
+                <div class="row q-col-gutter-lg">
+                  <!--Twitter-->
+                  <div class="col-xs-12 col-sm-12 col-md-4">
+                    <q-input v-model="form.fields.twitter.value" stack-label :label="`Twitter`">
+                      <template v-slot:prepend>
+                        <q-icon name="fab fa-twitter" color="blue" />
+                      </template>
+                    </q-input>
+                  </div>
+
+                  <!--Facebook-->
+                  <div class="col-xs-12 col-sm-12 col-md-4">
+                    <q-input v-model="form.fields.facebook.value" stack-label :label="`Facebook`">
+                      <template v-slot:prepend>
+                        <q-icon name="fab fa-facebook" color="indigo" />
+                      </template>
+                    </q-input>
+                  </div>
+
+                  <!--Instagram-->
+                  <div class="col-xs-12 col-sm-12 col-md-4">
+                    <q-input v-model="form.fields.instagram.value" stack-label :label="`Instagram`">
+                      <template v-slot:prepend>
+                        <q-icon name="fab fa-instagram" color="primary" />
+                      </template>
+                    </q-input>
+                  </div>
+                </div>
         
-        <div class="col-12">
-          <p class="caption q-mb-xs">Como apareces en tus redes sociales</p>
-        </div>
-        
-        <!--Twitter-->
-        <div class="col">
-          <q-input v-model="form.fields.twitter.value" stack-label :label="`Twitter`">
-            <template v-slot:prepend>
-              <q-icon name="fab fa-twitter" />
-            </template>
-          </q-input>
-        </div>
+              </div>
+            </div>
 
-        <!--Facebook-->
-        <div class="col">
-          <q-input v-model="form.fields.facebook.value" stack-label :label="`Facebook`">
-            <template v-slot:prepend>
-              <q-icon name="fab fa-facebook" />
-            </template>
-          </q-input>
-        </div>
+            <!-- Infor Required -->
+            <div class="row q-mt-md">
+              <small class="infor-required text-primary text-weight-medium">* Campo Obligatorio</small>
+            </div>
 
-        <!--Instagram-->
-        <div class="col">
-          <q-input v-model="form.fields.instagram.value" stack-label :label="`Instagram`">
-            <template v-slot:prepend>
-              <q-icon name="fab fa-instagram" />
-            </template>
-          </q-input>
-        </div>
+          </q-card-section>
+        </q-card>
 
-      </div>
+        <div class="q-my-md full-width"></div>
 
-      <!-- Infor Required -->
-      <div class="row q-mt-lg">
-          <small class="infor-required text-primary text-weight-medium">* Campo Obligatorio</small>
-      </div>
+        <q-card class="rounded-md q-mb-xl full-width">
+          <div class="q-pl-md">
+            <h3 class="title-label-profile bg-primary">
+              <div>Tus Gustos</div>
+            </h3>
+          </div>
+          <q-card-section class="q-pa-xl">
 
-    </div>
-
-    <!--Form Gustos-->
-    <div class="form-pleasures bg-white rounded-md shadow-3 relative-position q-px-xl q-py-lg q-my-xl">
-
-      <h3 class="title-label-orange text-center">
-        <div>Tus Gustos</div>
-      </h3>
-
-      <!-- Leisure -->  <!-- Favorite Movie -->
-      <div class="row q-col-gutter-lg">
-        
-        <div class="col">
-          <!-- Leisure -->
-          <q-select label="* Ocio (Gustos)" stack-label
-                    multiple
+            <div class="row q-col-gutter-lg">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
+                <!-- Leisure -->
+                <q-select label="Ocio (Gustos)" stack-label class="requeried"
+                    multiple use-chips 
                     v-model="form.fields.leisures.value" 
                     :options="leisureOptions"
                     :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
-        </div>
-
-        <div class="col">
-          <!--Favorite Movie-->
-          <q-input v-model="form.fields.favoriteMovie.value" stack-label :label="`Pelicula Favorita`"/>
-        </div>
-
-      </div>
-
-      <!-- Favorite Serie --> <!-- Favorite Team -->
-      <div class="row q-col-gutter-lg">
-        
-        <div class="col">
-          <!-- Favorite Serie -->
-          <q-input v-model="form.fields.favoriteSerie.value" stack-label :label="`Serie Favorita`"/>
-        </div>
-
-        <div class="col">
-          <!-- Favorite Team -->
-           <q-input v-model="form.fields.favoriteTeam.value" stack-label :label="`Equipo Favorito`"/>
-        </div>
-
-      </div>
-
-      <!-- Promotions -->
-      <div class="row q-col-gutter-lg q-mt-sm">
-        <div class="col">
-          <!-- Promotions -->
-          <q-select label="* ¿De que te gustaria recibir la promoción?" stack-label
-                    multiple
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
+                <!--Favorite Movie-->
+                <q-input v-model="form.fields.favoriteMovie.value" stack-label :label="`Pelicula Favorita`"/>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
+                <!-- Favorite Serie -->
+                <q-input v-model="form.fields.favoriteSerie.value" stack-label :label="`Serie Favorita`"/>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
+                <!-- Favorite Team -->
+                <q-input v-model="form.fields.favoriteTeam.value" stack-label :label="`Equipo Favorito`"/>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
+                <!-- Promotions -->
+                <q-select label="* ¿De que te gustaria recibir la promoción?" stack-label
+                    multiple use-chips 
                     v-model="form.fields.promotions.value" 
                     :options="promotionOptions"
                     :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
+              </div>
+              <div class="col-12">
 
-        </div>
-        <div class="col">
-          
-        </div>
-      </div>
+                <p class="caption q-mb-xl">Fechas importantes para ti</p>
 
+                <div class="row q-col-gutter-md">
+                  <!--Important Date 1-->
+                  <div class="col-xs-6 col-sm-6 col-md-3 q-mb-lg">
+                    <q-input v-model="form.fields.importantDate1.value" mask="date" placeholder="YYYY/MM/DD">
+                      <template v-slot:append>
+                        <q-icon name="event" color="primary" class="cursor-pointer">
+                          <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
+                            <q-date v-model="form.fields.importantDate1.value" @input="() => $refs.qDateProxy.hide()" />
+                          </q-popup-proxy>
+                        </q-icon>
+                      </template>
+                    </q-input>
+                  </div>
 
-      <!--Importants Dates-->
-      <div class="row q-col-gutter-lg">
+                  <!--Important Date Why 1-->
+                  <div class="col-xs-6 col-sm-6 col-md-3 q-mb-lg">
+                    <q-input v-model="form.fields.importantDate1Why.value" stack-label :label="`¿Por que?`"/>
+                  </div>
 
-        <div class="col-12">
-          <p class="caption q-mb-none">Fechas importantes para ti</p>
-        </div>
+                  <!--Important Date 2-->
+                  <div class="col-xs-6 col-sm-6 col-md-3 q-mb-lg">
+                    <q-input v-model="form.fields.importantDate2.value" mask="date" placeholder="YYYY/MM/DD" >
+                      <template v-slot:append>
+                        <q-icon name="event" color="primary" class="cursor-pointer">
+                          <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
+                            <q-date v-model="form.fields.importantDate2.value" @input="() => $refs.qDateProxy.hide()" />
+                          </q-popup-proxy>
+                        </q-icon>
+                      </template>
+                    </q-input>
+                  </div>
 
-        <!--Important Date 1-->
-        <div class="col">
-          <q-input v-model="form.fields.importantDate1.value" mask="date" placeholder="YYYY/MM/DD">
-            <template v-slot:append>
-              <q-icon name="event" class="cursor-pointer">
-                <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
-                  <q-date v-model="form.fields.importantDate1.value" @input="() => $refs.qDateProxy.hide()" />
-                </q-popup-proxy>
-              </q-icon>
-            </template>
-          </q-input>
-        </div>
+                  <!--Important Date Why 2-->
+                  <div class="col-xs-6 col-sm-6 col-md-3 q-mb-lg">
+                    <q-input v-model="form.fields.importantDate2Why.value" stack-label :label="`¿Por que?`"/>
+                  </div>
 
-        <!--Important Date Why 1-->
-        <div class="col">
-          <q-input v-model="form.fields.importantDate1Why.value" stack-label :label="`¿Por que?`"/>
-        </div>
+                </div>
 
-        <!--Important Date 2-->
-        <div class="col">
-          <q-input v-model="form.fields.importantDate2.value" mask="date" placeholder="YYYY/MM/DD" >
-            <template v-slot:append>
-              <q-icon name="event" class="cursor-pointer">
-                <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
-                  <q-date v-model="form.fields.importantDate2.value" @input="() => $refs.qDateProxy.hide()" />
-                </q-popup-proxy>
-              </q-icon>
-            </template>
-          </q-input>
-        </div>
+              </div>
+            </div>
+            
+            <!-- Infor Required -->
+            <div class="row q-mt-md">
+              <small class="infor-required text-primary text-weight-medium">* Campo Obligatorio</small>
+            </div>
+          </q-card-section>
+        </q-card>
 
-        <!--Important Date Why 2-->
-        <div class="col">
-          <q-input v-model="form.fields.importantDate2Why.value" stack-label :label="`¿Por que?`"/>
-        </div>
+        <div class="q-my-md full-width"></div>
 
-      </div>
-
-      <!-- Infor Required -->
-      <div class="row q-mt-md">
-          <small class="infor-required text-primary text-weight-medium">* Campo Obligatorio</small>
-      </div>
-
-    </div>
-
-    <!--Form Como conociste-->
-    <div class="form-meet bg-white rounded-md shadow-3 relative-position q-px-xl q-py-lg q-my-xl">
-
-      <h3 class="title-label-orange text-center">
-        <div>Como conociste la Página</div>
-      </h3>
-
-      <!--Radio --> <!--Redes Sociales -->
-      <div class="row q-col-gutter-lg">
-
-        <div class="col">
-          <!--Radio -->
-          <div class="col-12 q-mb-md">
-            <q-radio v-model="form.fields.meetUs.value" 
-                  val="radio" left-label label="Radio"/>
+        <q-card class="rounded-md q-mb-xl full-width">
+          <div class="q-pl-md">
+            <h3 class="title-label-profile  bg-tertiary">
+              <div>Como conociste la Página</div>
+            </h3>
           </div>
+          <q-card-section class="q-pa-xl">
 
-        </div>
+            <div class="row q-col-gutter-lg">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <!--Radio -->
+                <div class="row items-center">
+                  <div class="col">
+                    <p class="caption q-mb-none">Radio</p>
+                  </div>
+                  <div class="col-auto">
+                    <q-radio v-model="form.fields.meetUs.value" keep-color color="primary" val="radio" />
+                  </div>
+                </div> 
+                
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <!--Redes Sociales -->
+                <div class="row items-center">
+                  <div class="col">
+                    <p class="caption q-mb-none">Redes Sociales</p>
+                  </div>
+                  <div class="col-auto">
+                    <q-radio v-model="form.fields.meetUs.value" keep-color color="primary" val="redes sociales" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
+                <!--Un amigo -->
+                <div class="row items-center">
+                  <div class="col">
+                    <p class="caption q-mb-none">Un amigo</p>
+                  </div>
+                  <div class="col-auto">
+                    <q-radio  v-model="form.fields.meetUs.value" keep-color color="primary" val="amigo" />
+                  </div>
+                </div>
+                
+                <!-- Friend Name -->
+                <q-input class="label-mini" v-model="form.fields.friendUserName.value" label="Escribe el nombre de usuario de tu amigo" />
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
+                <!--Otros -->
+                <div class="row items-center">
+                  <div class="col">
+                    <p class="caption q-mb-none">Otros</p>
+                  </div>
+                  <div class="col-auto">
+                    <q-radio v-model="form.fields.meetUs.value" keep-color color="primary" val="otros"/>
+                  </div>
+                </div>
+                
+                <!-- Other medio -->
+                <q-input class="label-mini" v-model="form.fields.otherMedio.value" label="Cuentanos ¿cuál fue?" />
+              </div>
+            </div>
 
-        <div class="col">
 
-          <!--Redes Sociales -->
-          <div class="col-12 q-mb-md">
-            <q-radio v-model="form.fields.meetUs.value" 
-                  val="redes sociales" left-label label="Redes Sociales"/>
+          </q-card-section>
+        </q-card>
+
+        <div class="q-my-md full-width"></div>
+
+        <q-card class="rounded-md q-mb-xl full-width">
+          <div class="q-pl-md">
+            <h3 class="title-label-profile bg-primary">
+              <div>Seguridad <small>(cambiar contraseña)</small></div>
+            </h3>
           </div>
+          <q-card-section class="q-pa-xl">
 
-        </div>
-        
-      </div>
-
-      <!--Un amigo -->  <!--Otros -->
-      <div class="row q-col-gutter-lg">
-        
-        <div class="col">
-           <!--Un amigo -->
-          <q-radio v-model="form.fields.meetUs.value" 
-                  val="amigo" left-label label="Un amigo"/>
-          <!-- Friend Name -->
-          <q-input v-model="form.fields.friendUserName.value" placeholder="Escribe el nombre de usuario de tu amigo" />
-
-        </div>
-
-        <div class="col">
-          <!--Otros -->
-          <q-radio v-model="form.fields.meetUs.value" 
-                  val="otros" left-label label="Otros"/>
-          <!-- Other medio -->
-          <q-input v-model="form.fields.otherMedio.value" placeholder="Cuentanos ¿cuál fue?" />
-        </div>
-
-      </div>
-
-    </div>
-
-    <!--Form Seguridad-->
-    <div class="form-security bg-white rounded-md shadow-3 relative-position q-px-xl q-py-lg q-my-xl">
-
-      <h3 class="title-label-orange text-center">
-        <div>Seguridad (cambiar contraseña)</div>
-      </h3>
-
-      <!-- NEW PASS --> <!-- CONFIRM NEW PASS -->
-      <div class="row q-col-gutter-lg">
-        
-        <!-- NEW PASS -->
-        <div class="col">
-          <q-input stack-label :label="`Nueva Contraseña`" v-model="form.newPassword"
+            <div class="row q-col-gutter-lg">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
+                <q-input stack-label :label="`Nueva Contraseña`" v-model="form.newPassword"
                      :type="isPwd ? 'password' : 'text'"
                      autocomplete="off"
                      name="password">
-
-              <template v-slot:append>
-               <q-icon
-                  :name="isPwd ? 'visibility_off' : 'visibility'"
-                  class="cursor-pointer"
-                  @click="isPwd = !isPwd"
-                />
-              </template>
-          </q-input>
-        </div>
-
-        <!-- CONFIRM NEW PASS -->
-        <div class="col">
-          <q-input stack-label :label="`Confirmar Contraseña`" v-model="form.confirmNewPassword"
+                    <template v-slot:append>
+                     <q-icon
+                        :name="isPwd ? 'visibility_off' : 'visibility'"
+                        class="cursor-pointer"
+                        @click="isPwd = !isPwd"
+                      />
+                    </template>
+                </q-input>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
+                <q-input stack-label :label="`Confirmar Contraseña`" v-model="form.confirmNewPassword"
                      :type="isPwd ? 'password' : 'text'"
                      name="password"
                      autocomplete="off"
                      :rules="[ val => val == form.newPassword || $tr('ui.message.fieldCheckPassword')]">
-            <template v-slot:append>
-               <q-icon
-                  :name="isPwd ? 'visibility_off' : 'visibility'"
-                  class="cursor-pointer"
-                  @click="isPwd = !isPwd"
-                />
-            </template>
-          </q-input>
-        </div>
-
-      </div>
-
-    </div>
-
-    <!--Form Final policies and button update-->
-    <div class="form-final bg-white rounded-md shadow-3 q-px-lg q-py-xl">
-      <div class="row">
-
-          <!--Policies-->
-          <div class="col-12 col-sm-9 ">
-              <q-list>
-                <q-item tag="label">
-                  <q-item-section avatar top>
-                    <q-radio v-model="form.fields.policies.value" val="policies" color="primary" />
-                  </q-item-section>
-                  <q-item-section>
-                    <q-item-label caption>
-                      Declaro conocer las políticas de Términos y Condiciones y autorizo el tratamiento de mis datos personales en la pagina web <span class='text-primary'>Donde Esta Esa Vaina</span>
-                    </q-item-label>
-                  </q-item-section>
-                </q-item>
-              </q-list>
-          </div>
-
-          <!--Update button-->
-          <div class="col-12 col-sm-3">
-            <div class="text-right q-mt-sm">
-                  <q-btn color="primary" :loading="loading" 
-                    class="font-family-secondary btn-update text-white no-border" 
-                    @click="updateData"
-                  label="Actualizar"/>
+                  <template v-slot:append>
+                     <q-icon
+                        :name="isPwd ? 'visibility_off' : 'visibility'"
+                        class="cursor-pointer"
+                        @click="isPwd = !isPwd"
+                      />
+                  </template>
+                </q-input>
+              </div>
             </div>
-          </div>
+                
+                       
+          </q-card-section>
+        </q-card>
+
+        <div class="q-my-md full-width"></div>
+
+        <q-card class="rounded-md q-mb-xl full-width">
+
+          <q-card-section class="q-py-xl">
+
+            <div class="row q-col-gutter-lg items-center">
+              <!--Policies-->
+              <div class="col-12 col-sm-9 ">
+                  <q-list>
+                    <q-item>
+                      <q-item-section avatar top>
+                        <q-radio v-model="form.fields.policies.value" val="policies" color="primary" />
+                      </q-item-section>
+                      <q-item-section>
+                        <q-item-label caption>
+                          Declaro conocer las políticas de Términos y Condiciones y autorizo el tratamiento de mis datos personales en la pagina web <span class='text-primary'>Donde Esta Esa Vaina</span>
+                        </q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+              </div>
+
+              <!--Update button-->
+              <div class="col-12 col-sm-3">
+                <div class="text-right q-mt-sm">
+                      <q-btn color="primary" :loading="loading" 
+                        class="btn-arrow-send-pink" 
+                        @click="updateData"
+                      label="Actualizar"/>
+                </div>
+              </div>
+            </div>
+
+                       
+          </q-card-section>
+        </q-card>
+
+        <div class="q-my-md full-width"></div>
 
       </div>
-    </div>
 
     </div><!--End if success--> 
 
@@ -1036,40 +1002,7 @@
 </script> 
 
 <style lang="stylus">
-  
-  #profilePage
-    .form-title
-      color $primary
-  .q-select, .q-datetime-input
-    & .q-icon  
-     color $primary
-     
-  .form-personal, .form-pleasures, .form-security
-    .title-label-orange
-      background-color $primary
-      
-  .form-personal, .form-contact, .form-pleasures, .form-meet, .form-security
-    margin-bottom 80px !important
-    .title-label-orange
-      font-size 20px
-      padding 3px 20px
-      position absolute
-      left 10px
-      &:before
-        right -40px
-        
-  .btn-update
-    &:after
-      content ''
-      background-image url('/statics/img/arrow-send-pink.png')
-      background-repeat no-repeat
-      background-size contain
-      width 74px
-      height 100px
-      top -4px
-      left -50px
-      position absolute
-      
+.quser-profile
   .title-principal
     margin-bottom 65px
     h3
@@ -1079,26 +1012,64 @@
     small
       font-size 15px
       font-family 'Trebuchet MS'
-
-  .social
-    .fa-twitter
-      color #00ACEE
-    .fa-facebook
-      color #3B5998
-    .fa-instagram
-      color $primary
-      
-  .infor-required, .form-final .q-option-label
-    font-family 'Trebuchet MS'
-    
-  .form-final
-    .q-btn
-      border-radius 0px
-      .q-btn-inner
-        text-transform none
-      
-  .errorInput
-    .q-if
+  .title-label-profile
+    -webkit-transform skew(10deg)
+    transform skew(10deg)
+    border-radius 10px
+    padding 0px 30px
+    display inline-block
+    min-width 40%
+    margin -58px 0 10px 0
+    color #FFFFFF
+    font-size 20px
+    position relative
+    font-family $font-secondary
+    &:before
+      content ''
+      background-image url('/statics/img/arrow-down-blue.png')
+      position absolute
+      right -25px
+      width 100%
+      height 50px
+      background-repeat no-repeat
+      background-size contain
+      top 27px
+      background-position right
+    @media screen and (max-width: $breakpoint-md)
+      min-width 60%
+      font-size 20px
+      padding 0 15px
       &:before
-        border-bottom 2px solid $primary
+          display none !important   
+    @media screen and (max-width: $breakpoint-sm)
+      min-width 60%
+      font-size 15px
+      padding 0 10px         
+    & > div
+      -webkit-transform  skew(-10deg)
+      transform skew(-10deg)       
+  .text-h6 
+    line-height 1.5rem
+    color $secondary
+    @media screen and (max-width: $breakpoint-sm)
+      line-height 1rem
+      font-sie 1rem
+      margin-top 10px
+      margin-bottom 20px  
+
+  .q-field__label
+    color #444
+    font-size 23px
+    padding-bottom 60px    
+  .requeried   
+    .q-field__label:before
+      color $primary
+      content '* ' 
+  .label-mini    
+    .q-field__label  
+      font-size 16px
+      padding-bottom 20px
+      color #888
+  .btn-arrow-send-pink:after
+    right 90px  
 </style>

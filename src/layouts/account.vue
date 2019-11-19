@@ -12,11 +12,11 @@
 
                     <div class="row q-col-gutter-lg q-my-xl">
 
-                      <div class="col-12 col-md-5 col-lg-4 col-xl-3">
+                      <div class="col-12 col-md-12 col-lg-4 col-xl-3">
                         <menuAccount/>
                       </div>
 
-                      <div class="col-12 col-md-7 col-lg-8 col-xl-9">
+                      <div class="col-12 col-md-12 col-lg-8 col-xl-9">
                         <router-view v-if="appState.loadPage"/>
                       </div>
                       

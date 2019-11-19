@@ -2,35 +2,110 @@
 
   <div class="account-menu" v-if="success">
 
-    <!-- Bloque Nivel-->
-    <div class="row bloque-nivel-club">
-      <div class="col-12">
-        <div class="nivel relative-position text-white text-center q-pt-lg round-borders">
-          <h4 class="text-uppercase q-my-sm font-family-secondary">nivel</h4>
-          <h5 class="text-uppercase q-mb-xs q-mt-md">club de conocidos</h5>
-          <p class="text-center text-white">dondeestaesavaina.com</p>
-        </div>
-        <div class="club text-center">
-          <div class="circulo bg-secondary text-white round flex items-center justify-center">
-            <div class="points font-family-secondary">{{pointsHistory}}</div>
+    <div  v-if="$q.platform.is.desktop" >
+
+      <!-- Bloque Nivel-->
+      <div class="row bloque-nivel-club">
+        <div class="col-12">
+          <div class="nivel relative-position text-white text-center q-pt-lg round-borders">
+            <h4 class="text-uppercase q-my-sm font-family-secondary">nivel</h4>
+            <h5 class="text-uppercase q-mb-xs q-mt-md">club de conocidos</h5>
+            <p class="text-center text-white">dondeestaesavaina.com</p>
           </div>
-          <h5 class="font-family-secondary text-secondary q-my-md">Puntos historicos</h5>
+          <div class="club text-center">
+            <div class="circulo bg-secondary text-white round flex items-center justify-center">
+              <div class="points font-family-secondary">{{pointsHistory}}</div>
+            </div>
+            <h5 class="font-family-secondary text-secondary q-my-md">Puntos historicos</h5>
+          </div>
         </div>
       </div>
+
+      <!-- Bloque Menu -->
+      <div class="row bloque-op-profile relative-position bg-white rounded-md shadow-5">
+        <div class="col-12">
+
+          <!--Image-->
+          <upload-image v-model="imgUser" class="q-mt-lg q-mb-md"/>
+
+          <!--FullName-->
+          <h5 class="fullname font-family-secondary text-center relative-position">{{form.firstName}} {{form.lastName}}</h5>
+
+          <!--Links-->
+          <q-list no-border inset-delimiter class="q-px-lg">
+
+                   <q-item :key="'menu'+index" v-for="(item, index) in menuAccount" class=" q-mb-lg round-borders" :to="{name:item.to}">
+
+                      <q-item-section avatar>
+                        <q-icon :name="item.icon" size="20px"></q-icon>
+                      </q-item-section>
+                      <q-item-section class="item-title">
+                        {{item.title}}
+                          <!--
+                         <q-item-tile tag="a" color="grey-10" style="text-decoration: none">
+                          {{item.title}}
+                        </q-item-tile>
+                        -->
+                      </q-item-section>
+                    </q-item>
+
+                    <!--Logout-->
+                    <q-item tag="label" class="q-mb-lg round-borders" link :to="{name:'auth.logout'}" v-if="$store.state.quserAuth.userToken">
+                      <q-item-section avatar>
+                        <q-icon name="fas fa-sign-out-alt" size="20px"></q-icon>
+                      </q-item-section>
+                      <q-item-section class="item-title">
+                        {{$t('ui.configList.signOut', {capitalize : true})}}
+                        <!--
+                        <q-item-tile tag="a"
+                                     color="grey-10"
+                                     style="text-decoration: none">
+                          {{$t('ui.configList.signOut', {capitalize : true})}}
+                        </q-item-tile>
+                        -->
+                      </q-item-section>
+                    </q-item>
+
+          </q-list>
+
+        </div>
+      </div>
+
     </div>
+    <div v-else>
+      <q-drawer overlay  v-model="drawer">
 
-    <!-- Bloque Menu -->
-    <div class="row bloque-op-profile relative-position bg-white rounded-md shadow-5">
-      <div class="col-12">
+        <div class="q-pa-lg">
 
-        <!--Image-->
-        <upload-image v-model="imgUser" class="q-mt-lg q-mb-md"/>
+          <!-- Bloque Nivel-->
+          <div class="row bloque-nivel-club">
+            <div class="col-12">
+              <div class="nivel relative-position text-white text-center q-pt-lg round-borders">
+                <h4 class="text-uppercase q-my-sm font-family-secondary">nivel</h4>
+                <h5 class="text-uppercase q-mb-xs q-mt-md">club de conocidos</h5>
+                <p class="text-center text-white">dondeestaesavaina.com</p>
+              </div>
+              <div class="club text-center">
+                <div class="circulo bg-secondary text-white round flex items-center justify-center">
+                  <div class="points font-family-secondary">{{pointsHistory}}</div>
+                </div>
+                <h5 class="font-family-secondary text-secondary q-my-md">Puntos historicos</h5>
+              </div>
+            </div>
+          </div>
 
-        <!--FullName-->
-        <h5 class="fullname font-family-secondary text-center relative-position">{{form.firstName}} {{form.lastName}}</h5>
+          <!-- Bloque Menu -->
+          <div class="row bloque-op-profile relative-position bg-white rounded-md shadow-5">
+            <div class="col-12">
 
-        <!--Links-->
-        <q-list no-border inset-delimiter class="q-px-lg">
+              <!--Image-->
+              <upload-image v-model="imgUser" class="q-mt-lg q-mb-md"/>
+
+              <!--FullName-->
+              <h5 class="fullname font-family-secondary text-center relative-position">{{form.firstName}} {{form.lastName}}</h5>
+
+              <!--Links-->
+              <q-list no-border inset-delimiter class="q-px-lg">
 
                  <q-item :key="'menu'+index" v-for="(item, index) in menuAccount" class=" q-mb-lg round-borders" :to="{name:item.to}">
 
@@ -39,11 +114,6 @@
                     </q-item-section>
                     <q-item-section class="item-title">
                       {{item.title}}
-                        <!--
-                       <q-item-tile tag="a" color="grey-10" style="text-decoration: none">
-                        {{item.title}}
-                      </q-item-tile>
-                      -->
                     </q-item-section>
                   </q-item>
 
@@ -54,19 +124,20 @@
                     </q-item-section>
                     <q-item-section class="item-title">
                       {{$t('ui.configList.signOut', {capitalize : true})}}
-                      <!--
-                      <q-item-tile tag="a"
-                                   color="grey-10"
-                                   style="text-decoration: none">
-                        {{$t('ui.configList.signOut', {capitalize : true})}}
-                      </q-item-tile>
-                      -->
                     </q-item-section>
                   </q-item>
+              </q-list>
+            </div>
+          </div>  
+        </div>  
+      </q-drawer>
 
-        </q-list>
 
-      </div>
+      <q-page-sticky position="top-left" :offset="[18, 18]" style="z-index: 9;">
+        <q-btn round @click="drawer = !drawer" color="primary" icon="arrow_back" />
+      </q-page-sticky>
+
+
     </div>
 
   </div>
@@ -121,6 +192,7 @@
     },
     data() {
       return {
+        drawer: false,
         loading: false,
         success: false,
         imgUser: null,
