@@ -15,7 +15,7 @@
               <q-img :ratio="16-9" :src="trivia.mainImage.path" />
           </div>  
           <div class="q-py-md">
-             <q-option-group
+             <q-option-group keep-color
               v-model="selectedOption"
               type="radio"
               :options="answers[index]"
@@ -287,27 +287,39 @@ export default {
   & .img-title
       margin-top -22px
   & .q-card__section
-      padding 10px 25px 15px 25px
-      & .text-h6 
-        position relative
-        margin-bottom 0
-        &:before 
-          position absolute
-          color #FD2D5E
-          content "•"
-          left -15px
-          font-weight bold
+    padding-left 0
+    padding-right 0
+    padding-top 0
+    & .text-h6 
+      position relative
+      margin-bottom 0
+      margin-left 25px
+      margin-right 25px
+      font-size 18px
+      line-height 1.5rem
+      &:before 
+        position absolute
+        color #FD2D5E
+        content "•"
+        left -15px
+        font-weight bold
           
   & .q-option-group
     > div
       border 1px solid #FD2D5E
       border-radius 20px
       margin-bottom 10px
-      padding 8px
+      .q-radio__bg
+        background-color #fff
+        border-radius 50%
       & .q-icon
         color #FD2D5E
         font-size 20px
+      & .q-radio__label
+          font-size 18px
   .q-stepper
+    background-color var(--q-color-light)
+    border-radius 10px
     .q-stepper__header
       display none
     .q-stepper__step-inner  
