@@ -6,7 +6,5 @@ let responseApiRoutes = {
   ilocations:ilocations
   //Add here more apiRoutes...
 }
-console.log('api routes');
-console.log(responseApiRoutes);
 //Export apiRoutes
 export default responseApiRoutes

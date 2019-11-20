@@ -132,8 +132,6 @@
                         })
                 })
             }
-
-            console.warn(items)
             return items
         },
       getImageUrl() {
