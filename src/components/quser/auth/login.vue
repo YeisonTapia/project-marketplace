@@ -62,6 +62,12 @@
               <q-btn flat :label="$tr('quser.layout.label.resetPassword')" class="q-mt-md"
                  :to="{name : 'auth.reset.password'}" color="grey-8"/>
             </div>
+
+             <!-- Button Volver -->
+            <div class="text-center col-12">
+              <q-btn flat label="Volver" class="q-mt-md"
+                @click="emitSelectForm()" color="grey-8"/>
+            </div>
           
            
         </q-form>
@@ -145,7 +151,7 @@
           }
         }, 200)
       },
-      changeSelectForm(){
+      emitSelectForm(){
         this.$emit('selectForm','init');
       }
     }

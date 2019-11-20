@@ -47,6 +47,27 @@
         {{alertContent.msj}}
       </div>
     </q-banner>
+ 
+
+    <!-- Votes Poll -->
+    <!--
+    <div v-if="showVotes" class="votesPoll text-white q-px-md q-py-md">
+
+        <div class="text-h6 font-family-secondary q-my-sm">Resultados</div>
+        <div class="contentPoll" v-for="(question, index) in votesPoll" :key="index">
+
+          <div class="question q-mb-md">
+            {{question.title}} - TOTAL DE VOTOS: {{question.totalVotes}}
+            <div class="answers" v-for="(answer, index2) in question.answers" :key="index2">
+              {{answer.title}} - VOTOS: {{answer.votes}}
+              
+            </div>
+          </div>
+        </div>
+
+    </div>
+    -->
+    
 
   </q-card>
 
@@ -86,7 +107,9 @@
                   icon:'check',
                   msj:'Gracias por participar!!'
                 },
-                currentStep: null
+                currentStep: null,
+                votesPoll: null,
+                showVotes: false
             }
         },
         methods: {
@@ -203,6 +226,7 @@
               this.loading = true;
               this.setDataFinal()
               
+              /*
               this.finalDataSave.forEach((data, index) => {
                 
                 this.$crud.create('apiRoutes.qquiz.userQuestionAnswers', data).then(response => {
@@ -218,9 +242,18 @@
               // Finished Poll
               if(this.userId!=null)
                 this.saveUserPoll()
+              */
+
+              console.warn("Termino Encuesta")
+              console.warn("Poll ID "+this.poll.id)
+
+              this.getResultsPoll()
               
               this.$v.$reset()//Reset validations
               this.alertContent.active = true
+
+              //this.showVotes = true // OJOOOOOOO
+
               this.loading = false;
              
             }else{
@@ -293,6 +326,33 @@
             })
             this.selectedOptions = []
 
+          },
+          // get Results Poll
+          getResultsPoll(){
+            return new Promise((resolve, reject) => {
+
+              //Params
+              let params = {
+                refresh: true,
+                params: {
+                  filter: {votes:true,pollId: this.poll.id},
+                  include: 'answers'
+                }
+              }
+
+              this.$crud.index("apiRoutes.qquiz.questions",params).then(response => {
+             
+                this.votesPoll = response.data
+                console.warn(this.votesPoll)
+
+                resolve(true)//Resolve
+
+              }).catch(error => {
+                this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+                reject(false)//Resolve
+              })
+
+            }) 
           }
 
         }

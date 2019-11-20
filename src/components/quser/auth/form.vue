@@ -33,8 +33,7 @@
     },
     watch: {
       selectForm(val,oldval){
-        if(val!='ini')
-          this.cBackground = true
+        this.cBackground = !this.cBackground
       }
     },
     mounted () {
