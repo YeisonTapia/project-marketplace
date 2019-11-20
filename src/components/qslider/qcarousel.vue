@@ -8,7 +8,7 @@
             autoplay
             height="600px"
     >
-      <q-carousel-slide  v-for="(slide, index) in position.slides"  :name="index" :img-src="slide.imageUrl">
+      <q-carousel-slide v-for="slide in position.slides"  v-bind:key="slide.id" :name="slide.id"  :img-src="slide.imageUrl">
         <div v-if="slide.title || slide.caption" class="absolute-bottom custom-caption">
           <div v-if="slide.title" class="text-h2">{{slide.title}}</div>
           <div v-if="slide.caption" class="text-subtitle1">{{slide.caption}}</div>
