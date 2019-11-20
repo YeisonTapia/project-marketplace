@@ -102,6 +102,7 @@ export default {
     margin-top -25px
   .banner-two
     background-image url('/statics/img/theme-two/conocenos.jpg')
+    background-attachment fixed
     background-size cover
     padding 10% 0
     position relative

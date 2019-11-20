@@ -9,7 +9,10 @@
           <div class="line-secondary q-mt-sm"></div>
         </h4>
       </div>
+
       <div class="row items-center">
+
+        <!-- Meta Mensual -->
         <q-card class="rounded-md q-mb-xl full-width">
           <div class="q-pl-md">
             <h3 class="title-label-puntos text-center bg-primary">
@@ -23,16 +26,16 @@
 
                 <q-item-section>
                   <q-slider
-                    v-model="puntos"
+                    v-model="pointsAvailables"
                     markers
                     snap
                     label
                     label-always
                     :min="min"
-                    :max="total"
+                    :max="meta"
                     :step="step"
                     readonly
-                    :label-value="puntos + ' puntos' "
+                    :label-value="pointsAvailables + ' puntos' "
 
                   />
                 </q-item-section>
@@ -46,7 +49,7 @@
                     <div>
                       <img src="/statics/img/copa-puntos.png" alt="Copa">
                     </div>
-                    <div class="text-h5 font-family-secondary">{{total}}</div>
+                    <div class="text-h5 font-family-secondary">{{meta}}</div>
                     Puntos
                   </div>
                  
@@ -56,7 +59,10 @@
 
           </q-card-section>
         </q-card>
+
         <div class="q-my-md full-width"></div>
+
+        <!-- Puntos por Canjear -->
         <q-card class="rounded-md q-mb-xl full-width">
           <div class="q-pl-md">
             <h3 class="title-label-puntos text-center bg-tertiary">
@@ -64,9 +70,10 @@
             </h3>
           </div>
           <q-card-section class="q-mx-puntos q-my-lg">
+            
+            <q-list v-if="itemsRedeems.length" separator bordered style="border-left: 0; border-right: 0;">
 
-            <q-list separator bordered style="border-left: 0; border-right: 0;">
-              <q-item>
+              <q-item v-for="(item, index) in itemsRedeems" :key="index">
                 <q-item-section>
 
                   <div class="row justify-center text-center q-my-lg">
@@ -74,7 +81,7 @@
 
                       <div class="row q-col-gutter-md justify-center items-center">
                         <div class="col-xs-5 col-sm">
-                          <q-avatar class="font-family-secondary" font-size="2rem" color="primary" size="6rem" text-color="white">160</q-avatar>
+                          <q-avatar class="font-family-secondary" font-size="2rem" color="primary" size="6rem" text-color="white">{{item.value}}</q-avatar>
                           <div class="text-h6">Puntos</div>
                         </div>
                         <div class="col-xs-1 col-sm text-center">
@@ -82,12 +89,16 @@
                         </div>
                         <div class="col-xs-5 col-sm">
                           <q-avatar size="6rem" class="q-mb-sm">
-                            <img src="/statics/img/comida.jpg">
+                            <img :src="item.mainImage.path">
                           </q-avatar>
-                          <div class="text-h6">Bicicleta</div>
+                          <div class="text-h6">{{item.name}}</div>
                         </div>
                         <div class="col-xs-12 col-sm">
-                          <q-btn label="Canjear" no-caps size="lg" color="tertiary" />
+
+                          <q-btn v-if="pointsAvailables>=item.value" label="Canjear" no-caps size="lg" color="tertiary" @click="redeemItem(item)"/>
+
+                          <q-btn v-else label="Canjear" no-caps size="lg" color="tertiary" disabled class="cursor-not-allowed"/>
+
                         </div>
                       </div>                    
                        
@@ -97,40 +108,19 @@
 
                 </q-item-section>
               </q-item>
-              <q-item>
-                <q-item-section>
-                  <div class="row justify-center text-center q-my-lg">
-                    <div class="col-xs-12 col-sm-10 col-md-9 col-lg-8">
-
-                      <div class="row  justify-center items-center">
-                        <div class="col-xs-5 col-sm">
-                          <q-avatar class="font-family-secondary" font-size="2rem" color="primary" size="6rem" text-color="white">160</q-avatar>
-                          <div class="text-h6">Puntos</div>
-                        </div>
-                        <div class="col-xs-1 col-sm text-center">
-                          <div class="font-family-secondary text-secondary" style="font-size: 2rem;">=</div>
-                        </div>
-                        <div class="col-xs-5 col-sm">
-                          <q-avatar size="6rem" class="q-mb-sm">
-                            <img src="/statics/img/comida.jpg">
-                          </q-avatar>
-                          <div class="text-h6">Televisor</div>
-                        </div>
-                        <div class="col-xs-12 col-sm">
-                          <q-btn label="Canjear" size="lg" no-caps color="tertiary" />
-                        </div>
-                      </div>                    
-                       
-                    </div>
-                
-                  </div>
-                </q-item-section>
-              </q-item>
+             
             </q-list>
+
+            <div v-else>
+              No existen items disponibles para cambiar
+            </div>
 
           </q-card-section>
         </q-card>
+
         <div class="q-my-md full-width"></div>
+
+        <!-- Todos los puntos acumulados -->
         <q-card class="rounded-md q-mb-xl full-width">
           <div class="q-pl-md">
             <h3 class="title-label-puntos text-center bg-primary">
@@ -141,28 +131,19 @@
 
               <div class="row q-col-gutter-md justify-center items-center text-center">
                 <div class="col-xs-12 col-sm-12 col-md">
-                  <q-avatar class="font-family-secondary" font-size="2rem" color="primary" size="6rem" text-color="white">140</q-avatar>
+                  <q-avatar class="font-family-secondary" font-size="2rem" color="primary" size="6rem" text-color="white">{{acumulados}}</q-avatar>
                   <div class="text-h6">Puntos <br> Acumulados</div>
                 </div>
+
                 <div class="col-xs-12 col-sm-12 col-md-auto text-center">
                   <div class="font-family-secondary text-secondary" style="font-size: 2rem;">=</div>
                 </div>
-                <div class="col-sm-6 col-md">
-                  <q-avatar class="font-family-secondary" font-size="2rem" color="tertiary" size="6rem" text-color="white">10</q-avatar>
-                  <div class="text-h6">Puntos por tus Compras</div>
+
+                <div class="col-sm-6 col-md" v-for="(group, index) in pointsGroup" :key="index">
+                  <q-avatar class="font-family-secondary" font-size="2rem" color="tertiary" size="6rem" text-color="white">{{group.total}}</q-avatar>
+                  <div class="text-h6">{{group.description}}</div>
                 </div>
-                <div class="col-sm-6 col-md">
-                  <q-avatar class="font-family-secondary" font-size="2rem" color="tertiary" size="6rem" text-color="white">10</q-avatar>
-                  <div class="text-h6">Puntos por tus Trivias</div>
-                </div>
-                <div class="col-sm-6 col-md">
-                  <q-avatar class="font-family-secondary" font-size="2rem" color="tertiary" size="6rem" text-color="white">10</q-avatar>
-                  <div class="text-h6">Puntos por tus Encuentas</div>
-                </div>
-                <div class="col-sm-6 col-md">
-                  <q-avatar class="font-family-secondary" font-size="2rem" color="tertiary" size="6rem" text-color="white">10</q-avatar>
-                  <div class="text-h6">Puntos por tus Recomendar</div>
-                </div>
+
               </div>                    
                        
           </q-card-section>
@@ -187,6 +168,9 @@
 
 </template>
 <script>
+
+  import http from "axios"
+
   export default {
     props: {},
     components: {},
@@ -203,18 +187,196 @@
       return {
         loading: false,
         success: false,
-        puntos: 120,
-        total: 300,
+        meta: this.$store.getters['qsiteSettings/getSettingValueByName']('iredeems::points-month'),
         min: 0,
-        step: 40
+        step: 40,
+        pointsGroup: [],
+        acumulados: 0,
+        itemsRedeems: [],
+        userId: this.$store.state.quserAuth.userId ? this.$store.state.quserAuth.userId : null,
+        pointsAvailables: 0,
+        userItemsRedeems: [],
       }
     },
     methods: {
       //init
       async init() {
         this.loading = true
+
+        // Points Availables to User
+        await this.getPointsUser()
+
+        // Items User redeems
+        await this.getRedeemsItemsUser()
+
+         // Items to Redeem
+        await this.getItems()
+
+        // Historic group
+        await this.getHistoryPoints()
+       
+
         this.loading = false
         this.success = true
+      },
+      // Get Points History
+      getHistoryPoints(){
+        return new Promise((resolve, reject) => {
+          //Params
+          let params = {
+            params: {
+              filter: {
+                userId: this.$store.state.quserAuth.userId,
+                type: 'groupTotalPointsUser'
+              }
+            }
+          }
+
+          http.get(config('apiRoutes.qredeems.calculates'),params)
+            .then(response => {
+
+              this.pointsGroup = response.data.data
+              for (let i=0;i<this.pointsGroup.length;i++) {
+                this.acumulados += parseInt(this.pointsGroup[i].total)
+              }
+              resolve(true);
+
+            })
+            .catch(error => {
+              reject(error);
+            });
+        })
+      },
+      // Get Items Random
+      getItems(){
+        return new Promise((resolve, reject) => {
+          
+          this.itemsRedeems = []
+
+          //Params
+          let params = {
+            refresh: true,
+            params: {
+              filter: {exclude:this.userItemsRedeems,random:true},
+              take: 2
+            }
+          }
+
+          this.$crud.index("apiRoutes.qredeems.items",params).then(response => {
+            this.itemsRedeems = response.data
+            console.warn("*** GET ITEMS ")
+            resolve(true)//Resolve
+          }).catch(error => {
+            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'}) 
+            reject(false)//Resolve
+          })
+
+        })
+      },
+      // Get Points Available User
+      getPointsUser(){
+        return new Promise((resolve, reject) => {
+          
+          this.pointsAvailables = 0
+
+          //Params
+          let params = {
+            params: {
+              filter: {
+                userId: this.userId,
+                type: 'availablePointsUser'
+              }
+            }
+          }
+
+          http.get(config('apiRoutes.qredeems.calculates'),params)
+            .then(response => {
+
+              if(response.data.data.points>0)
+                this.pointsAvailables = response.data.data.points
+
+              console.warn("*** GET POINTS USER - Puntos Disponibles:"+this.pointsAvailables )
+              resolve(true);
+
+            })
+            .catch(error => {
+              reject(error);
+            });
+        })
+      },
+      // Redeem Item
+      redeemItem(item){
+
+        this.loading = true
+
+        let data = {
+          'user_id': this.userId,
+          'item_id': item.id,
+          'description': item.name,
+          'points' : item.value
+        }
+
+        this.$crud.create('apiRoutes.qredeems.redeems', data).then(response => {
+          
+          console.error('*** CREATE REDEEMS REDEEMS')
+
+          // Items User redeems
+          this.userItemsRedeems.push(item.id)
+          this.getRedeemsItemsUser()
+
+          // Items to Redeem
+          this.getItems()
+
+          // Points Availables to User
+          this.getPointsUser()
+         
+          this.loading = false
+
+          // Notify MSG
+          this.$q.notify({
+            color:'green',
+            message: 'Item Canjeado!!',
+            position: 'bottom-right'
+          })
+
+        }).catch(error => {
+          console.error('[CREATE REDEEMS REDEEMS] ', error)
+          this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
+          this.loading = false
+        })
+
+      },
+      // Get redeems ITEMS ID for a User
+      getRedeemsItemsUser(){
+        return new Promise((resolve, reject) => {
+          
+          //this.userItemsRedeems = []
+
+          //Params
+          let params = {
+            refresh: true,
+            params: {
+              filter: {userId:this.userId},
+              fields: 'item_id'
+            }
+          }
+
+          this.$crud.index("apiRoutes.qredeems.redeems",params).then(response => {
+            
+            response.data.forEach((redeems, index) => {
+              this.userItemsRedeems.push(redeems.itemId)
+            });
+
+            console.warn("*** GET REDEEMS ITEMS ")
+            //console.warn(this.userItemsRedeems)
+           
+            resolve(true)//Resolve
+          }).catch(error => {
+            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+            reject(false)//Resolve
+          })
+
+        })
       }
 
 
