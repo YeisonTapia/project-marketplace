@@ -3,7 +3,7 @@
     <div>
       <img class="img-title full-width" src="/statics/img/quiz-title.png">
     </div>
-    <q-stepper v-if="success && answers.length>0 && !alertContent.active" ref="stepper" v-model="currentStep" class="no-shadow">
+    <q-stepper v-if="success && answers.length>0 && !alertContent.active && !showVotes" ref="stepper" v-model="currentStep" class="no-shadow">
       
 
       <q-step :name="question.id" :order="index" :title="question.title" v-for="(question, index) in poll.questions" :key="index">
@@ -50,7 +50,6 @@
  
 
     <!-- Votes Poll -->
-    <!--
     <div v-if="showVotes" class="votesPoll text-white q-px-md q-py-md">
 
         <div class="text-h6 font-family-secondary q-my-sm">Resultados</div>
@@ -66,8 +65,6 @@
         </div>
 
     </div>
-    -->
-    
 
   </q-card>
 
@@ -250,9 +247,9 @@
               this.getResultsPoll()
               
               this.$v.$reset()//Reset validations
-              this.alertContent.active = true
+              //this.alertContent.active = true // OJOOOOOOO
 
-              //this.showVotes = true // OJOOOOOOO
+              this.showVotes = true
 
               this.loading = false;
              
