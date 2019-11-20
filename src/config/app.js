@@ -5,7 +5,7 @@ export default {
     isBackend: false, //Define if project is to admin
     loadPageBackend: true,
     //Add more configs, or update from coreAPP
-    modules:[
+    modules: [
         ...coreApp.modules,
         'qticket',
         'qsubscription',
@@ -13,6 +13,15 @@ export default {
         'qquiz',
         'qtrivia',
         'qredeems',
-    ]
+    ],
+    saveCache: {
+        refresh: [
+            ...coreApp.saveCache.refresh,
+            'marketplace.store.selected'
+        ],
+        logout: [
+            ...coreApp.saveCache.logout
+        ]
+    }
 
 }

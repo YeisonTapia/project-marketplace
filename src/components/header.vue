@@ -35,7 +35,7 @@
           <q-btn icon="fullscreen" @click="$q.fullscreen.toggle()" flat round/>
         </div>
       </q-toolbar>
-
+      <q-toggle v-model="storeList" />
       <!--Sub header-->
       <div class="text-center bg-white">
         <!--Logo-->
@@ -93,6 +93,16 @@
       }
     },
     computed: {
+      storeList:{
+
+        get () {
+          console.warn('adsasdas',this.$store)
+          return this.$store.state.showcase.drawerState
+        },
+        set (val) {
+          this.$store.commit('showcase/updateDrawerState', val)
+        }
+      },
       getImageUrl() {
         return config('apiRoutes.api.base_url') + '/' + this.userData.smallImage;
       },

@@ -12,12 +12,12 @@
                 <img :src="logo">
               </router-link>
             </div>
-          </div> 
+          </div>
           <div class="col">
 
             <div class="row full-height justify-end">
               <div class="col-auto self-start">
-                <im-social></im-social> 
+                <im-social></im-social>
                 <div class="profile">
                   <widget-user></widget-user>
                   <span class="q-px-sm font-family-primary line">|</span>
@@ -114,7 +114,7 @@
           </div>
           <div class="subtitle" >
             TIENDA PROFESIONAL
-          </div>      
+          </div>
         </div>
       </div>
       <!-- === LOGO === -->
@@ -123,6 +123,10 @@
             <img :src="logo">
         </router-link>
       </div>
+      <!--Select Store-->
+      <q-select :loading="store.loading" outlined dense :options="store.options"
+                @input="$store.dispatch('qmarketplaceStores/SET_STORE', store.selected)"
+                label="Store" v-model="store.selected" emit-value map-options />
       <!--= MENU =-->
       <menu-list :menu="menu"/>
 
@@ -131,6 +135,7 @@
         <div class="q-subheading text-primary  text-weight-bold q-mb-md">PARA EDITAR TU TIENDA?</div>
         <q-btn rounded to="/contacto" color="primary" label="Contáctanos aquí"/>
       </div>
+
     </q-drawer>
 
     <!-- Config -->
@@ -152,7 +157,7 @@
       configList,
       menuList,
       imSocial,
-      widgetUser, 
+      widgetUser,
       searchStore
     },
     watch: {},
@@ -170,12 +175,18 @@
         },
         menu: config('sidebar'),
         logo: this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo1').path,
+        store : {
+          selected : this.$store.state.qmarketplaceStores.storeSelected,
+          options : this.$store.getters['qmarketplaceStores/userStoresSelect'],
+          loading : false
+        }
       }
     },
     computed: {
       quserState () {
+        console.error(this.$store.state)
         return this.$store.state.quserAuth
-      }
+      },
     },
     methods: {
       //Show drawer specific
@@ -189,7 +200,7 @@
       createStore() {
         //Crear Tienda
         this.$router.push({ name: 'app.editartienda'});
-      },
+      }
     }
   }
 </script>
@@ -228,8 +239,8 @@
           color $primary
           & :hover
             color $warning
-        & .q-focus-helper  
-          background none !important 
+        & .q-focus-helper
+          background none !important
     .profile
       display inline-block
       color #ffffff
@@ -239,7 +250,7 @@
         width 1.5em
         & :hover
           color $warning
-      & .q-focus-helper  
+      & .q-focus-helper
         background none !important
       & .line
         position relative
@@ -282,7 +293,7 @@
       z-index 99
       > .q-btn
         -webkit-transform  skew(-10deg)
-        transform skew(-10deg)     
+        transform skew(-10deg)
         display -ms-flexbox
         display flex
         -ms-flex-wrap wrap
@@ -290,7 +301,7 @@
         margin 0
         list-style none
         padding 0 15px
-        color $secondary  
+        color $secondary
 
   #menu_left
     .q-list
@@ -308,12 +319,12 @@
         &:hover
           background $tertiary!important
           color #ffffff!important
-          i 
+          i
             color #ffffff
-      .q-expansion-item__content  
+      .q-expansion-item__content
         .q-item
           padding: 10px 25px
- 
 
- 
+
+
 </style>
