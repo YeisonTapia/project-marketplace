@@ -46,7 +46,7 @@
     </div>
 </template>
 <script>
-import fullWidthGallery from 'src/components/qslider/qcarousel'
+import fullWidthGallery from 'src/components/themes/qcarousel'
 export default {
   name: 'TopComponent',
   components: {
