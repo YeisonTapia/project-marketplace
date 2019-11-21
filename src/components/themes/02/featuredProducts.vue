@@ -15,7 +15,7 @@
                 navigationNextLabel="<i class='fas fa-angle-right'></i>"
                 navigationPrevLabel="<i class='fas fa-angle-left'></i>">
 
-                <slide v-for="product in products" :key="index">
+                <slide v-for="(product, index) in products" :key="index">
                     <product :product="product" className="cardProductTwo"></product>
                 </slide>
             </carousel>
