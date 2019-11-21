@@ -1,60 +1,100 @@
 <template>
-   <div id="showIblog" class="relative-position">
-      <div id="bannerIblog" v-if="post">
-         <div class="q-container">
-            <!--BreadCrum-->
-            <q-breadcrumbs active-color="primary" color="light" align="right">
-               <!-- Separator -->
-               <q-icon name="fas fa-angle-right" slot="separator" slot-scope="props"/>
-               <!-- Route Home -->
-               <q-breadcrumbs-el label="Inicio" :to="{name : 'app.home'}" icon="home"/>
-               <!-- To category -->
-               <q-breadcrumbs-el :label="post.category.title"
-                                 :to="{name : 'qblog.index', params : {category: post.category.slug}}"/>
-               <!-- To Post -->
-               <q-breadcrumbs-el :label="post.title"/>
-            </q-breadcrumbs>
-            <!--Title-->
-            <h1 class="q-ma-none text-h5 bg-white q-pa-lg title-container text-uppercase text-grey-9">
-               <label>{{post.title}}</label>
-            </h1>
-         </div>
-      </div>
+   <q-page class="page-blog">
 
-      <!--content-->
-      <div class="q-container relative-position" v-if="post">
-         <div class="row q-py-xl">
-            <!--Post-->
-            <div class="post col-12 col-lg-8">
-               <!--Image-->
-               <div class="img" :style="'background-image: url('+post.mainImage.path+')'"></div>
+      <div class="bg-fondo q-px-sm">
+         <div class="q-container" >
+            <div class="row justify-end">
+               <div class="col-auto text-center q-my-lg" v-if="post">
 
-               <!--Description-->
-               <div class="description q-px-sm" v-html="post.description"></div>
+                  <!--BreadCrum-->
+                  <q-breadcrumbs active-color="secondary" color="secondary" align="right">
+                     <!-- Separator -->
+                     <q-icon name="fas fa-angle-right" slot="separator" slot-scope="props"/>
+                     <!-- Route Home -->
+                     <q-breadcrumbs-el label="Inicio" :to="{name : 'app.home'}" icon="home"/>
+                     <!-- To category -->
+                     <q-breadcrumbs-el :label="post.category.title"
+                                       :to="{name : 'qblog.index', params : {category: post.category.slug}}"/>
+                     <!-- To Post -->
+                     <q-breadcrumbs-el :label="post.title"/>
+                  </q-breadcrumbs>
 
-               <!--Autor-->
-               <div class="autor q-headline">
-                  <span class="text-primary">{{post.editor.first_name+' '+post.editor.last_name}}</span>, Autor
                </div>
             </div>
+            <div class="row q-col-gutter-xl q-mt-sm">
+               <div class="col-xs-12 col-sm-12 col-md-8 q-mb-lg" >
 
-            <!--Other Posts-->
-            <div class="col-12 col-lg-4 desktop-only">
-               <posts-component :category-slug="$route.params.category"/>
+                 <q-card  v-if="post">
+                   <q-card-section class="text-center">
+                     <h4 class="title q-my-none text-secondary">{{post.title}}</h4>
+                     <span class="text-tertiary">Por {{post.editor.first_name+' '+post.editor.last_name}}</span> -  {{ $trd(post.createdAt) }}
+                   </q-card-section>
+
+                   <q-card-section class="q-pa-none">
+                     <q-img :ratio="16/9" :src="post.mainImage.path"/>
+                   </q-card-section>
+
+                   <q-card-section>
+                     <div class="q-subheading q-my-md" v-html="post.description"></div>
+
+                     <div class="q-mt-md">
+                       <div class="bg-primary q-pa-md text-white text-weight-bold">
+                         COMENTA AHORA
+                         </div>
+                         <div class="q-pa-sm bg-light">
+                           <div class="comment-facebook bg-white q-pa-sm">
+                              <comment-component></comment-component>
+                           </div>
+                         </div>
+                     </div>
+
+                   </q-card-section>
+                   <q-card-actions align="right">
+                       <q-btn flat color="primary" icon="fab fa-facebook" />
+                       <q-btn flat color="primary" icon="fab fa-whatsapp" />
+                       <q-btn flat color="primary" icon="fab fa-twitter" />
+                   </q-card-actions>
+                 </q-card>
+
+               </div>
+
+               <div class="col-xs-12 col-sm-12 col-md-4 q-mb-lg desktop-only">
+
+                  <categories></categories>
+
+                  <featured></featured>
+
+                  <more-popular></more-popular>
+
+                  <!-- <posts-component :category-slug="$route.params.category"/> -->
+               </div>
+               <inner-loading :visible="loading"/>
             </div>
-
-            <inner-loading :visible="loading"/>
          </div>
+
+
+         <div class="q-container banner q-py-xl text-center">
+           <img class="w-100" src="/statics/img/publicidad1-100.jpg" alt="banner">
+         </div>  
       </div>
-   </div>
+   </q-page>
 </template>
 
 <script>
-   /*Component*/
-   import commentComponent from 'src/components/master/commentsFB'
-   import postsComponent from '@imagina/qblog/_components/widgets/widget-post-blog'
-
+/*Component*/
+import commentComponent from 'src/components/master/commentsFB'
+import postsComponent from '@imagina/qblog/_components/widgets/widget-post-blog'
+import categories from 'src/components/qblog/categories'
+import featured from 'src/components/qblog/featured'
+import morePopular from 'src/components/qblog/morePopular'
    export default {
+      components: {
+         categories,
+         featured,
+         morePopular,
+         commentComponent,
+         postsComponent
+      },
       preFetch({store, currentRoute, previousRoute, redirect, ssrContext}) {
          return new Promise(async resolve => {
             //Get data post
@@ -94,10 +134,6 @@
             },
          }
       },
-      components: {
-         commentComponent,
-         postsComponent
-      },
       watch: {
          '$route.params'() {
             this.getData()
@@ -132,64 +168,11 @@
       },
    }
 </script>
-
 <style lang="stylus">
-   #showIblog
-      .post
-         .title
-            font-size 34px
-            color $dark
-            margin-top 0
-            @media screen and (max-width: $breakpoint-md)
-               font-size 24px
-               text-align center
-
-         .img
-            height 400px
-            width 100%
-            position relative
-            background-repeat no-repeat
-            background-position center
-            background-size cover
-
-            span
-               padding 5px
-               position absolute
-               top 0px
-               left 20px
-               line-height 1.5
-
-               h4
-                  margin 0
-
-         .autor
-            padding 15px 8px
-            margin-bottom 25px
-            border-top: 1px solid $grey-5
-            border-bottom: 1px solid $grey-5
-
-         .description
-            margin 30px 0px
-
-            p
-               line-height 1.6
-               text-align justify
-
-      iframe
-         width 100% !important
-
-      #bannerIblog
-         background-color $grey-4
-         padding 5px
-
-         .title-container
-            border-top-right-radius 50px
-            width max-content
-
-            label
-               font-weight bold !important
-               border-bottom: 5px solid $secondary
+.page-blog
+  .title
+    a    
+      color $secondary
+  .line-red
+    border-top 3px solid $primary  
 </style>
-
-
-name: "show"
