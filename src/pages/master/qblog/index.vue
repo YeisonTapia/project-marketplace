@@ -28,7 +28,7 @@
                  v-for="(post,key) in category.posts">
                <q-card inline style="width: 100%" flat>
                   <!--Media-->
-                  <router-link :to="{name: 'qblog.show',params:{category: category.slug, postSlug: post.slug}}">
+                  <router-link :to="{name: 'qblog.show',params:{category: post.category.slug, slugPost: post.slug}}">
                      <div class="img" :style="'background-image: url('+post.mainImage.path+')'"></div>
                   </router-link>
                   <!--Date-->
@@ -40,7 +40,7 @@
                   <q-separator class="q-ml-sm"/>
                   <q-card-section class="q-pa-sm">
                      <router-link
-                             :to="{name: 'qblog.show',params:{category: category.slug, postSlug: post.slug}}">
+                             :to="{name: 'qblog.show',params:{category: post.category.slug, slugPost: post.slug}}">
                         <h2 class="q-ma-none text-primary text-h6 text-weight-bold">
                            {{post.title}}
                         </h2>

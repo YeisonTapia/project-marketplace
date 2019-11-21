@@ -1,5 +1,25 @@
 <template>
    <div id="showIblog" class="relative-position">
+      <div id="bannerIblog" v-if="post">
+         <div class="q-container">
+            <!--BreadCrum-->
+            <q-breadcrumbs active-color="primary" color="light" align="right">
+               <!-- Separator -->
+               <q-icon name="fas fa-angle-right" slot="separator" slot-scope="props"/>
+               <!-- Route Home -->
+               <q-breadcrumbs-el label="Inicio" :to="{name : 'app.home'}" icon="home"/>
+               <!-- To category -->
+               <q-breadcrumbs-el :label="post.category.title"
+                                 :to="{name : 'qblog.index', params : {category: post.category.slug}}"/>
+               <!-- To Post -->
+               <q-breadcrumbs-el :label="post.title"/>
+            </q-breadcrumbs>
+            <!--Title-->
+            <h1 class="q-ma-none text-h5 bg-white q-pa-lg title-container text-uppercase text-grey-9">
+               <label>{{post.title}}</label>
+            </h1>
+         </div>
+      </div>
 
       <!--content-->
       <div class="q-container relative-position" v-if="post">

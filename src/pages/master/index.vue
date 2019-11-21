@@ -35,8 +35,7 @@
 </style>
 
 <script>
-import fullWidthGallery from 'src/components/qslider/qcarousel'
-
+import fullWidthGallery from 'src/components/qslider/vueCarousel'
 import top from 'src/components/themes/top'
 import featuredStores from 'src/components/themes/featuredStores'
 import interestStores from 'src/components/themes/interestStores'
