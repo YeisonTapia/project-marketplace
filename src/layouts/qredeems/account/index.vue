@@ -153,12 +153,37 @@
       </div>
 
       <div class="text-right">
-        <div class="q-inline-block cursor-pointer">
+        <div class="q-inline-block">
           <h5 id="asd" class="title text-secondary font-family-secondary q-mt-none">
               Historial de puntos
             <div class="line-secondary q-mt-sm"></div>
           </h5>
         </div>
+      </div>
+
+      <!-- Historial Ptos-->
+      <div class="row q-col-gutter-md">
+
+        <!-- Puntos Obtenidos -->
+        <div class="col-6">
+            <q-table
+              title="Puntos Obtenidos"
+              :data="tableUserAllPoints"
+              :columns="tableColumnsAllPoints"
+              row-key="id"
+            />
+        </div>
+
+        <!-- Puntos Canjeados -->
+        <div class="col-6">
+            <q-table
+              title="Puntos Canjeados"
+              :data="tableUserItemsRedeems"
+              :columns="tableColumns"
+              row-key="id"
+            />
+        </div>
+        
       </div>
 
 
@@ -172,6 +197,7 @@
 <script>
 
   import http from "axios"
+  import { date } from 'quasar'
 
   export default {
     props: {
@@ -201,6 +227,75 @@
         userId: this.$store.state.quserAuth.userId ? this.$store.state.quserAuth.userId : null,
         //pointsAvailables: 0,
         userItemsRedeems: [],
+        tableColumns: [
+          /*
+          {
+            name: 'id',
+            field: 'id', 
+            label: 'ID',
+            align: 'left',
+            sortable: true
+          },
+          */
+          {
+            name: 'description',
+            field: 'description', 
+            label: 'DESCRIPCION',
+            align: 'left',
+          },
+          {
+            name: 'points',
+            field: 'points', 
+            label: 'PUNTOS',
+            align: 'left',
+            sortable: true
+          },
+          {
+            name: 'createdAt',
+            field: 'createdAt', 
+            label: 'FECHA',
+            align: 'left',
+            sortable: true,
+            format: val => this.fDate(val),
+          }
+        ],
+        tableData: [],
+        tableUserItemsRedeems: [],
+        tableUserAllPoints:[],
+        tableColumnsAllPoints: [
+          /*
+          {
+            name: 'id',
+            field: 'id', 
+            label: 'ID',
+            align: 'left',
+            sortable: true
+          },
+          */
+          {
+            name: 'description',
+            field: 'description', 
+            label: 'DESCRIPCION',
+            align: 'left',
+          },
+          {
+            name: 'points',
+            field: 'points', 
+            label: 'PUNTOS',
+            align: 'left',
+            sortable: true,
+            format: val => this.fPoints(val),
+          },
+          {
+            name: 'createdAt',
+            field: 'createdAt', 
+            label: 'FECHA',
+            align: 'left',
+            sortable: true,
+            format: val => this.fDate(val),
+          }
+        ],
+
       }
     },
     methods: {
@@ -219,12 +314,15 @@
 
         // Historic group
         await this.getHistoryPoints()
+
+        // All points User
+        await this.getAllPointsByUser()
        
         this.loading = false
         this.success = true
 
       },
-      // Get Points History
+      // Get Points History Group
       getHistoryPoints(){
         return new Promise((resolve, reject) => {
           //Params
@@ -357,26 +455,26 @@
       getRedeemsItemsUser(){
         return new Promise((resolve, reject) => {
           
-          //this.userItemsRedeems = []
+          this.tableUserItemsRedeems = []
 
           //Params
           let params = {
             refresh: true,
             params: {
-              filter: {userId:this.userId},
-              fields: 'item_id'
+              filter: {userId:this.userId}
             }
           }
 
           this.$crud.index("apiRoutes.qredeems.redeems",params).then(response => {
+            
+            this.tableUserItemsRedeems = response.data
             
             response.data.forEach((redeems, index) => {
               this.userItemsRedeems.push(redeems.itemId)
             });
 
             console.warn("*** GET REDEEMS ITEMS ")
-            //console.warn(this.userItemsRedeems)
-           
+            
             resolve(true)//Resolve
           }).catch(error => {
             this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
@@ -388,6 +486,45 @@
       // CHange Points Availables
       emitChangePoints(){
         this.$emit('changePoints',true);
+      },
+      // Get ALL Points that User has Won
+      getAllPointsByUser(){
+        return new Promise((resolve, reject) => {
+          //Params
+          let params = {
+            params: {
+              filter: {
+                userId: this.$store.state.quserAuth.userId,
+              }
+            }
+          }
+
+          this.$crud.index('apiRoutes.qredeems.points',params)
+            .then(response => {
+
+              this.tableUserAllPoints = response.data
+              console.warn("*** GET ALL POINTS BY USER ")
+              resolve(true);
+
+            })
+            .catch(error => {
+              this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+              console.error("*** GET ALL POINTS BY USER - ERROR")
+              reject(error);
+            });
+        })
+      },
+      // Format date table
+      fDate(val){
+        let formattedString = date.formatDate(val, 'DD-MM-YYYY')
+        return formattedString
+      },
+      // Validate Points value 0
+      fPoints(val){
+        if(val==undefined)
+          return 0
+        else
+          return val
       },
 
 
