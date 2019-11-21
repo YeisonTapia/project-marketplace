@@ -71,7 +71,7 @@
           </div>
           <q-card-section class="q-mx-puntos q-my-lg">
             
-            <q-list v-if="itemsRedeems.length" separator bordered style="border-left: 0; border-right: 0;">
+            <q-list v-if="itemsRedeems.length>0" separator bordered style="border-left: 0; border-right: 0;">
 
               <q-item v-for="(item, index) in itemsRedeems" :key="index">
                 <q-item-section>
@@ -111,8 +111,10 @@
              
             </q-list>
 
-            <div v-else>
-              No existen items disponibles para cambiar
+            <div v-if="itemsRedeems.length==0 && loading==false">
+
+                No existen items disponibles para cambiar
+             
             </div>
 
           </q-card-section>
@@ -172,7 +174,10 @@
   import http from "axios"
 
   export default {
-    props: {},
+    props: {
+      pointsAvailables:{default: 0},
+      changePoints: {type: Boolean, default: false},
+    },
     components: {},
     watch: {},
     validations() {
@@ -187,14 +192,14 @@
       return {
         loading: false,
         success: false,
-        meta: this.$store.getters['qsiteSettings/getSettingValueByName']('iredeems::points-month'),
+        meta: parseInt(this.$store.getters['qsiteSettings/getSettingValueByName']('iredeems::points-month')),
         min: 0,
         step: 40,
         pointsGroup: [],
         acumulados: 0,
         itemsRedeems: [],
         userId: this.$store.state.quserAuth.userId ? this.$store.state.quserAuth.userId : null,
-        pointsAvailables: 0,
+        //pointsAvailables: 0,
         userItemsRedeems: [],
       }
     },
@@ -204,7 +209,7 @@
         this.loading = true
 
         // Points Availables to User
-        await this.getPointsUser()
+        //await this.getPointsUser()
 
         // Items User redeems
         await this.getRedeemsItemsUser()
@@ -215,9 +220,9 @@
         // Historic group
         await this.getHistoryPoints()
        
-
         this.loading = false
         this.success = true
+
       },
       // Get Points History
       getHistoryPoints(){
@@ -265,6 +270,7 @@
           this.$crud.index("apiRoutes.qredeems.items",params).then(response => {
             this.itemsRedeems = response.data
             console.warn("*** GET ITEMS ")
+            this.loading = false
             resolve(true)//Resolve
           }).catch(error => {
             this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'}) 
@@ -277,7 +283,7 @@
       getPointsUser(){
         return new Promise((resolve, reject) => {
           
-          this.pointsAvailables = 0
+          //this.pointsAvailables = 0
 
           //Params
           let params = {
@@ -293,7 +299,7 @@
             .then(response => {
 
               if(response.data.data.points>0)
-                this.pointsAvailables = response.data.data.points
+                //this.pointsAvailables = response.data.data.points
 
               console.warn("*** GET POINTS USER - Puntos Disponibles:"+this.pointsAvailables )
               resolve(true);
@@ -316,9 +322,14 @@
           'points' : item.value
         }
 
+      
         this.$crud.create('apiRoutes.qredeems.redeems', data).then(response => {
           
-          console.error('*** CREATE REDEEMS REDEEMS')
+          console.warn('*** CREATE REDEEMS REDEEMS')
+
+          // Points Availables to User
+          this.emitChangePoints()
+          //this.getPointsUser()
 
           // Items User redeems
           this.userItemsRedeems.push(item.id)
@@ -326,11 +337,6 @@
 
           // Items to Redeem
           this.getItems()
-
-          // Points Availables to User
-          this.getPointsUser()
-         
-          this.loading = false
 
           // Notify MSG
           this.$q.notify({
@@ -344,6 +350,7 @@
           this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
           this.loading = false
         })
+
 
       },
       // Get redeems ITEMS ID for a User
@@ -377,7 +384,11 @@
           })
 
         })
-      }
+      },
+      // CHange Points Availables
+      emitChangePoints(){
+        this.$emit('changePoints',true);
+      },
 
 
     }

@@ -14,7 +14,7 @@
           </div>
           <div class="club text-center">
             <div class="circulo bg-secondary text-white round flex items-center justify-center">
-              <div class="points font-family-secondary">{{pointsHistory}}</div>
+              <div class="points font-family-secondary">{{pointsAvailables}}</div>
             </div>
             <h5 class="font-family-secondary text-secondary q-my-md">Puntos historicos</h5>
           </div>
@@ -152,7 +152,9 @@
   import {required, email, minLength} from 'vuelidate/lib/validators'
 
   export default {
-    props: {},
+    props: {
+      pointsAvailables:{default: 0}
+    },
     components: {},
     watch: {
       imgUser(val,oldval){
@@ -250,7 +252,7 @@
         this.loading = true//Loading
         this.form.fields = this.$clone(this.defaultFields)//Set default fields
         await this.setUserData()//Set user data
-        await this.getPointsHistoryc()
+        //await this.getPointsHistoryc()
         this.success = true//Success page
         this.loading = false//Loading
       },

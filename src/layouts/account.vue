@@ -13,11 +13,11 @@
                     <div class="row q-col-gutter-lg q-my-xl">
 
                       <div class="col-12 col-md-12 col-lg-4 col-xl-3">
-                        <menuAccount/>
+                        <menuAccount :pointsAvailables="pointsAvailables"/>
                       </div>
 
                       <div class="col-12 col-md-12 col-lg-8 col-xl-9">
-                        <router-view v-if="appState.loadPage"/>
+                        <router-view v-if="appState.loadPage" :pointsAvailables="pointsAvailables" :changePoints="changePoints" @changePoints ="changePoints = $event"/>
                       </div>
                       
                     </div>
@@ -39,6 +39,8 @@
     import frontendFooter from 'src/components/master/frontend/footer'
     import configApp from 'src/config/app'
     import menuAccount from 'src/components/account/menu'
+    import http from "axios"
+
     export default {
         preFetch({store}) {
             return new Promise(async resolve => {
@@ -78,11 +80,14 @@
         },
         mounted() {
             this.$nextTick(async function () {
+                this.init()
             })
         },
         data() {
             return {
-                appIsBackend: config('app.isBackend')
+                appIsBackend: config('app.isBackend'),
+                pointsAvailables: 0,
+                changePoints: false
             }
         },
         computed: {
@@ -95,10 +100,55 @@
             }
         },
         methods: {
+
             async refreshPage(done) {
                 await this.$store.dispatch('app/REFRESH_PAGE')
                 done()
+            },
+             //init
+            async init() {
+                await this.getPointsUser()
+            },
+            
+            // Get Points Available User
+            getPointsUser(){
+                return new Promise((resolve, reject) => {
+                  
+                  this.pointsAvailables = 0
+
+                  //Params
+                  let params = {
+                    params: {
+                      filter: {
+                        userId: this.$store.state.quserAuth.userId,
+                        type: 'availablePointsUser'
+                      }
+                    }
+                  }
+
+                  http.get(config('apiRoutes.qredeems.calculates'),params)
+                    .then(response => {
+
+                      if(response.data.data.points>0)
+                        this.pointsAvailables = response.data.data.points
+
+                      console.warn("*** GET POINTS USER - Puntos Disponibles:"+this.pointsAvailables )
+                      resolve(true);
+
+                    })
+                    .catch(error => {
+                      reject(error);
+                    });
+                })
+            },
+        },
+        watch: {
+          changePoints(val,oldval) {
+            if(val==true){
+                this.getPointsUser()
+                this.changePoints = false
             }
+          }
         }
     }
 </script>
