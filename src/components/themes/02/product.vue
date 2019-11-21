@@ -18,8 +18,8 @@
         v-model="product.rating" color="secondary"
         :max="5" v-if="product.rating>0"
       />
-      <p class="q-my-sm text-truncate">{{product.name}}</p>
-      <p class="q-my-sm text-truncate"><small>{{product.tienda}}</small></p>  
+      <p class="q-my-sm ">{{product.name}}</p>
+      <p class="q-my-sm "><small>{{product.tienda}}</small></p>  
     </q-card-section>
     <q-card-actions>
       <q-btn color="secondary" label="COMPRAR" icon="shopping_cart"/>
@@ -36,6 +36,7 @@ export default {
 .cardProductTwo
   border-radius 20px 20px 20px 0
   position relative
+  margin 8px
   background-color var(--q-color-light)
   & .card-title
     margin-right 30px
