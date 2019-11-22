@@ -5,7 +5,7 @@
     </div>
     <div class="content-stepper">
 
-     <q-stepper v-if="success && answers.length>0 && !alertContent.active" ref="stepper" v-model="currentStep" class="no-shadow">
+     <q-stepper v-if="success && answers.length>0 && !alertContent.active && !showResults" ref="stepper" v-model="currentStep" class="no-shadow">
       <!-- Step: -->
       <q-step :name="question.id" :order="index" :title="question.title" v-for="(question, index) in trivia.questions" :key="index">
 
@@ -64,7 +64,7 @@
     </div>
 
     <!-- msj final -->
-    <q-banner v-if="alertContent.active" :class="alertContent.color" class="q-mx-sm q-mt-xl q-py-md">
+    <q-banner v-if="alertContent.active && !showResults" :class="alertContent.color" class="q-mx-sm q-mt-xl q-py-md">
 
       <template v-slot:avatar>
         <q-icon :name="alertContent.icon" color="white" />
@@ -75,6 +75,20 @@
         </div>
 
     </q-banner>
+
+    <!-- Results Trivia -->
+    <div v-if="showResults" class="showResults text-white q-px-md q-py-md">
+
+        <div class="text-h6 text-primary font-family-secondary q-my-sm">Resultados</div>
+        <div class="contentTrivia text-black">
+          <div>Total de Preguntas: {{resultsTrivia.questionsTotal}}</div>
+          <div>Total de Preguntas que Acertaste: {{resultsTrivia.userOkQuestions}}</div>
+          <div>Porcentaje Acertado: {{resultsTrivia.questionsPercentCompleted}} %</div>
+          <div>Puntos Ganados: {{resultsTrivia.pointsWinner}}</div>
+          <div class="q-mt-md">Nota: Si tu porcentaje de acierto es menor al 100%, puede ser que ganes menos o incluso ningun punto, asi que recuerda estar seguro al responder.</div>
+        </div>
+        
+    </div>
 
   </q-card>
 </template>
@@ -110,7 +124,9 @@ export default {
           icon:'check',
           msj:'Gracias por participar!!'
         },      
-        currentStep: null
+        currentStep: null,
+        showResults: false,
+        resultsTrivia: [],
       }
   },
   methods: {
@@ -241,6 +257,11 @@ export default {
         'user_id' : this.userId
       }
       this.$crud.create('apiRoutes.qtrivia.userTrivias', data).then(response => {
+
+        this.resultsTrivia = response.data[0]
+        //console.warn('[TRIVIA - CREATE USER TRIVIAS]')
+        this.showResults = true
+
         this.loading = false
       }).catch(error => {
         console.error('[TRIVIA - CREATE USER TRIVIAS] ', error)

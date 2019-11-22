@@ -38,7 +38,7 @@
     
 
     <!-- msj final -->
-    <q-banner v-if="alertContent.active" :class="alertContent.color" class="q-mx-sm q-mt-xl q-py-md">
+    <q-banner v-if="alertContent.active && !showVotes" :class="alertContent.color" class="q-mx-sm q-mt-xl q-py-md">
       <template v-slot:avatar>
         <q-icon :name="alertContent.icon" color="white" />
       </template>
