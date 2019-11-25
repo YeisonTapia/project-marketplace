@@ -70,6 +70,17 @@ let responsePages = {
             icon: 'fas fa-truck',
             authenticated: false
         },
+        contacto: {
+            permission: null,
+            activated: true,
+            path: '/contacto',
+            name: 'app.contacto',
+            layout: () => import('src/layouts/master'),
+            page: () => import('pages/contacto.vue'),
+            title: 'Contacto',
+            icon: 'far fa-envelope-open',
+            authenticated: false
+        },
         layout1: {
             permission: null,
             activated: true,

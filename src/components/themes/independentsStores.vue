@@ -1,5 +1,5 @@
 <template>
-    <div class="independents-stores q-my-lg">
+    <div class="independents-stores full-width q-my-lg">
         <div class="bg-white text-center ">
             <h3 class="title-label-primary text-center">
                 <div>Independientes Destacados</div>
@@ -25,58 +25,58 @@
                 stores:  [
                 {
                     name: 'BELLE TIENDA 1',
-                    avatar: 'https://cdn.quasar.dev/img/avatar.png',
-                    image: '/statics/img/banner.png',
-                    summary: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
+                    logo : { path: 'https://cdn.quasar.dev/img/avatar.png' },
+                    mainImage: { path: '/statics/img/banner.png' },
+                    slogan: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
                     pts: 9
                 },
                 {
                     name: 'BELLE TIENDA 2',
-                    avatar: 'https://cdn.quasar.dev/img/avatar.png',
-                    image: '/statics/img/banner.png',
-                    summary: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
+                    logo : { path: 'https://cdn.quasar.dev/img/avatar.png' },
+                    mainImage: { path: '/statics/img/banner.png' },
+                    slogan: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
                     pts: 9
                 },
                                 {
                     name: 'BELLE TIENDA 3',
-                    avatar: 'https://cdn.quasar.dev/img/avatar.png',
-                    image: '/statics/img/banner.png',
-                    summary: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
+                    logo : { path: 'https://cdn.quasar.dev/img/avatar.png' },
+                    mainImage: { path: '/statics/img/banner.png' },
+                    slogan: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
                     pts: 3
                 },
                 {
                     name: 'BELLE TIENDA 4',
-                    avatar: 'https://cdn.quasar.dev/img/avatar.png',
-                    image: '/statics/img/banner.png',
-                    summary: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
+                    logo : { path: 'https://cdn.quasar.dev/img/avatar.png' },
+                    mainImage: { path: '/statics/img/banner.png' },
+                    slogan: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
                     pts: 9
                 },
                                 {
                     name: 'BELLE TIENDA 5',
-                    avatar: 'https://cdn.quasar.dev/img/avatar.png',
-                    image: '/statics/img/banner.png',
-                    summary: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
+                    logo : { path: 'https://cdn.quasar.dev/img/avatar.png' },
+                    mainImage: { path: '/statics/img/banner.png' },
+                    slogan: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
                     pts: 0
                 },
                 {
                     name: 'BELLE TIENDA 6',
-                    avatar: 'https://cdn.quasar.dev/img/avatar.png',
-                    image: '/statics/img/banner.png',
-                    summary: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
+                    logo : { path: 'https://cdn.quasar.dev/img/avatar.png' },
+                    mainImage: { path: '/statics/img/banner.png' },
+                    slogan: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
                     pts: 0
                 },
                 {
                     name: 'BELLE TIENDA 7',
-                    avatar: 'https://cdn.quasar.dev/img/avatar.png',
-                    image: '/statics/img/banner.png',
-                    summary: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
+                    logo : { path: 'https://cdn.quasar.dev/img/avatar.png' },
+                    mainImage: { path: '/statics/img/banner.png' },
+                    slogan: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
                     pts: 9
                 },
                 {
                     name: 'BELLE TIENDA 8',
-                    avatar: 'https://cdn.quasar.dev/img/avatar.png',
-                    image: '/statics/img/banner.png',
-                    summary: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
+                    logo : { path: 'https://cdn.quasar.dev/img/avatar.png' },
+                    mainImage: { path: '/statics/img/banner.png' },
+                    slogan: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
                     pts: 9
                 }
                 ]

@@ -56,11 +56,28 @@
         <div class="contentPoll" v-for="(question, index) in votesPoll" :key="index">
 
           <div class="question q-mb-md">
-            {{question.title}} - TOTAL DE VOTOS: {{question.totalVotes}}
-            <div class="answers" v-for="(answer, index2) in question.answers" :key="index2">
-              {{answer.title}} - VOTOS: {{answer.votes}}
-              
-            </div>
+            <div class="text-center text-subtitle1">{{question.title}} </div>
+            <table class="q-mx-auto">
+              <thead>
+                <tr>
+                  <th style="width:50%;"></th>
+                  <th class="text-center" style="width:20%;">Votos</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="answers" v-for="(answer, index2) in question.answers" :key="index2">
+                  <td>{{answer.title}}</td> <td class="text-center">  {{answer.votes}} </td>
+                </tr>
+                <tr>
+                 <td>
+                   TOTAL 
+                 </td>
+                 <td class="text-center">
+                   {{question.totalVotes}}
+                 </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 

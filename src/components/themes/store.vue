@@ -1,14 +1,14 @@
 <template>
   <q-card class="card-store q-ma-md">
-    <q-img :ratio="4/3" :src="store.image" >
+    <q-img :ratio="4/3" :src="store.mainImage.path" >
       <div class="absolute-top-left text-center q-ml-md">
         <div class="pts text-subtitle1" v-if="store.pts">
           <span>{{store.pts}}pt</span>
         </div>
       </div>
       <div class="absolute-bottom-left text-center q-ma-sm">
-        <q-avatar round size="100px">
-          <img :src="store.avatar">
+        <q-avatar round class="bg-white" size="100px">
+          <img :src="store.logo.path">
         </q-avatar>
       </div>
 
@@ -19,7 +19,7 @@
       </div>
     </q-img>
     <q-card-section class="summary text-subtitle2">
-      {{store.summary}}
+      {{store.slogan}}
     </q-card-section>
   </q-card>
 </template>
