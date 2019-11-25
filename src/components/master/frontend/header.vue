@@ -20,8 +20,8 @@
                 <im-social></im-social>
                 <div class="profile">
                   <widget-user></widget-user>
-                  <span class="q-px-sm font-family-primary line">|</span>
-                  <q-btn class="q-pa-none" round flat icon="fas fa-heart" />
+                  <span class="q-px-md font-family-primary line">|</span>
+                  <q-btn class="q-pa-none" flat icon="fas fa-heart" />
                 </div>
               </div>
               <div class="col-12 q-py-lg">

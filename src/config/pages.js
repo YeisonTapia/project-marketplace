@@ -48,6 +48,28 @@ let responsePages = {
             icon: 'far fa-envelope-open',
             authenticated: false
         },
+        ofertas: {
+            permission: null,
+            activated: true,
+            path: '/tiendas-en-ofertas',
+            name: 'app.ofertas',
+            layout: () => import('src/layouts/master'),
+            page: () => import('pages/ofertas.vue'),
+            title: 'Tiendas en oferta',
+            icon: 'fas fa-store',
+            authenticated: false
+        },
+        domicilios: {
+            permission: null,
+            activated: true,
+            path: '/domicilios',
+            name: 'app.domicilios',
+            layout: () => import('src/layouts/master'),
+            page: () => import('pages/domicilios.vue'),
+            title: 'Domicilios',
+            icon: 'fas fa-truck',
+            authenticated: false
+        },
         layout1: {
             permission: null,
             activated: true,
