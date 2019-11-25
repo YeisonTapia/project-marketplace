@@ -1,24 +1,26 @@
 <template>
-  <div class="q-inline-block">
-    <q-btn-dropdown class="q-pa-none" flat no-caps icon="fas fa-user-alt" v-if="userData">
+  <div class="q-inline-block widget-user">
+    <q-btn-dropdown class="q-pa-none" round flat no-caps icon="fas fa-user-alt" dropdown-icon="fa" v-if="userData">
       <q-list class="bg-light">
 
-        <q-item tag="label" :to="{name: 'user.profile.me'}">
-          <q-item-section class="img-user">
+
+        <q-item  clickable v-ripple :to="{name: 'user.profile.me'}">
+          <q-item-section avatar>
             <q-avatar>
-              <img :src="userData.mediumImage" >
+              <img :src="userData.mediumImage">
             </q-avatar>
           </q-item-section>
-          <q-item-label>{{userData.fullName}}</q-item-label>
+          <q-item-section class="q-py-md">{{userData.fullName}}</q-item-section>
         </q-item>
 
         <q-separator />
 
-        <q-item tag="label" link :to="{name:'auth.logout'}">
-          <q-item-section>
-            <q-icon color="tertiary" name="fas fa-sign-out-alt" ></q-icon>
+        <q-item  clickable v-ripple :to="{name:'auth.logout'}">
+          <q-item-section avatar>
+            <q-icon color="primary" name="fas fa-sign-out-alt" />
           </q-item-section>
-          <q-item-label>{{$t('ui.configList.signOut')}}</q-item-label>
+
+          <q-item-section class="q-py-md">{{$t('ui.configList.signOut')}}</q-item-section>
         </q-item>
 
       </q-list>
@@ -65,5 +67,8 @@
   }
 </script>
 <style lang="stylus">
- 
+.widget-user
+  .q-btn-dropdown__arrow
+    display none!important
+    margin-left 0
 </style>
