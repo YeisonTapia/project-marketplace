@@ -1,68 +1,107 @@
 <template>
-   <div id="indexBlog1" class="relative-position">
-      <!-- BANNER -->
-      <div id="bannerIblog" v-if="category">
-         <div class="q-container">
-            <!--BreadCrum-->
-            <q-breadcrumbs active-color="primary" color="light" align="right">
-               <!-- Separator -->
-               <q-icon name="fas fa-angle-right" slot="separator" slot-scope="props"/>
-               <!-- Route Home -->
-               <q-breadcrumbs-el label="Inicio" :to="{name : 'app.home'}" icon="home"/>
-               <!-- To category -->
-               <q-breadcrumbs-el :label="$route.params.category.split('-').join(' ')"/>
-            </q-breadcrumbs>
-            <!--Title-->
-            <h1 class="q-ma-none text-h5 bg-white q-pa-lg title-container text-uppercase text-grey-9">
-               <label>{{category.title}}</label>
-            </h1>
-         </div>
-      </div>
-<pre>
+   <q-page class="page-blog">
 
-</pre>
-      <!-- Contend -->
-      <div class="q-container relative-position">
-         <div class="contentDescription q-col-gutter-md row q-py-lg q-px-sm" v-if="category && category.posts">
-            <div class="col-12 col-md-4 col-lg-3" :key="key"
-                 v-for="(post,key) in category.posts">
-               <q-card inline style="width: 100%" flat>
-                  <!--Media-->
-                  <router-link :to="{name: 'qblog.show',params:{category: post.category.slug, slugPost: post.slug}}">
-                     <div class="img" :style="'background-image: url('+post.mainImage.path+')'"></div>
-                  </router-link>
-                  <!--Date-->
-                  <q-card-actions class="q-px-sm q-pb-md">
-                     <p class="q-mb-none">
-                        {{ $trd(post.createdAt) }}
-                     </p>
-                  </q-card-actions>
-                  <q-separator class="q-ml-sm"/>
-                  <q-card-section class="q-pa-sm">
-                     <router-link
-                             :to="{name: 'qblog.show',params:{category: post.category.slug, slugPost: post.slug}}">
-                        <h2 class="q-ma-none text-primary text-h6 text-weight-bold">
-                           {{post.title}}
-                        </h2>
-                     </router-link>
-                  </q-card-section>
-                  <q-card-section class="q-pa-none">
-                     <p class="q-pa-sm text-justify">
-                        {{post.summary}}
-                     </p>
-                  </q-card-section>
-               </q-card>
+      <div class="bg-fondo q-px-sm">
+         <div class="q-container">
+            <div class="row justify-end">
+               <div class="col-auto text-center q-my-lg">
+                  <div  v-if="category">
+    
+                     <!--BreadCrum-->
+                     <q-breadcrumbs active-color="secondary" color="secondary" align="right">
+                        <!-- Separator -->
+                        <q-icon name="fas fa-angle-right" slot="separator" slot-scope="props"/>
+                        <!-- Route Home -->
+                        <q-breadcrumbs-el label="Inicio" :to="{name : 'app.home'}"/>
+                        <!-- To category -->
+                        <q-breadcrumbs-el :label="$route.params.category.split('-').join(' ')"/>
+                     </q-breadcrumbs>
+
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-12">
+                  <h5 class="bg-secondary font-family-secondary text-weight-bold q-inline-block text-white q-px-lg q-py-md"> {{category.title}} </h5>
+               </div>       
+            </div>
+         
+            <div class="row q-col-gutter-xl">
+               <div class="col-xs-12 col-sm-12 col-md-8 q-mb-lg" v-if="category && category.posts">
+
+                  <div class="row q-col-gutter-lg">
+                     <div :class="[ key == 0 ?  'col-12' : 'col-xs-12 col-sm-12 col-md-12 col-lg-6']" :key="key" v-for="(post,key) in category.posts">
+
+                        <q-card>
+                           <q-card-section class="q-px-none q-pt-none">
+                              <router-link
+                                :to="{name: 'qblog.show',params:{category: post.category.slug, slugPost: post.slug}}">
+                                 <q-img :ratio="4/3" :src="post.mainImage.path"/>
+                              </router-link>
+                           </q-card-section>
+                          <q-card-section>
+                              <!--<span class="text-tertiary">Por liseth torres</span> - -->  {{ $trd(post.createdAt) }}
+                          </q-card-section>
+                          <q-card-section>
+                           <h4 class="title q-my-none text-sencondary">
+                              <router-link
+                                :to="{name: 'qblog.show',params:{category: post.category.slug, slugPost: post.slug}}">
+                                 
+                                    {{post.title}}
+                                 
+                              </router-link>
+                           </h4>
+                            <p class="q-my-md"> {{post.summary}}</p>
+                          </q-card-section>
+                          <q-card-actions align="between">
+
+                            <q-btn :to="{name: 'qblog.show',params:{category: post.category.slug, slugPost: post.slug}}" no-caps flat color="primary" icon="fas fa-caret-right" label="Seguir leyendo" />
+                            <div class="div">
+                              <q-btn flat color="primary" icon="fab fa-facebook" />
+                              <q-btn flat color="primary" icon="fab fa-whatsapp" />
+                              <q-btn flat color="primary" icon="fab fa-twitter" />
+                            </div>
+                          </q-card-actions>
+                        </q-card>
+       
+
+                     </div>
+
+                </div>
+
+               </div>
+               <!--Not results-->
+               <not-results v-else />
+               <div class="col-xs-12 col-sm-12 col-md-4 q-mb-lg desktop-only">
+
+                  <categories></categories>
+
+                  <featured></featured>
+
+                  <more-popular></more-popular>
+
+               </div>
             </div>
          </div>
 
-         <!--Not results-->
-         <not-results v-else/>
+         <div class="q-container banner q-py-xl text-center">
+           <img class="w-100" src="/statics/img/publicidad1-100.jpg" alt="banner">
+         </div>  
+
       </div>
-   </div>
+   </q-page>
 </template>
 
 <script>
+import categories from 'src/components/qblog/categories'
+import featured from 'src/components/qblog/featured'
+import morePopular from 'src/components/qblog/morePopular'
    export default {
+      components: {
+         categories,
+         featured,
+         morePopular
+      },
       preFetch({store, currentRoute, previousRoute, redirect, ssrContext}) {
          return new Promise(async resolve => {
             let category = currentRoute.params.category || false
@@ -103,31 +142,12 @@
 </script>
 
 <style lang="stylus">
-   #indexBlog1
-      .q-card
-         .img
-            background-size cover
-            background-position center
-            background-repeat no-repeat
-            height 230px
-            width 100%
-
-         .q-separator
-            background $secondary
-            height 5px
-            width 30%
-
-      #bannerIblog
-         background-color $grey-4
-         padding 5px
-
-         .title-container
-            border-top-right-radius 50px
-            width max-content
-
-            label
-               font-weight bold !important
-               border-bottom: 5px solid $secondary
+.page-blog
+  .title
+    a    
+      color $secondary
+  .line-red
+    border-top 3px solid $primary  
 </style>
 
 
