@@ -253,7 +253,7 @@ responsePages.qredeems.redeems.layout= () => import('src/layouts/admin')
 responsePages.qredeems.redeems.path=  '/admin/iredeems/redeems/index'
 
 // QREDEEMS FRONTEND
-responsePages.frontqredeems.userAccount.path='account/points'
+responsePages.frontqredeems.userAccount.path='account/redeems/points'
 responsePages.frontqredeems.userAccount.layout = () => import('src/layouts/account.vue')
 responsePages.frontqredeems.userAccount.page= () => import('src/layouts/qredeems/account/index')
 
