@@ -224,6 +224,9 @@ responsePages.frontqredeems.userAccount.path='account/points'
 responsePages.frontqredeems.userAccount.layout = () => import('src/layouts/account.vue')
 responsePages.frontqredeems.userAccount.page= () => import('src/layouts/qredeems/account/index')
 
+responsePages.frontqredeems.userPrizes.path='account/prizes'
+responsePages.frontqredeems.userPrizes.layout = () => import('src/layouts/account.vue')
+
 //QFORM
 responsePages.qform.forms.layout= () => import('src/layouts/admin')
 responsePages.qform.forms.path=  '/admin/iform/form'
