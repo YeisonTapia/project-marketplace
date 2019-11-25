@@ -165,7 +165,7 @@
       <div class="row q-col-gutter-md">
 
         <!-- Puntos Obtenidos -->
-        <div class="col-6">
+        <div class="col-12">
             <q-table
               title="Puntos Obtenidos"
               :data="tableUserAllPoints"
@@ -175,6 +175,7 @@
         </div>
 
         <!-- Puntos Canjeados -->
+        <!--
         <div class="col-6">
             <q-table
               title="Puntos Canjeados"
@@ -183,6 +184,7 @@
               row-key="id"
             />
         </div>
+        -->
         
       </div>
 
@@ -263,7 +265,6 @@
         tableUserItemsRedeems: [],
         tableUserAllPoints:[],
         tableColumnsAllPoints: [
-          /*
           {
             name: 'id',
             field: 'id', 
@@ -271,7 +272,6 @@
             align: 'left',
             sortable: true
           },
-          */
           {
             name: 'description',
             field: 'description', 

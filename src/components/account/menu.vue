@@ -218,7 +218,7 @@
           {
             title: 'Mis Premios',
             icon: 'fas fa-award',
-            to: 'app.home'
+            to: 'qredeems.account.myprizes'
           },
           {
             title: 'Mis Mensajes',
