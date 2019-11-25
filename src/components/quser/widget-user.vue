@@ -2,21 +2,25 @@
   <div class="q-inline-block">
     <q-btn-dropdown class="q-pa-none" flat no-caps icon="fas fa-user-alt" v-if="userData">
       <q-list class="bg-light">
+
         <q-item tag="label" :to="{name: 'user.profile.me'}">
-          <q-item-side class="img-user">
-            <q-item-tile avatar >
+          <q-item-section class="img-user">
+            <q-avatar>
               <img :src="userData.mediumImage" >
-            </q-item-tile>
-          </q-item-side>
-          <q-item-main :label="userData.fullName" />
+            </q-avatar>
+          </q-item-section>
+          <q-item-label>{{userData.fullName}}</q-item-label>
         </q-item>
-        <q-item-separator />
+
+        <q-separator />
+
         <q-item tag="label" link :to="{name:'auth.logout'}">
-          <q-item-side>
+          <q-item-section>
             <q-icon color="tertiary" name="fas fa-sign-out-alt" ></q-icon>
-          </q-item-side>
-          <q-item-main :label="$t('ui.configList.signOut')" />
+          </q-item-section>
+          <q-item-label>{{$t('ui.configList.signOut')}}</q-item-label>
         </q-item>
+
       </q-list>
     </q-btn-dropdown>
     <q-btn v-else class="q-pa-none" round flat icon="fas fa-user-alt" :to="{name:'auth.login'}" />
@@ -50,7 +54,7 @@
     },
     methods: {
       setData() {
-        helper.storage.get.item('sessionData').then(response => {
+        this.$cache.get.item('sessionData').then(response => {
           if(response)
             this.userData = response.userData
         }).catch(error => {
