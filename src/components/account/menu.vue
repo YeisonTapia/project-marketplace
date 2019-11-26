@@ -228,12 +228,12 @@
           {
             title: 'Mis Compras',
             icon: 'fas fa-shopping-bag',
-            to: 'app.home'
+            to: 'qcommerce.account.orders'
           },
           {
             title: 'Mis Tiendas Favoritas',
             icon: 'far fa-star',
-            to: 'app.home'
+            to: 'qmarketplace.account.favorite.stores'
           }
         ],
         pointsHistory: 0

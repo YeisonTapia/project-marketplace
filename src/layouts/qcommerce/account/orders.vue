@@ -1,29 +1,24 @@
 <template>
-  <q-page class="qredeems-account-myprizes page-prizes">
+  <q-page class="qcommerce-account-orders page-orders">
     <div v-if="success" class="qredeems-content">
 
       <div class="q-inline-block q-mb-lg">
         <h4 class="title text-secondary font-family-secondary q-mt-none">
           <div class="line-secondary q-mb-sm"></div>
-            Mis Premios
+            Mis Compras
           <div class="line-secondary q-mt-sm"></div>
         </h4>
       </div>
 
-      <!-- Puntos Canjeados -->
-        
       <div class="col-12">
-            
-            <q-table
-              title="Puntos Canjeados"
-              :data="tableUserItemsRedeems"
-              :columns="tableColumns"
-              row-key="id"
-            />
-      
+        <q-table
+          title="Ordenes"
+          :data="tableOrders"
+          :columns="tableColumns"
+          row-key="id"
+        />
       </div>
       
-     
     </div>  
     <!--Inner loading-->
     <inner-loading :visible="loading"/>
@@ -33,7 +28,6 @@
 </template>
 <script>
 
-  import http from "axios"
   import { date } from 'quasar'
 
   export default {
@@ -53,7 +47,7 @@
         loading: false,
         success: false,
         userId: this.$store.state.quserAuth.userId ? this.$store.state.quserAuth.userId : null,
-        tableUserItemsRedeems: [],
+        tableOrders: [],
         tableColumns: [
           {
             name: 'id',
@@ -63,17 +57,23 @@
             sortable: true
           },
           {
-            name: 'description',
-            field: 'description', 
-            label: 'DESCRIPCION',
+            name: 'total',
+            field: 'total', 
+            label: 'TOTAL',
+            align: 'left',
+            sortable: true
+          },
+          {
+            name: 'statusName',
+            field: 'statusName', 
+            label: 'ESTADO',
             align: 'left',
           },
           {
-            name: 'points',
-            field: 'points', 
-            label: 'PUNTOS',
+            name: 'email',
+            label: 'E-MAIL',
+            field: 'email',
             align: 'left',
-            sortable: true
           },
           {
             name: 'createdAt',
@@ -89,21 +89,21 @@
     methods: {
       //init
       async init() {
+
         this.loading = true
 
-        // Items User redeems
-        await this.getRedeemsItemsUser()
+        // Orders
+        await this.getOrders()
 
         this.loading = false
         this.success = true
 
       },
       // Get redeems ITEMS ID for a User
-      getRedeemsItemsUser(){
+      getOrders(){
         return new Promise((resolve, reject) => {
           
-          this.tableUserItemsRedeems = []
-
+          this.tableOrders = []
           //Params
           let params = {
             refresh: true,
@@ -111,13 +111,11 @@
               filter: {userId:this.userId}
             }
           }
-
-          this.$crud.index("apiRoutes.qredeems.redeems",params).then(response => {
-            
-            this.tableUserItemsRedeems = response.data
-          
+          this.$crud.index("apiRoutes.qcommerce.orders",params).then(response => {
+            this.tableOrders = response.data
             resolve(true)//Resolve
           }).catch(error => {
+            console.error("ERROR - GET ORDERS")
             this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
             reject(false)//Resolve
           })
