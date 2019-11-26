@@ -77,18 +77,21 @@
 <script>
 import imSocial from 'src/components/master/imSocial';
 import {required, email} from 'vuelidate/lib/validators';
+import alert from '@imagina/qhelper/_plugins/alert';
 
 export default {
   name: 'PageContacto',
   components: {
     imSocial
   },
-  validations: {
-    form: {
-      name: {required},
-      phone: {required},
-      email: {required, email},
-      message: {required},
+  validations() {
+    return {
+      form: {
+        name: {required},
+        phone: {required},
+        email: {required, email},
+        message: {required},
+      }
     }
   },
   data() {
@@ -105,6 +108,41 @@ export default {
     }
   },
   methods: {    
+    async sendEmail() {
+      this.$v.$touch();
+      if (this.$v.$error) {
+        this.$alert.error({message: 'Por favor revisa de nuevo los campos.', pos: 'bottom'});
+      } else {
+        
+        this.loading = true;
+        this.$crud.create('apiRoutes.iform.send', this.form).then(response => {
+
+            if (response.status === "error") {
+              this.loading = false;
+              this.$alert.error({message: 'Ha ocurrido un error al enviar el correo.'});
+            } else {
+              this.loading = false;
+              this.$alert.success({message: 'Mensaje enviado exitosamente. Pronto nos pondremos en contacto con usted.'});
+              this.$router.push({name: 'app.home'})
+            }
+        });       
+      }
+    },
+    clearForm(){
+      this.form = {
+        name: null,
+        phone: null,
+        email: null,
+        message: null,
+        form_id: 1
+      }
+      this.$v.form.$reset()
+    },
+    forceSet(field, value) {
+      this.$nextTick(() => {
+        this.form[field] = value
+      })
+    }
   }
 
 }
