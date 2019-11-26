@@ -1,29 +1,24 @@
 <template>
-  <q-page class="qredeems-account-myprizes page-prizes">
-    <div v-if="success" class="qredeems-content">
+  <q-page class="qcommerce-account-favoriteStores page-favoriteStores">
+    <div v-if="success" class="qmarketplace-content">
 
       <div class="q-inline-block q-mb-lg">
         <h4 class="title text-secondary font-family-secondary q-mt-none">
           <div class="line-secondary q-mb-sm"></div>
-            Mis Premios
+            Mis Tiendas Favoritas
           <div class="line-secondary q-mt-sm"></div>
         </h4>
       </div>
 
-      <!-- Puntos Canjeados -->
-        
       <div class="col-12">
-            
-            <q-table
-              title="Puntos Canjeados"
-              :data="tableUserItemsRedeems"
-              :columns="tableColumns"
-              row-key="id"
-            />
-      
+        <q-table
+          title="Favoritas"
+          :data="tableFavoriteStores"
+          :columns="tableColumns"
+          row-key="id"
+        />
       </div>
       
-     
     </div>  
     <!--Inner loading-->
     <inner-loading :visible="loading"/>
@@ -33,7 +28,6 @@
 </template>
 <script>
 
-  import http from "axios"
   import { date } from 'quasar'
 
   export default {
@@ -53,7 +47,7 @@
         loading: false,
         success: false,
         userId: this.$store.state.quserAuth.userId ? this.$store.state.quserAuth.userId : null,
-        tableUserItemsRedeems: [],
+        tableFavoriteStores: [],
         tableColumns: [
           {
             name: 'id',
@@ -63,15 +57,16 @@
             sortable: true
           },
           {
-            name: 'description',
-            field: 'description', 
-            label: 'DESCRIPCION',
+            name: 'name',
+            field: 'name', 
+            label: 'Nombre',
             align: 'left',
+            sortable: true
           },
           {
-            name: 'points',
-            field: 'points', 
-            label: 'PUNTOS',
+            name: 'slogan',
+            field: 'slogan', 
+            label: 'Slogan',
             align: 'left',
             sortable: true
           },
@@ -89,21 +84,21 @@
     methods: {
       //init
       async init() {
+
         this.loading = true
 
-        // Items User redeems
-        await this.getRedeemsItemsUser()
+        // Favorite Stores
+        //await this.getFavoriteStores()
 
         this.loading = false
         this.success = true
 
       },
       // Get redeems ITEMS ID for a User
-      getRedeemsItemsUser(){
+      getFavoriteStores(){
         return new Promise((resolve, reject) => {
           
-          this.tableUserItemsRedeems = []
-
+          this.tableFavoriteStores = []
           //Params
           let params = {
             refresh: true,
@@ -111,16 +106,18 @@
               filter: {userId:this.userId}
             }
           }
+          console.warn("BUSCAR TIENDAS FAVORITAS POR USUARIO")
 
-          this.$crud.index("apiRoutes.qredeems.redeems",params).then(response => {
-            
-            this.tableUserItemsRedeems = response.data
-          
+          /*
+          this.$crud.index("apiRoutes.qmarketplace.stores",params).then(response => {
+            this.tableOrders = response.data
             resolve(true)//Resolve
           }).catch(error => {
+            console.error("ERROR - GET ORDERS")
             this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
             reject(false)//Resolve
           })
+          */
 
         })
       },
@@ -128,14 +125,7 @@
       fDate(val){
         let formattedString = date.formatDate(val, 'DD-MM-YYYY')
         return formattedString
-      },
-      // Validate Points value 0
-      fPoints(val){
-        if(val==undefined)
-          return 0
-        else
-          return val
-      },
+      }
     }
   }
 </script>

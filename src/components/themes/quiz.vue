@@ -240,7 +240,7 @@
               this.loading = true;
               this.setDataFinal()
               
-              /*
+             
               this.finalDataSave.forEach((data, index) => {
                 
                 this.$crud.create('apiRoutes.qquiz.userQuestionAnswers', data).then(response => {
@@ -256,10 +256,10 @@
               // Finished Poll
               if(this.userId!=null)
                 this.saveUserPoll()
-              */
+              
 
-              console.warn("Termino Encuesta")
-              console.warn("Poll ID "+this.poll.id)
+              //console.warn("Termino Encuesta")
+              //console.warn("Poll ID "+this.poll.id)
 
               this.getResultsPoll()
               

@@ -124,7 +124,31 @@ let responsePages = {
             title: 'Administrador',
             icon: 'far fa-envelope-open',
             authenticated: true
-        }
+        },
+        // User Orders Profile
+        userOrders: {
+            permission: 'icommerce.orders.index',
+            activated: true,
+            path: '/account/orders',
+            name: 'qcommerce.account.orders',
+            layout: () => import('src/layouts/account.vue'),
+            page: () => import('src/layouts/qcommerce/account/orders'),
+            title: 'Mis compras',
+            icon: 'apps',
+            authenticated: true
+        },
+        // User Favorite Marketplace Profile
+        userFavoriteStores: {
+            //permission: 'qmarketplace.stores.manage',
+            activated: true,
+            path: '/account/favorite-stores',
+            name: 'qmarketplace.account.favorite.stores',
+            layout: () => import('src/layouts/account.vue'),
+            page: () => import('src/layouts/qmarketplace/account/favoriteStores'),
+            title: 'Mis tiendas favoritas',
+            icon: 'apps',
+            authenticated: true
+        },
     }
     //Add here more responsePages...#example
     /*groupName : {
