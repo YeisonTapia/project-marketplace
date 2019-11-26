@@ -7,7 +7,7 @@
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7">
             <q-card flat class="rounded-md bg-white full-width">
               <h3 class="title-label text-center bg-secondary text-white q-mt-lg q-ml-20">
-                <div>¿Problemas con una tienda?</div>
+                <div>¿Tuviste problema con una Tienda?</div>
               </h3>
               <div class="text-subtitle1 text-center q-pa-lg">
                   Si tienes alguna duda, alguna consulta no dudes en
@@ -18,7 +18,7 @@
                 <q-input v-model="form.email"  label="Correo Electrónico:" />
                 <q-input v-model="form.phone"  label="Teléfono:" />
                 <q-select v-model="form.type" label="Tipo de Solicitud:" :options="typeOptions" />
-                <q-input v-model="form.message"  label="Mensaje:" />
+                <q-input type="textarea" v-model="form.message"  label="Escribe aquí tu caso e intermediaremos para tratar de solucionarlo" />
               </q-card-section>
               <q-card-actions  align="right" no-caps class="q-pr-xl q-pb-lg">
                 <q-btn class="bg-primary text-white btn-arrow-send-yellow" @click="sendEmail()">Enviar</q-btn>
