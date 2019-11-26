@@ -154,7 +154,7 @@
 
       <div class="text-right">
         <div class="q-inline-block">
-          <h5 id="asd" class="title text-secondary font-family-secondary q-mt-none">
+          <h5 class="title text-secondary cursor-pointer font-family-secondary q-mt-none" @click="drawerPoint = !drawerPoint">
               Historial de puntos
             <div class="line-secondary q-mt-sm"></div>
           </h5>
@@ -162,16 +162,24 @@
       </div>
 
       <!-- Historial Ptos-->
-      <div class="row q-col-gutter-md">
+      <div class="row q-col-gutter-md" v-if="drawerPoint">
 
         <!-- Puntos Obtenidos -->
         <div class="col-12">
-            <q-table
-              title="Puntos Obtenidos"
-              :data="tableUserAllPoints"
-              :columns="tableColumnsAllPoints"
-              row-key="id"
-            />
+          <q-card class="rounded-md q-mb-xl full-width">
+            <div class="q-pl-md">
+              <h3 class="title-label-puntos text-center bg-tertiary">
+                <div>Puntos Obtenidos</div>
+              </h3>
+            </div>
+            <q-card-section class="q-py-xl">
+              <q-table class="no-shadow my-sticky-header-table"
+                :data="tableUserAllPoints"
+                :columns="tableColumnsAllPoints"
+                row-key="id"
+              />
+            </q-card-section>
+          </q-card>
         </div>
 
         <!-- Puntos Canjeados -->
@@ -220,6 +228,7 @@
       return {
         loading: false,
         success: false,
+        drawerPoint: false,
         meta: parseInt(this.$store.getters['qsiteSettings/getSettingValueByName']('iredeems::points-month')),
         min: 0,
         step: 40,
@@ -605,4 +614,16 @@
       font-sie 1rem
       margin-top 10px
       margin-bottom 20px  
+  .my-sticky-header-table
+    .q-table__top
+    thead tr:first-child th
+      background-color var(--q-color-light)
+
+    thead tr th
+      position sticky
+      z-index 1
+    thead tr:first-child th
+      top 0
+    &.q-table--loading thead tr:last-child th
+      top 48px    
 </style>
