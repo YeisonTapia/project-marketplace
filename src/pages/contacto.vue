@@ -15,7 +15,7 @@
                   <div class="text-h4 text-primary q-mb-md text-center font-family-secondary">Datos de contacto</div>
                   <div class="text-subtitle1 text-center q-pb-lg  text-secondary">
                     Si tienes alguna duda, alguna consulta o
-                    simplemente quieres saludarnos, nos dudes en
+                    simplemente quieres saludarnos, no dudes en
                     contactarnos, estatemos listos para responderte.
                   </div>
                   <hr>

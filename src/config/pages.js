@@ -81,6 +81,17 @@ let responsePages = {
             icon: 'far fa-envelope-open',
             authenticated: false
         },
+        problems: {
+            permission: null,
+            activated: true,
+            path: '/problems',
+            name: 'app.problems',
+            layout: () => import('src/layouts/master'),
+            page: () => import('pages/problems.vue'),
+            title: 'Problems',
+            icon: 'far fa-envelope-open',
+            authenticated: false
+        },
         layout1: {
             permission: null,
             activated: true,
