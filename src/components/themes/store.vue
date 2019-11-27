@@ -1,5 +1,7 @@
 <template>
+
   <q-card class="card-store q-ma-md">
+    <router-link :to="{name: 'stores.show',params: {slug: store.slug}}">
     <q-img :ratio="4/3" :src="store.mainImage.path" >
       <div class="absolute-top-left text-center q-ml-md">
         <div class="pts text-subtitle1" v-if="store.pts">
@@ -18,6 +20,7 @@
         </div>
       </div>
     </q-img>
+    </router-link>
     <q-card-section class="summary text-subtitle2">
       {{store.slogan}}
     </q-card-section>

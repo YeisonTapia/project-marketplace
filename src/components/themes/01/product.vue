@@ -1,6 +1,8 @@
 <template>
   <q-card :class="className">
-    <q-img :ratio="1" :src="product.image" />
+    <router-link :to="{name: 'stores.product.show',params: {slug:product.store.slug,product: product.slug}}">
+    <q-img :ratio="1" :src="product.mainImage.path" />
+    </router-link>
     <q-card-actions>
       <q-btn flat dense icon="favorite"/>
       <q-btn flat dense icon="shopping_cart"/>
@@ -12,7 +14,7 @@
       />
       <h5 class="q-my-sm">${{product.price}}</h5>
       <p class="q-my-none text-truncate">{{product.name}}</p>
-      <p class="q-my-none text-truncate"><small>{{product.tienda}}</small></p>
+      <p class="q-my-none text-truncate"><small>{{product.store.name}}</small></p>
     </q-card-section>
   </q-card>
 </template>

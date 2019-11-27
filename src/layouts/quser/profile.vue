@@ -9,6 +9,7 @@
       </div>
 
       <div class="row items-center form-general">
+        <!-- Informacion Personal -->
         <q-card class="rounded-md q-mb-xl full-width">
           <div class="q-pl-md">
             <h3 class="title-label-profile bg-primary">
@@ -72,9 +73,9 @@
                     @input="getCities(form.fields.country.value,'CiO')"/>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
-                <!--City-->
+                <!--State - Province-->
                 <q-select 
-                    label="Ciudad"
+                    label="Departamento"
                     class="requeried"
                     stack-label
                     emit-value
@@ -125,6 +126,7 @@
 
         <div class="q-my-md full-width"></div>
 
+        <!-- Informacion de Contacto -->
         <q-card class="rounded-md q-mb-xl full-width">
           <div class="q-pl-md">
             <h3 class="title-label-profile bg-tertiary">
@@ -166,27 +168,44 @@
                     @input="getCities(address.countryId,'CiRO')"/>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
-                <!-- City ​​of residence ADDRESS STATE -->
+                <!-- Department ​​of residence ADDRESS STATE -->
                   <q-select 
-                    label="Ciudad de residencia"
+                    label="Departamento"
                     class="requeried"
                     stack-label
                     emit-value
                     map-options
                     v-model="address.stateId" 
                     :options="cityResidenceOptions"
+                    :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+                    @input="getCities2(address.stateId)"/>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
+                <!-- City -->
+                  <q-select 
+                    label="Ciudad"
+                    class="requeried"
+                    stack-label
+                    emit-value
+                    map-options
+                    v-model="address.cityId" 
+                    :options="city2ResidenceOptions"
                     :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
                 <!-- Neighborhood -->
+                <q-input class="requeried" v-model="address.neighborhood" stack-label label="Barrio"
+                   :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
+                <!--
                 <q-select label="Barrio" stack-label class="requeried"
                     emit-value
                     map-options
                     v-model="address.neighborhoodId" 
                     :options="neighborhoodOptions"
                     :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
+                -->
               </div>
-              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+              <div class="col-xs-12 col-sm-12 col-md-12">
                 <!--Address NEW ADDRESS-->
                 <q-input class="requeried" v-model="address.address1" stack-label :label="`Dirección`"
                    :rules="[val => !!val || $tr('ui.message.fieldRequired')]" />
@@ -237,6 +256,7 @@
 
         <div class="q-my-md full-width"></div>
 
+        <!-- Tus Gustos -->
         <q-card class="rounded-md q-mb-xl full-width">
           <div class="q-pl-md">
             <h3 class="title-label-profile bg-primary">
@@ -248,11 +268,26 @@
             <div class="row q-col-gutter-lg">
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
                 <!-- Leisure -->
+                <!--
                 <q-select label="Ocio (Gustos)" stack-label class="requeried"
                     multiple use-chips 
                     v-model="form.fields.leisures.value" 
                     :options="leisureOptions"
                     :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
+                -->
+                <!-- Leisure -->
+                <q-select
+                  label="Ocio (Gustos)" stack-label class="requeried q-pb-xs"
+                  v-model="form.fields.leisures.value"
+                  :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+                  use-input
+                  use-chips
+                  multiple
+                  hide-dropdown-icon
+                  input-debounce="0"
+                  @new-value="createValueOcio"
+                  />
+                  <div class="text-caption">Despues de escribir tu gusto, presiona enter</div>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
                 <!--Favorite Movie-->
@@ -268,7 +303,7 @@
               </div>
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
                 <!-- Promotions -->
-                <q-select label="* ¿De que te gustaria recibir la promoción?" stack-label
+                <q-select label="¿De que te gustaria recibir la promoción?" stack-label class="requeried"
                     multiple use-chips 
                     v-model="form.fields.promotions.value" 
                     :options="promotionOptions"
@@ -329,6 +364,7 @@
 
         <div class="q-my-md full-width"></div>
 
+        <!-- Como conociste la Pagina -->
         <q-card class="rounded-md q-mb-xl full-width">
           <div class="q-pl-md">
             <h3 class="title-label-profile  bg-tertiary">
@@ -397,6 +433,7 @@
 
         <div class="q-my-md full-width"></div>
 
+        <!-- Seguridad -->
         <q-card class="rounded-md q-mb-xl full-width">
           <div class="q-pl-md">
             <h3 class="title-label-profile bg-primary">
@@ -549,8 +586,10 @@
         address:{
             countryId:{required},
             stateId:{required},
+            cityId:{required},
             address1:{required},
-            neighborhoodId:{required},
+            neighborhood:{required}
+            //neighborhoodId:{required},
         }
       }
     },
@@ -617,6 +656,7 @@
         cityOptions: [],
         countryResidenceOptions: [],
         cityResidenceOptions: [],
+        city2ResidenceOptions: [],
         neighborhoodOptions: [
           {
             label: 'Barrio 1',
@@ -645,20 +685,7 @@
             value: 'gusto3'
           },
         ],
-        promotionOptions: [
-          {
-            label: 'Promo 1',
-            value: 'promo1'
-          },
-           {
-            label: 'Promo 2',
-            value: 'promo2'
-          },
-           {
-            label: 'Promo 3',
-            value: 'promo3'
-          },
-        ],
+        promotionOptions: [],
         checkPU: null,
         sexOptions: [
           {
@@ -730,13 +757,23 @@
 
         //console.warn("Field - country INIT: "+this.form.fields.country.value)
 
+        // Get Provinces
         if(this.form.fields.country.value!="" && this.form.fields.country.value!=null)
           await this.getCities(this.form.fields.country.value,'CiO')
 
         //console.warn("Field - address country INIT: "+this.form.fields.country.value)
 
+        // Get Provinces
         if(this.address.countryId!="" && this.address.countryId!=null)
           await this.getCities(this.address.countryId,'CiRO')
+
+        // Get Cities
+        if(this.address.stateId!="" && this.address.stateId!=null)
+          await this.getCities2(this.address.stateId,'CiRO')
+
+        // Get Promotions
+        await this.getCategoriesStore()
+
         this.success = true//Success page
         this.loading = false//Loading
 
@@ -770,6 +807,7 @@
               this.address.countryId = parseInt(userData.addresses[i].country_id)
               this.address.state = userData.addresses[i].state
               this.address.stateId = parseInt(userData.addresses[i].state_id)
+              this.address.cityId = parseInt(userData.addresses[i].city_id)
               this.address.neighborhood = userData.addresses[i].neighborhood
               this.address.neighborhoodId = parseInt(userData.addresses[i].neighborhood_id)
               break
@@ -800,6 +838,7 @@
           // Add adress infor
           data.addresses.push(this.address)
 
+          //console.warn(data)
           //Request
           this.$crud.update('apiRoutes.quser.users', data.id, data).then(response => {
             this.$alert.success({message: this.$tr('ui.message.recordUpdated')})
@@ -814,6 +853,7 @@
          
 
         } else {
+          //console.warn(this.$v.$error)
           this.$alert.error({message: this.$tr('ui.message.formInvalid'), pos: 'bottom'})
         }
       },
@@ -869,7 +909,7 @@
 
         })
       },
-      // Get Cities from ilocations
+      // Get Cities (Provinces- State) from ilocations
       getCities(countryModel,cityOptions){
         return new Promise((resolve, reject) => {
 
@@ -899,8 +939,13 @@
               // Second time
               if(this.success==true)
                 this.address.stateId = null
-              
+
+              // Clean Cities Select
+              this.city2ResidenceOptions = []
+             
             }
+
+           
           
             http.get(config('apiRoutes.ilocations.provinces'), params)
             .then(response => {
@@ -927,6 +972,34 @@
             });
         })
         
+      },
+      // Get Cities from Ilocations
+      getCities2(cityModel){
+        
+        //console.warn(cityModel)
+
+        this.city2ResidenceOptions = []
+
+        if(cityModel.value!=undefined)
+          cityModel = cityModel.value
+
+
+        let params = {
+          params: {
+            filter: {province_id: cityModel}
+          }
+        }
+
+        this.$crud.index("apiRoutes.ilocations.cities",params).then(response => {
+            //console.warn(response)
+            response.data.forEach(data => {
+              this.city2ResidenceOptions.push({
+                label:data.name,
+                value:data.id
+              })
+            })
+        });
+
       },
       // Check Points Proccess
       async checkPointsProccess(){
@@ -993,7 +1066,26 @@
           this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
         })
 
-      } 
+      },
+      // Create Value Ocio
+      createValueOcio (val, done) {
+        done(val, 'add-unique')
+      },
+      // Get Categories Store Like Promotions
+      getCategoriesStore(){
+        return new Promise((resolve, reject) => {
+          this.$crud.index("apiRoutes.qmarketplace.category").then(response => {
+            
+            this.promotionOptions = response.data
+            resolve(true)//Resolve
+
+          }).catch(error => {
+            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+            console.error("ERROR - GET CATEGORIES STORE") 
+            reject(false)//Resolve
+          })
+        })
+      }
 
 
     }

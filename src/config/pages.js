@@ -84,7 +84,7 @@ let responsePages = {
         problems: {
             permission: null,
             activated: true,
-            path: '/problems',
+            path: '/pqrs',
             name: 'app.problems',
             layout: () => import('src/layouts/master'),
             page: () => import('pages/problems.vue'),
