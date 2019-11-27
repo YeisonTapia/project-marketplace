@@ -21,8 +21,10 @@
       </div>
     </q-img>
     </router-link>
-    <q-card-section class="summary text-subtitle2">
-      {{store.slogan}}
+    <q-card-section class="summary text-subtitle2 items-center row">
+      <div class="col-12">
+        {{store.slogan}}
+      </div>
     </q-card-section>
   </q-card>
 </template>
@@ -35,6 +37,8 @@
 <style lang="stylus">
   .card-store
     border-radius 0px 0px 20px 20px
+    .summary
+      min-height 100px
     .q-img__content > div
       padding 0
       font-weight bold
