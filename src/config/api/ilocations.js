@@ -9,4 +9,5 @@ export default {
   countries: api_url + '/countries',
   provinces: api_url + '/provinces',
   cities: api_url + '/cities',
+  neighborhoods: api_url + '/neighborhoods',
 }
