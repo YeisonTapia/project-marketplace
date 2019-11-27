@@ -185,7 +185,7 @@
       },
       editStore() {
         //editar Tienda
-        this.$router.push({name: 'qmarketplace.admin.stores.edit', params: {id: this.storeSelected}});
+        this.$router.push({name: 'qmarketplace.admin.stores.my.store'});
       },
     }
   }

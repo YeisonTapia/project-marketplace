@@ -132,7 +132,7 @@
          </div>
          <!--Select Store-->
          <q-select v-if="store.selected" :loading="store.loading" outlined dense :options="store.options"
-                   @input="$store.dispatch('qmarketplaceStores/SET_STORE', store.selected),getStore()"
+                   @input="$store.dispatch('qmarketplaceStores/SET_STORE', store.selected),getStore(),$store.dispatch('app/REFRESH_PAGE')"
                    label="Store" v-model="store.selected" emit-value map-options/>
          <!--= MENU =-->
          <menu-list v-if="store.selected" :menu="menu"/>
@@ -232,7 +232,7 @@
             this.$router.push({name: 'qmarketplace.admin.stores.create'});
          },
          editStore() {
-            this.$router.push({name: 'qmarketplace.admin.stores.edit', params: {id: this.store.selected}});
+            this.$router.push({name: 'qmarketplace.admin.stores.my.store'});
          },
          getStore() {
             if (this.store.selected) {
