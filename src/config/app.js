@@ -22,6 +22,11 @@ export default {
         logout: [
             ...coreApp.saveCache.logout
         ]
-    }
+    },
+    resetStores:[
+        ...coreApp.resetStores,
+        'qmarketplaceStores/RESET'
+    ]
+
 
 }

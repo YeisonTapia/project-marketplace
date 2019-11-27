@@ -32,7 +32,7 @@
                   </div>
                   <div class="col-xs-12 col-sm-9 col-md-auto">
                     <q-btn v-if="canCreateStore" class="btn-tienda" flat icon="fas fa-store" color="white" no-caps label="Crea tu Tienda Virtual" @click="createStore()" />
-                    <q-btn v-else-if="$auth.hasAccess('marketplace.stores.create')" class="btn-tienda" flat icon="fas fa-store" color="white" no-caps label="editar tu Tienda Virtual" @click="editStore()" />
+                    <q-btn v-else-if="$auth.hasAccess('marketplace.stores.create')&& storeSelected" class="btn-tienda" flat icon="fas fa-store" color="white" no-caps label="editar tu Tienda Virtual" @click="editStore()" />
                   </div>
                 </div>
               </div>
@@ -108,6 +108,7 @@
         drawer: {
           menu: false
         },
+        storeSelected: this.$store.state.qmarketplaceStores.storeSelected,
         logo: this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo1').path,
         modal: {
           show: true,
@@ -153,13 +154,13 @@
             let params={
               params:{
                 filter:{
-                  userId:this.$store.state.quserAuth.userId,
+                  user:this.$store.state.quserAuth.userId,
                   status:1
                 }
               }
             };
             this.$crud.index("apiRoutes.qsubscription.suscriptions",params).then(response => {
-              if(response.data.length>0){
+              if(response.data.length>0 && !this.storeSelected){
                 this.canCreateStore=true;
               }
             })
@@ -184,9 +185,7 @@
       },
       editStore() {
         //editar Tienda
-        let store =this.$store.state.qmarketplaceStores.storeSelected
-        console.error(store)
-        this.$router.push({ name: 'qmarketplace.admin.stores.show',params:{id:1}});
+        this.$router.push({name: 'qmarketplace.admin.stores.edit', params: {id: this.storeSelected}});
       },
     }
   }

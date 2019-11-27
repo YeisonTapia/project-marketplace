@@ -123,18 +123,19 @@
          </div>
          <!-- === LOGO === -->
          <div class="logo-tienda text-center q-pb-lg">
-            <router-link :to="{ name: 'app.home'}">
+            <router-link :to="{ name: 'app.home'}" v-if="!store.selected">
                <img :src="logo">
+            </router-link>
+            <router-link :to="{name: 'qmarketplace.admin.stores.show', params: {id: store.selected}}" v-else="!store.selected">
+               <img :src="selectStore.mainImage.path">
             </router-link>
          </div>
          <!--Select Store-->
-         <pre>
-       </pre>
-         <q-select :loading="store.loading" outlined dense :options="store.options"
-                   @input="$store.dispatch('qmarketplaceStores/SET_STORE', store.selected)"
+         <q-select v-if="store.selected" :loading="store.loading" outlined dense :options="store.options"
+                   @input="$store.dispatch('qmarketplaceStores/SET_STORE', store.selected),getStore()"
                    label="Store" v-model="store.selected" emit-value map-options/>
          <!--= MENU =-->
-         <menu-list :menu="menu"/>
+         <menu-list v-if="store.selected" :menu="menu"/>
 
          <div class="bg-light text-center q-py-lg">
             <div class="q-headline text-primary text-weight-bold">¿NECESITAS AYUDA</div>
@@ -169,6 +170,8 @@
       watch: {},
       mounted() {
          this.$nextTick(function () {
+            this.getSuscriptionData()
+            this.getStore()
          })
       },
       data() {
@@ -179,8 +182,11 @@
                config: false,
                notification: false
             },
+            selectStore: null,
+            canCreateStore: false,
             menu: config('sidebar'),
             logo: this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo1').path,
+            logoStore: '',
             store: {
                selected: this.$store.state.qmarketplaceStores.storeSelected,
                options: this.$store.getters['qmarketplaceStores/userStoresSelect'],
@@ -190,12 +196,30 @@
       },
       computed: {
          quserState() {
-            console.error(this.$store.state)
             return this.$store.state.quserAuth
          },
       },
       methods: {
          //Show drawer specific
+         getSuscriptionData() {
+            if (this.$store.state.quserAuth.authenticated) {
+               if (this.$auth.hasAccess('marketplace.stores.create')) {
+                  let params = {
+                     params: {
+                        filter: {
+                           userId: this.$store.state.quserAuth.userId,
+                           status: 1
+                        }
+                     }
+                  };
+                  this.$crud.index("apiRoutes.qsubscription.suscriptions", params).then(response => {
+                     if (response.data.length > 0 && !this.store.selected) {
+                        this.canCreateStore = true;
+                     }
+                  })
+               }//businessRole
+            }
+         },
          toggleDrawer(name, show) {
             //Hidden all drawers
             for (var drawer in this.drawer) {
@@ -205,7 +229,24 @@
          },
          createStore() {
             //Crear Tienda
-            this.$router.push({name: 'app.editartienda'});
+            this.$router.push({name: 'qmarketplace.admin.stores.create'});
+         },
+         editStore() {
+            this.$router.push({name: 'qmarketplace.admin.stores.edit', params: {id: this.store.selected}});
+         },
+         getStore() {
+            if (this.store.selected) {
+               let params = {
+                  params: {
+                     filter: {}
+                  }
+               }
+               let criteria = this.store.selected;
+               this.$crud.show("apiRoutes.qmarketplace.store", criteria, params).then(response => {
+                  this.selectStore = response.data
+                  console.error('store select',this.selectStore)
+               })
+            }
          }
       }
    }
