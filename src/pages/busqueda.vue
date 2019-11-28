@@ -1,6 +1,6 @@
 <template>
   <q-page class="bg-fondo advanced_search form-general" v-if="success">
-    
+
     <!-- Busqueda Avanzada -->
     <!--
     <div class="q-pa-xl bg-white shadow-2">
@@ -25,7 +25,7 @@
               <p class="caption q-mb-xs">Filtro por tipo de empresa</p>
               <q-select dense v-model="advanced_search.company" multiple use-chips :options="companyOptions"/>
             </div>
-           
+
           </div>
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
 
@@ -45,7 +45,7 @@
 
             <q-toggle dense v-model="advanced_search.offer" color="primary" label="Tienda en Oferta" />
 
-            
+
 
           </div>
 
@@ -175,7 +175,7 @@ export default {
         neighborhoodId : parseInt(this.$route.params.neighborhoodId),
         text: this.$route.params.text
       }
-     
+
     }
   },
   mounted(){
@@ -198,7 +198,7 @@ export default {
 
       this.loading = false
       this.success = true
-      
+
     },
     // Search Stores
     searchStores() {
@@ -207,18 +207,18 @@ export default {
         remember: false,
         params: {
           filter:{
-            cityId: this.paramsF.cityId,
-            neighborhoodId: this.paramsF.neighborhoodId ? this.paramsF.neighborhoodId : null,
-            name: this.paramsF.text
+            cities: this.paramsF.cityId,
+            neighborhoods: this.paramsF.neighborhoodId ? this.paramsF.neighborhoodId : null,
+            search: this.paramsF.text
           }
         }
       };
-     
+
       this.$crud.index("apiRoutes.qmarketplace.store", params).then(response => {
         this.stores = response.data
       }).catch(error => {
         console.error('[ERROR - GET STORES SEARCH] ', error)
-        this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'}) 
+        this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
       })
 
     }
