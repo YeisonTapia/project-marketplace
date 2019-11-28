@@ -1,5 +1,5 @@
 <template>
-  <q-page class="qcommerce-account-favoriteStores page-favoriteStores">
+  <q-page class="qcommerce-account-favoriteStores page-favorite-stores">
     <div v-if="success" class="qmarketplace-content">
 
       <div class="q-inline-block q-mb-lg">
@@ -10,13 +10,26 @@
         </h4>
       </div>
 
-      <div class="col-12">
-        <q-table
-          title="Favoritas"
-          :data="tableFavoriteStores"
-          :columns="tableColumns"
-          row-key="id"
-        />
+      <div class="row q-col-gutter-md">
+        <div class="col-12">
+              
+            <q-card class="rounded-md q-mb-xl full-width">
+              <div class="q-pl-md">
+                <h3 class="title-label-puntos text-center bg-tertiary">
+                  <div>Favoritas</div>
+                </h3>
+              </div>
+              <q-card-section class="q-py-xl">
+                <q-table class="no-shadow my-sticky-header-table"
+                  :data="tableFavoriteStores"
+                  :columns="tableColumns"
+                  row-key="id"
+                />
+               
+              </q-card-section>
+            </q-card>
+
+        </div>
       </div>
       
     </div>  
@@ -50,30 +63,30 @@
         tableFavoriteStores: [],
         tableColumns: [
           {
-            name: 'id',
-            field: 'id', 
-            label: 'ID',
-            align: 'left',
-            sortable: true
-          },
-          {
             name: 'name',
-            field: 'name', 
-            label: 'Nombre',
+            field: row => row.store.name, 
+            label: 'NOMBRE',
             align: 'left',
             sortable: true
           },
           {
             name: 'slogan',
-            field: 'slogan', 
-            label: 'Slogan',
+            field: row => row.store.slogan, 
+            label: 'SLOGAN',
+            align: 'left',
+            sortable: true
+          },
+          {
+            name: 'address',
+            field:  row => row.store.address,
+            label: 'DIRECCION',
             align: 'left',
             sortable: true
           },
           {
             name: 'createdAt',
             field: 'createdAt', 
-            label: 'FECHA',
+            label: 'AGREGADA EL',
             align: 'left',
             sortable: true,
             format: val => this.fDate(val),
@@ -88,7 +101,7 @@
         this.loading = true
 
         // Favorite Stores
-        //await this.getFavoriteStores()
+        await this.getFavoriteStores()
 
         this.loading = false
         this.success = true
@@ -103,21 +116,20 @@
           let params = {
             refresh: true,
             params: {
-              filter: {userId:this.userId}
+              include: 'store',
+              filter: {userId:this.userId,allTranslations:true}
             }
           }
-          console.warn("BUSCAR TIENDAS FAVORITAS POR USUARIO")
-
-          /*
-          this.$crud.index("apiRoutes.qmarketplace.stores",params).then(response => {
-            this.tableOrders = response.data
+          //console.warn("BUSCAR TIENDAS FAVORITAS POR USUARIO")
+          this.$crud.index("apiRoutes.qmarketplace.favoriteStore",params).then(response => {
+            this.tableFavoriteStores = response.data
             resolve(true)//Resolve
           }).catch(error => {
-            console.error("ERROR - GET ORDERS")
+            console.error("ERROR - GET FAVORITE STORES")
             this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
             reject(false)//Resolve
           })
-          */
+         
 
         })
       },
@@ -130,5 +142,73 @@
   }
 </script>
 <style lang="stylus">
+.page-favorite-stores
+  .title-label-puntos
+    -webkit-transform skew(10deg)
+    transform skew(10deg)
+    border-radius 10px
+    padding 0px 30px
+    display inline-block
+    min-width 40%
+    margin -58px 0 10px 0
+    color #FFFFFF
+    font-size 20px
+    position relative
+    font-family $font-secondary
+    &:before
+      content ''
+      background-image url('/statics/img/arrow-down-blue.png')
+      position absolute
+      right -25px
+      width 100%
+      height 50px
+      background-repeat no-repeat
+      background-size contain
+      top 27px
+      background-position right
+    @media screen and (max-width: $breakpoint-md)
+      min-width 60%
+      font-size 20px
+      padding 0 15px
+      &:before
+          display none !important   
+    @media screen and (max-width: $breakpoint-sm)
+      min-width 60%
+      font-size 15px
+      padding 0 10px         
+    & > div
+      -webkit-transform  skew(-10deg)
+      transform skew(-10deg)      
+  .q-mx-puntos   
+    padding-left 80px
+    padding-right 80px  
+    @media screen and (max-width: $breakpoint-md)
+      padding-left 30px
+      padding-right 30px  
+    @media screen and (max-width: $breakpoint-sm)
+      padding-left 10px
+      padding-right 10px  
+  .text-h6 
+    line-height 1.5rem
+    color $secondary
+    @media screen and (max-width: $breakpoint-sm)
+      line-height 1rem
+      font-sie 1rem
+      margin-top 10px
+      margin-bottom 20px  
+      
+  .my-sticky-header-table
+    .q-table__top
+    thead tr:first-child th
+      background-color var(--q-color-light)
+
+    thead tr th
+      position sticky
+      z-index 1
+    thead tr:first-child th
+      top 0
+    &.q-table--loading thead tr:last-child th
+      top 48px    
+      
 
 </style>

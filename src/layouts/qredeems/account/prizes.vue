@@ -11,18 +11,27 @@
       </div>
 
       <!-- Puntos Canjeados -->
-        
-      <div class="col-12">
-            
-            <q-table
-              title="Puntos Canjeados"
-              :data="tableUserItemsRedeems"
-              :columns="tableColumns"
-              row-key="id"
-            />
-      
+      <div class="row q-col-gutter-md">
+        <div class="col-12">
+              
+            <q-card class="rounded-md q-mb-xl full-width">
+              <div class="q-pl-md">
+                <h3 class="title-label-puntos text-center bg-tertiary">
+                  <div>Premios por Puntos Canjeados</div>
+                </h3>
+              </div>
+              <q-card-section class="q-py-xl">
+                <q-table class="no-shadow my-sticky-header-table"
+                    :data="tableUserItemsRedeems"
+                    :columns="tableColumns"
+                    row-key="id"
+                />
+              </q-card-section>
+            </q-card>
+
+        </div>
       </div>
-      
+        
      
     </div>  
     <!--Inner loading-->
@@ -71,14 +80,14 @@
           {
             name: 'points',
             field: 'points', 
-            label: 'PUNTOS',
+            label: 'PUNTOS UTILIZADOS',
             align: 'left',
             sortable: true
           },
           {
             name: 'createdAt',
             field: 'createdAt', 
-            label: 'FECHA',
+            label: 'CANJEADO EL',
             align: 'left',
             sortable: true,
             format: val => this.fDate(val),
@@ -140,5 +149,72 @@
   }
 </script>
 <style lang="stylus">
+.page-prizes
+  .title-label-puntos
+    -webkit-transform skew(10deg)
+    transform skew(10deg)
+    border-radius 10px
+    padding 0px 30px
+    display inline-block
+    min-width 40%
+    margin -58px 0 10px 0
+    color #FFFFFF
+    font-size 20px
+    position relative
+    font-family $font-secondary
+    &:before
+      content ''
+      background-image url('/statics/img/arrow-down-blue.png')
+      position absolute
+      right -25px
+      width 100%
+      height 50px
+      background-repeat no-repeat
+      background-size contain
+      top 27px
+      background-position right
+    @media screen and (max-width: $breakpoint-md)
+      min-width 60%
+      font-size 20px
+      padding 0 15px
+      &:before
+          display none !important   
+    @media screen and (max-width: $breakpoint-sm)
+      min-width 60%
+      font-size 15px
+      padding 0 10px         
+    & > div
+      -webkit-transform  skew(-10deg)
+      transform skew(-10deg)      
+  .q-mx-puntos   
+    padding-left 80px
+    padding-right 80px  
+    @media screen and (max-width: $breakpoint-md)
+      padding-left 30px
+      padding-right 30px  
+    @media screen and (max-width: $breakpoint-sm)
+      padding-left 10px
+      padding-right 10px  
+  .text-h6 
+    line-height 1.5rem
+    color $secondary
+    @media screen and (max-width: $breakpoint-sm)
+      line-height 1rem
+      font-sie 1rem
+      margin-top 10px
+      margin-bottom 20px  
+      
+  .my-sticky-header-table
+    .q-table__top
+    thead tr:first-child th
+      background-color var(--q-color-light)
 
+    thead tr th
+      position sticky
+      z-index 1
+    thead tr:first-child th
+      top 0
+    &.q-table--loading thead tr:last-child th
+      top 48px    
+  
 </style>

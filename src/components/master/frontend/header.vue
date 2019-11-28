@@ -32,6 +32,7 @@
                   </div>
                   <div class="col-xs-12 col-sm-9 col-md-auto">
                     <q-btn v-if="canCreateStore" class="btn-tienda" flat icon="fas fa-store" color="white" no-caps label="Crea tu Tienda Virtual" @click="createStore()" />
+                    <q-btn v-else-if="$auth.hasAccess('marketplace.stores.create')&& storeSelected" class="btn-tienda" flat icon="fas fa-store" color="white" no-caps label="editar tu Tienda Virtual" @click="editStore()" />
                   </div>
                 </div>
               </div>
@@ -60,6 +61,7 @@
         <widget-user></widget-user>
         <q-btn flat round dense icon="fas fa-heart" />
         <q-btn v-if="canCreateStore" flat round dense @click="createStore()" icon="fas fa-store" />
+        <q-btn v-else-if="$auth.hasAccess('marketplace.stores.create')" flat round dense @click="createStore()" icon="fas fa-store" />
       </q-toolbar>
 
     </q-header>
@@ -106,6 +108,7 @@
         drawer: {
           menu: false
         },
+        storeSelected: this.$store.state.qmarketplaceStores.storeSelected,
         logo: this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo1').path,
         modal: {
           show: true,
@@ -120,6 +123,7 @@
             let menu = this.$store.state.qcrudMaster.show['qmenu-menus-main']
             let items = []
             //Transform data
+
             if (menu && menu.data.menuitems) {
                 menu.data.menuitems.forEach(item => {
                     if (parseInt(item.status))
@@ -127,11 +131,13 @@
                             permission: null,
                             activated: true,
                             name: item.uri,
+                            params:item.class,
                             title: item.title,
                             icon: item.icon
                         })
                 })
             }
+            console.warn(items)
             return items
         },
       getImageUrl() {
@@ -144,32 +150,17 @@
     methods: {
       getSuscriptionData(){
         if(this.$store.state.quserAuth.authenticated){
-          /*Get role user autentichated*/
-          var roles=this.$store.state.quserAuth.userData.roles;
-          var businessRole=0;
-          for (var i=0;i<roles.length;i++){
-            if(roles[i].slug=="business"){
-              businessRole=1;
-              break;
-            }//if role business
-            else if(roles[i].slug=="superadmin"){
-              businessRole=1;
-              break;
-            }
-          }//for
-          if(businessRole){
-            //Query axios
-            //If doesn't suscription active, redirect to plans
+          if(this.$auth.hasAccess('marketplace.stores.create')){
             let params={
               params:{
                 filter:{
-                  userId:this.$store.state.quserAuth.userId,
+                  user:this.$store.state.quserAuth.userId,
                   status:1
                 }
               }
             };
             this.$crud.index("apiRoutes.qsubscription.suscriptions",params).then(response => {
-              if(response.data.length>0){
+              if(response.data.length>0 && !this.storeSelected){
                 this.canCreateStore=true;
               }
             })
@@ -190,7 +181,11 @@
       },
       createStore() {
         //Crear Tienda
-        this.$router.push({ name: 'qmarketplace.admin.stores.index'});
+        this.$router.push({ name: 'qmarketplace.admin.stores.create'});
+      },
+      editStore() {
+        //editar Tienda
+        this.$router.push({name: 'qmarketplace.admin.stores.my.store'});
       },
     }
   }
