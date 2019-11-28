@@ -1,18 +1,89 @@
 <template>
-  <div class="q-pa-xl full-width shadow-2 q-mb-xl">
-    <div class="row q-col-gutter-lg q-pt-xl">
-      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-        <quiz></quiz>
+  <div>
+    <div class="q-pa-xl full-width shadow-2 q-mb-xl" v-if="$q.platform.is.desktop">
+      <div class="row q-col-gutter-lg q-pt-xl" >
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+          <quiz></quiz>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+          <top-companies></top-companies> 
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+          <top-users></top-users>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+          <trivia v-if="success" :trivia="trivia" :isModal="false" className="home-trivia"></trivia>
+        </div>
       </div>
-      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-        <top-companies></top-companies> 
+    </div>
+    <div class="q-mt-lg" v-else>
+      <div class="row q-col-gutter-md">
+        <div class="col-auto">
+          <div class="text-center">
+            <q-avatar size="xl" round color="white" @click="modal.quiz = !modal.quiz">
+              <img src="/statics/img/icon-quiz.png" style="border: 2px solid red">
+            </q-avatar>
+            <div class="q-mt-sm">Encuesta</div>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="text-center">
+            <q-avatar size="xl" round color="white" @click="modal.companies = !modal.companies">
+              <img src="/statics/img/top-companies.png" style="border: 2px solid red">
+            </q-avatar>
+            <div class="q-mt-sm">Empresas</div>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="text-center">
+            <q-avatar size="xl" round color="white" @click="modal.users = !modal.users">
+              <img src="/statics/img/copa.png" style="border: 2px solid red">
+            </q-avatar>
+            <div class="q-mt-sm">Usuarios</div>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="text-center">
+            <q-avatar size="xl" round color="white" @click="modal.trivia = !modal.trivia">
+              <img src="/statics/img/icon-trivia.png" style="border: 2px solid red">
+            </q-avatar>
+            <div class="q-mt-sm">Trivia</div>
+          </div>
+        </div>
       </div>
-      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-        <top-users></top-users>
-      </div>
-      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-        <trivia v-if="success" :trivia="trivia" :isModal="false" className="home-trivia"></trivia>
-      </div>
+      <!-- -->
+      <q-dialog v-model="modal.quiz" maximized >
+        <q-card class="topWidgetHomeMobil">
+          <div class="close">
+            <q-btn round color="primary"  icon="close" v-close-popup />
+          </div>
+          <quiz></quiz>
+        </q-card>
+      </q-dialog>
+      <q-dialog v-model="modal.companies" maximized >
+        <q-card class="topWidgetHomeMobil">
+          <div class="close">
+            <q-btn round color="primary"  icon="close" v-close-popup />
+          </div>
+          <top-companies></top-companies> 
+        </q-card>
+      </q-dialog>
+      <q-dialog v-model="modal.users" maximized >
+        <q-card class="topWidgetHomeMobil">
+          <div class="close">
+            <q-btn round color="primary"  icon="close" v-close-popup />
+          </div>
+          <top-users></top-users>
+        </q-card>
+      </q-dialog>
+      <q-dialog v-model="modal.trivia" maximized >
+        <q-card class="topWidgetHomeMobil">
+          <div class="close">
+            <q-btn round color="primary"  icon="close" v-close-popup />
+          </div>
+          <trivia v-if="success" :trivia="trivia" :isModal="false" className="home-trivia"></trivia>
+        </q-card>
+      </q-dialog>
     </div>
   </div>
 </template>
@@ -41,6 +112,13 @@ export default {
       triviaUserIds:[],
       trivias:[],
       trivia:null,
+      encuesta:false,
+      modal: {
+        quiz: false,
+        trivia: false,
+        companies: false,
+        users: false,
+      },
       userId: this.$store.state.quserAuth.userId ? this.$store.state.quserAuth.userId : null
     }
   },
@@ -120,3 +198,14 @@ export default {
   
 }
 </script>
+<style lang="stylus">
+.topWidgetHomeMobil
+  .close
+    position fixed
+    top 10px
+    right 10px
+    z-index 99
+  .card-quiz, .card-top-users, .home-trivia, .card-top
+    .img-title 
+      margin-top 0
+</style>

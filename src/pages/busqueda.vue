@@ -1,5 +1,8 @@
 <template>
-  <q-page class="bg-fondo advanced_search form-general">
+  <q-page class="bg-fondo advanced_search form-general" v-if="success">
+    
+    <!-- Busqueda Avanzada -->
+    <!--
     <div class="q-pa-xl bg-white shadow-2">
       <div class="q-container q-pt-xl">
         <div class="row q-col-gutter-lg">
@@ -56,12 +59,29 @@
 
       </div>
     </div>
+    -->
 
     <div>
-      <div class="row q-pa-lg">
+      <div v-if="stores.length>0" class="row q-pa-lg">
         <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" v-for="store in stores">
           <store :store="store"></store>
         </div>
+      </div>
+      <div v-else>
+
+          <div class="row q-pa-lg">
+            <div class="col-12">
+
+             <q-banner inline-actions class="q-mt-xl text-white bg-red">
+                <template v-slot:avatar>
+                  <q-icon name="warning" color="white" />
+                </template>
+                No existen resultados disponibles
+              </q-banner>
+
+            </div>
+          </div>
+
       </div>
     </div>
 
@@ -147,69 +167,60 @@ export default {
           value: '3'
         }
       ],
-      stores:  [
-        {
-            name: 'BELLE TIENDA 1',
-            logo : { path: 'https://cdn.quasar.dev/img/avatar.png' },
-            mainImage: { path: '/statics/img/banner.png' },
-            slogan: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
-            pts: 9
-        },
-        {
-            name: 'BELLE TIENDA 2',
-            logo : { path: 'https://cdn.quasar.dev/img/avatar.png' },
-            mainImage: { path: '/statics/img/banner.png' },
-            slogan: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
-            pts: 9
-        },
-                        {
-            name: 'BELLE TIENDA 3',
-            logo : { path: 'https://cdn.quasar.dev/img/avatar.png' },
-            mainImage: { path: '/statics/img/banner.png' },
-            slogan: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
-            pts: 3
-        },
-        {
-            name: 'BELLE TIENDA 4',
-            logo : { path: 'https://cdn.quasar.dev/img/avatar.png' },
-            mainImage: { path: '/statics/img/banner.png' },
-            slogan: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
-            pts: 9
-        },
-                        {
-            name: 'BELLE TIENDA 5',
-            logo : { path: 'https://cdn.quasar.dev/img/avatar.png' },
-            mainImage: { path: '/statics/img/banner.png' },
-            slogan: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
-            pts: 1
-        },
-        {
-            name: 'BELLE TIENDA 6',
-            logo : { path: 'https://cdn.quasar.dev/img/avatar.png' },
-            mainImage: { path: '/statics/img/banner.png' },
-            slogan: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
-            pts: 1
-        },
-        {
-            name: 'BELLE TIENDA 7',
-            logo : { path: 'https://cdn.quasar.dev/img/avatar.png' },
-            mainImage: { path: '/statics/img/banner.png' },
-            slogan: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
-            pts: 9
-        },
-        {
-            name: 'BELLE TIENDA 8',
-            logo : { path: 'https://cdn.quasar.dev/img/avatar.png' },
-            mainImage: { path: '/statics/img/banner.png' },
-            slogan: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
-            pts: 9
-        }
-      ]
+      stores: [],
+      loading: false,
+      success: false,
+      paramsF:{
+        cityId : parseInt(this.$route.params.cityId),
+        neighborhoodId : parseInt(this.$route.params.neighborhoodId),
+        text: this.$route.params.text
+      }
+     
     }
   },
+  mounted(){
+    this.init();
+  },
   methods: {
-    search() {
-      console.log(this.advanced_search);
+    // init Method
+    async init(){
+
+      console.warn("*** INICIO")
+
+      this.loading = true
+      /*
+      console.warn("BUSCO CIUDAD: "+this.$route.params.cityId)
+      console.warn("BUSCO BARRIO: "+this.$route.params.neighborhoodId)
+      console.warn("BUSCO TEXTO: "+this.$route.params.text)
+      */
+
+      await this.searchStores();
+
+      this.loading = false
+      this.success = true
+      
+    },
+    // Search Stores
+    searchStores() {
+
+      let params = {
+        remember: false,
+        params: {
+          filter:{
+            cityId: this.paramsF.cityId,
+            neighborhoodId: this.paramsF.neighborhoodId ? this.paramsF.neighborhoodId : null,
+            name: this.paramsF.text
+          }
+        }
+      };
+     
+      this.$crud.index("apiRoutes.qmarketplace.store", params).then(response => {
+        this.stores = response.data
+      }).catch(error => {
+        console.error('[ERROR - GET STORES SEARCH] ', error)
+        this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'}) 
+      })
+
     }
   }
 }
