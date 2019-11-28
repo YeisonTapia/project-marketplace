@@ -223,7 +223,7 @@
           {
             title: 'Mis Mensajes',
             icon: 'far fa-envelope',
-            to: 'app.home'
+            to: 'qform.account.messages'
           },
           {
             title: 'Mis Compras',

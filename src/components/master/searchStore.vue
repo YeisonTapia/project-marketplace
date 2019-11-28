@@ -1,13 +1,29 @@
 <template>
-    <q-toolbar class="search q-px-none">
+    <q-toolbar class="search q-px-none" v-if="success">
       <q-btn class="btn-search q-mr-xs" 
-          round color="warning"  icon="search" @click="searchStore()" />
-      <q-input v-model="search.text" dense color="white" outlined 
-          placeholder="Busca tu vaina aquí..."/>   
-      <q-select outlined dense class="select-neighborhood"
-                v-model="search.neighborhood" :options="neighborhoodOptions" />
+          round color="warning"  icon="search" @click="searchReedirect()" />
+      <q-input 
+        v-model="search.text" 
+        dense 
+        color="white" 
+        outlined 
+        placeholder="Busca tu vaina aquí..."
+        @keydown.enter="searchReedirect()"/>   
+      <q-select 
+        outlined 
+        dense 
+        class="select-neighborhood"
+        v-model="search.neighborhood" 
+        :options="neighborhoodOptions" 
+        />
       <q-space class="q-mx-sm" />
-      <q-select outlined class="select-cities" v-model="search.city" :options="cityOptions">
+      <q-select 
+        outlined 
+        class="select-cities" 
+        v-model="search.city" 
+        :options="cityOptions"
+        @input="getNeighborhoods()"
+        >
         <template v-slot:prepend>
           <q-icon name="fas fa-globe-americas" />
         </template>
@@ -19,15 +35,129 @@ export default {
     name: 'searchStoreComponent',
     data() {
       return {
+        loading: false,
+        success: false,
         search: {
           text: '',
-          neighborhood: 'Barrios',
-          city: 'Rioacha'
+          neighborhood: {},
+          city: {}
         },
-        neighborhoodOptions: [ 'Barrios','Barrios','Barrioswert' ],
-        cityOptions: [ 'Rioacha','Playaacha','Lagoacha'],
+        provinceId: 777, // Default - La Guajira
+        cityOptions: [],
+        neighborhoodOptions: [],
+        
       }
     },
+    mounted(){
+      this.init();
+    },
+    methods:{
+
+      async init(){
+
+        await this.getCities();//
+
+        this.success = true
+      },
+      // Get Cities
+      getCities(){
+        
+        let params = {
+            remember: false,
+            params: {
+              include: '',
+              filter:{
+                allTranslations: true,
+                province_id: this.provinceId
+              }
+            }
+        };//params
+
+        this.$crud.index("apiRoutes.ilocations.cities",params).then(response => {
+            this.cityOptions=[];
+            this.cityOptions.push({label:"Seleccione",value:0,id:0});
+            for(var i=0;i<response.data.length;i++){
+              this.cityOptions.push({
+                label:response.data[i].name,
+                value:response.data[i].id,
+                id:response.data[i].id});
+            }
+          
+            this.search.city = {label:"Seleccione",value:0,id:0}
+        }).catch(error => {
+          console.error('[ERROR - GET CITIES] ', error)
+          this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'}) 
+        })
+
+      },
+      // Get Neighborhoods
+      getNeighborhoods(){
+
+        if(this.search.city.id){
+
+          //params
+          let params = {
+            remember: false,
+            params: {
+              include: 'city',
+              filter:{
+                allTranslations: true,
+                city:this.search.city.id
+              }
+            }
+          };
+
+          this.$crud.index("apiRoutes.ilocations.neighborhoods",params).then(response => {
+            
+            this.neighborhoodOptions=[];
+            this.neighborhoodOptions.push({label:"Seleccione",value:0,id:0});
+
+            for(var i=0;i<response.data.length;i++){
+              this.neighborhoodOptions.push({
+                label:response.data[i].name,
+                value:response.data[i].id,
+                id:response.data[i].id
+              });
+            }
+
+            this.search.neighborhood = {label:"Seleccione",value:0,id:0}
+
+          }).catch(error => {
+            console.error('[ERROR - GET Neighborhoods] ', error)
+            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'}) 
+          })
+
+        }
+      
+      },
+      // Reedirect to search
+      searchReedirect(){
+
+        let cityId = this.search.city.id
+        let neighborhoodId = this.search.neighborhood.id
+
+        if(this.search.text!=null && this.search.text!=''){
+          /*
+          console.warn("BUSCO CIUDAD: "+cityId)
+          console.warn("BUSCO BARRIO: "+neighborhoodId)
+          console.warn("BUSCO TEXTO: "+this.search.text)
+          */
+          this.$router.push({ 
+            name: 'app.busqueda',
+            params: { 
+              text: this.search.text,
+              cityId: cityId,
+              neighborhoodId: neighborhoodId
+            }
+          })
+      
+        }
+        
+      }
+
+    }
+
+
 }
 </script>
 <style lang="stylus">

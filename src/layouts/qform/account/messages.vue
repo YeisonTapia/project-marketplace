@@ -5,23 +5,23 @@
       <div class="q-inline-block q-mb-lg">
         <h4 class="title text-secondary font-family-secondary q-mt-none">
           <div class="line-secondary q-mb-sm"></div>
-            Mis Tiendas Favoritas
+            Mis Mensajes
           <div class="line-secondary q-mt-sm"></div>
         </h4>
       </div>
-
+    
       <div class="row q-col-gutter-md">
         <div class="col-12">
               
             <q-card class="rounded-md q-mb-xl full-width">
               <div class="q-pl-md">
                 <h3 class="title-label-puntos text-center bg-tertiary">
-                  <div>Favoritas</div>
+                  <div>Mensajes</div>
                 </h3>
               </div>
               <q-card-section class="q-py-xl">
                 <q-table class="no-shadow my-sticky-header-table"
-                  :data="tableFavoriteStores"
+                  :data="tableMessages"
                   :columns="tableColumns"
                   row-key="id"
                 />
@@ -60,25 +60,19 @@
         loading: false,
         success: false,
         userId: this.$store.state.quserAuth.userId ? this.$store.state.quserAuth.userId : null,
-        tableFavoriteStores: [],
+        tableMessages: [],
         tableColumns: [
           {
-            name: 'name',
-            field: row => row.store.name, 
-            label: 'NOMBRE',
+            name: 'id',
+            field: 'id', 
+            label: 'ID',
             align: 'left',
             sortable: true
           },
           {
-            name: 'slogan',
-            field: row => row.store.slogan, 
-            label: 'SLOGAN',
-            align: 'left'
-          },
-          {
-            name: 'address',
-            field:  row => row.store.address,
-            label: 'DIRECCION',
+            name: 'titulo',
+            field: 'title', 
+            label: 'TITULO',
             align: 'left'
           },
           {
@@ -99,18 +93,20 @@
         this.loading = true
 
         // Favorite Stores
-        await this.getFavoriteStores()
+        //await this.getMessages()
 
         this.loading = false
         this.success = true
 
       },
       // Get redeems ITEMS ID for a User
-      getFavoriteStores(){
+      getMessages(){
         return new Promise((resolve, reject) => {
           
-          this.tableFavoriteStores = []
+          console.warn("BUSCAR MENSAJES DEL USUARIO")
+          this.tableMessages = []
           //Params
+          /*
           let params = {
             refresh: true,
             params: {
@@ -118,7 +114,9 @@
               filter: {userId:this.userId,allTranslations:true}
             }
           }
-          //console.warn("BUSCAR TIENDAS FAVORITAS POR USUARIO")
+          */
+         
+          /*
           this.$crud.index("apiRoutes.qmarketplace.favoriteStore",params).then(response => {
             this.tableFavoriteStores = response.data
             resolve(true)//Resolve
@@ -127,6 +125,7 @@
             this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
             reject(false)//Resolve
           })
+          */
          
 
         })

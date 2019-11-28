@@ -29,7 +29,7 @@ let responsePages = {
         busqueda: {
             permission: null,
             activated: true,
-            path: '/busqueda',
+            path: '/busqueda/:text/:cityId?/:neighborhoodId?',
             name: 'app.busqueda',
             layout: () => import('src/layouts/master'),
             page: () => import('pages/busqueda.vue'),
@@ -160,6 +160,19 @@ let responsePages = {
             icon: 'apps',
             authenticated: true
         },
+        // User Messages Profile
+        userMessages: {
+            //permission: 'qform.manage',
+            activated: true,
+            path: '/account/messages',
+            name: 'qform.account.messages',
+            layout: () => import('src/layouts/account.vue'),
+            page: () => import('src/layouts/qform/account/messages'),
+            title: 'Mis Mensajes',
+            icon: 'apps',
+            authenticated: true
+        }
+
     }
     //Add here more responsePages...#example
     /*groupName : {
