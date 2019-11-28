@@ -2,14 +2,14 @@
   <q-page class="bg-fondo advanced_search form-general" v-if="success">
 
     <!-- Busqueda Avanzada -->
-    <!--
     <div class="q-pa-xl bg-white shadow-2">
       <div class="q-container q-pt-xl">
         <div class="row q-col-gutter-lg">
           <div class="col-12">
-            <div class="text-h4 text-primary font-family-secondary">Busqueda Avanzada</div>
+            <div class="text-h4 text-primary font-family-secondary cursor-pointer"  @click="drawerPoint = !drawerPoint">Busqueda Avanzada</div>
           </div>
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+
+          <div v-if="drawerPoint" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
 
             <div class="q-mb-lg">
               <p class="caption q-mb-xs">Categorias</p>
@@ -27,7 +27,7 @@
             </div>
 
           </div>
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+          <div v-if="drawerPoint" class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
 
             <div class="q-mb-lg">
               <p class="caption q-mb-xs">Ciudad</p>
@@ -50,16 +50,16 @@
           </div>
 
         </div>
-        <div class="col-12 text-right">
+        <div v-if="drawerPoint" class="col-12 text-right">
             <div class="q-my-lg">
-              <q-btn class="bg-primary text-white btn-arrow-send-pink" @click="search">Buscar</q-btn>
+              <q-btn class="bg-primary text-white btn-arrow-send-pink">Buscar</q-btn>
             </div>
         </div>
 
 
       </div>
     </div>
-    -->
+    
 
     <div>
       <div v-if="stores.length>0" class="row q-pa-lg">
@@ -109,36 +109,9 @@ export default {
           level: '',
           offer: false
       },
-      categoryOptions: [
-        {
-          label: 'Comida',
-          value: '1'
-        },
-        {
-          label: 'Hotel',
-          value: '2'
-        }
-      ],
-      cityOptions: [
-        {
-          label: 'Ciudad',
-          value: '1'
-        },
-        {
-          label: 'Hotel',
-          value: '2'
-        }
-      ],
-      neighborhoodOptions: [
-        {
-          label: 'Barrio',
-          value: '1'
-        },
-        {
-          label: 'Hotel',
-          value: '2'
-        }
-      ],
+      categoryOptions: [],
+      cityOptions: [],
+      neighborhoodOptions: [],
       companyOptions: [
         {
           label: 'Tiendas',
@@ -170,11 +143,13 @@ export default {
       stores: [],
       loading: false,
       success: false,
+      typeSearch: 1, // 1 = Front Header, 2 = Advance Search
       paramsF:{
         cityId : parseInt(this.$route.params.cityId),
         neighborhoodId : parseInt(this.$route.params.neighborhoodId),
         text: this.$route.params.text
-      }
+      },
+      drawerPoint: false,
 
     }
   },
@@ -185,22 +160,18 @@ export default {
     // init Method
     async init(){
 
-      console.warn("*** INICIO")
-
       this.loading = true
-      /*
-      console.warn("BUSCO CIUDAD: "+this.$route.params.cityId)
-      console.warn("BUSCO BARRIO: "+this.$route.params.neighborhoodId)
-      console.warn("BUSCO TEXTO: "+this.$route.params.text)
-      */
-
-      await this.searchStores();
+    
+      if(this.typeSearch==1)
+        await this.searchStores();
 
       this.loading = false
       this.success = true
 
+      console.warn("INICIA PAGE")
+
     },
-    // Search Stores
+    // Basic Search Stores
     searchStores() {
 
       let params = {
@@ -221,7 +192,8 @@ export default {
         this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
       })
 
-    }
+    },
+
   }
 }
 </script>

@@ -22,7 +22,6 @@
         class="select-cities"
         v-model="search.city"
         :options="cityOptions"
-        @input="getNeighborhoods()"
         >
         <template v-slot:prepend>
           <q-icon name="fas fa-globe-americas" />
@@ -62,6 +61,10 @@ export default {
       // Get Cities
       getCities(){
 
+        this.search.city = {label:"RIOHACHA",value:640,id:640}
+        this.getNeighborhoods()
+
+        /* Funcional - No eliminar - Comentado por ahora
         let params = {
             remember: false,
             params: {
@@ -88,6 +91,7 @@ export default {
           console.error('[ERROR - GET CITIES] ', error)
           this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
         })
+        */
 
       },
       // Get Neighborhoods
@@ -110,7 +114,7 @@ export default {
           this.$crud.index("apiRoutes.ilocations.neighborhoods",params).then(response => {
 
             this.neighborhoodOptions=[];
-            this.neighborhoodOptions.push({label:"Seleccione",value:0,id:0});
+            this.neighborhoodOptions.push({label:"Barrio",value:0,id:0});
 
             for(var i=0;i<response.data.length;i++){
               this.neighborhoodOptions.push({
@@ -120,7 +124,7 @@ export default {
               });
             }
 
-            this.search.neighborhood = {label:"Seleccione",value:0,id:0}
+            this.search.neighborhood = {label:"Barrio",value:0,id:0}
 
           }).catch(error => {
             console.error('[ERROR - GET Neighborhoods] ', error)
@@ -137,11 +141,6 @@ export default {
         let neighborhoodId = this.search.neighborhood.id
 
         if(this.search.text!=null && this.search.text!=''){
-          /*
-          console.warn("BUSCO CIUDAD: "+cityId)
-          console.warn("BUSCO BARRIO: "+neighborhoodId)
-          console.warn("BUSCO TEXTO: "+this.search.text)
-          */
           this.$router.push({
             name: 'app.busqueda',
             params: {
@@ -150,9 +149,8 @@ export default {
               neighborhoodId: neighborhoodId
             }
           })
-
         }
-
+       
       }
 
     }
