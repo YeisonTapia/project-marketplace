@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="listMenu">
-      <q-list>
+      <q-list  v-if="$q.platform.is.desktop">
         <!--Single Item-->
         <q-item  :class="getClassItem(item)" v-if="checkItemSingle(item)"
                 v-for="(item,key) in props.menu" :key="key"
@@ -12,15 +12,39 @@
           <q-item-section> {{props.translatable ? $tr(item.title) : item.title}}</q-item-section>
         </q-item>
 
+
+        <q-btn flat no-caps v-else-if="checkItemMultiple(item)" :icon="item.icon" :key="key"
+                                  :label="props.translatable ? $tr(item.title) : item.title"
+                                  :header-class="selectedChildren(item)"
+                                  :class="selectedChildren(item) ? 'bg-tertiary' : ''">
+
+          <q-menu content-class="bg-light">
+            <q-list class="menu-expansion-item" separator style="min-width: 200px">
+              <recursive-menu :translatable="props.translatable" :show-icons="props.showIcons"
+                          :key="key" :menu="item.children"/>   
+            </q-list>
+          </q-menu>
+        </q-btn>
+      </q-list>
+      <q-list  v-else>
+        <!--Single Item-->
+        <q-item  :class="getClassItem(item)" v-if="checkItemSingle(item)"
+                v-for="(item,key) in props.menu" :key="key"
+                @click.native="redirectTo(item)" clickable v-ripple >
+          <q-item-section v-if="item.icon && props.showIcons" avatar>
+            <q-icon :name="item.icon"/>
+          </q-item-section>
+          <q-item-section> {{props.translatable ? $tr(item.title) : item.title}}</q-item-section>
+        </q-item>  
         <!-- Dropdwon Item -->
         <q-expansion-item v-else-if="checkItemMultiple(item)" :icon="item.icon" :key="key"
                           :label="props.translatable ? $tr(item.title) : item.title"
                           :header-class="selectedChildren(item)"
                           :class="selectedChildren(item) ? 'bg-tertiary' : ''">
-          <!--Recursive item-->
+  
           <recursive-menu :translatable="props.translatable" :show-icons="props.showIcons"
-                          :key="key" :menu="item.children"/>
-        </q-expansion-item>
+                          :key="key" :menu="item.children"/>   
+        </q-expansion-item> 
       </q-list>
     </div>
   </div>

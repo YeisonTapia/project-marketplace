@@ -43,7 +43,7 @@
         <!--= Menu Desktop =-->
         <div class="row justify-center full-width">
           <div class="col-11">
-            <menu-list class="menu" :menu="menuItems"></menu-list>
+            <menu-list class="menu" :menu="menu_frontend"></menu-list>
           </div>
         </div>
 
@@ -77,7 +77,7 @@
         </q-item-section>
 
         <!--= MENU =-->
-        <menu-list :menu="menuItems" class="menu"/>
+        <menu-list :menu="menu_frontend" class="menu"/>
       </q-list>
     </q-drawer>
   </div>
@@ -116,6 +116,64 @@
         },
         canCreateStore:false,
         phones: [],//this.$store.getters['qsiteSettings/getSettingValueByName']('isite::phones')
+        menu_frontend: [
+          {
+            icon: 'fas fa-bars',
+            title: 'Categorias',
+            activated: true,
+            name: '#',
+            children: [
+              {
+                icon: 'fas fa-apple-alt',
+                title: 'Comida',
+                name: '#',
+                activated: true,
+              },
+              {
+                icon: 'fas fa-concierge-bell',
+                title: 'Hotel',
+                name: '#',
+                activated: true
+              }
+            ]
+          },
+          {
+            icon: 'fas fa-store',
+            title: 'Tiendas en ofertas',
+            name: 'app.ofertas',
+            activated: true
+          },
+          {
+            icon: 'fas fa-car-side',
+            title: 'Domicilio',
+            name: 'app.domicilios',
+            activated: true
+          },
+          {
+            icon: 'far fa-surprise',
+            title: '¿Probemas con una tienda?',
+            name: 'app.problems',
+            activated: true
+          },
+          {
+            icon: 'far fa-newspaper',
+            title: 'Blog',
+            name: '/categoria/blog',
+            activated: true
+          },
+          {
+            icon: 'fas fa-users',
+            title: 'Nosotros',
+            name: 'app.nosotros',
+            activated: true
+          },
+          {
+            icon: 'far fa-envelope-open',
+            title: 'Contacto',
+            name: 'app.contacto',
+            activated: true
+          }
+        ]
       }
     },
     computed: {
@@ -321,12 +379,13 @@
           margin 0
           list-style none
           padding 0
-          > .q-item
+          > .q-item, .q-btn
             -ms-flex 1 1 auto
             flex 1 1 auto
             cursor pointer
             position relative
             color $secondary
+            font-size 1rem
             &:hover
               color $tertiary
               &:before
@@ -340,4 +399,16 @@
                 left 0
                 right 0
                 background-position center
+.menu-expansion-item
+  color $secondary
+  font-size 1rem
+  font-weight bold
+  .q-icon
+    color $tertiary
+    margin 10px   
+  .single-item:hover      
+    background $tertiary !important
+    color #fff
+    .q-icon
+      color #fff        
 </style>
