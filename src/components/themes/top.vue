@@ -16,71 +16,76 @@
         </div>
       </div>
     </div>
-    <div class="q-mt-lg" v-else>
-      <div class="row q-col-gutter-md">
+    <div  class="topWidgetHomeMobile q-mt-lg" v-else>
+      <div class="row q-col-gutter-lg">
         <div class="col-auto">
           <div class="text-center">
-            <q-avatar size="xl" round color="white" @click="modal.quiz = !modal.quiz">
-              <img src="/statics/img/icon-quiz.png" style="border: 2px solid red">
+            <q-avatar round color="white" @click="modal.quiz = !modal.quiz">
+              <img src="/statics/img/icon-quiz.png">
             </q-avatar>
-            <div class="q-mt-sm">Encuesta</div>
+            <div class="q-mt-sm text-bold">Encuesta</div>
           </div>
         </div>
         <div class="col-auto">
           <div class="text-center">
-            <q-avatar size="xl" round color="white" @click="modal.companies = !modal.companies">
-              <img src="/statics/img/top-companies.png" style="border: 2px solid red">
+            <q-avatar round color="white" @click="modal.companies = !modal.companies">
+              <img src="/statics/img/top-companies.png">
             </q-avatar>
-            <div class="q-mt-sm">Empresas</div>
+            <div class="q-mt-sm text-bold">Empresas</div>
           </div>
         </div>
         <div class="col-auto">
           <div class="text-center">
-            <q-avatar size="xl" round color="white" @click="modal.users = !modal.users">
-              <img src="/statics/img/copa.png" style="border: 2px solid red">
+            <q-avatar round color="white" @click="modal.users = !modal.users">
+              <img src="/statics/img/copa.png">
             </q-avatar>
-            <div class="q-mt-sm">Usuarios</div>
+            <div class="q-mt-sm text-bold">Usuarios</div>
           </div>
         </div>
         <div class="col-auto">
           <div class="text-center">
-            <q-avatar size="xl" round color="white" @click="modal.trivia = !modal.trivia">
-              <img src="/statics/img/icon-trivia.png" style="border: 2px solid red">
+            <q-avatar round color="white" @click="modal.trivia = !modal.trivia">
+              <img src="/statics/img/icon-trivia.png">
             </q-avatar>
-            <div class="q-mt-sm">Trivia</div>
+            <div class="q-mt-sm text-bold">Trivia</div>
           </div>
         </div>
       </div>
       <!-- -->
       <q-dialog v-model="modal.quiz" maximized >
-        <q-card class="topWidgetHomeMobil">
-          <div class="close">
-            <q-btn round color="primary"  icon="close" v-close-popup />
-          </div>
+       <!--  -->
+        <q-card class="topWidgetHomeMobile">
+          <q-toolbar>
+            <q-btn flat v-close-popup color="primary" round dense icon="fas fa-arrow-left" />
+            <q-toolbar-title class="text-primary font-family-secondary">Encuesta</q-toolbar-title>
+          </q-toolbar>
           <quiz></quiz>
-        </q-card>
+        </q-card> 
       </q-dialog>
       <q-dialog v-model="modal.companies" maximized >
-        <q-card class="topWidgetHomeMobil">
-          <div class="close">
-            <q-btn round color="primary"  icon="close" v-close-popup />
-          </div>
-          <top-companies></top-companies> 
+        <q-card class="topWidgetHomeMobile">
+          <q-toolbar>
+            <q-btn flat v-close-popup color="primary" round dense icon="fas fa-arrow-left" />
+            <q-toolbar-title class="text-primary font-family-secondary">Mejores Empresas</q-toolbar-title>
+          </q-toolbar>
+          <top-companies class="q-pt-md"></top-companies> 
         </q-card>
       </q-dialog>
       <q-dialog v-model="modal.users" maximized >
-        <q-card class="topWidgetHomeMobil">
-          <div class="close">
-            <q-btn round color="primary"  icon="close" v-close-popup />
-          </div>
-          <top-users></top-users>
+        <q-card class="topWidgetHomeMobile">
+          <q-toolbar>
+            <q-btn flat v-close-popup color="primary" round dense icon="fas fa-arrow-left" />
+            <q-toolbar-title class="text-primary font-family-secondary">Usuarios Destacados</q-toolbar-title>
+          </q-toolbar>
+          <top-users class="q-pt-md"></top-users>
         </q-card>
       </q-dialog>
       <q-dialog v-model="modal.trivia" maximized >
-        <q-card class="topWidgetHomeMobil">
-          <div class="close">
-            <q-btn round color="primary"  icon="close" v-close-popup />
-          </div>
+        <q-card class="topWidgetHomeMobile">
+          <q-toolbar>
+            <q-btn flat v-close-popup color="primary" round dense icon="fas fa-arrow-left" />
+            <q-toolbar-title class="text-primary font-family-secondary">Trivia</q-toolbar-title>
+          </q-toolbar>
           <trivia v-if="success" :trivia="trivia" :isModal="false" className="home-trivia"></trivia>
         </q-card>
       </q-dialog>
@@ -199,13 +204,23 @@ export default {
 }
 </script>
 <style lang="stylus">
-.topWidgetHomeMobil
-  .close
-    position fixed
-    top 10px
-    right 10px
-    z-index 99
-  .card-quiz, .card-top-users, .home-trivia, .card-top
+.topWidgetHomeMobile
+  .card-top-users
     .img-title 
-      margin-top 0
+      margin-top 0 
+  .card-top-users, .card-top
+    .text-h6
+      display none!important      
+  .card-quiz, .home-trivia
+    .img-title
+      display none!important 
+  .home-trivia    
+    padding-top 20px
+  .q-avatar    
+    img
+      font-size 60px
+      border 3px solid $primary
+      padding 3px
+      border-radius 50%
+      overflow hidden
 </style>

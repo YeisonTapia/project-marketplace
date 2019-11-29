@@ -1,12 +1,11 @@
 <template>
   <div style="width: 100%; margin-bottom: -25px;">
-    <q-carousel
+    <q-carousel 
             arrows
             animated
             v-model="slide"
             infinite
             autoplay
-            height="600px"
     >
       <q-carousel-slide v-for="slide in position.slides"  v-bind:key="slide.id" :name="slide.id"  :img-src="slide.imageUrl">
         <div v-if="slide.title || slide.caption" class="absolute-bottom custom-caption">
@@ -58,7 +57,15 @@
     }
 </script>
 <style lang="stylus">
-
+.img-ratio-16-9
+  .q-carousel-track
+    height 0
+    padding-bottom 56.25%
+    position relative
+    .q-carousel-slide
+      position absolute
+      height 100%
+      width 100%      
   .custom-caption
     text-align: center
     padding: 12px
