@@ -28,7 +28,11 @@
           </div>
         </q-stepper-navigation>
         <q-stepper-navigation align="right" v-else class="send q-pa-md" >
-           <q-btn class="bg-primary text-light font-family-secondary" @click="saveData">Enviar</q-btn>
+           <q-btn :loading="btnLoading" class="bg-primary text-light font-family-secondary" @click="saveData">Enviar
+            <template v-slot:loading>
+              <q-spinner-hourglass class="on-left" />
+            </template>
+           </q-btn>
         </q-stepper-navigation>
         
       </q-step>
@@ -123,7 +127,8 @@
                 },
                 currentStep: null,
                 votesPoll: null,
-                showVotes: false
+                showVotes: false,
+                btnLoading: false,
             }
         },
         methods: {
@@ -237,7 +242,10 @@
             this.$v.$touch()
             if (!this.$v.$error) {
               
-              this.loading = true;
+              
+              this.loading = true
+              this.btnLoading = true
+            
               this.setDataFinal()
               
              
@@ -267,8 +275,9 @@
               //this.alertContent.active = true // OJOOOOOOO
 
               this.showVotes = true
-
-              this.loading = false;
+               
+              this.loading = false
+              this.btnLoading = false
              
             }else{
               this.$alert.error({message: 'Encuesta: Debe seleccionar una respuesta', pos: 'bottom'})
@@ -357,7 +366,7 @@
               this.$crud.index("apiRoutes.qquiz.questions",params).then(response => {
              
                 this.votesPoll = response.data
-                console.warn(this.votesPoll)
+                //console.warn(this.votesPoll)
 
                 resolve(true)//Resolve
 

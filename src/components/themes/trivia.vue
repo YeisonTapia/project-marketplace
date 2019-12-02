@@ -46,9 +46,13 @@
             </div>
             <div class="col-6 text-right">
 
-                <q-btn v-show="!isModal" class="btn-arrow-send-pink text-primary font-family-secondary" @click="saveData()"  >Enviar</q-btn>
+                <q-btn :loading="btnLoading" v-show="!isModal" class="btn-arrow-send-pink text-primary font-family-secondary" @click="saveData()"  >Enviar
+                  <template v-slot:loading>
+                    <q-spinner-hourglass class="on-left" />
+                  </template>
+                </q-btn>
 
-                <q-btn  v-show="isModal" color="primary" @click="saveData()" label="Enviar"
+                <q-btn v-show="isModal" color="primary" @click="saveData()" label="Enviar"
                   />
 
             </div>
@@ -127,6 +131,7 @@ export default {
         currentStep: null,
         showResults: false,
         resultsTrivia: [],
+        btnLoading: false,
       }
   },
   methods: {
@@ -198,32 +203,25 @@ export default {
       })
     },
     // Save Data Answers
-    saveData(){
+    async saveData(){
       this.$v.$touch()
       if (!this.$v.$error) {
               
         this.loading = true;
-        this.setDataFinal()
-      
-        this.finalDataSave.forEach((data, index) => {
-                
-          this.$crud.create('apiRoutes.qtrivia.userQuestionAnswers', data).then(response => {
-            //console.warn("TRIVIA - SAVE USER QUESTION ANSWER")
-          }).catch(error => {
-            console.error('[TRIVIA - CREATE USER QUESTION ANSWERS] ', error)
-            this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
-            this.loading = false
-          })
-               
-        })// End Save Answers
-       
+        this.btnLoading = true
+
+        await this.setDataFinal()
+
+        // User Questions Answers
+        await this.saveUserQuestionsAnswers()
 
         // Finished Trivia
-        this.saveUserTrivia()
-       
+        await this.saveUserTrivia()
+
         this.$v.$reset()//Reset validations
         this.alertContent.active = true
         this.loading = false;
+        this.btnLoading = false
              
       }else{
         this.$alert.error({message: 'Trivia: Debe seleccionar una respuesta', pos: 'bottom'})
@@ -259,7 +257,7 @@ export default {
       this.$crud.create('apiRoutes.qtrivia.userTrivias', data).then(response => {
 
         this.resultsTrivia = response.data[0]
-        //console.warn('[TRIVIA - CREATE USER TRIVIAS]')
+        console.warn('[TRIVIA - CREATE USER TRIVIAS]')
         this.showResults = true
 
         this.loading = false
@@ -268,6 +266,20 @@ export default {
         this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
       })
 
+    },
+    // Save Data Questions and Answers
+    saveUserQuestionsAnswers(){
+      this.finalDataSave.forEach((data, index) => {
+            
+          this.$crud.create('apiRoutes.qtrivia.userQuestionAnswers', data).then(response => {
+            console.warn("TRIVIA - SAVE USER QUESTION ANSWER")
+          }).catch(error => {
+            console.error('[TRIVIA - CREATE USER QUESTION ANSWERS] ', error)
+            this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
+            this.loading = false
+          })
+
+      })// End Save Answers
     }
   }  
 }
