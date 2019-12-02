@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 100%; margin-bottom: -25px;">
+  <div class="full-width">
     <q-carousel 
             arrows
             animated
@@ -57,19 +57,11 @@
     }
 </script>
 <style lang="stylus">
-.img-ratio-16-9
-  .q-carousel-track
-    height 0
-    padding-bottom 56.25%
-    position relative
-    .q-carousel-slide
-      position absolute
-      height 100%
-      width 100%      
-  .custom-caption
-    text-align: center
-    padding: 12px
-    color: white
-    background-color: rgba(0, 0, 0, .3)
+.q-carousel
+    height 600px
+    @media screen and (max-width: $breakpoint-md)
+        height 400px
+    @media screen and (max-width: $breakpoint-sm)
+        height 200px
 </style>
 
