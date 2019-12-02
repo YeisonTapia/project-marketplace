@@ -1,32 +1,28 @@
 <template>
-  <div>
-    <div id="listMenu">
-      <q-list>
-        <!--Single Item-->
-        <q-item  :class="getClassItem(item)" v-if="checkItemSingle(item)"
-                v-for="(item,key) in props.menu" :key="key"
-                @click.native="redirectTo(item)" clickable v-ripple >
-          <q-item-section v-if="item.icon && props.showIcons" avatar>
-            <q-icon :name="item.icon"/>
-          </q-item-section>
-          <q-item-section> {{props.translatable ? $tr(item.title) : item.title}}</q-item-section>
-        </q-item>  
-        <!-- Dropdwon Item -->
-        <q-expansion-item v-else-if="checkItemMultiple(item)" :icon="item.icon" :key="key"
-                          :label="props.translatable ? $tr(item.title) : item.title"
-                          :header-class="selectedChildren(item)"
-                          :class="selectedChildren(item) ? 'bg-tertiary' : ''">
-  
-          <recursive-menu :translatable="props.translatable" :show-icons="props.showIcons"
-                          :key="key" :menu="item.children"/>   
-        </q-expansion-item> 
-      </q-list>
-    </div>
-  </div>
+  <q-list>
+    <!--Single Item-->
+    <q-item  :class="getClassItem(item)" v-if="checkItemSingle(item)"
+            v-for="(item,key) in props.menu" :key="key"
+            @click.native="redirectTo(item)" clickable v-ripple >
+      <q-item-section v-if="item.icon && props.showIcons" avatar>
+        <q-icon :name="item.icon"/>
+      </q-item-section>
+      <q-item-section> {{props.translatable ? $tr(item.title) : item.title}}</q-item-section>
+    </q-item>  
+    <!-- Dropdwon Item -->
+    <q-expansion-item v-else-if="checkItemMultiple(item)" :icon="item.icon" :key="key"
+                      :label="props.translatable ? $tr(item.title) : item.title"
+                      :header-class="selectedChildren(item)"
+                      :class="selectedChildren(item) ? 'bg-tertiary' : ''">
+
+      <recursive-item-admin :translatable="props.translatable" :show-icons="props.showIcons"
+                      :key="key" :menu="item.children"/>   
+    </q-expansion-item> 
+  </q-list>
 </template>
 <script>
   export default {
-    name: 'recursiveMenuAdmin',
+    name: 'recursiveItemAdmin',
     components: {},
     props: {
       menu: {default: false},
