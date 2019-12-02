@@ -135,7 +135,7 @@
                    @input="$store.dispatch('qmarketplaceStores/SET_STORE', store.selected),getStore(),$store.dispatch('app/REFRESH_PAGE')"
                    label="Store" v-model="store.selected" emit-value map-options/>
          <!--= MENU =-->
-         <menu-list v-if="store.selected" :menu="menu"/>
+         <menu-list v-if="store.selected || $auth.hasAccess('marketplace.stores.manage')" :menu="menu"/>
 
          <div class="bg-light text-center q-py-lg">
             <div class="q-headline text-primary text-weight-bold">¿NECESITAS AYUDA</div>
