@@ -153,7 +153,7 @@
 </template>
 <script>
    import configList from '../configList'
-   import menuList from '../recursiveItem'
+   import menuList from '../recursiveItemAdmin'
    import imSocial from 'src/components/master/imSocial'
    import widgetUser from 'src/components/quser/widget-user'
    import searchStore from 'src/components/master/searchStore'
