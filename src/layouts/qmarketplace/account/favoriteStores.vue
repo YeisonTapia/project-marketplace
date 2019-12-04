@@ -20,12 +20,21 @@
                 </h3>
               </div>
               <q-card-section class="q-py-xl">
+
                 <q-table class="no-shadow my-sticky-header-table"
                   :data="tableFavoriteStores"
                   :columns="tableColumns"
                   row-key="id"
-                />
-               
+                >
+
+                  <q-td slot="body-cell-actions" slot-scope="props" :props="props">
+                      <q-btn @click="deleteFavoriteStore(props.row)" color="negative" icon="fas fa-trash-alt" size="sm" class="q-ml-xs">
+                        <q-tooltip :delay="300">Dejar de Seguir</q-tooltip>
+                      </q-btn>
+                  </q-td>
+
+                </q-table>
+             
               </q-card-section>
             </q-card>
 
@@ -75,12 +84,14 @@
             label: 'SLOGAN',
             align: 'left'
           },
+          /*
           {
             name: 'address',
             field:  row => row.store.address,
             label: 'DIRECCION',
             align: 'left'
           },
+          */
           {
             name: 'createdAt',
             field: 'createdAt', 
@@ -88,6 +99,12 @@
             align: 'left',
             sortable: true,
             format: val => this.fDate(val),
+          },
+          {
+            name: 'actions',
+            field: 'actions', 
+            label: 'ACCIONES',
+            align: 'left'
           }
         ],
       }
@@ -135,7 +152,36 @@
       fDate(val){
         let formattedString = date.formatDate(val, 'DD-MM-YYYY')
         return formattedString
+      },
+      // Delete Favorite Store
+      deleteFavoriteStore(row){
+        
+        this.loading = true
+
+        let criteria = row.id
+
+        this.$crud.delete("apiRoutes.qmarketplace.favoriteStore",criteria).then(response => {
+           
+            this.getFavoriteStores()
+
+            // Notify MSG
+            this.$q.notify({
+              color:'green',
+              message: 'Proceso realizado exitosamente!!',
+              position: 'bottom-right'
+            })
+
+            this.loading = false
+
+          }).catch(error => {
+            console.error("ERROR - DELETED FAVORITE STORES")
+            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+
+            this.loading = false
+        })
+          
       }
+
     }
   }
 </script>
