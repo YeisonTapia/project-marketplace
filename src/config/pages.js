@@ -92,6 +92,28 @@ let responsePages = {
             icon: 'far fa-envelope-open',
             authenticated: false
         },
+        trivia: {
+            permission: null,
+            activated: true,
+            path: '/trivia',
+            name: 'app.trivia',
+            layout: () => import('src/layouts/master'),
+            page: () => import('pages/trivia.vue'),
+            title: 'Trivia',
+            icon: 'far fa-envelope-open',
+            authenticated: false
+        },
+        empresa: {
+            permission: null,
+            activated: true,
+            path: '/empresa',
+            name: 'app.empresa',
+            layout: () => import('src/layouts/master'),
+            page: () => import('pages/empresa.vue'),
+            title: 'Empresa',
+            icon: 'far fa-envelope-open',
+            authenticated: false
+        },
         admin: {
             permission: null,
             activated: true,

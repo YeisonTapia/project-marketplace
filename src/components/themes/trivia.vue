@@ -12,7 +12,7 @@
         <q-card-section>
           <div class="text-h6  text-primary">{{question.title}}</div>
           <div  v-show="isModal">
-              <q-img :ratio="16-9" :src="trivia.mainImage.path" />
+              <q-img :ratio="16/9" :src="trivia.mainImage.path" />
           </div>  
           <div class="q-py-md">
              <q-option-group keep-color
@@ -285,10 +285,10 @@ export default {
 }
 </script>
 <style lang="stylus">
-.modaltrivia
+.triviaModal
   & .q-card__section
     padding 0
-    h2 
+    .text-h6  
       font-size 18px
       text-align center
       margin-top 0
