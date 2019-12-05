@@ -111,9 +111,15 @@
       <!-- MENU -->
       <q-drawer bordered id="menu_left" class="no-shadow" v-model="drawer.menu">
          <!--Select Store-->
-         <q-select id="storeSelect" v-if="store.selected" :loading="store.loading" outlined dense :options="store.options"
-                   @input="$store.dispatch('qmarketplaceStores/SET_STORE', store.selected),getStore(),$store.dispatch('app/REFRESH_PAGE')"
-                   label="Store" v-model="store.selected" emit-value map-options/>
+         <div id="storeSelect">
+            <q-select  v-if="store.selected"
+                       :loading="store.loading" outlined dense :options="store.options"
+                       @filter="filterFn"
+                       @input="$store.dispatch('qmarketplaceStores/SET_STORE', store.selected),getStore(),$store.dispatch('app/REFRESH_PAGE')"
+                       label="Store" v-model="store.selected" emit-value map-options
+                       />
+         </div>
+
          <div class="q-pb-none q-mt-md">
             <div class="label-primary text-center text-white">
                <div class="title q-pb-md font-family-secondary">
@@ -253,8 +259,26 @@
 </script>
 <style lang="stylus">
    #masterHeaderAdmin
-      .q-select
-         
+      #storeSelect
+         .q-select
+            background $grey-4
+            .q-field__control
+               height 68px
+               border-bottom $primary solid 3px
+               .q-field__native
+                  font-size 17px
+                  color $primary
+            .q-field__control:before
+               border none
+               border-radius inherit
+               border-bottom $primary solid 1px
+            .q-field__append
+               color:$primary
+               height 68px
+               i
+                  font-weight bold
+                  font-size 36px
+
       .header-desktop
          .logo-circle
             position relative

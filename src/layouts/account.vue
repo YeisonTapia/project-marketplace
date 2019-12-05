@@ -107,7 +107,7 @@
             },
              //init
             async init() {
-                await this.getPointsUser()
+                await this.getPointsUser().catch(error => {})
             },
             
             // Get Points Available User
