@@ -134,8 +134,8 @@ export default {
       this.loading = true
 
       if(this.userId!=null){
-        await this.getUserTrivias()
-        await this.getTrivias()
+        await this.getUserTrivias().catch(error => {})
+        await this.getTrivias().catch(error => {})
         if(this.trivias.length>0)
               this.trivia = this.trivias[0]
       }

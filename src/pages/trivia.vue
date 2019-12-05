@@ -63,10 +63,10 @@ export default {
       
       this.loading = true
 
-      await this.getTrivias()
+      await this.getTrivias().catch(error => {})
 
       //set Opened all trivias
-      await this.setOpenedAttribute()
+      await this.setOpenedAttribute().catch(error => {})
 
       this.loading = false
       this.success = true

@@ -316,16 +316,16 @@
         //await this.getPointsUser()
 
         // Items User redeems
-        await this.getRedeemsItemsUser()
+        await this.getRedeemsItemsUser().catch(error => {})
 
          // Items to Redeem
-        await this.getItems()
+        await this.getItems().catch(error => {})
 
         // Historic group
-        await this.getHistoryPoints()
+        await this.getHistoryPoints().catch(error => {})
 
         // All points User
-        await this.getAllPointsByUser()
+        await this.getAllPointsByUser().catch(error => {})
        
         this.loading = false
         this.success = true

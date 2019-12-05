@@ -52,7 +52,7 @@
         this.loading = true
 
         if(this.userId!=null){
-          await this.getTopUsers()
+          await this.getTopUsers().catch(error => {})
         }else{
           this.alertContent.msj = "Para visualizar este contenido, debes Iniciar Sesión"
           this.alertContent.icon = "account_circle"

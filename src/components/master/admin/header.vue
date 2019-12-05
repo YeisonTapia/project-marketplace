@@ -110,7 +110,10 @@
 
       <!-- MENU -->
       <q-drawer bordered id="menu_left" class="no-shadow" v-model="drawer.menu">
-
+         <!--Select Store-->
+         <q-select id="storeSelect" v-if="store.selected" :loading="store.loading" outlined dense :options="store.options"
+                   @input="$store.dispatch('qmarketplaceStores/SET_STORE', store.selected),getStore(),$store.dispatch('app/REFRESH_PAGE')"
+                   label="Store" v-model="store.selected" emit-value map-options/>
          <div class="q-pb-none q-mt-md">
             <div class="label-primary text-center text-white">
                <div class="title q-pb-md font-family-secondary">
@@ -130,10 +133,7 @@
                <img :src="selectStore.mainImage.path">
             </router-link>
          </div>
-         <!--Select Store-->
-         <q-select v-if="store.selected" :loading="store.loading" outlined dense :options="store.options"
-                   @input="$store.dispatch('qmarketplaceStores/SET_STORE', store.selected),getStore(),$store.dispatch('app/REFRESH_PAGE')"
-                   label="Store" v-model="store.selected" emit-value map-options/>
+
          <!--= MENU =-->
          <menu-list v-if="store.selected || $auth.hasAccess('marketplace.stores.manage')" :menu="menu"/>
 
@@ -253,6 +253,8 @@
 </script>
 <style lang="stylus">
    #masterHeaderAdmin
+      .q-select
+         
       .header-desktop
          .logo-circle
             position relative

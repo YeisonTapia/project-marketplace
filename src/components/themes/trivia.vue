@@ -146,7 +146,7 @@ export default {
           // Get answers for each question
           for (let i=0;i<this.trivia.questions.length;i++) {
             let qId = this.trivia.questions[i].id
-            await this.getAnswers(qId,i)
+            await this.getAnswers(qId,i).catch(error => {})
             this.answers[i] = this.answersOptions
             this.answersOptions = []
 
@@ -210,13 +210,13 @@ export default {
         this.loading = true;
         this.btnLoading = true
 
-        await this.setDataFinal()
+        await this.setDataFinal().catch(error => {})
 
         // User Questions Answers
-        await this.saveUserQuestionsAnswers()
+        await this.saveUserQuestionsAnswers().catch(error => {})
 
         // Finished Trivia
-        await this.saveUserTrivia()
+        await this.saveUserTrivia().catch(error => {})
 
         this.$v.$reset()//Reset validations
         this.alertContent.active = true

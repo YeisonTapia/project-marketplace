@@ -752,27 +752,27 @@
         this.loading = true//Loading
         
         this.form.fields = this.$clone(this.defaultFields)//Set default fields
-        await this.setUserData()//Set user data
-        await this.getCountries()// Get countries
+        await this.setUserData().catch(error => {})//Set user data
+        await this.getCountries().catch(error => {})// Get countries
 
         //console.warn("Field - country INIT: "+this.form.fields.country.value)
 
         // Get Provinces
         if(this.form.fields.country.value!="" && this.form.fields.country.value!=null)
-          await this.getCities(this.form.fields.country.value,'CiO')
+          await this.getCities(this.form.fields.country.value,'CiO').catch(error => {})
 
         //console.warn("Field - address country INIT: "+this.form.fields.country.value)
 
         // Get Provinces
         if(this.address.countryId!="" && this.address.countryId!=null)
-          await this.getCities(this.address.countryId,'CiRO')
+          await this.getCities(this.address.countryId,'CiRO').catch(error => {})
 
         // Get Cities
         if(this.address.stateId!="" && this.address.stateId!=null)
-          await this.getCities2(this.address.stateId,'CiRO')
+          await this.getCities2(this.address.stateId,'CiRO').catch(error => {})
 
         // Get Promotions
-        await this.getCategoriesStore()
+        await this.getCategoriesStore().catch(error => {})
 
         this.success = true//Success page
         this.loading = false//Loading
@@ -1011,7 +1011,7 @@
           let pointPerRegister = this.$store.getters['qsiteSettings/getSettingValueByName']('iredeems::points-per-register-user-completed')
           if(pointPerRegister>0){
 
-            await this.getPointsRegister()
+            await this.getPointsRegister().catch(error => {})
             // User hasn't points for register
             if(this.checkPU.length==0){
               this.savePointsRegister(pointPerRegister)

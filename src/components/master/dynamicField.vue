@@ -193,7 +193,7 @@
           //Set options if is type select
           if (['select', 'multiSelect'].indexOf(this.field.type) != -1) {
             if (this.field.loadOptions) {
-              await this.getOptions()
+              await this.getOptions().catch(error => {})
             }//Get options
             else if (this.field.options) this.options = this.field.options
           }
@@ -266,7 +266,7 @@
             if (componentCrud) {
               //Activate listen to chanel
               this.$root.$on(`crudForm${componentCrud.params.apiRoute}Created`, async () => {
-                this.getOptions()//Get options
+                this.getOptions().catch(error => {})//Get options
               })
             }
           }

@@ -106,7 +106,7 @@
         this.loading = true
 
         // Orders
-        await this.getOrders()
+        await this.getOrders().catch(error => {})
 
         this.loading = false
         this.success = true

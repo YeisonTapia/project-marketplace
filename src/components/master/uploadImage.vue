@@ -87,7 +87,7 @@
       },
       //Dispath upload file event
       async uploadFile () {
-        await this.removeFile()
+        await this.removeFile().catch(error => {})
         this.$refs.uploadComponent.pickFiles()
       },
       //Add image to data file

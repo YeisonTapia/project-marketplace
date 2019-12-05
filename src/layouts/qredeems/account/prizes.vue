@@ -101,7 +101,7 @@
         this.loading = true
 
         // Items User redeems
-        await this.getRedeemsItemsUser()
+        await this.getRedeemsItemsUser().catch(error => {})
 
         this.loading = false
         this.success = true

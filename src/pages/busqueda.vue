@@ -185,7 +185,7 @@ export default {
       this.$q.loading.show()
     
       if(this.typeSearch==1)
-        await this.searchStores()
+        await this.searchStores().catch(error => {})
 
       this.loading = false
       this.$q.loading.hide()
@@ -384,8 +384,8 @@ export default {
     },
     async getInforAdvanced(){
       this.$q.loading.show()
-      await this.getCategoriesStore()
-      await this.getCities()
+      await this.getCategoriesStore().catch(error => {})
+      await this.getCities().catch(error => {})
 
       //await this.getCompanies()
 
