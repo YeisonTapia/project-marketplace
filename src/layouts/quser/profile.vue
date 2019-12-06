@@ -769,7 +769,7 @@
 
         // Get Cities
         if(this.address.stateId!="" && this.address.stateId!=null)
-          await this.getCities2(this.address.stateId,'CiRO').catch(error => {})
+          await this.getCities2(this.address.stateId,'CiRO')
 
         // Get Promotions
         await this.getCategoriesStore().catch(error => {})

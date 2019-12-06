@@ -160,7 +160,20 @@ let responsePages = {
             title: 'Mis Mensajes',
             icon: 'apps',
             authenticated: true
-        }
+        },
+        // User Public Profile
+        userPublicProfile: {
+            permission: 'marketplace.stores.manage',
+            activated: true,
+            path: '/account/public/profile/:userId',
+            name: 'quser.account.public.profile',
+            layout: () => import('src/layouts/quser/public/account.vue'),
+            page: () => import('src/layouts/quser/public/profile'),
+            title: 'Perfil',
+            icon: 'apps',
+            authenticated: true
+        },
+
 
     }
     //Add here more responsePages...#example
