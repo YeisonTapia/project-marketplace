@@ -332,5 +332,6 @@ responsePages.qmarketplace.myStoreTheme.layout= () => import('src/layouts/admin'
 responsePages.qmarketplace.myStoreProducts.layout= () => import('src/layouts/admin')
 responsePages.qmarketplace.favoriteUsers.layout= () => import('src/layouts/admin')
 responsePages.qmarketplace.categoriesStore.layout= () => import('src/layouts/admin')
+responsePages.qmarketplace.storeProductsCreate.page= () => import('src/layouts/qmarketplace/admin/stores/products/form')
 
 export default responsePages
