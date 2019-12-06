@@ -59,8 +59,11 @@
       translatable: {type: Boolean, default: true}
     },
     watch: {
-      menu() {
-        this.init()
+      menu: {
+        handler (value) {
+          this.init()
+        },
+        deep: true
       }
     },
     mounted() {
