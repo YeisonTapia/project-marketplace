@@ -45,7 +45,7 @@
             <!--= Menu Desktop =-->
             <div class="row justify-center full-width" id="bg-menu">
                <div class="col-11">
-                  <menu-list class="menu" :menu="items"></menu-list>
+                  <menu-list class="menu" :menu="items" in-line></menu-list>
                </div>
             </div>
 
@@ -267,79 +267,80 @@
 </script>
 <style lang="stylus">
    #masterHeader
-      #listMenu
-         margin-left  auto
-         margin-right auto
-         .q-expansion-item__container
-            .q-expansion-item__content
-               padding 0 0 0 15px
-         .content-item
-            padding 0 15px
-            transform: none !important;
-            display: inline-block;
-            border none
-            .q-expansion-item__content
-               position absolute
-            #listMenu
-               position absolute
-               width 347px
-               transform: skew(-10deg) !important;
-               left -35px
-               top 10px
-               background-color $grey-3
-               .content-item
-                  padding 0
-                  transform: none !important;
-                  font-family Trebuchet MS
-                  height 69 px
-                  display block
-                  border-bottom 2px solid $grey-5
-                  .q-expansion-item
-                     height 100%
-                     .q-expansion-item__container
-                        height 100%
-                  .q-item
-                     padding-left 45px
-                     height 100%
-                     .q-icon
-                        color $tertiary
-                        font-size 27px
-                  #listMenu
-                     padding-top 20px
-                     transform: skew(0deg) !important
-                     background-color $tertiary
-                     position absolute
-                     left: 347px;
-                     top -69 px
-                     z-index 10000
+      .header-desktop
+         #listMenu
+            margin-left  auto
+            margin-right auto
+            .q-expansion-item__container
+               .q-expansion-item__content
+                  padding 0 0 0 15px
+            .content-item
+               padding 0 15px
+               transform: none !important;
+               display: inline-block;
+               border none
+               .q-expansion-item__content
+                  position absolute
+               #listMenu
+                  position absolute
+                  width 347px
+                  transform: skew(-10deg) !important;
+                  left -35px
+                  top 10px
+                  background-color $grey-3
+                  .content-item
+                     padding 0
+                     transform: none !important;
+                     font-family Trebuchet MS
+                     height 69 px
                      display block
-                     .content-item
-                        color #fff
-                        border-bottom none
-                        height 40 px
+                     border-bottom 2px solid $grey-5
+                     .q-expansion-item
+                        height 100%
+                        .q-expansion-item__container
+                           height 100%
+                     .q-item
+                        padding-left 45px
+                        height 100%
+                        .q-icon
+                           color $tertiary
+                           font-size 27px
+                     #listMenu
+                        padding-top 20px
+                        transform: skew(0deg) !important
+                        background-color $tertiary
+                        position absolute
+                        left: 347px;
+                        top -69 px
+                        z-index 10000
                         display block
-                        .q-expansion-item
-                           height 100%
-                           .q-expansion-item__container
-                              height 100%
-                        .q-item
-                           height 100%
+                        .content-item
                            color #fff
-                           text-shadow none
+                           border-bottom none
+                           height 40 px
+                           display block
+                           .q-expansion-item
+                              height 100%
+                              .q-expansion-item__container
+                                 height 100%
+                           .q-item
+                              height 100%
+                              color #fff
+                              text-shadow none
 
 
-            .q-separator
-               display none
-            .q-item
-               background-color  transparent
-               cursor pointer
-               color $grey-9
-               font-size: 1.1rem;
-               .q-item__section--avatar
-                  min-width 20px
-                  padding-right 10px
-               .q-icon
-                  font-size 16px
+               .q-separator
+                  display none
+               .q-item
+                  background-color  transparent
+                  cursor pointer
+                  color $grey-9
+                  font-size: 1.1rem;
+                  .q-item__section--avatar
+                     min-width 20px
+                     padding-right 10px
+                  .q-icon
+                     font-size 16px
       .header-movil
          .logo
             background-image url('/statics/img/bg-logo.png')
