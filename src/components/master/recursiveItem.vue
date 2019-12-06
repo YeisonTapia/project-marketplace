@@ -1,51 +1,27 @@
 <template>
   <div>
     <div id="listMenu">
-      <q-list  v-if="$q.platform.is.desktop">
+      <q-no-ssr v-for="(item,key) in props.menu" :key="key" :class="`content-item ${inLine ? 'inline-block' : ''}`">
+        <q-separator v-if="!inLine"/>
         <!--Single Item-->
-        <q-item  :class="getClassItem(item)" v-if="checkItemSingle(item)"
-                v-for="(item,key) in props.menu" :key="key"
-                @click.native="redirectTo(item)" clickable v-ripple >
+        <q-item :class="getClassItem(item)" v-if="checkItemSingle(item)"
+                @click.native="redirectTo(item)" clickable :key="key">
           <q-item-section v-if="item.icon && props.showIcons" avatar>
             <q-icon :name="item.icon"/>
           </q-item-section>
           <q-item-section> {{props.translatable ? $tr(item.title) : item.title}}</q-item-section>
         </q-item>
 
-
-        <q-btn flat no-caps v-else-if="checkItemMultiple(item)" :icon="item.icon" :key="key"
-                                  :label="props.translatable ? $tr(item.title) : item.title"
-                                  :header-class="selectedChildren(item)"
-                                  :class="selectedChildren(item) ? 'bg-tertiary' : ''">
-
-          <q-menu content-class="bg-light">
-            <q-list class="menu-expansion-item" separator style="min-width: 200px">
-              <recursive-menu :translatable="props.translatable" :show-icons="props.showIcons"
-                          :key="key" :menu="item.children"/>   
-            </q-list>
-          </q-menu>
-        </q-btn>
-      </q-list>
-      <q-list  v-else>
-        <!--Single Item-->
-        <q-item  :class="getClassItem(item)" v-if="checkItemSingle(item)"
-                v-for="(item,key) in props.menu" :key="key"
-                @click.native="redirectTo(item)" clickable v-ripple >
-          <q-item-section v-if="item.icon && props.showIcons" avatar>
-            <q-icon :name="item.icon"/>
-          </q-item-section>
-          <q-item-section> {{props.translatable ? $tr(item.title) : item.title}}</q-item-section>
-        </q-item>  
         <!-- Dropdwon Item -->
         <q-expansion-item v-else-if="checkItemMultiple(item)" :icon="item.icon" :key="key"
                           :label="props.translatable ? $tr(item.title) : item.title"
-                          :header-class="selectedChildren(item)"
-                          :class="selectedChildren(item) ? 'bg-tertiary' : ''">
-  
+                          :header-class="selectedChildren(item)" :default-opened="selectedChildren(item) ? true : false"
+                          :class="selectedChildren(item) ? 'expansion-selected' : ''">
+          <!--Recursive item-->
           <recursive-menu :translatable="props.translatable" :show-icons="props.showIcons"
-                          :key="key" :menu="item.children"/>   
-        </q-expansion-item> 
-      </q-list>
+                          :key="key" :menu="item.children"/>
+        </q-expansion-item>
+      </q-no-ssr>
     </div>
   </div>
 </template>
@@ -56,7 +32,8 @@
     props: {
       menu: {default: false},
       showIcons: {type: Boolean, default: true},
-      translatable: {type: Boolean, default: true}
+      translatable: {type: Boolean, default: true},
+      inLine: {type: Boolean, default: false}
     },
     watch: {
       menu: {
@@ -66,6 +43,7 @@
         deep: true
       }
     },
+
     mounted() {
       this.$nextTick(function () {
         this.init()
@@ -104,7 +82,6 @@
       //Validate if should load all multi-item
       checkCollapsibles() {
         let collapsibles = this.$el.getElementsByClassName('q-expansion-item')
-
         for (let group of collapsibles) {
           let items = group.getElementsByClassName('single-item')
           if (!items.length) group.style.display = 'none'
@@ -121,32 +98,39 @@
       //Validate if children of multi-item is selected
       selectedChildren(item) {
         let response = ''//Defualt response
-
         //If has children's
         if (item.children) {
           let routeName = this.$route.name
           let isSelectedChildren = item.children.find(item => item.name == routeName)
           if (isSelectedChildren) response = ' item-is-active'
         }
-
         return response //Response
       },
       //Validate if item is same of current page
       getClassItem(item) {
         let response = 'single-item'
-
         if (this.$route.name == item.name) {
           if (JSON.stringify(this.$route.params) == JSON.stringify(item.params || {})) {
             response += ' item-is-active'
           }
         }
-
         return response
       }
     }
   }
 </script>
 <style lang="stylus">
+  #listMenu
+    .q-expansion-item__container
+      .q-expansion-item__content
+        padding 0 0 0 15px
+    .q-item
+      cursor pointer
+      background-color white
+      color $grey-9
+      .q-item__section--avatar
+        min-width 20px
+        padding-right 10px
+      .q-icon
+        font-size 16px
 </style>
-
-

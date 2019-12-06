@@ -250,7 +250,6 @@
                let criteria = this.store.selected;
                this.$crud.show("apiRoutes.qmarketplace.store", criteria, params).then(response => {
                   this.selectStore = response.data
-                  console.error('store select',this.selectStore)
                })
             }
          }
@@ -259,6 +258,7 @@
 </script>
 <style lang="stylus">
    #masterHeaderAdmin
+
       #storeSelect
          .q-select
             background $grey-4

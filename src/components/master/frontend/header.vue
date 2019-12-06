@@ -43,7 +43,7 @@
                </div>
             </div>
             <!--= Menu Desktop =-->
-            <div class="row justify-center full-width">
+            <div class="row justify-center full-width" id="bg-menu">
                <div class="col-11">
                   <menu-list class="menu" :menu="items"></menu-list>
                </div>
@@ -138,7 +138,7 @@
                   icon: 'fas fa-car-side',
                   title: 'Domicilio',
                   name: 'stores.index',
-                  params: {slug: 'domicilios'},
+                  params: {slug: 'agencias-de-envos'},
                   activated: true
                },
                {
@@ -183,6 +183,9 @@
             //Transform data
             let params = {
                params: {
+                  filter: {
+                     parent:0
+                  },
                   include: 'children'
                }
             };
@@ -190,18 +193,31 @@
             this.$crud.index("apiRoutes.qmarketplace.category", params).then(response => {
                if (response.data.length > 0) {
 
-                  response.data.forEach(function (valor, i, array) {
+                  response.data.forEach(function (item, i, array) {
+                     let itemChild=null;
+                     if(item.children.length){
+                        itemChild=[];
+                        item.children.forEach(function (item, i, array) {
+                           itemChild.push({
+                              title: item.title,
+                              name: 'stores.index',
+                              params: {slug: item.slug},
+                              activated: true,
+                           })
+                        });
+                     }
                      child.push( {
-                        icon: 'fas fa-users',
-                        title: valor.title,
+                        icon: item.icon,
+                        title: item.title,
                         name: 'stores.index',
-                        params: {slug: valor.slug},
-                        activated: true
+                        params: {slug: item.slug},
+                        activated: true,
+                        children:itemChild
                      })
 
                   })
                   this.items[0].children = this.$clone(child);
-                  console.warn('sdfdsfdsf',this.items)
+
                }
             });
          },
@@ -251,6 +267,79 @@
 </script>
 <style lang="stylus">
    #masterHeader
+      #listMenu
+         margin-left  auto
+         margin-right auto
+         .q-expansion-item__container
+            .q-expansion-item__content
+               padding 0 0 0 15px
+         .content-item
+            padding 0 15px
+            transform: none !important;
+            display: inline-block;
+            border none
+            .q-expansion-item__content
+               position absolute
+            #listMenu
+               position absolute
+               width 347px
+               transform: skew(-10deg) !important;
+               left -35px
+               top 10px
+               background-color $grey-3
+               .content-item
+                  padding 0
+                  transform: none !important;
+                  font-family Trebuchet MS
+                  height 69 px
+                  display block
+                  border-bottom 2px solid $grey-5
+                  .q-expansion-item
+                     height 100%
+                     .q-expansion-item__container
+                        height 100%
+                  .q-item
+                     padding-left 45px
+                     height 100%
+                     .q-icon
+                        color $tertiary
+                        font-size 27px
+                  #listMenu
+                     padding-top 20px
+                     transform: skew(0deg) !important
+                     background-color $tertiary
+                     position absolute
+                     left: 347px;
+                     top -69 px
+                     z-index 10000
+                     display block
+                     .content-item
+                        color #fff
+                        border-bottom none
+                        height 40 px
+                        display block
+                        .q-expansion-item
+                           height 100%
+                           .q-expansion-item__container
+                              height 100%
+                        .q-item
+                           height 100%
+                           color #fff
+                           text-shadow none
+
+
+            .q-separator
+               display none
+            .q-item
+               background-color  transparent
+               cursor pointer
+               color $grey-9
+               font-size: 1.1rem;
+               .q-item__section--avatar
+                  min-width 20px
+                  padding-right 10px
+               .q-icon
+                  font-size 16px
       .header-movil
          .logo
             background-image url('/statics/img/bg-logo.png')

@@ -7,7 +7,9 @@
 </template>
 
 <style lang="stylus">
-
+  #masterHeader
+    #bg-menu
+      background-color transparent !important
 </style>
 
 <script>
