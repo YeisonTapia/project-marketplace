@@ -26,12 +26,54 @@
         {{store.slogan}}
       </div>
     </q-card-section>
+
+    <!-- Dejar de Seguir Tienda-->
+    <q-card-section v-if="favStoreId" class="leaveFollow items-center row">
+      <div class="col-12">
+        <q-btn @click="deleteFavoriteStore(favStoreId)" color="negative" icon="fas fa-trash-alt" size="sm" class="q-ml-xs">
+          <q-tooltip :delay="300">Dejar de Seguir</q-tooltip>
+        </q-btn>
+      </div>
+    </q-card-section>
+
   </q-card>
 </template>
 <script>
   export default {
     name: 'StoreComponent',
-    props: ['store']
+    props: ['store','favStoreId','chargeFavorite'],
+    data() {
+      return {
+      }
+    },
+    methods: {
+       // Delete Favorite Store
+      deleteFavoriteStore(id){
+
+        let criteria = id
+
+        this.$crud.delete("apiRoutes.qmarketplace.favoriteStore",criteria).then(response => {
+           
+            // Notify MSG
+            this.$q.notify({
+              color:'green',
+              message: 'Proceso realizado exitosamente!!',
+              position: 'bottom-right'
+            })
+
+            this.emitChargeFavorite()
+
+          }).catch(error => {
+            console.error("ERROR - DELETED FAVORITE STORES")
+            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+        })
+ 
+      },
+      // Ready
+      emitChargeFavorite(){
+        this.$emit('chargeFavorite',true);
+      },
+    }
   }
 </script>
 <style lang="stylus">

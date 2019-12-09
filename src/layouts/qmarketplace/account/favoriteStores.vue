@@ -21,6 +21,33 @@
               </div>
               <q-card-section class="q-py-xl">
 
+                
+                <div v-if="tableFavoriteStores.length>0" class="row q-pa-lg">
+                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" v-for="favStore in tableFavoriteStores">
+                    
+                    <store 
+                      :store="favStore.store" 
+                      :favStoreId="favStore.id" 
+                      :chargeFavorite="chargeFavorite"
+                      @chargeFavorite ="chargeFavorite = $event"></store>
+                   
+                  </div>
+                </div>
+
+                <div  v-if="tableFavoriteStores.length==0 && !loading">
+                  <q-banner  class="bg-red q-mx-sm q-mt-xl q-mb-xl">
+                    <template v-slot:avatar>
+                      <q-icon name="error" color="white" />
+                    </template>
+
+                    <div class="text-center text-white">
+                      NO EXISTEN RESULTADOS DISPONIBLES
+                    </div>
+                  </q-banner>
+                </div>
+                
+
+                <!--
                 <q-table class="no-shadow my-sticky-header-table"
                   :data="tableFavoriteStores"
                   :columns="tableColumns"
@@ -34,6 +61,7 @@
                   </q-td>
 
                 </q-table>
+                -->
              
               </q-card-section>
             </q-card>
@@ -51,11 +79,13 @@
 <script>
 
   import { date } from 'quasar'
+  import store from 'src/components/themes/store'
 
   export default {
     props: {},
-    components: {},
-    watch: {},
+    components: {
+      store
+    },
     validations() {
       return {}
     },
@@ -107,6 +137,8 @@
             align: 'left'
           }
         ],
+        stores: [],
+        chargeFavorite: false,
       }
     },
     methods: {
@@ -116,7 +148,7 @@
         this.loading = true
 
         // Favorite Stores
-        await this.getFavoriteStores()
+        await this.getFavoriteStores().catch(error => {})
 
         this.loading = false
         this.success = true
@@ -126,6 +158,8 @@
       getFavoriteStores(){
         return new Promise((resolve, reject) => {
           
+          this.loading = true
+
           this.tableFavoriteStores = []
           //Params
           let params = {
@@ -137,9 +171,12 @@
           }
           //console.warn("BUSCAR TIENDAS FAVORITAS POR USUARIO")
           this.$crud.index("apiRoutes.qmarketplace.favoriteStore",params).then(response => {
+            
             this.tableFavoriteStores = response.data
+            this.loading = false
             resolve(true)//Resolve
           }).catch(error => {
+            this.loading = false
             console.error("ERROR - GET FAVORITE STORES")
             this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
             reject(false)//Resolve
@@ -154,11 +191,12 @@
         return formattedString
       },
       // Delete Favorite Store
-      deleteFavoriteStore(row){
+      deleteFavoriteStore(id){
         
         this.loading = true
 
-        let criteria = row.id
+        //let criteria = row.id
+        let criteria = id
 
         this.$crud.delete("apiRoutes.qmarketplace.favoriteStore",criteria).then(response => {
            
@@ -182,7 +220,15 @@
           
       }
 
-    }
+    },
+    watch: {
+      chargeFavorite(val,oldval) {
+        if(val==true){
+          this.getFavoriteStores()
+          this.chargeFavorite = false
+        }
+      }
+    },
   }
 </script>
 <style lang="stylus">
@@ -254,5 +300,20 @@
     &.q-table--loading thead tr:last-child th
       top 48px    
       
+
+.qcommerce-account-favoriteStores
+  .q-avatar
+    @media screen and (max-width: $breakpoint-xs)
+      display none
+  .absolute-bottom-right
+    .text-subtitle1
+      @media screen and (max-width: $breakpoint-xs)
+        display none
+  .summary
+    @media screen and (max-width: $breakpoint-xs)
+      display none
+  .leaveFollow
+    @media screen and (max-width: $breakpoint-xs)
+      text-align center
 
 </style>
