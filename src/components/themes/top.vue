@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <div  class="topWidgetHomeMobile q-mt-lg" v-else>
+    <div  class="topWidgetHomeMobile q-mt-lg q-mb-md" v-else>
       <div class="row q-col-gutter-lg">
         <div class="col-auto">
           <div class="text-center">

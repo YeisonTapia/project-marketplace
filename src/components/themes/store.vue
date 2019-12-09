@@ -8,25 +8,27 @@
           <span>{{store.pts}}pt</span>
         </div>
       </div>
-      <div class="absolute-bottom-left text-center q-ma-sm">
+      <div class="absolute-bottom-left text-center q-ma-sm"  v-if="$q.platform.is.desktop">
         <q-avatar round class="bg-white" size="100px">
           <img :src="store.logo.path">
         </q-avatar>
       </div>
 
-      <div class="absolute-bottom-right q-my-md q-pa-none">
-        <div class="bg-white text-subtitle1 text-weight-bold text-primary label-title q-px-md q-py-xs text-uppercase">
+      <div class="absolute-bottom-right q-my-md q-pa-none"  v-if="$q.platform.is.desktop">
+        <div class="bg-white text-subtitle1 text-bold text-primary label-title q-px-md q-py-xs text-uppercase">
           {{store.name}}
         </div>
       </div>
     </q-img>
     </router-link>
-    <q-card-section class="summary text-subtitle2 items-center row">
+    <q-card-section class="summary text-subtitle2 items-center row" v-if="$q.platform.is.desktop">
       <div class="col-12">
         {{store.slogan}}
       </div>
     </q-card-section>
-
+    <q-card-section class="q-pa-xs text-subtitle1 text-bold text-primary label-title text-uppercase" v-else>
+        {{store.name}}
+    </q-card-section>
     <!-- Dejar de Seguir Tienda-->
     <q-card-section v-if="favStoreId" class="leaveFollow items-center row">
       <div class="col-12">
