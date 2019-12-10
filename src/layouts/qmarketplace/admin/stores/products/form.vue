@@ -207,6 +207,15 @@
                        v-model="locale.formTemplate.orderWeight"/> -->
               <!--Points-->
               <q-input v-model="locale.formTemplate.points"  :label="$trp('ui.form.point')"/>
+
+              <br>
+
+              <q-btn
+                color="negative" :loading="loading"
+               label="Opciones de producto" @click="optionProducts=true;"
+              />
+
+              <!-- BUTTON OPTION PRODUCTS -->
               <!--Requires shipping-->
               <!-- <q-checkbox :label="$tr('qcommerce.layout.form.requriedShipping')"
                           v-model="locale.formTemplate.shipping"/> -->
@@ -222,6 +231,21 @@
           </div>
 
         </div>
+
+        <q-dialog transition-show="rotate" transition-hide="rotate" full-height full-width @hide="optionProducts=false" v-model="optionProducts" minimized :content-css="{borderRadius: '20px', minWidth: '50vw', backgroundColor: 'transparent', boxShadow: 'none'}" ref="modalRef">
+          <crud-options :productId="productId" v-if="productId"/>
+          <div v-else class="text-center">
+            <div class="q-my-md">
+              <q-icon name="fas fa-exclamation-triangle" color="warning"></q-icon>
+              {{`${$tr('qcommerce.layout.message.warnAddOpt')}...`}}
+            </div>
+            <q-btn color="positive" label="Cerrar" @click="optionProducts=false;"
+            />
+            <!-- <q-btn icon="fas fa-save" :label="options.btn.saveAndEdit"
+                   @click="buttonActions.value = 4; createItem()" color="positive"/> -->
+          </div>
+        </q-dialog>
+
 
         <!--Buttons Actions-->
         <q-page-sticky position="bottom-right" :offset="[18, 18]">
@@ -286,6 +310,7 @@
       this.$nextTick(function () {
         this.initForm(),
         console.log(this.$store.state.qmarketplaceStores.storeSelected);
+        console.log(this.$route.params);
       })
     },
     data () {
@@ -296,6 +321,7 @@
         loadingCategory: false,
         success: false,
         productId: false,
+        optionProducts: false,
         editorText: {
           toolbar: [
             ['bold', 'italic', 'strike', 'underline', 'removeFormat'],

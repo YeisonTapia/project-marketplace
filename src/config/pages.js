@@ -323,6 +323,7 @@ responsePages.qmarketplace.myStoreTheme.layout= () => import('src/layouts/admin'
 responsePages.qmarketplace.myStoreProducts.layout= () => import('src/layouts/admin')
 responsePages.qmarketplace.myStoreProductCreate.layout= () => import('src/layouts/admin')
 responsePages.qmarketplace.myStoreProductCreate.page= () => import('src/layouts/qmarketplace/admin/stores/products/form')
+responsePages.qmarketplace.myStoreProductEdit.page= () => import('src/layouts/qmarketplace/admin/stores/products/form')
 responsePages.qmarketplace.myStoreCategoryProducts.layout= () => import('src/layouts/admin')
 responsePages.qmarketplace.orders.layout= () => import('src/layouts/admin')
 responsePages.qmarketplace.order.layout= () => import('src/layouts/admin')
