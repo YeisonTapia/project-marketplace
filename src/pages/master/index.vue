@@ -1,5 +1,5 @@
 <template>
-	<q-page class="flex flex-center">
+	<q-page class="">
 
 	    <full-width-gallery system-name="principal" />
 

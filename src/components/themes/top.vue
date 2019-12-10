@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="q-pa-xl full-width shadow-2 q-mb-xl" v-if="$q.platform.is.desktop">
+    <div class="q-pa-xl full-width  q-mb-xl" v-if="$q.platform.is.desktop">
       <div class="row q-col-gutter-lg q-pt-xl" >
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
           <quiz></quiz>
@@ -17,40 +17,46 @@
       </div>
     </div>
     <div  class="topWidgetHomeMobile q-mt-lg q-mb-md" v-else>
-      <div class="row q-col-gutter-lg">
-        <div class="col-auto">
+
+      <carousel autoplay
+                :autoplayTimeout="4000"
+                :loop="true"
+                :centerMode="true"
+                :perPageCustom="[[480, 2], [768, 2]]">
+
+         <slide>
           <div class="text-center">
             <q-avatar round color="white" @click="modal.quiz = !modal.quiz">
               <img src="/statics/img/icon-quiz.png">
             </q-avatar>
             <div class="q-mt-sm text-bold">Encuesta</div>
           </div>
-        </div>
-        <div class="col-auto">
+         </slide>
+         <slide>
           <div class="text-center">
             <q-avatar round color="white" @click="modal.companies = !modal.companies">
               <img src="/statics/img/top-companies.png">
             </q-avatar>
             <div class="q-mt-sm text-bold">Empresas</div>
           </div>
-        </div>
-        <div class="col-auto">
+         </slide>
+         <slide>
           <div class="text-center">
             <q-avatar round color="white" @click="modal.users = !modal.users">
               <img src="/statics/img/copa.png">
             </q-avatar>
             <div class="q-mt-sm text-bold">Usuarios</div>
           </div>
-        </div>
-        <div class="col-auto">
+         </slide>
+         <slide>
           <div class="text-center">
             <q-avatar round color="white" @click="modal.trivia = !modal.trivia">
               <img src="/statics/img/icon-trivia.png">
             </q-avatar>
             <div class="q-mt-sm text-bold">Trivia</div>
           </div>
-        </div>
-      </div>
+         </slide>
+      </carousel>
       <!-- -->
       <q-dialog v-model="modal.quiz" maximized >
        <!--  -->
@@ -117,6 +123,7 @@ export default {
       triviaUserIds:[],
       trivias:[],
       trivia:null,
+      slide: 0,
       encuesta:false,
       modal: {
         quiz: false,
@@ -223,4 +230,7 @@ export default {
       padding 3px
       border-radius 50%
       overflow hidden
+  .VueCarousel-pagination
+    .VueCarousel-dot-container
+      margin-top -30px!important    
 </style>

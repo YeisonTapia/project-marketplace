@@ -411,9 +411,9 @@
                padding 5px
 
                & .q-btn
-                  height 1.5em
-                  width 1.5em
                   color $primary
+                  min-height 3em !important
+                  min-width 3em !important
 
                   & :hover
                      color $warning
