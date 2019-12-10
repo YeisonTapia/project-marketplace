@@ -13,6 +13,7 @@ export default {
         'qquiz',
         'qtrivia',
         'qredeems',
+        'qticket'
     ],
     saveCache: {
         refresh: [
