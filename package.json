@@ -28,6 +28,8 @@
     "@imagina/qform": ">=2",
     "@riophae/vue-treeselect": "0.0.38",
     "dotenv": "^6.0.0",
+    "emoji-mart-vue": "^2.6.6",
+    "laravel-echo": "^1.6.1",
     "localforage": "^1.7.2",
     "vue-moment": "^4.0.0",
     "vue-routisan": "^2.1.2",

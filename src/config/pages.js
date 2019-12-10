@@ -13,7 +13,7 @@ let responsePages = {
             page: () => import('pages/master/index.vue'),
             title: 'sidebar.pageHome',
             icon: 'fas fa-home',
-            authenticated: false
+            authenticated: true
         },
         nosotros: {
             permission: null,
@@ -59,17 +59,6 @@ let responsePages = {
             icon: 'fas fa-store',
             authenticated: false
         },
-        domicilios: {
-            permission: null,
-            activated: true,
-            path: '/domicilios',
-            name: 'app.domicilios',
-            layout: () => import('src/layouts/master'),
-            page: () => import('pages/domicilios.vue'),
-            title: 'Domicilios',
-            icon: 'fas fa-truck',
-            authenticated: false
-        },
         contacto: {
             permission: null,
             activated: true,
@@ -103,17 +92,6 @@ let responsePages = {
             icon: 'far fa-envelope-open',
             authenticated: false
         },
-        // empresa: {
-        //     permission: null,
-        //     activated: true,
-        //     path: '/empresa',
-        //     name: 'app.empresa',
-        //     layout: () => import('src/layouts/master'),
-        //     page: () => import('pages/empresa.vue'),
-        //     title: 'Empresa',
-        //     icon: 'far fa-envelope-open',
-        //     authenticated: false
-        // },
         admin: {
             permission: null,
             activated: true,
@@ -332,19 +310,7 @@ responsePages.qsubscription.featuresCreate.layout= () => import('src/layouts/adm
 responsePages.qsubscription.featuresUpdate.layout= () => import('src/layouts/admin')
 
 //QMARKETPLACE
-responsePages.qmarketplace.themes.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.categories.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.stores.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.storesCreate.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.storesEdit.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.storesTheme.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.storeProducts.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.storeProductsCreate.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.myStore.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.myStoreTheme.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.myStoreProducts.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.favoriteUsers.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.categoriesStore.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.storeProductsCreate.page= () => import('src/layouts/qmarketplace/admin/stores/products/form')
+
+responsePages.qmarketplace.myStoreProductCreate.page= () => import('src/layouts/qmarketplace/admin/stores/products/form')
 
 export default responsePages
