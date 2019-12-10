@@ -42,7 +42,7 @@
                        :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                        :label="`${$tr('ui.form.metaDescription')} (${locale.language})*`" rows="3"/>
               <!-- Vídeo -->
-              <q-input v-model="locale.formTemplate.options.video"  :label="$tr('ui.form.video')"/>
+              <q-input v-model="locale.formTemplate.options.video" placeholder="https://youtube.com/?gl=CO&hl=es-419"  :label="$tr('ui.form.video')"/>
               <!-- Images -->
               <div class="row">
                 <div class="col-6">
@@ -105,12 +105,11 @@
                 placeholder=""
               />
               <!--Category-->
-              <div class="input-title">
+              <!-- <div class="input-title">
                 Categoría principal
-                <!--Crud category-->
                 <crud :crud-data="import('@imagina/qcommerce/_crud/productCategories')"
                       just-create @created="getCategories"/>
-              </div>
+              </div> -->
               <tree-select
                 :clearable="false"
                 :append-to-body="true"
@@ -121,12 +120,11 @@
                 placeholder=""
               />
               <!--Categories-->
-              <div class="input-title">
+              <!-- <div class="input-title">
                 {{`${$trp('ui.form.category')}`}}
-                <!--Crud category-->
                 <crud :crud-data="import('@imagina/qcommerce/_crud/productCategories')"
                       just-create @created="getCategories"/>
-              </div>
+              </div> -->
               <recursive-list v-model="locale.formTemplate.categories"
                               :items="optionsTemplate.categories"/>
 
@@ -138,138 +136,91 @@
         </q-form>
 
         <!--Extra Data-->
-        <div v-if="locale.success" class="q-mt-lg box" style="padding: 0px !important;">
-          <!-- Tabs titles-->
-          <q-tabs v-model="vTab" align="justify">
-            <q-tab name="tab-data" :label="$tr('ui.label.data')"/>
-            <q-tab name="tab-links" :label="$tr('ui.label.link')"/>
-            <q-tab name="tab-images" :label="$trp('ui.label.image')"/>
-            <q-tab name="tab-options" :label="$trp('ui.label.option')"/>
-          </q-tabs>
+        <div v-if="locale.success" class="q-mt-lg box" >
 
-          <q-tab-panels v-model="vTab">
-            <!-- Data -->
-            <q-tab-panel name="tab-data">
-              <div class="row q-col-gutter-sm">
-                <!--Left-->
-                <div class="col-12 col-md-6">
-                  <!--SKU-->
-                  <q-input  v-model="locale.formTemplate.sku" :label="$tr('ui.form.sku')"/>
-                  <!--Quantity-->
-                  <q-input  v-model="locale.formTemplate.quantity"
-                           :label="$tr('ui.form.quantity')" type="number"/>
-                  <!--Status-->
-                  <div class="input-title">{{$tr('ui.form.stock')}}</div>
-                  <tree-select
-                    :clearable="false"
-                    :append-to-body="true"
-                    :options="options.stockStatus"
-                    value-consists-of="BRANCH_PRIORITY"
-                    v-model="locale.formTemplate.stockStatus"
-                    placeholder=""
-                    class="q-mb-md"
-                  />
-                  <!--Price-->
-                  <q-input v-model="locale.formTemplate.price"
-                           :label="$tr('ui.form.price')" type="number"/>
-                  <!--availability date-->
-                  <q-input dense mask="date" v-model="locale.formTemplate.dateAvailable" color="primary"
-                           unmasked-value :label="$tr('qcommerce.layout.form.availableDate')"
-                           outlined placeholder="YYYY/MM/DD">
-                    <template v-slot:append>
-                      <q-icon name="fas fa-calendar-day"/>
-                      <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
-                        <q-date v-model="locale.formTemplate.dateAvailable" @input="() => $refs.qDateProxy.hide()"/>
-                      </q-popup-proxy>
-                    </template>
-                  </q-input>
-                  <!--weight-->
-                  <q-input v-model="locale.formTemplate.weight" :label="$tr('ui.form.weight')"
-                            type="number"/>
-                  <!--length-->
-                  <q-input v-model="locale.formTemplate.length" :label="$tr('ui.form.length')"
-                            type="number"/>
-                </div>
-                <!--Right-->
-                <div class="col-12 col-md-6">
-                  <!--width-->
-                  <q-input v-model="locale.formTemplate.width" :label="$tr('ui.form.width')"
-                            type="number"/>
-                  <!--height-->
-                  <q-input v-model="locale.formTemplate.height" :label="$tr('ui.form.height')"
-                            type="number"/>
-                  <!--minimum-->
-                  <q-input :label="$tr('qcommerce.layout.form.minimumOrder')"
-                           type="number" v-model="locale.formTemplate.minimum"/>
-                  <!--reference-->
-                  <q-input v-model="locale.formTemplate.reference"
-                           :label="$tr('ui.form.reference')"/>
-                  <!--Order Weight-->
-                  <q-input :label="$tr('qcommerce.layout.form.orderWeight')"
-                           v-model="locale.formTemplate.orderWeight"/>
-                  <!--Points-->
-                  <q-input v-model="locale.formTemplate.points"  :label="$trp('ui.form.point')"/>
-                  <!--Requires shipping-->
-                  <q-checkbox :label="$tr('qcommerce.layout.form.requriedShipping')"
-                              v-model="locale.formTemplate.shipping"/>
-                  <!--Free shipping-->
-                  <br>
-                  <q-checkbox :label="$tr('qcommerce.layout.form.freeShipping')"
-                              v-model="locale.formTemplate.freeshipping"/>
-                  <!--Substrac from Stock-->
-                  <br>
-                  <q-checkbox :label="$tr('qcommerce.layout.form.subtractFromStock')"
-                              v-model="locale.formTemplate.subtract"/>
-                </div>
-              </div>
-            </q-tab-panel>
-            <!-- Links -->
-            <q-tab-panel name="tab-links" keep-alive>
-              <!--Related Products-->
-              <div class="input-title">{{$tr('qcommerce.layout.form.relatedProducts')}}</div>
+          <div class="row q-col-gutter-x-sm" v-if="locale.success">
+            <!--Left-->
+            <div class="col-12 col-md-6">
+              <!--SKU-->
+              <!-- <q-input placeholder="Referencia" v-model="locale.formTemplate.sku" :label="$tr('ui.form.sku')"/> -->
+              <!--Price-->
+              <q-input v-model="locale.formTemplate.price"
+              :label="$tr('ui.form.price')" type="number"/>
+              <!--Quantity-->
+              <q-input  v-model="locale.formTemplate.quantity"
+              :label="$tr('ui.form.quantity')" type="number"/>
+              <!--availability date-->
+              <!-- <q-input dense mask="date" v-model="locale.formTemplate.dateAvailable" color="primary"
+                       unmasked-value :label="$tr('qcommerce.layout.form.availableDate')"
+                       outlined placeholder="YYYY/MM/DD">
+                <template v-slot:append>
+                  <q-icon name="fas fa-calendar-day"/>
+                  <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
+                    <q-date v-model="locale.formTemplate.dateAvailable" @input="() => $refs.qDateProxy.hide()"/>
+                  </q-popup-proxy>
+                </template>
+              </q-input> -->
+              <!--weight-->
+              <q-input v-model="locale.formTemplate.weight" :label="$tr('ui.form.weight')"
+                        type="number"/>
+              <!--length-->
+              <q-input v-model="locale.formTemplate.length" label="Longitud"
+                        type="number"/>
+              <!--width-->
+              <q-input v-model="locale.formTemplate.width" label="Anchura"
+                        type="number"/>
+              <!--height-->
+              <q-input v-model="locale.formTemplate.height" label="Altura"
+                        type="number"/>
+            </div>
+            <!--Right-->
+            <div class="col-12 col-md-6">
+
+              <!--reference-->
+              <q-input placeholder="Referencia" v-model="locale.formTemplate.reference"
+              :label="$tr('ui.form.reference')"/>
+
+              <!--Status-->
+              <q-toggle
+              v-model="locale.formTemplate.stockStatus"
+              color="red"
+              label="En stock"
+              />
+              <!-- <div class="input-title">{{$tr('ui.form.stock')}}</div>
+
               <tree-select
-                v-model="locale.formTemplate.relatedProducts"
-                :async="true"
-                :multiple="true"
+                :clearable="false"
                 :append-to-body="true"
-                :load-options="searchProducts"
-                :default-options="optionsTemplate.relatedProducts"
+                :options="options.stockStatus"
+                value-consists-of="BRANCH_PRIORITY"
+                v-model="locale.formTemplate.stockStatus"
                 placeholder=""
-              />
-            </q-tab-panel>
-            <!-- images -->
-            <q-tab-panel name="tab-images" keep-alive>
-              <!--Video-->
-              <q-input v-model="locale.formTemplate.options.video"  :label="$tr('ui.form.video')"/>
-              <div class="input-title">{{$tr('ui.form.image')}}</div>
-              <upload-media
-                v-model="locale.formTemplate.mediasSingle"
-                entity="Modules\Icommerce\Entities\Product"
-                :entity-id="productId ? productId : null"
-                zone='mainimage'
-              />
-              <div class="input-title">{{$tr('ui.form.gallery')}}</div>
-              <upload-media
-                multiple
-                v-model="locale.formTemplate.mediasMulti"
-                entity="Modules\Icommerce\Entities\Product"
-                :entity-id="productId ? productId : null"
-                zone='gallery'
-              />
-            </q-tab-panel>
-            <!-- options -->
-            <q-tab-panel name="tab-options" keep-alive>
-              <crud-options :productId="productId" v-if="productId"/>
-              <div v-else class="text-center">
-                <div class="q-my-md">
-                  <q-icon name="fas fa-exclamation-triangle" color="warning"></q-icon>
-                  {{`${$tr('qcommerce.layout.message.warnAddOpt')}...`}}
-                </div>
-                <q-btn icon="fas fa-save" :label="options.btn.saveAndEdit"
-                       @click="buttonActions.value = 4; createItem()" color="positive"/>
-              </div>
-            </q-tab-panel>
-          </q-tab-panels>
+                class="q-mb-md"
+              /> -->
+
+
+              <!--minimum-->
+              <q-input label="Orden mínima"
+                       type="number" v-model="locale.formTemplate.minimum"/>
+              <!--Order Weight-->
+              <!-- <q-input :label="$tr('qcommerce.layout.form.orderWeight')"
+                       v-model="locale.formTemplate.orderWeight"/> -->
+              <!--Points-->
+              <q-input v-model="locale.formTemplate.points"  :label="$trp('ui.form.point')"/>
+              <!--Requires shipping-->
+              <!-- <q-checkbox :label="$tr('qcommerce.layout.form.requriedShipping')"
+                          v-model="locale.formTemplate.shipping"/> -->
+              <!--Free shipping-->
+              <!-- <br> -->
+              <!-- <q-checkbox :label="$tr('qcommerce.layout.form.freeShipping')"
+                          v-model="locale.formTemplate.freeshipping"/> -->
+              <!--Substrac from Stock-->
+              <!-- <br> -->
+              <!-- <q-checkbox :label="$tr('qcommerce.layout.form.subtractFromStock')"
+                          v-model="locale.formTemplate.subtract"/> -->
+            </div>
+          </div>
+
         </div>
 
         <!--Buttons Actions-->
@@ -334,8 +285,7 @@
     mounted () {
       this.$nextTick(function () {
         this.initForm(),
-        console.log(this.$route.params.storeId);
-        console.log(this.$route.params);
+        console.log(this.$store.state.qmarketplaceStores.storeSelected);
       })
     },
     data () {
@@ -380,7 +330,8 @@
       dataLocale () {
         return {
           fields: {
-            storeId:this.$route.params.storeId,
+            // storeId:this.$route.params.storeId,
+            storeId:this.$store.state.qmarketplaceStores.storeSelected,
             parentId: null,
             status: 1,
             categoryId: null,
