@@ -8,30 +8,74 @@
           <span>{{store.pts}}pt</span>
         </div>
       </div>
-      <div class="absolute-bottom-left text-center q-ma-sm">
+      <div class="absolute-bottom-left text-center q-ma-sm"  v-if="$q.platform.is.desktop">
         <q-avatar round class="bg-white" size="100px">
           <img :src="store.logo.path">
         </q-avatar>
       </div>
 
-      <div class="absolute-bottom-right q-my-md q-pa-none">
-        <div class="bg-white text-subtitle1 text-weight-bold text-primary label-title q-px-md q-py-xs text-uppercase">
+      <div class="absolute-bottom-right q-my-md q-pa-none"  v-if="$q.platform.is.desktop">
+        <div class="bg-white text-subtitle1 text-bold text-primary label-title q-px-md q-py-xs text-uppercase">
           {{store.name}}
         </div>
       </div>
     </q-img>
     </router-link>
-    <q-card-section class="summary text-subtitle2 items-center row">
+    <q-card-section class="summary text-subtitle2 items-center row" v-if="$q.platform.is.desktop">
       <div class="col-12">
         {{store.slogan}}
       </div>
     </q-card-section>
+    <q-card-section class="q-pa-xs text-subtitle1 text-bold text-primary label-title text-uppercase" v-else>
+        {{store.name}}
+    </q-card-section>
+    <!-- Dejar de Seguir Tienda-->
+    <q-card-section v-if="favStoreId" class="leaveFollow items-center row">
+      <div class="col-12">
+        <q-btn @click="deleteFavoriteStore(favStoreId)" color="negative" icon="fas fa-trash-alt" size="sm" class="q-ml-xs">
+          <q-tooltip :delay="300">Dejar de Seguir</q-tooltip>
+        </q-btn>
+      </div>
+    </q-card-section>
+
   </q-card>
 </template>
 <script>
   export default {
     name: 'StoreComponent',
-    props: ['store']
+    props: ['store','favStoreId','chargeFavorite'],
+    data() {
+      return {
+      }
+    },
+    methods: {
+       // Delete Favorite Store
+      deleteFavoriteStore(id){
+
+        let criteria = id
+
+        this.$crud.delete("apiRoutes.qmarketplace.favoriteStore",criteria).then(response => {
+           
+            // Notify MSG
+            this.$q.notify({
+              color:'green',
+              message: 'Proceso realizado exitosamente!!',
+              position: 'bottom-right'
+            })
+
+            this.emitChargeFavorite()
+
+          }).catch(error => {
+            console.error("ERROR - DELETED FAVORITE STORES")
+            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+        })
+ 
+      },
+      // Ready
+      emitChargeFavorite(){
+        this.$emit('chargeFavorite',true);
+      },
+    }
   }
 </script>
 <style lang="stylus">

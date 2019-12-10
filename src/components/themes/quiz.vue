@@ -12,11 +12,11 @@
 
          <div class="text-h6 q-mb-sm text-light">{{question.title}}</div>
             
-          <q-option-group  dark
+          <q-option-group  keep-color size="sm"
             v-model="selectedOptions"
             :options="answers[index]"
             color="light"
-            type="checkbox"
+            type="radio"
           />
 
         </q-card-section>
@@ -384,6 +384,8 @@
 <style lang="stylus">
 .card-quiz
   border-radius 10px
+  .q-radio__outer-circle 
+    border-radius 4px
   & .image
     background-image url('/statics/img/quiz-fondo.png')
     background-repeat no-repeat

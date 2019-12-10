@@ -6,7 +6,7 @@
       </h3>
       <div class="q-container q-pt-lg">
         <div class="row q-py-lg">
-          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3" v-for="product in products">
+          <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4 col-xl-3" v-for="product in products">
             <product :product="product"></product>
           </div>
         </div>
