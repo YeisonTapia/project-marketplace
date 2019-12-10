@@ -343,8 +343,15 @@ responsePages.qmarketplace.storeProductsCreate.layout= () => import('src/layouts
 responsePages.qmarketplace.myStore.layout= () => import('src/layouts/admin')
 responsePages.qmarketplace.myStoreTheme.layout= () => import('src/layouts/admin')
 responsePages.qmarketplace.myStoreProducts.layout= () => import('src/layouts/admin')
+responsePages.qmarketplace.myStoreProductCreate.layout= () => import('src/layouts/admin')
+responsePages.qmarketplace.myStoreCategoryProducts.layout= () => import('src/layouts/admin')
+responsePages.qmarketplace.orders.layout= () => import('src/layouts/admin')
+responsePages.qmarketplace.order.layout= () => import('src/layouts/admin')
 responsePages.qmarketplace.favoriteUsers.layout= () => import('src/layouts/admin')
 responsePages.qmarketplace.categoriesStore.layout= () => import('src/layouts/admin')
 responsePages.qmarketplace.storeProductsCreate.page= () => import('src/layouts/qmarketplace/admin/stores/products/form')
+
+//QTICKET
+responsePages.qticket.tickets.layout= () => import('src/layouts/admin')
 
 export default responsePages
