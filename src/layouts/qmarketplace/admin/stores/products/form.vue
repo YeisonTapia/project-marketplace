@@ -193,6 +193,8 @@
                 <div>
                 <!--Status-->
                 <q-toggle
+                true-value="1"
+                false-value="0"
                 v-model="locale.formTemplate.stockStatus"
                 color="primary"
                 label="En stock"
@@ -213,24 +215,24 @@
 
                 <div class="" v-if="canEnableProductToHome">
                   <q-checkbox
-                  v-model="locale.formTemplate.status"
+                  v-model="locale.formTemplate.visible"
                   color="primary"
                   label="Agregar producto a la página inicial de 'Donde esta esa vaina'"
                   true-value="1"
                   false-value="0"
                   />
-                  <p class="text-primary">Disponibles ({{quantityProductsToHome}})</p>
+                  <p class="text-primary text-caption q-pl-xl">Disponibles ({{quantityProductsToHome}})</p>
                 </div>
-                <div class="" v-else-if="locale.formTemplate.status==1">
+                <div class="" v-else-if="locale.formTemplate.visible==1">
                   <q-checkbox
-                  v-model="locale.formTemplate.status"
+                  v-model="locale.formTemplate.visible"
                   color="primary"
                   label="Agregar producto a la página inicial de 'Donde esta esa vaina'"
                   true-value="1"
                   false-value="0"
                   />
                 </div>
-                <div class="text-primary text-caption q-pl-xl">Disponibles(2)</div>
+                <!-- <div class="text-primary text-caption q-pl-xl">Disponibles(2)</div> -->
 
                 <div class="q-mb-xl"></div>
 
@@ -423,9 +425,8 @@
     },
     mounted () {
       this.$nextTick(function () {
-        this.initForm(),
-        console.log(this.$store.state.qmarketplaceStores.storeSelected);
-      })
+        this.initForm();
+      });
     },
     data () {
       return {
@@ -483,6 +484,7 @@
             addedById: this.$store.state.quserAuth.userId,
             sku: 0,
             quantity: 0,
+            visible: 0,
             stockStatus: 1,
             price: 0,
             dateAvailable: this.$moment().format('YYYY-MM-DD'),
@@ -573,7 +575,7 @@
             include:'plan.features',
             filter:{
               userId:this.$store.state.quserAuth.userId,
-              status:1
+              visible:1
             }
           }
         };
@@ -623,9 +625,7 @@
         });
       },
       validateProductsVisibleOfStore(){
-        console.log('enter here asdadadada');
         if(this.canEnableProductToHome){
-          console.log('asdaxdd');
           //Axios products visible of store
           this.$crud.index("apiRoutes.qcommerce.products",{
             params:{
