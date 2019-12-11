@@ -13,10 +13,10 @@
          <div class="text-h6 q-mb-sm text-light">{{question.title}}</div>
             
           <q-option-group  keep-color size="sm"
-            v-model="selectedOptions"
+            v-model="selectedOption"
             :options="answers[index]"
             color="light"
-            type="checkbox"
+            type="radio"
           />
 
         </q-card-section>
@@ -99,7 +99,8 @@
         name: 'QuizComponent',
         validations() {
           return {
-            selectedOptions: {required}
+            selectedOption: {required}
+            //selectedOptions: {required}
           }
         },
         beforeMount() {
@@ -116,7 +117,8 @@
                 poll:null,
                 answers: [],
                 answersOptions: [],
-                selectedOptions: [],
+                //selectedOptions: [],
+                selectedOption: '',
                 finalDataSave:[],
                 userId: this.$store.state.quserAuth.userId ? this.$store.state.quserAuth.userId : null,
                 alertContent:{
@@ -340,6 +342,13 @@
           // set data to Save
           setDataFinal(){
 
+            this.finalDataSave.push({
+              question_id:this.currentStep,
+              answer_id:this.selectedOption,
+              user_id: this.userId
+            })
+            this.selectedOption = ''
+            /*
             this.selectedOptions.forEach((answerId, index) => {
               this.finalDataSave.push({
                 question_id:this.currentStep,
@@ -348,6 +357,7 @@
               })
             })
             this.selectedOptions = []
+            */
 
           },
           // get Results Poll
