@@ -33,14 +33,6 @@
                 <q-editor v-model="locale.formTemplate.description" class="full-width"
                           :toolbar="editorText.toolbar" content-class="text-grey-9" toolbar-text-color="grey-9"/>
               </q-field>
-              <!--Meta Title-->
-              <q-input v-model="locale.formTemplate.metaTitle"
-                       :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
-                       :label="`${$tr('ui.form.metaTitle')} (${locale.language})*`"/>
-              <!--Meta Description-->
-              <q-input v-model="locale.formTemplate.metaDescription" type="textarea"
-                       :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
-                       :label="`${$tr('ui.form.metaDescription')} (${locale.language})*`" rows="3"/>
               <!-- Vídeo -->
               <q-input v-model="locale.formTemplate.options.video" placeholder="https://youtube.com/?gl=CO&hl=es-419"  :label="$tr('ui.form.video')"/>
               <!-- Images -->
@@ -223,6 +215,75 @@
 
         </div>
 
+        <!--SEO-->
+        <div v-if="locale.success" class="q-mt-lg box" >
+
+          <div class="row q-col-gutter-x-sm" v-if="locale.success">
+
+            <div class="col-12 col-md-12">
+              <p class="caption q-mb-md">Editar SEO
+                <q-btn round class="no-shadow" size="6px" icon="fas fa-question">
+                  <q-tooltip>
+                    Meta título y meta descripción para el SEO del sitio
+                  </q-tooltip>
+                </q-btn>
+              </p>
+            </div>
+            <!--Left-->
+            <div class="col-12 col-md-6">
+
+              <!--Meta Title-->
+              <q-input v-model="locale.formTemplate.metaTitle"
+                       :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+                       :label="`${$tr('ui.form.metaTitle')} (${locale.language})*`"/>
+            </div>
+            <!--Right-->
+            <div class="col-12 col-md-6">
+
+              <!--Meta Description-->
+              <q-input v-model="locale.formTemplate.metaDescription" type="textarea"
+              :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
+              :label="`${$tr('ui.form.metaDescription')} (${locale.language})*`" rows="2"/>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!--RELATED-->
+        <div v-if="locale.success" class="q-mt-lg box" >
+
+          <div class="row q-col-gutter-x-sm" v-if="locale.success">
+
+            <div class="col-12 col-md-12">
+              <p class="caption q-mb-md">Relacionados
+                <q-btn round class="no-shadow" size="6px" icon="fas fa-question">
+                  <q-tooltip>
+                    Items relacionados al producto
+                  </q-tooltip>
+                </q-btn>
+              </p>
+            </div>
+
+            <div class="col-12 col-md-12">
+
+              <div class="input-title">{{$tr('qcommerce.layout.form.relatedProducts')}}</div>
+              <tree-select
+                v-model="locale.formTemplate.relatedProducts"
+                :async="true"
+                :multiple="true"
+                :append-to-body="true"
+                :load-options="searchProducts"
+                :default-options="optionsTemplate.relatedProducts"
+                placeholder=""
+              />
+
+            </div>
+
+          </div>
+
+        </div>
+
         <!--Buttons Actions-->
         <q-page-sticky position="bottom-right" :offset="[18, 18]">
           <!--Update button-->
@@ -286,6 +347,9 @@
       this.$nextTick(function () {
         this.initForm(),
         console.log(this.$store.state.qmarketplaceStores.storeSelected);
+
+
+
       })
     },
     data () {
@@ -424,6 +488,51 @@
       }
     },
     methods: {
+      getSuscription(){
+        let params={
+          params:{
+            include:'plan.product,plan.features',
+            filter:{
+              userId:this.$store.state.quserAuth.userId,
+              status:1
+            }
+          }
+        };
+        this.$crud.index("apiRoutes.qsubscription.suscriptions",params).then(response => {
+          console.log('Subscription data');
+          console.log(response.data);
+          if(response.data.length>0){
+            //response.data.plan.features ; id=12 Producto visible en la página value 2 , id:4 Productos y categorías en su tienda, id:44 Productos y categorías ilimitadas
+            var canCreateProduct=false;//Puede crear productos.
+            var canEnableProductToHome=false;//Puede hacer visible productos para el home.
+            var quantityProductsToHome=0;//Cantidad de productos que pueden estar visibles en la página principal
+            var quantityProductsCanCreate=0;//Cantidad de productos que puede crear.
+            for(var i=0;i<response.data[0].plan.features.length;i++){
+              //Cantidad de productos visibles en la página principal
+              if(response.data[0].plan.features[i].id==12){
+                canEnableProductToHome=true;//Puede hacer visible productos para el home.
+                quantityProductsToHome=response.data[0].plan.features[i].value;
+              }//if
+              //Cantidad de productos que puede crear
+              if(response.data[0].plan.features[i].id==44){
+                canCreateProduct=true;
+                quantityProductsCanCreate=999999999999999;
+              }else if(!canCreateProduct && response.data[0].plan.features[i].id==4){
+                canCreateProduct=true;
+                quantityProductsCanCreate=response.data[0].plan.features[i].value;
+              }
+            }//for features of plan
+            console.log('Can create product');
+            console.log(canCreateProduct);
+            console.log('Can enable product to home');
+            console.log(canEnableProductToHome);
+            console.log('QUantity of products to home');
+            console.log(quantityProductsToHome);
+            console.log('quantity products can create');
+            console.log(quantityProductsCanCreate);
+          }
+        });
+      },
       //Init Form
       async initForm () {
         this.loading = true
@@ -437,7 +546,8 @@
         await this.getCategories().catch(error => {})//Get categories
         this.success = true//Activate status of page
         this.updateOptions
-        this.loading = false
+        this.loading = false;
+        this.getSuscription();
       },
       //Get product categories
       getCategories () {
