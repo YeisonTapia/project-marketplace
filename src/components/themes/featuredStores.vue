@@ -5,7 +5,7 @@
                 <div>Tiendas Destacadas</div>
             </h3>
           <div class="row q-pa-lg">
-            <div class="col-xs-6 col-sm-12 col-md-6 col-lg-4 col-xl-3" v-for="store in stores">
+            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-3" v-for="store in stores">
               <store :store="store"></store>
             </div>  
           </div>
