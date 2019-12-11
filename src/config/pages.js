@@ -7,7 +7,7 @@ let responsePages = {
         home: {
             permission: null,
             activated: true,
-            path: '/home',
+            path: '/',
             name: 'app.home',
             layout: () => import('src/layouts/master'),
             page: () => import('pages/master/index.vue'),
@@ -310,25 +310,9 @@ responsePages.qsubscription.featuresCreate.layout= () => import('src/layouts/adm
 responsePages.qsubscription.featuresUpdate.layout= () => import('src/layouts/admin')
 
 //QMARKETPLACE
-responsePages.qmarketplace.themes.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.categories.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.stores.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.storesCreate.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.storesEdit.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.storesTheme.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.storeProducts.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.storeProductsCreate.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.myStore.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.myStoreTheme.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.myStoreProducts.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.myStoreProductCreate.layout= () => import('src/layouts/admin')
 responsePages.qmarketplace.myStoreProductCreate.page= () => import('src/layouts/qmarketplace/admin/stores/products/form')
 responsePages.qmarketplace.myStoreProductEdit.page= () => import('src/layouts/qmarketplace/admin/stores/products/form')
 responsePages.qmarketplace.myStoreCategoryProducts.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.orders.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.order.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.favoriteUsers.layout= () => import('src/layouts/admin')
-responsePages.qmarketplace.categoriesStore.layout= () => import('src/layouts/admin')
 responsePages.qmarketplace.storeProductsCreate.page= () => import('src/layouts/qmarketplace/admin/stores/products/form')
 
 //QTICKET

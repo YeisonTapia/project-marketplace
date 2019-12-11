@@ -240,27 +240,121 @@
                   label="Opciones de producto" @click="optionProducts=true;"
                 />
 
-                <q-dialog transition-show="rotate" transition-hide="rotate" full-height full-width  @hide="optionProducts=false" v-model="optionProducts" ref="modalRef">
+        <!--Extra Data-->
+        <div v-if="locale.success" class="q-mt-lg box" >
 
-                  <q-card>
-
-                  <crud-options :productId="productId" v-if="productId"/>
-                  <div v-else class="text-center">
-                    <div class="q-my-md">
-                      <q-icon name="fas fa-exclamation-triangle" color="warning"></q-icon>
-                      {{`${$tr('qcommerce.layout.message.warnAddOpt')}...`}}
-                    </div>
-                    <q-btn icon="fas fa-save" :label="options.btn.saveAndEdit"
-                           @click="buttonActions.value = 4; createItem()" color="positive"/>
-                  </div>
-
-                </q-card>
-
-                </q-dialog>
-
-
-              </div>
+          <div class="row q-col-gutter-x-sm" v-if="locale.success">
+            <!--Left-->
+            <div class="col-12 col-md-6">
+              <!--SKU-->
+              <!-- <q-input placeholder="Referencia" v-model="locale.formTemplate.sku" :label="$tr('ui.form.sku')"/> -->
+              <!--Price-->
+              <q-input v-model="locale.formTemplate.price"
+              :label="$tr('ui.form.price')" type="number"/>
+              <!--Quantity-->
+              <q-input  v-model="locale.formTemplate.quantity"
+              :label="$tr('ui.form.quantity')" type="number"/>
+              <!--availability date-->
+              <!-- <q-input dense mask="date" v-model="locale.formTemplate.dateAvailable" color="primary"
+                       unmasked-value :label="$tr('qcommerce.layout.form.availableDate')"
+                       outlined placeholder="YYYY/MM/DD">
+                <template v-slot:append>
+                  <q-icon name="fas fa-calendar-day"/>
+                  <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
+                    <q-date v-model="locale.formTemplate.dateAvailable" @input="() => $refs.qDateProxy.hide()"/>
+                  </q-popup-proxy>
+                </template>
+              </q-input> -->
+              <!--weight-->
+              <q-input v-model="locale.formTemplate.weight" :label="$tr('ui.form.weight')"
+                        type="number"/>
+              <!--length-->
+              <q-input v-model="locale.formTemplate.length" label="Longitud"
+                        type="number"/>
+              <!--width-->
+              <q-input v-model="locale.formTemplate.width" label="Anchura"
+                        type="number"/>
+              <!--height-->
+              <q-input v-model="locale.formTemplate.height" label="Altura"
+                        type="number"/>
             </div>
+            <!--Right-->
+            <div class="col-12 col-md-6">
+
+              <!--reference-->
+              <q-input placeholder="Referencia" v-model="locale.formTemplate.reference"
+              :label="$tr('ui.form.reference')"/>
+
+              <!--Status-->
+              <q-toggle
+              v-model="locale.formTemplate.stockStatus"
+              color="red"
+              label="En stock"
+              />
+              <!-- <div class="input-title">{{$tr('ui.form.stock')}}</div>
+
+              <tree-select
+                :clearable="false"
+                :append-to-body="true"
+                :options="options.stockStatus"
+                value-consists-of="BRANCH_PRIORITY"
+                v-model="locale.formTemplate.stockStatus"
+                placeholder=""
+                class="q-mb-md"
+              /> -->
+
+
+              <!--minimum-->
+              <q-input label="Orden mínima"
+                       type="number" v-model="locale.formTemplate.minimum"/>
+              <!--Order Weight-->
+              <!-- <q-input :label="$tr('qcommerce.layout.form.orderWeight')"
+                       v-model="locale.formTemplate.orderWeight"/> -->
+              <!--Points-->
+              <q-input v-model="locale.formTemplate.points"  :label="$trp('ui.form.point')"/>
+
+              <br>
+
+              <q-btn
+                color="negative" :loading="loading"
+               label="Opciones de producto" @click="optionProducts=true;"
+              />
+
+              <!-- BUTTON OPTION PRODUCTS -->
+              <!--Requires shipping-->
+              <!-- <q-checkbox :label="$tr('qcommerce.layout.form.requriedShipping')"
+                          v-model="locale.formTemplate.shipping"/> -->
+              <!--Free shipping-->
+              <!-- <br> -->
+              <!-- <q-checkbox :label="$tr('qcommerce.layout.form.freeShipping')"
+                          v-model="locale.formTemplate.freeshipping"/> -->
+              <!--Substrac from Stock-->
+              <!-- <br> -->
+              <!-- <q-checkbox :label="$tr('qcommerce.layout.form.subtractFromStock')"
+                          v-model="locale.formTemplate.subtract"/> -->
+            </div>
+
+            <q-dialog transition-show="rotate" transition-hide="rotate" full-height full-width  @hide="optionProducts=false" v-model="optionProducts" ref="modalRef">
+
+              <q-card>
+
+              <crud-options :productId="productId" v-if="productId"/>
+              <div v-else class="text-center">
+                <div class="q-my-md">
+                  <q-icon name="fas fa-exclamation-triangle" color="warning"></q-icon>
+                  {{`${$tr('qcommerce.layout.message.warnAddOpt')}...`}}
+                </div>
+                <!-- <q-btn icon="fas fa-save" :label="options.btn.saveAndEdit"
+                       @click="buttonActions.value = 4; createItem()" color="positive"/> -->
+              </div>
+
+            </q-card>
+
+            </q-dialog>
+          </div>
+        </div>
+
+
 
           </q-card-section>
         </q-card>
@@ -359,6 +453,19 @@
 
         <div class="full-width q-my-lg"></div>
 
+        <!-- <q-dialog transition-show="rotate" transition-hide="rotate" full-height full-width @hide="optionProducts=false" v-model="optionProducts" minimized :content-css="{borderRadius: '20px', minWidth: '50vw', backgroundColor: 'transparent', boxShadow: 'none'}" ref="modalRef">
+          <crud-options :productId="productId" v-if="productId"/>
+          <div v-else class="text-center">
+            <div class="q-my-md">
+              <q-icon name="fas fa-exclamation-triangle" color="warning"></q-icon>
+              {{`${$tr('qcommerce.layout.message.warnAddOpt')}...`}}
+            </div>
+            <q-btn color="positive" label="Cerrar" @click="optionProducts=false;"
+            />
+          </div>
+        </q-dialog> -->
+
+
         <!--Buttons Actions-->
         <q-page-sticky position="bottom-right" :offset="[40, 30]">
           <!--Update button-->
@@ -409,7 +516,9 @@
   import crudOptions from '@imagina/qcommerce/_components/admin/products/crudOptions'
   //Plugins
   import { scroll } from 'quasar'
+
   const { getScrollTarget, setScrollPosition } = scroll
+
   export default {
     components: {
       crudOptions,
@@ -425,6 +534,9 @@
       this.$nextTick(function () {
         this.initForm(),
         console.log(this.$store.state.qmarketplaceStores.storeSelected);
+
+
+
       })
     },
     data () {
@@ -551,6 +663,7 @@
       //Has manage master record
       canManageRecordMaster () {
         let response = true
+
         if (this.productId && !this.$auth.hasAccess('isite.master.records.edit')) {
           response = false
           //Validate if record is master
@@ -562,6 +675,7 @@
         if (!this.productId && !this.$auth.hasAccess('isite.master.records.create')) {
           response = false
         }
+
         return response
       }
     },
@@ -642,6 +756,7 @@
               }
             }
           });
+
         }//if(this.canEnableProductToHome){
       },
       //Init Form
@@ -674,6 +789,7 @@
               }
             },
           }
+
           //Request
           this.$crud.index(configName, params).then(response => {
             this.optionsTemplate.categories = this.$array.tree(response.data)
@@ -732,6 +848,7 @@
         if (data.relatedProducts && data.relatedProducts.length) {
           this.optionsTemplate.relatedProducts = this.$array.tree(data.relatedProducts)
         }
+
         this.locale.form = this.$clone(orderData)
       },
       //Create Product
