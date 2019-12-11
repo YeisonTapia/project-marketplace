@@ -174,6 +174,8 @@
 
               <!--Status-->
               <q-toggle
+              false-value="0"
+              true-value="1"
               v-model="locale.formTemplate.stockStatus"
               color="red"
               label="En stock"
@@ -209,7 +211,28 @@
               <!--Substrac from Stock-->
               <!-- <br> -->
               <!-- <q-checkbox :label="$tr('qcommerce.layout.form.subtractFromStock')"
-                          v-model="locale.formTemplate.subtract"/> -->
+              v-model="locale.formTemplate.subtract"/> -->
+              <!--Visible (status)-->
+              <br>
+              <div class="q-pa-md" v-if="canEnableProductToHome">
+                <q-checkbox
+                v-model="locale.formTemplate.status"
+                color="primary"
+                label="Agregar producto a la página inicial de 'Donde esta esa vaina'"
+                true-value="1"
+                false-value="0"
+                />
+                <p class="text-primary">Disponibles ({{quantityProductsToHome}})</p>
+              </div>
+              <div class="q-pa-md" v-else-if="locale.formTemplate.status==1">
+                <q-checkbox
+                v-model="locale.formTemplate.status"
+                color="primary"
+                label="Agregar producto a la página inicial de 'Donde esta esa vaina'"
+                true-value="1"
+                false-value="0"
+                />
+              </div>
               <!--  product options -->
               <q-btn v-if="productId"
                             color="negative" :loading="loading"
@@ -381,6 +404,10 @@
         success: false,
         productId: false,
         optionProducts: false,
+        canCreateProduct: false,
+        canEnableProductToHome: false,
+        quantityProductsToHome:0,
+        quantityProductsCanCreate:0,
         editorText: {
           toolbar: [
             ['bold', 'italic', 'strike', 'underline', 'removeFormat'],
@@ -418,7 +445,7 @@
             // storeId:this.$route.params.storeId,
             storeId:this.$store.state.qmarketplaceStores.storeSelected,
             parentId: null,
-            status: 1,
+            status: 0,
             categoryId: null,
             categories: [],
             addedById: this.$store.state.quserAuth.userId,
@@ -510,9 +537,10 @@
     },
     methods: {
       getSuscription(){
+        this.loading = true
         let params={
           params:{
-            include:'plan.product,plan.features',
+            include:'plan.features',
             filter:{
               userId:this.$store.state.quserAuth.userId,
               status:1
@@ -520,39 +548,72 @@
           }
         };
         this.$crud.index("apiRoutes.qsubscription.suscriptions",params).then(response => {
+          /*
           console.log('Subscription data');
           console.log(response.data);
+          */
+          //response.data.plan.features ; id=12 Producto visible en la página value 2 , id:4 Productos y categorías en su tienda, id:44 Productos y categorías ilimitadas
+          this.canCreateProduct=false;//Puede crear productos.
+          this.canEnableProductToHome=false;//Puede hacer visible productos para el home.
+          this.quantityProductsToHome=0;//Cantidad de productos que pueden estar visibles en la página principal
+          this.quantityProductsCanCreate=0;//Cantidad de productos que puede crear.
           if(response.data.length>0){
-            //response.data.plan.features ; id=12 Producto visible en la página value 2 , id:4 Productos y categorías en su tienda, id:44 Productos y categorías ilimitadas
-            var canCreateProduct=false;//Puede crear productos.
-            var canEnableProductToHome=false;//Puede hacer visible productos para el home.
-            var quantityProductsToHome=0;//Cantidad de productos que pueden estar visibles en la página principal
-            var quantityProductsCanCreate=0;//Cantidad de productos que puede crear.
             for(var i=0;i<response.data[0].plan.features.length;i++){
               //Cantidad de productos visibles en la página principal
               if(response.data[0].plan.features[i].id==12){
-                canEnableProductToHome=true;//Puede hacer visible productos para el home.
-                quantityProductsToHome=response.data[0].plan.features[i].value;
+                this.canEnableProductToHome=true;//Puede hacer visible productos para el home.
+                this.quantityProductsToHome=response.data[0].plan.features[i].value;
               }//if
               //Cantidad de productos que puede crear
               if(response.data[0].plan.features[i].id==44){
-                canCreateProduct=true;
-                quantityProductsCanCreate=999999999999999;
-              }else if(!canCreateProduct && response.data[0].plan.features[i].id==4){
-                canCreateProduct=true;
-                quantityProductsCanCreate=response.data[0].plan.features[i].value;
+                this.canCreateProduct=true;
+                this.quantityProductsCanCreate=999999999999999;
+              }else if(!this.canCreateProduct && response.data[0].plan.features[i].id==4){
+                this.canCreateProduct=true;
+                this.quantityProductsCanCreate=response.data[0].plan.features[i].value;
               }
             }//for features of plan
+            /*
             console.log('Can create product');
-            console.log(canCreateProduct);
+            console.log(this.canCreateProduct);
             console.log('Can enable product to home');
-            console.log(canEnableProductToHome);
+            console.log(this.canEnableProductToHome);
             console.log('QUantity of products to home');
-            console.log(quantityProductsToHome);
+            console.log(this.quantityProductsToHome);
             console.log('quantity products can create');
-            console.log(quantityProductsCanCreate);
-          }
+            console.log(this.quantityProductsCanCreate);//
+            */
+            if(!this.canCreateProduct){
+              this.$alert.error({ message: "No puedes crear más productos.", pos: 'bottom' })
+              this.$router.push({ name: 'qmarketplace.admin.stores.my.store.products', params: {  }})
+            }
+            this.validateProductsVisibleOfStore();
+          }//if(response.data.length>0){
+            this.loading = false
         });
+      },
+      validateProductsVisibleOfStore(){
+        console.log('enter here asdadadada');
+        if(this.canEnableProductToHome){
+          console.log('asdaxdd');
+          //Axios products visible of store
+          this.$crud.index("apiRoutes.qcommerce.products",{
+            params:{
+              filter:{
+                store: this.$store.state.qmarketplaceStores.storeSelected,
+                status:1
+              }
+            }
+          }).then(response => {
+            if(response.data.length>0){
+              this.quantityProductsToHome=this.quantityProductsToHome-response.data.length;
+              if(this.quantityProductsToHome<=0){
+                this.canEnableProductToHome=false;
+              }
+            }
+          });
+
+        }//if(this.canEnableProductToHome){
       },
       //Init Form
       async initForm () {
@@ -568,7 +629,7 @@
         this.success = true//Activate status of page
         this.updateOptions
         this.loading = false;
-        this.getSuscription();
+        await this.getSuscription();
       },
       //Get product categories
       getCategories () {
@@ -577,7 +638,12 @@
           let configName = 'apiRoutes.qcommerce.categories'
           let params = {//Params to request
             refresh: true,
-            params: { include: 'parent' },
+            params: {
+              include: 'parent',
+              filter:{
+                store: this.$store.state.qmarketplaceStores.storeSelected
+              }
+            },
           }
 
           //Request
@@ -686,7 +752,7 @@
           let action = this.buttonActions.value
           switch (action) {
             case 1://redirect to index products
-              this.$router.push({ name: 'qmarketplace.admin.products.store.index', params: { id: this.$route.params.storeId }})
+              this.$router.push({ name: 'qmarketplace.admin.stores.my.store.products', params: {  }})
               break
             case 2://Redirect to update this product
               this.$router.push({ name: 'qcommerce.admin.products.edit', params: { id: id } })
