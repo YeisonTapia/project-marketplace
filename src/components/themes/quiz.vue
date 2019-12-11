@@ -16,7 +16,7 @@
             v-model="selectedOptions"
             :options="answers[index]"
             color="light"
-            type="radio"
+            type="checkbox"
           />
 
         </q-card-section>
