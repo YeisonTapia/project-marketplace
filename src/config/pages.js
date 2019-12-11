@@ -196,8 +196,16 @@ responsePages.qblog.categories.layout= () => import('src/layouts/admin')
 responsePages.qblog.categories.path='/admin/blog/categorias/index'
 responsePages.frontqblog.index.page= () => import('src/pages/master/qblog/index')
 responsePages.frontqblog.index.layout= () =>import('src/layouts/master')
+/*
 responsePages.frontqblog.show.page= () => import('src/pages/master/qblog/show'),
 responsePages.frontqblog.show.layout= () =>import('src/layouts/master')
+*/
+
+responsePages.frontqblog.show.path='articulo/:category/:slugPost'
+responsePages.frontqblog.show.page= () => import('src/pages/master/qblog/show'),
+responsePages.frontqblog.show.layout= () =>import('src/layouts/master')
+responsePages.frontqblog.show.path='articulo/:category/:slugPost'
+
 //qcommerce
 responsePages.qcommerce.products.layout= () => import('src/layouts/admin')
 responsePages.qcommerce.products.path= '/admin/ecommerce/productos'
