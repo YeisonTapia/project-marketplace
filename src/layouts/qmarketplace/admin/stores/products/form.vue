@@ -210,8 +210,28 @@
               <!-- <br> -->
               <!-- <q-checkbox :label="$tr('qcommerce.layout.form.subtractFromStock')"
                           v-model="locale.formTemplate.subtract"/> -->
+              <!--  product options -->
+              <q-btn v-if="productId"
+                            color="negative" :loading="loading"
+                            icon="fas fa-edit" label="Opciones de producto" @click="optionProducts=true;"
+                          />
             </div>
           </div>
+
+          <q-dialog transition-show="rotate" transition-hide="rotate" full-height full-width @hide="optionProducts=false" v-model="optionProducts" minimized :content-css="{borderRadius: '20px', minWidth: '50vw', backgroundColor: 'transparent', boxShadow: 'none'}" ref="modalRef">
+
+            <crud-options :productId="productId" v-if="productId"/>
+            <div v-else class="text-center">
+              <div class="q-my-md">
+                <q-icon name="fas fa-exclamation-triangle" color="warning"></q-icon>
+                {{`${$tr('qcommerce.layout.message.warnAddOpt')}...`}}
+              </div>
+              <q-btn icon="fas fa-save" :label="options.btn.saveAndEdit"
+                     @click="buttonActions.value = 4; createItem()" color="positive"/>
+            </div>
+
+
+        </q-dialog>
 
         </div>
 
@@ -360,6 +380,7 @@
         loadingCategory: false,
         success: false,
         productId: false,
+        optionProducts: false,
         editorText: {
           toolbar: [
             ['bold', 'italic', 'strike', 'underline', 'removeFormat'],
