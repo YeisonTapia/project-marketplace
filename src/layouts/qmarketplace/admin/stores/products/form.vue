@@ -1,356 +1,393 @@
 <template>
-  <div id="productFormPage" ref="productFormPage">
+  <div id="productFormPage" ref="productFormPage" class="store-page store-product">
+    <div class="text-h5 text-primary q-pb-md q-pl-lg font-family-secondary">Crear Producto</div>
+
+    <div class="full-width"></div>
     <q-no-ssr>
       <!--Content-->
-      <div class="relative-position q-mb-lg backend-page">
+      <div class="">
+        <!--Data-->
         <!--Data-->
         <q-form autocorrect="off" autocomplete="off" ref="formContent" class="box"
                 @submit="(!itemId && !field) ? createItem() : updateItem()"
                 @validation-error="$alert.error($tr('ui.message.formInvalid'))">
-          <div class="row q-col-gutter-x-md" v-if="success">
-            <!--Language-->
-            <div class="col-12 q-mb-md">
-              <locales v-model="locale" ref="localeComponent" :form="$refs.formContent"/>
-            </div>
-            <!--Form left-->
-            <div class="col-12 col-md-8" v-if="locale.success">
-              <!--name-->
-              <q-input v-model="locale.formTemplate.name" @input="setSlug()"
-                       :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
-                       :label="`${$tr('ui.form.name')} (${locale.language})*`"/>
-              <!--Slug-->
-              <q-input v-model="locale.formTemplate.slug"
-                       :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
-                       :label="`${$tr('ui.form.slug')} (${locale.language})*`"/>
-              <!--Sumario-->
-              <q-input v-model="locale.formTemplate.summary" type="textarea"
-                       :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
-                       :label="`Descripción corta (${locale.language})*`" rows="3"/>
-              <!--Description-->
-              <div class="input-title">{{`Descripción completa (${locale.language})*`}}</div>
-              <q-field v-model="locale.formTemplate.description" borderless
-                       :rules="[val => !!val || $tr('ui.message.fieldRequired')]">
-                <q-editor v-model="locale.formTemplate.description" class="full-width"
-                          :toolbar="editorText.toolbar" content-class="text-grey-9" toolbar-text-color="grey-9"/>
-              </q-field>
-              <!-- Vídeo -->
-              <q-input v-model="locale.formTemplate.options.video" placeholder="https://youtube.com/?gl=CO&hl=es-419"  :label="$tr('ui.form.video')"/>
-              <!-- Images -->
-              <div class="row">
-                <div class="col-6">
-                  <upload-media
-                  v-model="locale.formTemplate.mediasSingle"
-                  entity="Modules\Icommerce\Entities\Product"
-                  :entity-id="productId ? productId : null"
-                  zone='mainimage'
-                  />
+
+                  <q-card  class="rounded-md q-my-lg" v-if="success">
+            
+            <q-card-section class="q-px-xl q-py-none form-general">
+  
+              <div class="row q-col-gutter-lg justify-center">
+                
+                <div class="col-12">
+                  <locales v-model="locale" ref="localeComponent" :form="$refs.formContent"/>
+                </div>                 
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 q-pt-none card-border-right"  v-if="locale.success">
+                   
+                    <!--name-->
+                    <div class="q-mt-xl q-mb-lg">
+                      <p class="caption q-mb-sm">{{$tr('ui.form.name')}} ({{locale.language}})*</p>
+                      <q-input v-model="locale.formTemplate.name" @input="setSlug()" dense
+                     :rules="[val => !!val || $tr('ui.message.fieldRequired')]"    />
+
+                    </div>
+                    <!--Slug-->
+                    <div class="q-mb-lg">
+                      <p class="caption q-mb-sm">{{$tr('ui.form.slug')}} ({{locale.language}})*</p>
+                      <q-input v-model="locale.formTemplate.slug" dense
+                     :rules="[val => !!val || $tr('ui.message.fieldRequired')]"    />
+                    </div>
+                    <!--Sumario-->
+                    <div class="q-mb-lg">
+                      <p class="caption q-mb-sm">Descripción corta ({{locale.language}})*</p>
+                      <q-input v-model="locale.formTemplate.summary" dense type="textarea"
+                     :rules="[val => !!val || $tr('ui.message.fieldRequired')]"  rows="1"  />
+
+
+                    </div>
+                    <!--Description-->
+                    <div class="q-mb-xl">
+                      <p class="caption q-mb-sm">Descripción completa ({{locale.language}})*</p>
+                       <q-editor v-model="locale.formTemplate.description" class="full-width"
+                                :toolbar="editorText.toolbar" content-class="text-grey-9" toolbar-text-color="grey-9"/>
+                    </div>
+
+                    <p class="caption q-mb-md">Imagen
+                      <q-btn round class="no-shadow" size="6px" icon="fas fa-question" >
+                        <q-tooltip>
+                          Some text as content of Tooltip
+                        </q-tooltip>
+                      </q-btn>
+                    </p>
+                    <div class="row q-col-gutter-md" >
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 relative-position img-product">
+                        <upload-media 
+                          v-model="locale.formTemplate.mediasSingle"
+                          entity="Modules\Icommerce\Entities\Product"
+                          :entity-id="productId ? productId : null"
+                          zone='mainimage'
+                        />
+                        <div class="img-message">Imagen Principal</div>
+                      </div>
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 relative-position">
+                        <upload-media
+                          multiple
+                          v-model="locale.formTemplate.mediasMulti"
+                          entity="Modules\Icommerce\Entities\Product"
+                          :entity-id="productId ? productId : null"
+                          zone='gallery'
+                        />
+                        <div class="img-message"> <i class="fas fa-plus"></i>Añadir Imagenes</div>
+                      </div>
+                    </div>
+                    <!--Video-->
+                    <div class="q-my-xl">
+                      <p class="caption q-mb-sm">{{$tr('ui.form.video')}} 
+                        <q-btn round class="no-shadow" size="6px" icon="fas fa-question" >
+                          <q-tooltip>
+                            Some text as content of Tooltip
+                          </q-tooltip>
+                        </q-btn>
+                      </p>
+                      <q-input v-model="locale.formTemplate.options.video" dense placeholder="https://youtube.com" />
+                    </div>
+
                 </div>
-                <div class="col-6">
-                  <upload-media
-                    multiple
-                    v-model="locale.formTemplate.mediasMulti"
-                    entity="Modules\Icommerce\Entities\Product"
-                    :entity-id="productId ? productId : null"
-                    zone='gallery'
-                  />
+                <!--Form right-->
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 col-xl-4 q-pt-none" v-if="locale.success">
+
+                  <!--Status-->
+                  <div class="q-my-xl">
+                    <p class="caption q-mb-sm">{{$tr('ui.form.status')}}</p>
+                    <tree-select
+                      :clearable="false"
+                      :append-to-body="true"
+                      :options="options.status"
+                      value-consists-of="BRANCH_PRIORITY"
+                      v-model="locale.formTemplate.status"
+                      placeholder=""
+                    />
+                  </div>
+
+                  <!--Category-->
+                  <div class="q-my-xl">
+                    <p class="caption q-mb-sm">{{$tr('ui.form.category')}} Principal*
+                    </p>
+                     <tree-select
+                      :clearable="false"
+                      :append-to-body="true"
+                      class="q-mb-md"
+                      :options="optionsTemplate.categories"
+                      value-consists-of="BRANCH_PRIORITY"
+                      v-model="locale.formTemplate.categoryId"
+                      placeholder=""
+                    />
+                  </div>
+                  <!--Categories-->
+                  <div class="q-my-xl">
+                    <p class="caption q-mb-sm">
+                      {{$trp('ui.form.category')}}
+                    </p>
+                   <recursive-list v-model="locale.formTemplate.categories"
+                              :items="optionsTemplate.categories"/>
+                  </div>
+
                 </div>
               </div>
-            </div>
-            <!--Form right-->
-            <div class="col-12 col-md-4" v-if="locale.success">
-              <!--Record Master-->
-              <!-- <div v-if="canManageRecordMaster" class="q-mb-md">
-                <div class="input-title">
-                  {{`${$tr('ui.form.masterRecord')}`}}
-                </div>
-                <tree-select
-                  :clearable="false"
-                  :append-to-body="true"
-                  v-model="locale.formTemplate.options.masterRecord"
-                  :options="[
-                    {label: this.$tr('ui.label.yes'), id: 1},
-                    {label: this.$tr('ui.label.no'), id: 0},
-                  ]"
-                  placeholder=""
-                />
-              </div> -->
-              <!--Parent-->
-              <!-- <div class="input-title">{{`${$tr('ui.form.parent')}`}}</div>
-              <tree-select
-                v-model="locale.formTemplate.parentId"
-                :async="true"
-                :append-to-body="true"
-                class="q-mb-md"
-                :load-options="searchProducts"
-                :default-options="optionsTemplate.products"
-                placeholder=""
-              /> -->
-              <!--Status-->
-              <div class="input-title">{{`${$tr('ui.form.status')}`}}</div>
-              <tree-select
-                :clearable="false"
-                :append-to-body="true"
-                class="q-mb-md"
-                :options="options.status"
-                value-consists-of="BRANCH_PRIORITY"
-                v-model="locale.formTemplate.status"
-                placeholder=""
-              />
-              <!--Category-->
-              <!-- <div class="input-title">
-                Categoría principal
-                <crud :crud-data="import('@imagina/qcommerce/_crud/productCategories')"
-                      just-create @created="getCategories"/>
-              </div> -->
-              <tree-select
-                :clearable="false"
-                :append-to-body="true"
-                class="q-mb-md"
-                :options="optionsTemplate.categories"
-                value-consists-of="BRANCH_PRIORITY"
-                v-model="locale.formTemplate.categoryId"
-                placeholder=""
-              />
-              <!--Categories-->
-              <!-- <div class="input-title">
-                {{`${$trp('ui.form.category')}`}}
-                <crud :crud-data="import('@imagina/qcommerce/_crud/productCategories')"
-                      just-create @created="getCategories"/>
-              </div> -->
-              <recursive-list v-model="locale.formTemplate.categories"
-                              :items="optionsTemplate.categories"/>
 
+            </q-card-section>
+          </q-card>
 
-
-            </div>
-
-          </div>
-        </q-form>
+        </q-form>   
 
         <!--Extra Data-->
-        <div v-if="locale.success" class="q-mt-lg box" >
+        <q-card class="rounded-md q-mb-xl" v-if="locale.success">
 
-          <div class="row q-col-gutter-x-sm" v-if="locale.success">
-            <!--Left-->
-            <div class="col-12 col-md-6">
-              <!--SKU-->
-              <!-- <q-input placeholder="Referencia" v-model="locale.formTemplate.sku" :label="$tr('ui.form.sku')"/> -->
-              <!--Price-->
-              <q-input v-model="locale.formTemplate.price"
-              :label="$tr('ui.form.price')" type="number"/>
-              <!--Quantity-->
-              <q-input  v-model="locale.formTemplate.quantity"
-              :label="$tr('ui.form.quantity')" type="number"/>
-              <!--availability date-->
-              <!-- <q-input dense mask="date" v-model="locale.formTemplate.dateAvailable" color="primary"
-                       unmasked-value :label="$tr('qcommerce.layout.form.availableDate')"
-                       outlined placeholder="YYYY/MM/DD">
-                <template v-slot:append>
-                  <q-icon name="fas fa-calendar-day"/>
-                  <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
-                    <q-date v-model="locale.formTemplate.dateAvailable" @input="() => $refs.qDateProxy.hide()"/>
-                  </q-popup-proxy>
-                </template>
-              </q-input> -->
-              <!--weight-->
-              <q-input v-model="locale.formTemplate.weight" :label="$tr('ui.form.weight')"
-                        type="number"/>
-              <!--length-->
-              <q-input v-model="locale.formTemplate.length" label="Longitud"
-                        type="number"/>
-              <!--width-->
-              <q-input v-model="locale.formTemplate.width" label="Anchura"
-                        type="number"/>
-              <!--height-->
-              <q-input v-model="locale.formTemplate.height" label="Altura"
-                        type="number"/>
-            </div>
-            <!--Right-->
-            <div class="col-12 col-md-6">
+          <q-card-section class="q-px-xl q-pt-xl form-general">
 
-              <!--reference-->
-              <q-input placeholder="Referencia" v-model="locale.formTemplate.reference"
-              :label="$tr('ui.form.reference')"/>
+            <div class="row q-col-gutter-xl justify-center">
+              <!-- Left -->
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                <div class="text-h5 text-weight-bold text-primary q-pb-md text-capitalize">{{$tr('ui.label.data')}}</div>
+                <!--Price-->
+                <div class="q-mb-xl">
+                  <p class="caption q-mb-sm">{{$tr('ui.form.price')}}</p>
+                  <q-input v-model="locale.formTemplate.price" dense type="number"/>
+                </div>
+                <!--Quantity-->
+                <div class="q-my-xl">
+                  <p class="caption q-mb-sm">{{$tr('ui.form.quantity')}}</p>
+                  <q-input dense v-model="locale.formTemplate.quantity" type="number"/>
+                </div>
+                <!--weight-->
+                <div class="q-my-xl">
+                  <p class="caption q-mb-sm">{{$tr('ui.form.weight')}}</p>
+                  <q-input v-model="locale.formTemplate.weight"
+                         dense type="number"/>
+                </div>
+                <!--length-->
+                <div class="q-my-xl">
+                  <p class="caption q-mb-sm">{{$tr('ui.form.length')}}</p>
+                  <q-input v-model="locale.formTemplate.length"
+                          dense type="number"/>
+                </div>
+                <!--width-->
+                <div class="q-my-xl">
+                  <p class="caption q-mb-sm">{{$tr('ui.form.width')}}</p>
+                  <q-input v-model="locale.formTemplate.width"  dense type="number"/>
+                </div>
+                <!--height-->
+                <div class="q-my-xl">
+                  <p class="caption q-mb-sm">{{$tr('ui.form.height')}}</p>
+                  <q-input v-model="locale.formTemplate.height"   dense type="number"/>
+                </div>
+              </div>
+              <!-- Right -->
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
 
-              <!--Status-->
-              <q-toggle
-              false-value="0"
-              true-value="1"
-              v-model="locale.formTemplate.stockStatus"
-              color="red"
-              label="En stock"
-              />
-              <!-- <div class="input-title">{{$tr('ui.form.stock')}}</div>
+                <!--reference-->
+                <div class="q-my-xl">
+                  <p class="caption q-mb-sm">{{$tr('ui.form.reference')}}</p>
+                  <q-input v-model="locale.formTemplate.reference" dense  />
+                </div>
 
-              <tree-select
-                :clearable="false"
-                :append-to-body="true"
-                :options="options.stockStatus"
-                value-consists-of="BRANCH_PRIORITY"
+                <div>
+                <!--Status-->
+                <q-toggle
                 v-model="locale.formTemplate.stockStatus"
-                placeholder=""
-                class="q-mb-md"
-              /> -->
-
-
-              <!--minimum-->
-              <q-input label="Orden mínima"
-                       type="number" v-model="locale.formTemplate.minimum"/>
-              <!--Order Weight-->
-              <!-- <q-input :label="$tr('qcommerce.layout.form.orderWeight')"
-                       v-model="locale.formTemplate.orderWeight"/> -->
-              <!--Points-->
-              <q-input v-model="locale.formTemplate.points"  :label="$trp('ui.form.point')"/>
-              <!--Requires shipping-->
-              <!-- <q-checkbox :label="$tr('qcommerce.layout.form.requriedShipping')"
-                          v-model="locale.formTemplate.shipping"/> -->
-              <!--Free shipping-->
-              <!-- <br> -->
-              <!-- <q-checkbox :label="$tr('qcommerce.layout.form.freeShipping')"
-                          v-model="locale.formTemplate.freeshipping"/> -->
-              <!--Substrac from Stock-->
-              <!-- <br> -->
-              <!-- <q-checkbox :label="$tr('qcommerce.layout.form.subtractFromStock')"
-              v-model="locale.formTemplate.subtract"/> -->
-              <!--Visible (status)-->
-              <br>
-              <div class="q-pa-md" v-if="canEnableProductToHome">
-                <q-checkbox
-                v-model="locale.formTemplate.status"
                 color="primary"
-                label="Agregar producto a la página inicial de 'Donde esta esa vaina'"
-                true-value="1"
-                false-value="0"
+                label="En stock"
                 />
-                <p class="text-primary">Disponibles ({{quantityProductsToHome}})</p>
-              </div>
-              <div class="q-pa-md" v-else-if="locale.formTemplate.status==1">
-                <q-checkbox
-                v-model="locale.formTemplate.status"
-                color="primary"
-                label="Agregar producto a la página inicial de 'Donde esta esa vaina'"
-                true-value="1"
-                false-value="0"
+                </div>
+                <!--minimum-->
+                <div class="q-my-xl">
+                  <p class="caption q-mb-sm">{{$tr('qcommerce.layout.form.minimumOrder')}}</p>
+                  <q-input  dense
+                         type="number" v-model="locale.formTemplate.minimum"/>
+                </div>
+
+                <!--Points-->
+                <div class="q-my-xl">
+                  <p class="caption q-mb-sm">{{$trp('ui.form.point')}}</p>
+                  <q-input v-model="locale.formTemplate.points" dense />
+                </div>
+
+                <div class="" v-if="canEnableProductToHome">
+                  <q-checkbox
+                  v-model="locale.formTemplate.status"
+                  color="primary"
+                  label="Agregar producto a la página inicial de 'Donde esta esa vaina'"
+                  true-value="1"
+                  false-value="0"
+                  />
+                  <p class="text-primary">Disponibles ({{quantityProductsToHome}})</p>
+                </div>
+                <div class="" v-else-if="locale.formTemplate.status==1">
+                  <q-checkbox
+                  v-model="locale.formTemplate.status"
+                  color="primary"
+                  label="Agregar producto a la página inicial de 'Donde esta esa vaina'"
+                  true-value="1"
+                  false-value="0"
+                  />
+                </div>
+                <div class="text-primary text-caption q-pl-xl">Disponibles(2)</div>
+
+                <div class="q-mb-xl"></div>
+
+                <!--  product options -->
+                <q-btn v-if="productId"
+                  color="primary" size="lg" no-caps class="rounded-sm text-caption" :loading="loading"
+                  label="Opciones de producto" @click="optionProducts=true;"
                 />
+
+                <q-dialog transition-show="rotate" transition-hide="rotate" full-height full-width  @hide="optionProducts=false" v-model="optionProducts" ref="modalRef">
+
+                  <q-card>
+
+                  <crud-options :productId="productId" v-if="productId"/>
+                  <div v-else class="text-center">
+                    <div class="q-my-md">
+                      <q-icon name="fas fa-exclamation-triangle" color="warning"></q-icon>
+                      {{`${$tr('qcommerce.layout.message.warnAddOpt')}...`}}
+                    </div>
+                    <q-btn icon="fas fa-save" :label="options.btn.saveAndEdit"
+                           @click="buttonActions.value = 4; createItem()" color="positive"/>
+                  </div>
+
+                </q-card>
+    
+                </q-dialog>
+
+
               </div>
-              <!--  product options -->
-              <q-btn v-if="productId"
-                            color="negative" :loading="loading"
-                            icon="fas fa-edit" label="Opciones de producto" @click="optionProducts=true;"
-                          />
-            </div>
-          </div>
-
-          <q-dialog transition-show="rotate" transition-hide="rotate" full-height full-width @hide="optionProducts=false" v-model="optionProducts" minimized :content-css="{borderRadius: '20px', minWidth: '50vw', backgroundColor: 'transparent', boxShadow: 'none'}" ref="modalRef">
-
-            <crud-options :productId="productId" v-if="productId"/>
-            <div v-else class="text-center">
-              <div class="q-my-md">
-                <q-icon name="fas fa-exclamation-triangle" color="warning"></q-icon>
-                {{`${$tr('qcommerce.layout.message.warnAddOpt')}...`}}
-              </div>
-              <q-btn icon="fas fa-save" :label="options.btn.saveAndEdit"
-                     @click="buttonActions.value = 4; createItem()" color="positive"/>
             </div>
 
-
-        </q-dialog>
-
-        </div>
+          </q-card-section>
+        </q-card>
 
         <!--SEO-->
-        <div v-if="locale.success" class="q-mt-lg box" >
+        <q-card class="rounded-md q-mb-xl" v-if="locale.success">
+          <q-card-section class="q-px-xl q-pt-lg form-general">
+            <q-expansion-item >
+              <template v-slot:header>
+                <q-item-section>
+                  <p class="caption q-mb-none cursor-pointer"> 
+                    <q-icon name="fas fa-caret-right" size="md" color="primary" style="margin-left: -15px;" /> Editar SEO
+                    <q-btn round class="no-shadow" size="6px" icon="fas fa-question">
+                      <q-tooltip>
+                        Meta título y meta descripción para el SEO del sitio
+                      </q-tooltip>
+                    </q-btn>
+                  </p>
+                </q-item-section>
+              </template>
 
-          <div class="row q-col-gutter-x-sm" v-if="locale.success">
+              <q-card>
+                <q-card-section>
 
-            <div class="col-12 col-md-12">
-              <p class="caption q-mb-md">Editar SEO
-                <q-btn round class="no-shadow" size="6px" icon="fas fa-question">
-                  <q-tooltip>
-                    Meta título y meta descripción para el SEO del sitio
-                  </q-tooltip>
-                </q-btn>
-              </p>
-            </div>
-            <!--Left-->
-            <div class="col-12 col-md-6">
+                    <div class="row q-col-gutter-xl justify-center">
+                      <!-- Left -->
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                        <!--Meta Title-->
+                        <div class="q-my-lg">
+                          <p class="text-subtitle1 q-mb-none">{{$tr('ui.form.metaTitle')}} ({{locale.language}})*</p>
+                          <q-input v-model="locale.formTemplate.metaTitle"
+                               :rules="[val => !!val || $tr('ui.message.fieldRequired')]" />
+                        </div>
+                      </div>
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
 
-              <!--Meta Title-->
-              <q-input v-model="locale.formTemplate.metaTitle"
-                       :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
-                       :label="`${$tr('ui.form.metaTitle')} (${locale.language})*`"/>
-            </div>
-            <!--Right-->
-            <div class="col-12 col-md-6">
+                        <!--Meta Description-->
+                        <div class="q-my-lg">
+                          <p class="text-subtitle1 q-mb-none">{{$tr('ui.form.metaDescription')}} ({{locale.language}})*</p>
+                          <q-input v-model="locale.formTemplate.metaDescription" type="textarea" class="meta-description"
+                            :rules="[val => !!val || $tr('ui.message.fieldRequired')]" rows="2"/>
+                        </div>
+                      
+                      </div>
+                    </div>
 
-              <!--Meta Description-->
-              <q-input v-model="locale.formTemplate.metaDescription" type="textarea"
-              :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
-              :label="`${$tr('ui.form.metaDescription')} (${locale.language})*`" rows="2"/>
+                </q-card-section>
+              </q-card>
 
-            </div>
-          </div>
+            </q-expansion-item>
+            
+          </q-card-section>
+        </q-card>
 
-        </div>
 
         <!--RELATED-->
-        <div v-if="locale.success" class="q-mt-lg box" >
+        <q-card class="rounded-md q-mb-xl" v-if="locale.success">
+          <q-card-section class="q-px-xl q-pt-lg ">
 
-          <div class="row q-col-gutter-x-sm" v-if="locale.success">
+            <q-expansion-item >
+              <template v-slot:header>
+                <q-item-section>
+                  <div class="form-general">  
+                    <p class="caption q-mb-none">
+                      <q-icon name="fas fa-caret-right" size="md" color="primary" style="margin-left: -15px;" />
+                      {{$tr('qcommerce.layout.form.relatedProducts')}}
+                      <q-btn round class="no-shadow" size="6px" icon="fas fa-question">
+                        <q-tooltip>
+                          Items relacionados al producto
+                        </q-tooltip>
+                      </q-btn>
+                    </p>
+                  </div>
+                </q-item-section>
+              </template>
 
-            <div class="col-12 col-md-12">
-              <p class="caption q-mb-md">Relacionados
-                <q-btn round class="no-shadow" size="6px" icon="fas fa-question">
-                  <q-tooltip>
-                    Items relacionados al producto
-                  </q-tooltip>
-                </q-btn>
-              </p>
-            </div>
+              <q-card>
+                <q-card-section>
 
-            <div class="col-12 col-md-12">
+                  <tree-select
+                      v-model="locale.formTemplate.relatedProducts"
+                      :async="true"
+                      :multiple="true"
+                      :append-to-body="true"
+                      :load-options="searchProducts"
+                      :default-options="optionsTemplate.relatedProducts"
+                      placeholder=""
+                  />
 
-              <div class="input-title">{{$tr('qcommerce.layout.form.relatedProducts')}}</div>
-              <tree-select
-                v-model="locale.formTemplate.relatedProducts"
-                :async="true"
-                :multiple="true"
-                :append-to-body="true"
-                :load-options="searchProducts"
-                :default-options="optionsTemplate.relatedProducts"
-                placeholder=""
-              />
+                </q-card-section>
+              </q-card>
 
-            </div>
+            </q-expansion-item>
+          </q-card-section>
+        </q-card>
 
-          </div>
-
-        </div>
+        <div class="full-width q-my-lg"></div>
 
         <!--Buttons Actions-->
-        <q-page-sticky position="bottom-right" :offset="[18, 18]">
+        <q-page-sticky position="bottom-right" :offset="[40, 30]">
           <!--Update button-->
           <q-btn
-            v-if="productId"
-            color="positive" :loading="loading"
+            v-if="productId" class="bg-primary text-white btn-arrow-send-pink"
+            color="primary" :loading="loading"
             icon="fas fa-edit" :label="$tr('ui.label.update')" @click="updateItem()"
           />
           <!--Save button-->
-          <q-btn-dropdown :label="buttonActions.label" split v-else :loading="loading"
-                          content-style="min-width: 250px !important"
-                          color="positive" icon="fas fa-save" @click="createItem()" rounded align="right">
-            <q-list link>
-              <q-item @click.native="buttonActions = {label : options.btn.saveAndReturn, value : 1}"
+          <q-btn-dropdown class="bg-primary text-white btn-arrow-send-pink" :label="buttonActions.label" split v-else :loading="loading" color="primary" icon="fas fa-save" @click="createItem()" rounded align="right">
+
+            <q-list>
+              <q-item clickable @click.native="buttonActions = {label : options.btn.saveAndReturn, value : 1}"
                       v-close-popup>
-                {{options.btn.saveAndReturn}}
+                <q-item-section>
+                  {{options.btn.saveAndReturn}}
+                </q-item-section>
               </q-item>
-              <q-item @click.native="buttonActions = {label : options.btn.saveAndEdit, value : 2}"
+              <q-item clickable @click.native="buttonActions = {label : options.btn.saveAndEdit, value : 2}"
                       v-close-popup>
-                {{options.btn.saveAndEdit}}
+                <q-item-section>
+                  {{options.btn.saveAndEdit}}
+                </q-item-section>
               </q-item>
-              <q-item @click.native="buttonActions = {label : options.btn.saveAndCreate, value : 3}"
+              <q-item clickable @click.native="buttonActions = {label : options.btn.saveAndCreate, value : 3}"
                       v-close-popup>
-                {{options.btn.saveAndCreate}}
+                <q-item-section>
+                  {{options.btn.saveAndCreate}}
+                </q-item-section>
               </q-item>
             </q-list>
           </q-btn-dropdown>
