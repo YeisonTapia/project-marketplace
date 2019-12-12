@@ -14,21 +14,45 @@
 
     <q-footer bordered v-else>
       <q-tabs no-caps color="transparent" class="bg-degradado text-white">
-        <q-tab name="home" icon="home" />
-        <q-tab name="xtab-1" icon="search" />
+        <q-route-tab
+          icon="home"
+          :to="{ name: 'app.home'}"
+          exact
+        />
+        <q-tab name="xtab-1" icon="search" @click="modal = !modal" />
       </q-tabs>
+
+      <q-dialog v-model="modal">
+        <q-card class="bg-degradado">
+          <q-card-section>
+            <div class="text-h6 text-white font-family-secondary">Buscador de Tiendas</div>
+          </q-card-section>
+
+          <q-card-section>
+            <search-store></search-store>
+          </q-card-section>
+
+          <q-card-actions align="right">
+            <q-btn flat color="white" label="CERRAR" v-close-popup />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
+
+
     </q-footer>
   </footer>
 </template>
 <script>
   import menuList from "../recursiveItem"
   import logoImagina from 'src/components/master/imaginaSVG'
+  import searchStore from 'src/components/master/searchStore'
 
   export default {
     props: {},
     components: {
       menuList,
-      logoImagina
+      logoImagina,
+      searchStore
     },
     watch: {},
     mounted() {
@@ -36,7 +60,9 @@
       })
     },
     data() {
-      return {}
+      return {
+        modal: false,
+      }
     },
     computed: {
       menu() {
@@ -94,4 +120,9 @@
 
         &.router-link-active
           background transparent !important
+
+    .search
+      background-color red    
+      .select-cities
+        display block
 </style>

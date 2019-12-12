@@ -1,33 +1,65 @@
 <template>
-    <q-toolbar class="search q-px-none" v-if="success">
-      <q-btn class="btn-search q-mr-xs"
-          round color="warning"  icon="search" @click="searchReedirect()" />
-      <q-input
-        v-model="search.text"
-        dense
-        color="white"
-        outlined
+  <div>
+    <div v-if="$q.platform.is.desktop">
+      <q-toolbar class="search q-px-none" v-if="success" >
+        <q-btn class="btn-search q-mr-xs"
+            round color="warning"  icon="search" @click="searchReedirect()" />
+        <q-input
+          v-model="search.text"
+          dense
+          color="white"
+          outlined
+          placeholder="Busca tu vaina aquí..."
+          @keydown.enter="searchReedirect()"/>
+        <q-select
+          outlined
+          dense
+          class="select-neighborhood"
+          v-model="search.neighborhood"
+          :options="neighborhoodOptions"
+          />
+        <q-space class="q-mx-sm" />
+        <q-select
+          outlined
+          class="select-cities"
+          v-model="search.city"
+          :options="cityOptions"
+          >
+          <template v-slot:prepend>
+            <q-icon name="fas fa-globe-americas" />
+          </template>
+        </q-select>
+      </q-toolbar>
+    </div>
+    <div v-else>
+      <div class="search-mobile" v-if="success" >
+        <q-input
+        v-model="search.text" 
+        rounded outlined dense
+        class="q-mb-sm"
         placeholder="Busca tu vaina aquí..."
         @keydown.enter="searchReedirect()"/>
-      <q-select
-        outlined
-        dense
-        class="select-neighborhood"
-        v-model="search.neighborhood"
-        :options="neighborhoodOptions"
-        />
-      <q-space class="q-mx-sm" />
-      <q-select
-        outlined
-        class="select-cities"
-        v-model="search.city"
-        :options="cityOptions"
-        >
-        <template v-slot:prepend>
-          <q-icon name="fas fa-globe-americas" />
-        </template>
-      </q-select>
-    </q-toolbar>
+
+        <q-select
+          rounded outlined dense
+          class="select-neighborhood q-mb-sm"
+          v-model="search.neighborhood"
+          :options="neighborhoodOptions"
+          />
+ 
+        <q-select
+          rounded outlined dense
+          class="select-cities q-mb-sm"
+          v-model="search.city"
+          :options="cityOptions" />
+
+
+          <q-btn class="btn-search full-width" color="secondary" label="Buscar" icon="search" @click="searchReedirect()" />
+        </div>
+    </div>
+  </div>
+
+
 </template>
 <script>
 export default {
@@ -210,4 +242,10 @@ export default {
           color #FFFFFF
         & .q-icon
           color $warning
+.search-mobile
+  .select-neighborhood, .select-cities, .q-input
+    .q-field__control
+      color transparent
+      background-color #ffffff
+
 </style>
