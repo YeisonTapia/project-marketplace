@@ -11,23 +11,23 @@
             <div class="text-h4 text-primary font-family-secondary">
               Busqueda Avanzada
             </div>
-            <q-btn 
-              class="glossy q-ml-md" 
-              round 
-              color="primary" 
+            <q-btn
+              class="glossy q-ml-md"
+              round
+              color="primary"
               :icon="iconShow"
-              size="md" 
+              size="md"
               @click="drawerPoint = !drawerPoint"/>
           </div>
         </div>
-        
+
         <transition name="fade">
         <div v-if="drawerPoint">
-          
-        
+
+
         <div class="row q-col-gutter-lg">
-          
-          
+
+
 
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
 
@@ -90,7 +90,7 @@
 
       </div>
     </div>
-    
+
     <!-- Results Stores -->
     <div>
       <div v-if="stores.length>0" class="row q-pa-lg">
@@ -183,9 +183,9 @@ export default {
 
       this.loading = true
       this.$q.loading.show()
-    
+
       if(this.typeSearch==1)
-        await this.searchStores().catch(error => {})
+        await this.searchStores()
 
       this.loading = false
       this.$q.loading.hide()
@@ -216,21 +216,21 @@ export default {
       })
 
     },
-    // Get Categories Store 
+    // Get Categories Store
     getCategoriesStore(){
-        
+
       this.$crud.index("apiRoutes.qmarketplace.category").then(response => {
-            
-        this.categoryOptions = response.data
+
+        this.categoryOptions = this.$array.tree(response.data);
 
         this.advancedSearch.category = {label:"Selecciona la categoria de la tienda",value:0,id:0}
-       
+
       }).catch(error => {
         this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
-        console.error("ERROR - GET CATEGORIES STORE") 
-          
+        console.error("ERROR - GET CATEGORIES STORE")
+
       })
-      
+
     },
     // Get Cities
     getCities(){
@@ -310,10 +310,10 @@ export default {
     },
     // Get types of Companies
     getCompanies(){
-      
+
       let params={
         params:{
-          filter:{  
+          filter:{
             status:1,
             allTranslations: true
           }
@@ -323,7 +323,7 @@ export default {
       this.$crud.index("apiRoutes.qsubscription.products",params).then(response => {
 
         this.companyOptions=[]
-        
+
         for(var i=0;i<response.data.length;i++){
               this.companyOptions.push({
                 label:response.data[i].name,
@@ -350,7 +350,7 @@ export default {
       let storesOffer = this.advancedSearch.offer
       //let companies = this.advancedSearch.company
       //let levelId = parseInt(this.advancedSearch.level.id)
-     
+
 
       let params = {
         remember: false,
@@ -363,7 +363,7 @@ export default {
           }
         }
       };
-     
+
       this.$crud.index("apiRoutes.qmarketplace.store", params).then(response => {
         //console.warn('[GET STORES ADVANCE SEARCH] ')
         this.stores = response.data
@@ -378,14 +378,14 @@ export default {
         console.error('[ERROR - GET STORES ADVANCE SEARCH] ', error)
         this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
       })
-      
+
       this.loadingBtn = false
-      
+
     },
     async getInforAdvanced(){
       this.$q.loading.show()
-      await this.getCategoriesStore().catch(error => {})
-      await this.getCities().catch(error => {})
+      await this.getCategoriesStore()
+      await this.getCities()
 
       //await this.getCompanies()
 
@@ -410,13 +410,13 @@ export default {
 <style lang="stylus">
 
 .advanced_search
-  
-  .fade-enter-active, 
+
+  .fade-enter-active,
   .fade-leave-active
     transition opacity .5s
-  
-  .fade-enter, 
+
+  .fade-enter,
   .fade-leave-to
     opacity 0;
- 
+
 </style>
