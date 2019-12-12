@@ -18,23 +18,26 @@
       </div>
       <div class="topWidgetHomeMobile q-mt-lg q-mb-md" v-else>
 
-         <carousel autoplay
+         <carousel id="movil-widget-home-carousel" autoplay
                    :autoplayTimeout="4000"
                    :loop="true"
                    :centerMode="true"
                    :perPageCustom="[[480, 2], [768, 2]]">
 
             <slide>
-
+               <div class="content-modal" @click="modal.quiz = !modal.quiz"></div>
                <quiz></quiz>
             </slide>
             <slide>
+               <div class="content-modal" @click="modal.companies = !modal.companies"></div>
                <top-companies></top-companies>
             </slide>
             <slide>
+               <div class="content-modal" @click="modal.users = !modal.users"></div>
                <top-users></top-users>
             </slide>
             <slide>
+               <div class="content-modal" @click="modal.trivia = !modal.trivia"></div>
                <trivia v-if="success" :trivia="trivia" :isModal="false" className="home-trivia"></trivia>
             </slide>
          </carousel>
@@ -199,6 +202,11 @@
 </script>
 <style lang="stylus">
    .topWidgetHomeMobile
+      .content-modal
+         z-index 10000
+         width 100%
+         height 100%
+         position absolute
       .card-top-users
          .img-title
             margin-top 0
@@ -209,7 +217,7 @@
 
       .card-quiz, .home-trivia
          .img-title
-            display none !important
+            padding-top 10px
 
       .home-trivia
          padding-top 20px
@@ -228,35 +236,68 @@
 
       .VueCarousel
          .VueCarousel-slide
-            padding  0 12px
+            padding 0 12px
+            max-height 210px
+            border-radius: 10px;
+            overflow hidden
+
+            .card-top-users
+               .img-title
+                  height 50px
+                  margin-bottom 0
 
             .q-card__top
                .img-title
-                  height 50px
+                  height 30px
 
             .q-card__section
                font-size 10px
+               margin-top 0
+               padding-top 0
+
                .q-stepper__nav
                   padding 0 16px
                ol, ul
                   li
-                     margin-bottom 10px
+                     margin-bottom 8px
                      font-size 12px
 
                .text-h6
-                  font-size 14px
+                  font-size 10px
+                  line-height: normal
+
                & .q-option-group
                   > div
                      border-radius 20px
-                     margin-bottom 10px
+                     margin-bottom 5px
+
                      .q-radio__inner
-                        width: 30px
-                        min-width: 20px
-                        height: 30px
-                        padding: 20px
+                        width: 20px
+                        min-width: 10px
+                        height: 20px
+                        padding: 10px
+                        display: none
+
                      & .q-icon
-                        font-size 15px !important
+                        font-size 8px !important
+
                      & .q-radio__label
-                         font-size 10px !important
+                        font-size 8px !important
+
+      #movil-widget-home-carousel
+         .movil-nav
+            display none !important
+         ol, ul
+            li
+               margin-bottom 4px
+               font-size 12px
+               max-width 80px
+               white-space: nowrap;
+               text-overflow: ellipsis;
+               overflow: hidden;
+         .q-card__section
+            .text-h6
+               margin 0 9px
+               font-weight bold
 
 </style>

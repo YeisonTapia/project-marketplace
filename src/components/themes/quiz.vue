@@ -21,13 +21,13 @@
 
         </q-card-section>
 
-        <q-stepper-navigation  align="right" class="q-pa-md" v-if="index < poll.questions.length - 1" >
+        <q-stepper-navigation  align="right" class="q-pa-md movil-nav" v-if="index < poll.questions.length - 1" >
           <div class="text-light text-center cursor-pointer" @click="next()">
             <div class="font-family-secondary">Siguiente</div>
             <img src="statics/img/arrow-right-blue.png" style="width:25px;">
           </div>
         </q-stepper-navigation>
-        <q-stepper-navigation align="right" v-else class="send q-pa-md" >
+        <q-stepper-navigation align="right" v-else class="send q-pa-md movil-nav" >
            <q-btn :loading="btnLoading" class="bg-primary text-light font-family-secondary" @click="saveData">Enviar
             <template v-slot:loading>
               <q-spinner-hourglass class="on-left" />
@@ -39,7 +39,6 @@
 
       <q-inner-loading :visible="loading" />
     </q-stepper>
-    
 
     <!-- msj final -->
     <q-banner v-if="alertContent.active && !showVotes" :class="alertContent.color" class="q-mx-sm q-mt-xl q-py-md">
@@ -51,7 +50,6 @@
         {{alertContent.msj}}
       </div>
     </q-banner>
- 
 
     <!-- Votes Poll -->
     <div v-if="showVotes" class="votesPoll text-white q-px-md q-py-md">

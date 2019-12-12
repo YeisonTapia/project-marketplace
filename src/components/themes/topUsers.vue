@@ -4,10 +4,10 @@
       <img class="img-title" src="/statics/img/copa.png">
     </div>
     <q-card-section>
-      <div class="text-h6 font-family-secondary">Usuarios Destacados</div>
+      <div class="text-h6 destc-text font-family-secondary">Usuarios Destacados</div>
       <div v-if="listUsers.length>0">
         <ul>
-          <li v-for="user of listUsers">{{user.fullName}}</li>
+        <li v-for="user of listUsers">{{user.fullName}}</li>
         </ul>
       </div>
       <div v-else>

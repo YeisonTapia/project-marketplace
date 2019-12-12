@@ -24,8 +24,7 @@
           </div>
         </q-card-section>
 
-        <q-stepper-navigation class="q-pa-md">
-
+        <q-stepper-navigation class="q-pa-md movil-nav" >
           <div class="row justify-end items-center full-width full-height" v-if="index < trivia.questions.length - 1">
             <div class="col-6 text-center cursor-pointer" v-show="isModal">
               <q-icon name="fas fa-share-alt"/>

@@ -18,9 +18,6 @@
                   <div v-if="$q.platform.is.desktop" class="bg-white text-subtitle1 text-bold text-primary label-title q-px-md q-py-xs text-uppercase">
                      {{store.name}}
                   </div>
-                  <div v-else class="bg-white text-subtitle1 text-bold text-primary label-title q-px-md q-py-xs text-uppercase">
-                  {{store.name.substr(0,16)}}
-               </div>
                </div>
             </q-img>
          </router-link>
@@ -30,7 +27,7 @@
                   {{store.slogan}}
                </div>
                <div class="col-12" v-else>
-                  {{store.slogan.substr(0,50)}}
+                  {{store.name}}
                </div>
             </q-card-section>
          </router-link>
@@ -118,21 +115,28 @@
 
          & img
             border 2px solid #ffffff
-
+   @media screen and (max-width: $breakpoint-md)
+      .card-store
+         .summary
+            font-weight bold
+            color $tertiary !important
+            line-height: normal;
    @media screen and (max-width: $breakpoint-xs)
       .text-subtitle1
          font-size 9px
          min-height 20px
       .card-store
          border-radius 0px 0px 20px 20px
-
          a
             color: inherit;
             text-decoration: none;
 
          .summary
             font-size 10px
-            min-height 30px
+            min-height 50px
+            line-height: normal;
+            font-weight bold
+            color $tertiary !important
 
          .q-img__content > div
             padding 0
@@ -160,6 +164,6 @@
                border 2px solid #ffffff
 
          .q-avatar
-            height: 60px
-            width: 60px
+            height: 50px
+            width: 50px
 </style>
