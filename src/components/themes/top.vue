@@ -157,9 +157,11 @@
 
                this.$crud.index("apiRoutes.qtrivia.trivias", params).then(response => {
                   this.trivias = response.data
+
                   resolve(true)//Resolve
                }).catch(error => {
                   this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+                  console.warn('ERROR - THEMES - TOP - GET TRIVIAS')
                   reject(false)//Resolve
                })
 
@@ -184,6 +186,7 @@
                   resolve(true)//Resolve
                }).catch(error => {
                   this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+                  console.warn("ERROR - THEMES - TOP - GET USER TRIVIAS ")
                   reject(false)//Resolve
                })
 
