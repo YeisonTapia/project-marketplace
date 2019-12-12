@@ -76,6 +76,8 @@
     @media screen and (max-width: $breakpoint-sm)
         height 200px
         .custom-caption
+          top 40%
+          max-width 80%
           .text-h2
             font-size: 1.75rem;
             font-weight: 300;
