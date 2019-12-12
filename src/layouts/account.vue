@@ -110,7 +110,7 @@
                 await this.getPointsUser().catch(error => {})
             },
             
-            // Get Points Available User
+            // Get ALL POINTS
             getPointsUser(){
                 return new Promise((resolve, reject) => {
                   
@@ -121,7 +121,7 @@
                     params: {
                       filter: {
                         userId: this.$store.state.quserAuth.userId,
-                        type: 'availablePointsUser'
+                        type: 'totalPointsUser'
                       }
                     }
                   }
@@ -132,7 +132,7 @@
                       if(response.data.data.points>0)
                         this.pointsAvailables = response.data.data.points
 
-                      console.warn("*** GET POINTS USER - Puntos Disponibles:"+this.pointsAvailables )
+                      //console.warn("*** GET POINTS USER - Puntos Historicos:"+this.pointsAvailables )
                       resolve(true);
 
                     })

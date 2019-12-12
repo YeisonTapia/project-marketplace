@@ -26,7 +26,7 @@
 
                 <q-item-section>
                   <q-slider
-                    v-model="pointsAvailables"
+                    v-model="userPointsAvailables"
                     markers
                     snap
                     label
@@ -35,7 +35,7 @@
                     :max="meta"
                     :step="step"
                     readonly
-                    :label-value="pointsAvailables + ' puntos' "
+                    :label-value="userPointsAvailables + ' puntos' "
 
                   />
                 </q-item-section>
@@ -95,7 +95,7 @@
                         </div>
                         <div class="col-xs-12 col-sm">
 
-                          <q-btn v-if="pointsAvailables>=item.value" label="Canjear" no-caps size="lg" color="tertiary" @click="redeemItem(item)"/>
+                          <q-btn v-if="userPointsAvailables>=item.value" label="Canjear" no-caps size="lg" color="tertiary" @click="redeemItem(item)"/>
 
                           <q-btn v-else label="Canjear" no-caps size="lg" color="tertiary" disabled class="cursor-not-allowed"/>
 
@@ -236,7 +236,7 @@
         acumulados: 0,
         itemsRedeems: [],
         userId: this.$store.state.quserAuth.userId ? this.$store.state.quserAuth.userId : null,
-        //pointsAvailables: 0,
+        userPointsAvailables: 0,
         userItemsRedeems: [],
         tableColumns: [
           /*
@@ -313,7 +313,7 @@
         this.loading = true
 
         // Points Availables to User
-        //await this.getPointsUser()
+        await this.getPointsUser().catch(error => {})
 
         // Items User redeems
         await this.getRedeemsItemsUser().catch(error => {})
@@ -390,7 +390,7 @@
       getPointsUser(){
         return new Promise((resolve, reject) => {
           
-          //this.pointsAvailables = 0
+          this.userPointsAvailables = 0
 
           //Params
           let params = {
@@ -406,9 +406,9 @@
             .then(response => {
 
               if(response.data.data.points>0)
-                //this.pointsAvailables = response.data.data.points
+                this.userPointsAvailables = response.data.data.points
 
-              console.warn("*** GET POINTS USER - Puntos Disponibles:"+this.pointsAvailables )
+              console.warn("*** GET POINTS USER - Puntos Disponibles:"+this.userPointsAvailables )
               resolve(true);
 
             })
@@ -432,11 +432,12 @@
       
         this.$crud.create('apiRoutes.qredeems.redeems', data).then(response => {
           
-          console.warn('*** CREATE REDEEMS REDEEMS')
+          //console.warn('*** CREATE REDEEMS REDEEMS')
 
-          // Points Availables to User
-          this.emitChangePoints()
-          //this.getPointsUser()
+          // Points Availables to User (Account - Menu - Lateral)
+          //this.emitChangePoints()
+
+          this.getPointsUser()
 
           // Items User redeems
           this.userItemsRedeems.push(item.id)
