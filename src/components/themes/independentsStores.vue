@@ -5,7 +5,7 @@
                 <div>Independientes Destacados</div>
             </h3>
             <div class="line-primary"></div>
-            <div class="row q-pa-lg">
+            <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-3" v-for="store in stores">
                     <store :store="store"></store>
                 </div>

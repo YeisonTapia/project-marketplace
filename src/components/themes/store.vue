@@ -1,6 +1,6 @@
 <template>
    <div>
-      <q-card class="card-store q-ma-md">
+      <q-card class="card-store q-ma-sm q-pa-sm">
          <router-link :to="{name: 'stores.show',params: {slug: store.slug}}">
             <q-img :ratio="4/3" :src="store.mainImage.path">
                <div class="absolute-top-left text-center q-ml-md">
