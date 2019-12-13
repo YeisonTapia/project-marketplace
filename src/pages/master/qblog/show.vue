@@ -74,7 +74,7 @@
 
 
          <div class="q-container banner q-py-xl text-center">
-           <img class="w-100" src="/statics/img/publicidad1-100.jpg" alt="banner">
+           <img class="full-width" src="/statics/img/publicidad1-100.jpg" alt="banner">
          </div>  
       </div>
    </q-page>
