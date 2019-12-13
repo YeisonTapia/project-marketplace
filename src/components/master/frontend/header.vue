@@ -335,7 +335,7 @@
                      .q-item
                         background-color  transparent
                         cursor pointer
-                        color red
+                        color $secondary
                         font-size: 1.1rem;
                         .q-item__section--avatar
                            min-width 20px
