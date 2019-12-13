@@ -269,25 +269,26 @@
    #masterHeader
       .header-desktop
          #listMenu
-            margin-left  auto
-            margin-right auto
             .q-expansion-item__container
                .q-expansion-item__content
                   padding 0 0 0 15px
+               .q-expansion-item__toggle-icon
+                  display none         
             .content-item
-               padding 0 15px
                transform: none !important;
-               display: inline-block;
                border none
                .q-expansion-item__content
                   position absolute
                #listMenu
                   position absolute
                   width 347px
-                  transform: skew(-10deg) !important;
-                  left -35px
+                  transform: skew(0deg) !important;
+                  left 0px
                   top 10px
                   background-color $grey-3
+                  .q-expansion-item__container
+                     .q-expansion-item__toggle-icon
+                        display block 
                   .content-item
                      padding 0
                      transform: none !important;
@@ -304,14 +305,15 @@
                         height 100%
                         .q-icon
                            color $tertiary
-                           font-size 27px
+                           font-size 27px!important
                      #listMenu
-                        padding-top 20px
+                        padding-top 18px
+                        padding-bottom 18px
                         transform: skew(0deg) !important
                         background-color $tertiary
                         position absolute
-                        left: 347px;
-                        top -69 px
+                        left 347px
+                        top -67 px
                         z-index 10000
                         display block
                         .content-item
@@ -328,19 +330,18 @@
                               color #fff
                               text-shadow none
 
-
-               .q-separator
-                  display none
-               .q-item
-                  background-color  transparent
-                  cursor pointer
-                  color $grey-9
-                  font-size: 1.1rem;
-                  .q-item__section--avatar
-                     min-width 20px
-                     padding-right 10px
-                  .q-icon
-                     font-size 16px
+                     .q-separator
+                        display none
+                     .q-item
+                        background-color  transparent
+                        cursor pointer
+                        color red
+                        font-size: 1.1rem;
+                        .q-item__section--avatar
+                           min-width 20px
+                           padding-right 10px
+                        .q-icon
+                           font-size 16px
       .header-movil
          .logo
             background-image url('/statics/img/bg-logo.png')
@@ -470,39 +471,37 @@
                opacity 0
 
          .menu
+            -webkit-transform skew(10deg)
+            transform skew(10deg)
+            border-radius 10px
+            padding 10px 15px
+            margin -14px 0 10px 0
+            background-color $warning
+            font-size 1rem
+            position relative
+            z-index 99
             > div
-               -webkit-transform skew(10deg)
-               transform skew(10deg)
-               border-radius 10px
-               padding 10px 15px
-               margin -14px 0 10px 0
-               background-color $warning
-               font-size 1rem
-               position relative
-               z-index 99
-
-               > .q-list
-                  -webkit-transform skew(-10deg)
-                  transform skew(-10deg)
-                  display -ms-flexbox
-                  display flex
-                  -ms-flex-wrap wrap
-                  flex-wrap wrap
-                  margin 0
-                  list-style none
-                  padding 0
-
-                  > .q-item, .q-btn
-                     -ms-flex 1 1 auto
-                     flex 1 1 auto
+               display -ms-flexbox 
+               display flex
+               -ms-flex-wrap wrap
+               flex-wrap wrap
+               margin 0
+               list-style none
+               padding 0
+               -webkit-transform skew(-10deg) !important
+               transform skew(-10deg) !important
+               > .content-item
+                  -ms-flex 1 1 auto
+                  flex 1 1 auto
+                  > .q-expansion-item, > .q-item
                      cursor pointer
                      position relative
                      color $secondary
-                     font-size 1rem
-
+                     font-size 1rem     
                      &:hover
-                        color $tertiary
-
+                        color $tertiary !important
+                        .q-focus-helper
+                           background-color transparent !important
                         &:before
                            content ''
                            background-image url('/statics/img/menu-hover.png')
@@ -514,20 +513,5 @@
                            left 0
                            right 0
                            background-position center
-
-   .menu-expansion-item
-      color $secondary
-      font-size 1rem
-      font-weight bold
-
-      .q-icon
-         color $tertiary
-         margin 10px
-
-      .single-item:hover
-         background $tertiary !important
-         color #fff
-
-         .q-icon
-            color #fff
+                    
 </style>
