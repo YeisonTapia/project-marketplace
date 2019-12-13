@@ -29,7 +29,7 @@ let responsePages = {
         busqueda: {
             permission: null,
             activated: true,
-            path: '/busqueda/:text/:cityId?/:neighborhoodId?',
+            path: '/busqueda/:text/:cityId?/:neighborhoodId',
             name: 'app.busqueda',
             layout: () => import('src/layouts/master'),
             page: () => import('pages/busqueda.vue'),

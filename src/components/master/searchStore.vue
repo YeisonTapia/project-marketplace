@@ -34,7 +34,7 @@
     <div v-else>
       <div class="search-mobile" v-if="success" >
         <q-input
-        v-model="search.text" 
+        v-model="search.text"
         rounded outlined dense
         class="q-mb-sm"
         placeholder="Busca tu vaina aquí..."
@@ -46,7 +46,7 @@
           v-model="search.neighborhood"
           :options="neighborhoodOptions"
           />
- 
+
         <q-select
           rounded outlined dense
           class="select-cities q-mb-sm"
@@ -171,8 +171,11 @@ export default {
 
         let cityId = this.search.city.id
         let neighborhoodId = this.search.neighborhood.id
-
-        if(this.search.text!=null && this.search.text!=''){
+        if(this.search.text==""){
+          this.search.text="Todas las tiendas";
+        }
+        // if(this.search.text!=null && this.search.text!=''){
+        if(this.search.text!=null){
           this.$router.push({
             name: 'app.busqueda',
             params: {
@@ -182,7 +185,7 @@ export default {
             }
           })
         }
-       
+
       }
 
     }

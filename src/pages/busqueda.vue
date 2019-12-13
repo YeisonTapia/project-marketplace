@@ -196,18 +196,23 @@ export default {
     },
     // Basic Search Stores
     searchStores() {
-
+      if(this.paramsF.text=="Todas las tiendas"){
+        this.paramsF.text="";
+      }
       let params = {
         remember: false,
         params: {
           filter:{
             cities: this.paramsF.cityId,
-            neighborhoods: this.paramsF.neighborhoodId ? this.paramsF.neighborhoodId : null,
+            // neighborhoods: this.paramsF.neighborhoodId ? this.paramsF.neighborhoodId : null,
             search: this.paramsF.text
           }
         }
       };
-
+      var neighborhood=this.paramsF.neighborhoodId ? this.paramsF.neighborhoodId : null;
+      if(neighborhood){
+        params.params.filter.neighborhoods=neighborhood;
+      }
       this.$crud.index("apiRoutes.qmarketplace.store", params).then(response => {
         this.stores = response.data
       }).catch(error => {
