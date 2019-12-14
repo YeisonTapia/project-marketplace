@@ -120,17 +120,4 @@
   }
 </script>
 <style lang="stylus">
-  #listMenu
-    .q-expansion-item__container
-      .q-expansion-item__content
-        padding 0 0 0 15px
-    .q-item
-      cursor pointer
-      background-color white
-      color $grey-9
-      .q-item__section--avatar
-        min-width 20px
-        padding-right 10px
-      .q-icon
-        font-size 16px
 </style>
