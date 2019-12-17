@@ -234,7 +234,12 @@
             title: 'Mis Tiendas Favoritas',
             icon: 'far fa-star',
             to: 'qmarketplace.account.favorite.stores'
-          }
+          },
+          {
+            title: 'Mis Notificaciones',
+            icon: 'add_alert',
+            to: 'quser.account.notifications'
+          },
         ],
         pointsHistory: 0
       }

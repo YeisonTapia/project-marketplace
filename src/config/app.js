@@ -14,7 +14,8 @@ export default {
         'qtrivia',
         'qredeems',
         'qticket',
-        'qchat'
+        'qchat',
+        'qnotification'
     ],
     saveCache: {
         refresh: [

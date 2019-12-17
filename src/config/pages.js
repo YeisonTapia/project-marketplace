@@ -156,9 +156,21 @@ let responsePages = {
             activated: true,
             path: '/account/',
             name: 'quser.account.profile',
-            layout: () => import('src/layouts/quser/public/account.vue'),
+            layout: () => import('src/layouts/account.vue'),
             page: () => import('src/layouts/quser/public/index'),
             title: 'Perfil',
+            icon: 'apps',
+            authenticated: true
+        },
+        // User Notifications
+        userNotifications:{
+            //permission: 'marketplace.stores.manage',
+            activated: true,
+            path: '/account/notifications',
+            name: 'quser.account.notifications',
+            layout: () => import('src/layouts/account.vue'),
+            page: () => import('src/layouts/qnotifications/account/index'),
+            title: 'Notificaciones',
             icon: 'apps',
             authenticated: true
         },
