@@ -23,7 +23,7 @@
 
                 
                 <div v-if="tableFavoriteStores.length>0" class="row q-pa-lg">
-                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" v-for="favStore in tableFavoriteStores">
+                  <div class="col-xs-6 col-sm-4" v-for="favStore in tableFavoriteStores">
                     
                     <store 
                       :store="favStore.store" 

@@ -151,6 +151,17 @@ let responsePages = {
             icon: 'apps',
             authenticated: true
         },
+        userDaskboard:{
+            //permission: 'marketplace.stores.manage',
+            activated: true,
+            path: '/account/',
+            name: 'quser.account.profile',
+            layout: () => import('src/layouts/quser/public/account.vue'),
+            page: () => import('src/layouts/quser/public/index'),
+            title: 'Perfil',
+            icon: 'apps',
+            authenticated: true
+        },
 
 
     }
@@ -253,7 +264,7 @@ responsePages.quser.userProfile.layout= () => import('src/layouts/admin')
 responsePages.quser.userProfile.path='admin/me/profile'
 
 // QUSER FRONTEND
-responsePages.frontquser.userProfile.path ='/account/me/profile'
+responsePages.frontquser.userProfile.path ='/account/me/edit'
 responsePages.frontquser.userProfile.layout = () => import('src/layouts/account.vue')
 responsePages.frontquser.userProfile.page = () => import('src/layouts/quser/profile')
 responsePages.frontquser.login.layout = () => import('src/layouts/init.vue')

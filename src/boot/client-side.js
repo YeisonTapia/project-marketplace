@@ -1,5 +1,6 @@
 import { Carousel, Slide } from 'vue-carousel';
-
+import Echo from 'laravel-echo'
+import Pusher from 'pusher-js'
 
 export default async ({app, router, store, Vue}) => {
   await store.dispatch('qmarketplaceStores/GET_USER_STORES')

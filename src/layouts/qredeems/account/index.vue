@@ -47,7 +47,7 @@
                       <img src="/statics/img/comida.jpg">
                     </q-avatar>
                     <div>
-                      <img src="/statics/img/copa-puntos.png" alt="Copa">
+                      <img src="/statics/img/copa-puntos.png" alt="Copa" id="copa">
                     </div>
                     <div class="text-h5 font-family-secondary">{{meta}}</div>
                     Puntos
@@ -80,20 +80,20 @@
                     <div class="col-xs-12 col-sm-10 col-md-9 col-lg-8">
 
                       <div class="row q-col-gutter-md justify-center items-center">
-                        <div class="col-xs-5 col-sm">
+                        <div class=" col-sm">
                           <q-avatar class="font-family-secondary" font-size="2rem" color="primary" size="6rem" text-color="white">{{item.value}}</q-avatar>
                           <div class="text-h6">Puntos</div>
                         </div>
-                        <div class="col-xs-1 col-sm text-center">
+                        <div class=" col-sm text-center">
                           <div class="font-family-secondary text-secondary" style="font-size: 2rem;">=</div>
                         </div>
-                        <div class="col-xs-5 col-sm">
+                        <div class=" col-sm">
                           <q-avatar size="6rem" class="q-mb-sm">
                             <img :src="item.mainImage.path">
                           </q-avatar>
                           <div class="text-h6">{{item.name}}</div>
                         </div>
-                        <div class="col-xs-12 col-sm">
+                        <div class=" col-sm canjear">
 
                           <q-btn v-if="userPointsAvailables>=item.value" label="Canjear" no-caps size="lg" color="tertiary" @click="redeemItem(item)"/>
 
@@ -132,16 +132,16 @@
           <q-card-section class="q-py-xl">
 
               <div class="row q-col-gutter-md justify-center  text-center">
-                <div class="col-xs-12 col-sm-12 col-md self-start">
+                <div class="col-xs-4 col-sm-4 col-md self-start">
                   <q-avatar class="font-family-secondary" font-size="2rem" color="primary" size="6rem" text-color="white">{{acumulados}}</q-avatar>
                   <div class="text-h6">Puntos <br> Acumulados</div>
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-auto text-center self-center">
+                <div class=" col-md-auto text-center self-center">
                   <div class="font-family-secondary text-secondary" style="font-size: 2rem;">=</div>
                 </div>
 
-                <div class="col-sm-6 col-md self-start" v-for="(group, index) in pointsGroup" :key="index">
+                <div class=" col-md self-start" v-for="(group, index) in pointsGroup" :key="index">
                   <q-avatar class="font-family-secondary" font-size="2rem" color="tertiary" size="6rem" text-color="white">{{group.total}}</q-avatar>
                   <div class="text-h6">{{group.description}}</div>
                 </div>
@@ -626,5 +626,20 @@
     thead tr:first-child th
       top 0
     &.q-table--loading thead tr:last-child th
-      top 48px    
+      top 48px
+
+  @media screen and (max-width: $breakpoint-xs)
+    .title
+      font-size 20px
+    .q-card__section
+      padding-top 15px
+      .q-avatar
+        font-size 60px !important
+      #copa
+        max-height 60px
+    .canjear
+      padding-left 30px
+      padding-top 0
+      .btn
+        font-size 15px  !important
 </style>

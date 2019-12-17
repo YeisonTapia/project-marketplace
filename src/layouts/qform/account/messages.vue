@@ -1,211 +1,178 @@
 <template>
-  <q-page class="qcommerce-account-favoriteStores page-favorite-stores">
-    <div v-if="success" class="qmarketplace-content">
+   <q-page class="page-chat">
+      <div class="q-py-xs">
+         <div class="q-container">
+            <div class="row">
+               <div class="col-12">
+                  <div class="text-h5 text-primary q-mb-xs font-family-secondary">Chat</div>
+               </div>
+               <div class="col-12">
+                  <q-card class="rounded-md bg-white full-width q-my-sm">
+                     <div class="row gutter-md justify-center">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 card-border-right">
+                           <chat :conversation-id="conversationId"></chat>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 col-xl-4 bg-light"
+                             style="border-bottom-right-radius: 20px;">
+                           <q-toolbar class="bg-grey-9 text-white q-pr-none" style="border-top-right-radius: 20px;">
+                              <q-btn flat icon="fas fa-arrow-left"/>
+                              <q-toolbar-title>
+                                 Mensajes directos
+                              </q-toolbar-title>
+                           </q-toolbar>
+                           <q-card-section class="userMessages">
+                              <q-input outlined placeholder="Busqueda" bg-color="white"
+                                       class="full-width q-mb-lg" v-model="text" dense>
+                                 <q-btn round color="primary" flat icon="search"/>
+                              </q-input>
+                              <q-scroll-area ref="scrollArea" style="height: 450px;">
+                              <q-list>
+                                 <q-item @click="conversationId=conversation.id" v-for="conversation in listUsers"
+                                         :key="conversation.id" class="q-my-sm"
+                                         clickable v-ripple>
 
-      <div class="q-inline-block q-mb-lg">
-        <h4 class="title text-secondary font-family-secondary q-mt-none">
-          <div class="line-secondary q-mb-sm"></div>
-            Mis Mensajes
-          <div class="line-secondary q-mt-sm"></div>
-        </h4>
+                                    <q-item-section avatar>
+                                       <q-avatar color="primary" text-color="white">
+                                          <img :src="conversation.user.smallImage">
+                                       </q-avatar>
+                                    </q-item-section>
+
+                                    <q-item-section>
+                                       <q-item-label>{{ conversation.user.fullName }}</q-item-label>
+                                       <q-item-label caption lines="1">{{ conversation.user.email }}</q-item-label>
+                                    </q-item-section>
+
+                                    <q-item-section side>
+                                       <q-icon name="chat_bubble" :class="`newMessage${conversation.id}`" color="grey"/>
+                                    </q-item-section>
+
+                                 </q-item>
+
+                              </q-list>
+                              </q-scroll-area>
+
+                           </q-card-section>
+
+                        </div>
+                     </div>
+
+                  </q-card>
+
+
+               </div>
+
+            </div>
+         </div>
       </div>
-    
-      <div class="row q-col-gutter-md">
-        <div class="col-12">
-              
-            <q-card class="rounded-md q-mb-xl full-width">
-              <div class="q-pl-md">
-                <h3 class="title-label-puntos text-center bg-tertiary">
-                  <div>Mensajes</div>
-                </h3>
-              </div>
-              <q-card-section class="q-py-xl">
-                <q-table class="no-shadow my-sticky-header-table"
-                  :data="tableMessages"
-                  :columns="tableColumns"
-                  row-key="id"
-                />
-               
-              </q-card-section>
-            </q-card>
-
-        </div>
-      </div>
-      
-    </div>  
-    <!--Inner loading-->
-    <inner-loading :visible="loading"/>
-  </q-page>
-
-
+   </q-page>
 </template>
+
 <script>
+   import {Picker} from 'emoji-mart-vue'
+   import Echo from "laravel-echo";
+   import Pusher from 'pusher-js';
+   import chat from '@imagina/qmarketplace/_components/admin/qchat/chat'
 
-  import { date } from 'quasar'
-
-  export default {
-    props: {},
-    components: {},
-    watch: {},
-    validations() {
-      return {}
-    },
-    mounted() {
-      this.$nextTick(function () {
-        this.init()
-      })
-    },
-    data() {
-      return {
-        loading: false,
-        success: false,
-        userId: this.$store.state.quserAuth.userId ? this.$store.state.quserAuth.userId : null,
-        tableMessages: [],
-        tableColumns: [
-          {
-            name: 'id',
-            field: 'id', 
-            label: 'ID',
-            align: 'left',
-            sortable: true
-          },
-          {
-            name: 'titulo',
-            field: 'title', 
-            label: 'TITULO',
-            align: 'left'
-          },
-          {
-            name: 'createdAt',
-            field: 'createdAt', 
-            label: 'AGREGADA EL',
-            align: 'left',
-            sortable: true,
-            format: val => this.fDate(val),
-          }
-        ],
-      }
-    },
-    methods: {
-      //init
-      async init() {
-
-        this.loading = true
-
-        // Favorite Stores
-        //await this.getMessages()
-
-        this.loading = false
-        this.success = true
-
+   export default {
+      name: "about",
+      components: {
+         chat,
+         Picker,
       },
-      // Get redeems ITEMS ID for a User
-      getMessages(){
-        return new Promise((resolve, reject) => {
-          
-          console.warn("BUSCAR MENSAJES DEL USUARIO")
-          this.tableMessages = []
-          //Params
-          /*
-          let params = {
-            refresh: true,
-            params: {
-              include: 'store',
-              filter: {userId:this.userId,allTranslations:true}
+      computed: {
+         listUsers() {
+            let data = this.$clone(this.table.data)
+            return data.filter(item => {
+               return item.user.fullName.toLowerCase().includes(this.text.toLowerCase())
+            })
+         }
+      },
+      data() {
+         return {
+            tab: 'chats',
+            text: '',
+            contacts: [],
+            leftDrawerOpen: false,
+            currentConversationIndex: 0,
+            echo: null,
+            loading: false,
+            user: this.$store.state.quserAuth.userData,
+            conversationId: 0,
+            messages: [],
+            newMessage: 'green',
+            table: {
+               data: [],
+               pagination: {
+                  page: 1,
+                  rowsNumber: '',
+                  rowsPerPage: 50
+               },
+               filter: {
+                  search: null
+               }
+            },
+         }
+      },
+      created() {
+         this.$nextTick(function () {
+            this.getDataTable()
+            this.initPusher()
+         })
+      },
+      methods: {
+         getDataTable(refresh = false) {
+            this.getData({pagination: this.table.pagination}, refresh)
+         },
+         getData({pagination, filter}, refresh = false) {
+            this.loading = true
+            //Params to request
+            let params = {
+               refresh: refresh,
+               params: {
+                  filter: {between: [this.$store.state.quserAuth.userId]},
+                  include: 'users'
+               }
             }
-          }
-          */
-         
-          /*
-          this.$crud.index("apiRoutes.qmarketplace.favoriteStore",params).then(response => {
-            this.tableFavoriteStores = response.data
-            resolve(true)//Resolve
-          }).catch(error => {
-            console.error("ERROR - GET FAVORITE STORES")
-            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
-            reject(false)//Resolve
-          })
-          */
-         
+            //Request
+            this.$crud.index('apiRoutes.qchat.conversations', params).then(response => {
+               let data = []
 
-        })
-      },
-      // Format date table
-      fDate(val){
-        let formattedString = date.formatDate(val, 'DD-MM-YYYY')
-        return formattedString
+               response.data.map(item => {
+                  let user = item.users.find(user => parseInt(user.id) !== parseInt(this.$store.state.quserAuth.userId))
+                  if (user) data.push({id: item.id, user: user})
+               })
+
+               this.table.data = data
+               this.loading = false
+            })
+                .catch(error => {
+                   this.loading = false
+                })
+         },
+         initPusher() {
+            this.echo = new Echo({
+               broadcaster: env('BROADCAST_DRIVER', 'pusher'),
+               key: env('PUSHER_APP_KEY'),
+               cluster: env('PUSHER_APP_CLUSTER'),
+               encrypted: env('PUSHER_APP_ENCRYPTED'),
+            })
+            this.echo.channel('global')
+                .listen(`.conversationsUserUpdated${this.$store.state.quserAuth.userData.id}`, response => {
+                   this.getDataTable(true)
+                   console.warn(response.message.conversationId)
+                })
+         },
+
       }
-    }
-  }
+   }
 </script>
 <style lang="stylus">
-.page-favorite-stores
-  .title-label-puntos
-    -webkit-transform skew(10deg)
-    transform skew(10deg)
-    border-radius 10px
-    padding 0px 30px
-    display inline-block
-    min-width 40%
-    margin -58px 0 10px 0
-    color #FFFFFF
-    font-size 20px
-    position relative
-    font-family $font-secondary
-    &:before
-      content ''
-      background-image url('/statics/img/arrow-down-blue.png')
-      position absolute
-      right -25px
-      width 100%
-      height 50px
-      background-repeat no-repeat
-      background-size contain
-      top 27px
-      background-position right
-    @media screen and (max-width: $breakpoint-md)
-      min-width 60%
-      font-size 20px
-      padding 0 15px
-      &:before
-          display none !important   
-    @media screen and (max-width: $breakpoint-sm)
-      min-width 60%
-      font-size 15px
-      padding 0 10px         
-    & > div
-      -webkit-transform  skew(-10deg)
-      transform skew(-10deg)      
-  .q-mx-puntos   
-    padding-left 80px
-    padding-right 80px  
-    @media screen and (max-width: $breakpoint-md)
-      padding-left 30px
-      padding-right 30px  
-    @media screen and (max-width: $breakpoint-sm)
-      padding-left 10px
-      padding-right 10px  
-  .text-h6 
-    line-height 1.5rem
-    color $secondary
-    @media screen and (max-width: $breakpoint-sm)
-      line-height 1rem
-      font-sie 1rem
-      margin-top 10px
-      margin-bottom 20px  
-      
-  .my-sticky-header-table
-    .q-table__top
-    thead tr:first-child th
-      background-color var(--q-color-light)
+   .page-chat
+      .card-border-right
+         border-right 2px solid #E1E1E1
 
-    thead tr th
-      position sticky
-      z-index 1
-    thead tr:first-child th
-      top 0
-    &.q-table--loading thead tr:last-child th
-      top 48px    
-      
-
+      .userMessages
+         .q-item
+            margin 5px 0
+            padding 10px 10px
 </style>
