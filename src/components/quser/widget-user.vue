@@ -3,14 +3,23 @@
     <q-btn-dropdown class="q-pa-none" round flat no-caps icon="fas fa-user-alt" dropdown-icon="fa" v-if="userData">
       <q-list class="bg-light">
 
-
-        <q-item  clickable v-ripple :to="{name: 'user.profile.me'}">
+        <!--  :to="{name: 'user.profile.me'}" -->
+        <q-item  clickable v-ripple :to="{name: 'quser.account.profile'}">
           <q-item-section avatar>
             <q-avatar>
               <img :src="userData.mediumImage">
             </q-avatar>
           </q-item-section>
           <q-item-section class="q-py-md">{{userData.fullName}}</q-item-section>
+        </q-item>
+
+        <q-separator />
+
+        <q-item  clickable v-ripple :to="{name: 'quser.account.profile'}">
+          <q-item-section avatar>
+            <q-icon color="primary" name="fas fa-home" />
+          </q-item-section>
+          <q-item-section class="q-py-md">Inicio</q-item-section>
         </q-item>
 
         <q-separator />

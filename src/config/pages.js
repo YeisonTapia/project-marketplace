@@ -151,14 +151,15 @@ let responsePages = {
             icon: 'apps',
             authenticated: true
         },
-        userDaskboard:{
+        // User Dashboard
+        userDashboard:{
             //permission: 'marketplace.stores.manage',
             activated: true,
             path: '/account/',
             name: 'quser.account.profile',
             layout: () => import('src/layouts/account.vue'),
-            page: () => import('src/layouts/quser/public/index'),
-            title: 'Perfil',
+            page: () => import('src/layouts/quser/index'),
+            title: 'Inicio',
             icon: 'apps',
             authenticated: true
         },
