@@ -133,6 +133,9 @@
             this.inRequest = false
             this.$emit('logged')
           }).catch(error => {
+            //console.warn("ERROR - COMPONENTS - QUSER - AUTH - LOGIN")
+            this.$alert.error("Usuario o Contraseña incorrecta")
+
             this.loading = false
             this.inRequest = false
           })

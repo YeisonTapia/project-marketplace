@@ -326,4 +326,9 @@ responsePages.qmarketplace.storeProductsCreate.page= () => import('src/layouts/q
 //QTICKET
 responsePages.qticket.tickets.layout= () => import('src/layouts/admin')
 
+//QCHAT
+responsePages.qchat.messages.path='admin/chat/messages'
+responsePages.qchat.messages.layout = () => import('src/layouts/admin')
+
+
 export default responsePages

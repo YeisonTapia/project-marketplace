@@ -30,6 +30,7 @@
     "emoji-mart-vue": "^2.6.6",
     "laravel-echo": "^1.6.1",
     "localforage": "^1.7.2",
+    "pusher-js": "^5.0.3",
     "quasar": "^1.5.5",
     "vue-apexcharts": "^1.5.1",
     "vue-i18n": "^8.15.1",
