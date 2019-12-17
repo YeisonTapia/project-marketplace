@@ -21,7 +21,11 @@
                         <div class="profile">
                            <widget-user></widget-user>
                            <span class="q-px-md font-family-primary line">|</span>
-                           <q-btn class="q-pa-none" flat icon="fas fa-heart"/>
+                           <q-btn 
+                              class="q-pa-none" 
+                              flat 
+                              icon="fas fa-heart"  
+                              :to="{name: 'qmarketplace.account.favorite.stores'}"/>
                         </div>
                      </div>
                      <div class="col-12 q-py-lg">
