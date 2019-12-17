@@ -1,6 +1,6 @@
 <template>
   <div class="q-inline-block widget-user">
-    <q-btn-dropdown class="q-pa-none" round flat no-caps icon="fas fa-user-alt" dropdown-icon="fa" v-if="userData">
+    <q-btn-dropdown class="q-pa-none" round dense flat no-caps icon="fas fa-user-alt" dropdown-icon="fa" v-if="userData">
       <q-list class="bg-light">
 
         <!--  :to="{name: 'user.profile.me'}" -->

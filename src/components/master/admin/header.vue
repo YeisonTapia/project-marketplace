@@ -21,7 +21,7 @@
                         <div class="profile">
                            <widget-user></widget-user>
                            <span class="q-px-sm font-family-primary line">|</span>
-                           <q-btn class="q-pa-none" round flat icon="fas fa-heart"/>
+                           <q-btn class="q-pa-none" dense round flat icon="fas fa-heart" :to="{name: 'qmarketplace.account.favorite.stores'}"/>
                            <span class="q-px-sm font-family-primary line">|</span>
                            <!--== Button Config ==-->
                            <q-btn round dense flat icon="fas fa-cog"
@@ -336,9 +336,8 @@
             padding 10px 25px
 
             & .q-btn
-               height 1.5em
-               width 1.5em
-
+               min-height 1em !important
+               min-width 1em !important
                & :hover
                   color $warning
 
@@ -358,9 +357,10 @@
                background-size contain
                width 65px
                content ''
-               position absolute
                top -0
                border-radius 50%
+               margin-left auto
+               margin-right auto
 
             &:after
                height 33px
@@ -371,6 +371,8 @@
                content ''
                position absolute
                bottom -30px
+               margin-left -32.5px
+               left 50%
 
             & .q-icon
                color #f7c837
