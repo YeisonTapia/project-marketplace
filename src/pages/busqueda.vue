@@ -94,7 +94,7 @@
     <!-- Results Stores -->
     <div>
       <div v-if="stores.length>0" class="row q-pa-lg">
-        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" v-for="store in stores">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 text-center" v-for="store in stores">
           <store :store="store"></store>
         </div>
       </div>

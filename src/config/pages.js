@@ -37,17 +37,6 @@ let responsePages = {
             icon: 'far fa-envelope-open',
             authenticated: false
         },
-        categoria: {
-            permission: null,
-            activated: true,
-            path: '/categoria',
-            name: 'app.categoria',
-            layout: () => import('src/layouts/master'),
-            page: () => import('pages/categoria.vue'),
-            title: 'categoria',
-            icon: 'far fa-envelope-open',
-            authenticated: false
-        },
         ofertas: {
             permission: null,
             activated: true,

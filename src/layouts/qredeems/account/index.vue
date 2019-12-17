@@ -137,11 +137,11 @@
                   <div class="text-h6">Puntos <br> Acumulados</div>
                 </div>
 
-                <div class=" col-md-auto text-center self-center">
+                <div class="col-xs-4 col-md-auto text-center self-center">
                   <div class="font-family-secondary text-secondary" style="font-size: 2rem;">=</div>
                 </div>
 
-                <div class=" col-md self-start" v-for="(group, index) in pointsGroup" :key="index">
+                <div class="col-xs-4 col-md self-start" v-for="(group, index) in pointsGroup" :key="index">
                   <q-avatar class="font-family-secondary" font-size="2rem" color="tertiary" size="6rem" text-color="white">{{group.total}}</q-avatar>
                   <div class="text-h6">{{group.description}}</div>
                 </div>
