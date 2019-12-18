@@ -5,7 +5,7 @@
 
       <div class="title-principal q-mb-xl">
         <h3 class="font-family-secondary q-mt-none q-mb-md">Completa el formulario y <span class="text-tertiary">obten 10 puntos</span> para obtener <span class="text-tertiary">Premios y Descuentos.</span></h3>
-        <small class="q-mb-xl">Los datos de este formulario seran usados para adaptar las promociones y busquedas de tiendas a sus necesidades</small>
+        <small class="q-mb-xl font-family-primary">Los datos de este formulario seran usados para adaptar las promociones y busquedas de tiendas a sus necesidades</small>
       </div>
 
       <div class="row items-center form-general">
@@ -1119,7 +1119,9 @@
       color #4D4D4D
     small
       font-size 15px
-      font-family 'Trebuchet MS'
+    @media screen and (max-width: $breakpoint-sm)  
+      h3 
+        font-size 20px
   .title-label-profile
     -webkit-transform skew(10deg)
     transform skew(10deg)

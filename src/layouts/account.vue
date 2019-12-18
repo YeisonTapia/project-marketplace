@@ -10,7 +10,7 @@
 
                 <q-pull-to-refresh @refresh="refreshPage">
 
-                    <div class="row q-col-gutter-lg q-my-xl">
+                    <div class="row q-col-gutter-lg ">
 
                       <div class="col-12 col-md-12 col-lg-4 col-xl-3">
                         <menuAccount :pointsAvailables="pointsAvailables"/>
