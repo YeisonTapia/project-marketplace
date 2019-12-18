@@ -1074,9 +1074,25 @@
       // Get Categories Store Like Promotions
       getCategoriesStore(){
         return new Promise((resolve, reject) => {
+
+          /*
+          let params = {
+            refresh: true,
+            params: {
+              filter: {allTranslations: true}
+            }
+          }
+          */
+
           this.$crud.index("apiRoutes.qmarketplace.category").then(response => {
             
-            this.promotionOptions = response.data
+            response.data.forEach(data => {
+              this.promotionOptions.push({
+                label:data.title,
+                value:data.id
+              })
+            })
+
             resolve(true)//Resolve
 
           }).catch(error => {
