@@ -206,6 +206,11 @@
         },
         menuAccount:[
           {
+            title: 'Inicio',
+            icon: 'fas fa-tachometer-alt',
+            to: 'quser.account.profile'
+          },
+          {
             title: 'Editar Perfil',
             icon: 'far fa-edit',
             to: 'user.profile.me'

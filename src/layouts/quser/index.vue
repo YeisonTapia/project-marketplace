@@ -6,7 +6,7 @@
       <div class="q-inline-block q-mb-lg">
         <h4 class="title text-secondary font-family-secondary q-mt-none">
           <div class="line-secondary q-mb-sm"></div>
-            Informe
+            Inicio
           <div class="line-secondary q-mt-sm"></div>
         </h4>
       </div>
