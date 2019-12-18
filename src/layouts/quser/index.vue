@@ -11,12 +11,6 @@
         </h4>
       </div>
 
-    
-     
-
-      
-
-
     </div>  
 
     <!--Inner loading-->
