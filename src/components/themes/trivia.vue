@@ -210,13 +210,13 @@ export default {
         this.loading = true;
         this.btnLoading = true
 
-        await this.setDataFinal().catch(error => {})
+        await this.setDataFinal()
 
         // User Questions Answers
-        await this.saveUserQuestionsAnswers().catch(error => {})
+        await this.saveUserQuestionsAnswers()
 
         // Finished Trivia
-        await this.saveUserTrivia().catch(error => {})
+        await this.saveUserTrivia()
 
         this.$v.$reset()//Reset validations
         this.alertContent.active = true
