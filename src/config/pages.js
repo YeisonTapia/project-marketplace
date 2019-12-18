@@ -354,5 +354,9 @@ responsePages.qticket.tickets.layout= () => import('src/layouts/admin')
 responsePages.qchat.messages.path='admin/chat/messages'
 responsePages.qchat.messages.layout = () => import('src/layouts/admin')
 
+//QNOTIFICATIONS
+responsePages.qnotification.notifications.path='admin/notifications'
+responsePages.qnotification.notifications.layout = () => import('src/layouts/admin')
+
 
 export default responsePages
