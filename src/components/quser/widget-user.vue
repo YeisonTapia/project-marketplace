@@ -15,15 +15,6 @@
 
         <q-separator />
 
-        <q-item  clickable v-ripple :to="{name: 'quser.account.profile'}">
-          <q-item-section avatar>
-            <q-icon color="primary" name="fas fa-home" />
-          </q-item-section>
-          <q-item-section class="q-py-md">Inicio</q-item-section>
-        </q-item>
-
-        <q-separator />
-
         <q-item  clickable v-ripple :to="{name:'auth.logout'}">
           <q-item-section avatar>
             <q-icon color="primary" name="fas fa-sign-out-alt" />
