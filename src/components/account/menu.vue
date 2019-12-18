@@ -133,7 +133,7 @@
       </q-drawer>
 
 
-      <q-page-sticky position="top-left" :offset="[10, 10]" style="z-index: 9;">
+      <q-page-sticky position="top-right" :offset="[10, 10]" style="z-index: 9;">
         <q-btn round @click="drawer = !drawer" color="primary" icon="arrow_back" />
       </q-page-sticky>
 
