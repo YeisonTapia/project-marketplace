@@ -6,34 +6,54 @@
     <q-card-section>
       <div class="text-h6 text-primary font-family-secondary">Mejores Empresas</div>
       <ol>
-        <li v-for="item of list">{{item.name}}</li>
+        <li v-for="(item, index) in stores" :key="item.id"  @click="openModalStore(item)" clickable>
+          {{item.name}}
+        </li>
       </ol>
     </q-card-section>
+    <q-dialog v-model="card.open">
+      <card-store :card="card"></card-store>
+    </q-dialog>
   </q-card>
 </template>
 <script>
+  import cardStore from '@imagina/qmarketplace/_components/info/store/cardStore'
   export default {
     name: 'TopCompaniesComponent',
+    components: {
+      cardStore
+    },
+    mounted() {
+      this.$nextTick(function () {
+        this.getStores()
+      })
+    },
     data () {
-        return {
-            list: [
-                {
-                    name: 'Hotel Arimaca'
-                },
-                {
-                    name: 'Heladería Y Pizzería Esencia'
-                },
-                {
-                    name: 'American´s Pizza'
-                },
-                {
-                    name: 'Laly’s Arts Shop'
-                },
-                {
-                    name: 'Laly’s Arts Shop'
-                }
-            ]
-        }
+      return {
+        stores: [],
+        card: {
+          open: false,
+          info: [],
+        },
+      }
+    },
+    methods: {
+      getStores() {
+        this.$crud.index("apiRoutes.qmarketplace.store", {
+          params:{
+            filter:{
+              ranting:'top'
+            },
+            take:5
+          }
+        }).then(response => {
+          this.stores=response.data;
+        });
+      },
+      openModalStore(result) {
+        this.card.open = true;
+        this.card.info = result;
+      }
     }
   }
 </script>
@@ -56,6 +76,7 @@
           counter-increment my-awesome-counter
           margin-bottom 20px
           display flex
+          cursor pointer
           &:before 
             content counter(my-awesome-counter)
             color $primary
