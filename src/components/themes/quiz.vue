@@ -53,7 +53,7 @@
     </q-banner>
 
     <!-- Votes Poll -->
-    <div v-if="showVotes" class="q-px-xs q-py-md">
+    <div v-if="showVotes" class="q-px-xs q-py-md scroll" style="height: 350px;">
       <div class="chart-quiz" v-for="(chart, index) in chartsOptions" :key="index">
         <chart :options="chart"/>
       </div>
