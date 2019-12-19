@@ -3,6 +3,7 @@
     <div>
       <img class="img-title full-width" src="/statics/img/quiz-title.png">
     </div>
+
     <q-stepper v-if="success && answers.length>0 && !alertContent.active && !showVotes" ref="stepper" v-model="currentStep" class="no-shadow">
       
 
@@ -52,6 +53,12 @@
     </q-banner>
 
     <!-- Votes Poll -->
+    <div v-if="showVotes" class="q-px-xs q-py-md">
+      <div class="chart-quiz" v-for="(chart, index) in chartsOptions" :key="index">
+        <chart :options="chart"/>
+      </div>
+    </div>
+    <!--
     <div v-if="showVotes" class="votesPoll text-white q-px-md q-py-md">
 
         <div class="text-h6 font-family-secondary q-my-sm">Resultados</div>
@@ -84,6 +91,7 @@
         </div>
 
     </div>
+    -->
 
   </q-card>
 
@@ -93,8 +101,13 @@
   //Plugins
   import {required} from 'vuelidate/lib/validators'
 
+  import {Chart} from 'highcharts-vue'
+
     export default {
         name: 'QuizComponent',
+        components: {
+          Chart
+        },
         validations() {
           return {
             selectedOption: {required}
@@ -129,6 +142,53 @@
                 votesPoll: null,
                 showVotes: false,
                 btnLoading: false,
+                chartsOptions: [],
+                chartOptions: {},
+                chartOptionsBase: {
+                  chart: {
+                      type: 'bar'
+                  },
+                  title: {
+                      text: ''
+                  },
+                  xAxis: {
+                      categories: [], //Answers
+                      title: {
+                          text: null
+                      }
+                  },
+                  yAxis: {
+                      min: 0,
+                      title: {
+                          text: '',
+                          align: 'high'
+                      },
+                      labels: {
+                          overflow: 'justify'
+                      }
+                  },
+                  /*
+                  tooltip: {
+                      valueSuffix: '%'
+                  },
+                  */
+                  plotOptions: {
+                      bar: {
+                          dataLabels: {
+                              enabled: true
+                          }
+                      }
+                  },
+                  credits: {
+                    enabled: false
+                  },
+                  series: [
+                    {
+                      name: "Resultados",
+                      data: []
+                    }
+                  ]
+                }
             }
         },
         methods: {
@@ -245,10 +305,10 @@
               
               this.loading = true
               this.btnLoading = true
-            
+              
+              /* CODE TO SAVE - TESTING GRAPHICS RESULT
               this.setDataFinal()
               
-             
               this.finalDataSave.forEach((data, index) => {
                 
                 this.$crud.create('apiRoutes.qquiz.userQuestionAnswers', data).then(response => {
@@ -264,6 +324,8 @@
               // Finished Poll
               if(this.userId!=null)
                 this.saveUserPoll()
+
+              */
               
 
               //console.warn("Termino Encuesta")
@@ -274,7 +336,7 @@
               this.$v.$reset()//Reset validations
               //this.alertContent.active = true // OJOOOOOOO
 
-              this.showVotes = true
+              //this.showVotes = true
                
               this.loading = false
               this.btnLoading = false
@@ -374,22 +436,60 @@
               this.$crud.index("apiRoutes.qquiz.questions",params).then(response => {
              
                 this.votesPoll = response.data
-                //console.warn(this.votesPoll)
-
+               
+                this.fixDataChart(this.votesPoll)
+               
                 resolve(true)//Resolve
 
               }).catch(error => {
                 this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+                console.error(error)
                 reject(false)//Resolve
               })
 
             }) 
+          },
+          // Fix Data To Chart
+          fixDataChart(resultVotes){
+
+            // Results by each questions
+            resultVotes.forEach((question, index) => {
+
+              this.chartOptions = this.$clone(this.chartOptionsBase)
+
+              // Copy Params to Chart
+              // Get Questions Infor
+              this.chartOptions.title.text = question.title
+              this.chartOptions.yAxis.title.text = "Total de Votos: "+question.totalVotes
+
+              // Get Answers Infor
+              question.answers.forEach((answer, index) => {
+                this.chartOptions.xAxis.categories.push(answer.title)
+                this.chartOptions.series[0].data.push(answer.votes)
+                //this.chartOptions.series[0].data.push(this.getPercentage(question.totalVotes,answer.votes))
+              });
+
+              // Copy All Chart
+              this.chartsOptions.push(this.chartOptions)
+                
+            });
+
+            this.showVotes = true
+          },
+          // Convert Percentage
+          getPercentage(total, obt)
+          {
+            return Math.round((obt*100)/total);
           }
 
         }
     }
 </script>
 <style lang="stylus">
+.chart-quiz
+  .highcharts-yaxis-labels
+    display none
+
 .card-quiz
   border-radius 10px
   .q-radio__outer-circle 
