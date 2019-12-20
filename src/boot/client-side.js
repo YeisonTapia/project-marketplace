@@ -2,6 +2,7 @@ import { Carousel, Slide } from 'vue-carousel';
 import Echo from 'laravel-echo'
 import Pusher from 'pusher-js'
 import HighchartsVue from 'highcharts-vue'
+import Lingallery from 'lingallery';
 
 export default async ({app, router, store, Vue}) => {
   await store.dispatch('qmarketplaceStores/GET_USER_STORES')
@@ -12,6 +13,7 @@ export default async ({app, router, store, Vue}) => {
     {name: 'Carousel', component: Carousel},
     {name: 'Slide', component: Slide},
     {name: 'highcharts', component: HighchartsVue},
+    {name: 'lingallery', component: Lingallery},
   ]
 
   //Register components

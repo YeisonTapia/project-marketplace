@@ -4,7 +4,7 @@
       <q-no-ssr v-for="(item,key) in props.menu" :key="key" :class="`content-item ${inLine ? 'inline-block' : ''}`">
         <q-separator v-if="!inLine"/>
         <!--Single Item-->
-        <q-item :class="getClassItem(item)" v-if="checkItemSingle(item)"
+        <q-item v-close-popup :class="getClassItem(item)" v-if="checkItemSingle(item)"
                 @click.native="redirectTo(item)" clickable :key="key">
           <q-item-section v-if="item.icon && props.showIcons" avatar>
             <q-icon :name="item.icon"/>
@@ -13,12 +13,12 @@
         </q-item>
 
         <!-- Dropdwon Item -->
-        <q-expansion-item v-else-if="checkItemMultiple(item)" :icon="item.icon" :key="key"
+        <q-expansion-item  v-else-if="checkItemMultiple(item)" :icon="item.icon" :key="key"
                           :label="props.translatable ? $tr(item.title) : item.title"
                           :header-class="selectedChildren(item)" :default-opened="selectedChildren(item) ? true : false"
                           :class="selectedChildren(item) ? 'expansion-selected' : ''">
           <!--Recursive item-->
-          <recursive-menu :translatable="props.translatable" :show-icons="props.showIcons"
+          <recursive-menu  :translatable="props.translatable" :show-icons="props.showIcons"
                           :key="key" :menu="item.children"/>
         </q-expansion-item>
       </q-no-ssr>
