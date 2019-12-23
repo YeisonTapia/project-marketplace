@@ -127,19 +127,30 @@ export default {
         form_id: 1
       },
       loading: false,
-      typeOptions: [ 'Pregunta','Queja','Reclamo', 'Solicitud' ],
+      typeOptions: [
+        {label:'Pregunta',id:0},
+        {label:'Queja',id:1},
+        {label:'Reclamo',id:2},
+        {label:'Solicitud',id:3},
+        ],
       storeOptions:null,
     }
   },
-  methods: {    
+  methods: {
     async sendEmail() {
       this.$v.$touch();
       if (this.$v.$error) {
         this.$alert.error({message: 'Por favor revisa de nuevo los campos.', pos: 'bottom'});
       } else {
-        
+        var data={};
+        data.subject="Problema con tienda: "+this.form.storeTitle.id+" , "+this.form.message;
+        data.message=this.form.solution;
+        data.fullName=this.form.name;
+        data.type=this.form.type.id;
+        data.email=this.form.email;
+        data.phone=this.form.phone;
         this.loading = true;
-        this.$crud.create('apiRoutes.iform.send', this.form).then(response => {
+        this.$crud.create('apiRoutes.qticket.tickets', data).then(response => {
 
             if (response.status === "error") {
               this.loading = false;
@@ -149,7 +160,7 @@ export default {
               this.$alert.success({message: 'Mensaje enviado exitosamente. Pronto nos pondremos en contacto con usted.'});
               this.$router.push({name: 'app.home'})
             }
-        });       
+        });
       }
     },
     clearForm(){
@@ -174,7 +185,7 @@ export default {
             filter:{}
           }
         }).then(response => {
-          this.storeOptions=array.select(response.data, {label : 'name', id : 'id'})
+          this.storeOptions=array.select(response.data, {label : 'name', id : 'name'})
         });
     }
   }
