@@ -169,19 +169,29 @@
 
   //================== Styles only to backend
 
+  .content-box 
+    border-radius 20px
+    box-shadow $shadow-1
+    background-color white
+    padding 15px
+    > div.text-h5
+      border-bottom 2px solid var(--q-color-light)
+      margin-left 20px
+      margin-right 20px
+      margin-bottom 20px
+    
   .backend-page
     .box
-      border-top 3px solid $primary
-      border-radius 5px
+      border-radius 20px
       box-shadow $shadow-1
       background-color white
       padding 15px
 
     .box-table
-      border-top 3px solid $primary
-      border-radius 5px
-      box-shadow $shadow-1
-      background-color white
+      box-shadow none
+      thead tr th
+        background-color var(--q-color-light)
+
     .q-field
       padding-bottom 20px !important
       .q-field
