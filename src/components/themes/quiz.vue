@@ -160,8 +160,7 @@
                   yAxis: {
                       min: 0,
                       title: {
-                          text: '',
-                          align: 'high'
+                          text: ''
                       },
                       labels: {
                           overflow: 'justify'
@@ -185,9 +184,13 @@
                   series: [
                     {
                       name: "Resultados",
+                      //pointWidth: 25,
+                      //pointPadding: 0.01,
+                      //pointPlacement:'between',
                       data: []
                     }
-                  ]
+                  ],
+
                 }
             }
         },
@@ -201,28 +204,53 @@
                 await this.getUserPolls().catch(error => {})
 
             await this.getPolls().catch(error => {})
-           
+
             if(this.polls.length>0){
 
               this.poll = this.polls[0]
-              // Get answers for each question
-              for (let i=0;i<this.poll.questions.length;i++) {
-                let qId = this.poll.questions[i].id
-                await this.getAnswers(qId,i).catch(error => {})
-                this.answers[i] = this.answersOptions
-                this.answersOptions = []
 
-                // Set questionID to step
-                if(i==0) this.currentStep = qId
+              // If it has questions
+              if(this.poll.questions.length>0){
+
+                // Get answers for each question
+                for (let i=0;i<this.poll.questions.length;i++) {
+                  let qId = this.poll.questions[i].id
+                  await this.getAnswers(qId,i).catch(error => {})
+                  this.answers[i] = this.answersOptions
+                  this.answersOptions = []
+
+                  // Set questionID to step
+                  if(i==0) this.currentStep = qId
+                }
+
+              }else{
+               
+                await this.getResultsPoll()
+
+                if(this.votesPoll.length==0){
+                  this.alertContent.msj = "No existen Encuestas disponibles"
+                  this.alertContent.active = true
+                }
+
               }
 
             }else{
+
+              await this.getResultsPoll()
+
+              if(this.votesPoll.length==0){
+                this.alertContent.msj = "No existen Encuestas disponibles"
+                this.alertContent.active = true
+              }
+              
+              /*
               if(this.userId!=null)
                 this.alertContent.msj = "Ya respondiste todas las encuestas disponibles"
               else
                 this.alertContent.msj = "No existen Encuestas disponibles"
 
               this.alertContent.active = true
+              */
             }
 
             this.success = true
@@ -306,7 +334,7 @@
               this.loading = true
               this.btnLoading = true
               
-              /* CODE TO SAVE - TESTING GRAPHICS RESULT
+             
               this.setDataFinal()
               
               this.finalDataSave.forEach((data, index) => {
@@ -325,13 +353,10 @@
               if(this.userId!=null)
                 this.saveUserPoll()
 
-              */
-              
-
               //console.warn("Termino Encuesta")
               //console.warn("Poll ID "+this.poll.id)
 
-              this.getResultsPoll()
+              this.getResultsPoll(this.poll.id)
               
               this.$v.$reset()//Reset validations
               //this.alertContent.active = true // OJOOOOOOO
@@ -421,15 +446,20 @@
 
           },
           // get Results Poll
-          getResultsPoll(){
+          getResultsPoll(pId = null){
             return new Promise((resolve, reject) => {
 
               //Params
               let params = {
                 refresh: true,
                 params: {
-                  filter: {votes:true,pollId: this.poll.id},
-                  include: 'answers'
+                  filter: {votes:true,pollId: pId},
+                  include: 'answers',
+                  take: 1,
+                  order: {
+                    field: 'created_at',
+                    way: 'desc'
+                  }
                 }
               }
 
