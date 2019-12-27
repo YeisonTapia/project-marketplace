@@ -184,6 +184,7 @@ export default {
               neighborhoodId: neighborhoodId
             }
           })
+          this.$store.dispatch('app/REFRESH_PAGE')
         }
 
       }

@@ -1,19 +1,19 @@
 <template>
   <q-card class="q-my-xl">
 
-    <div class="content q-px-xl q-py-md rounded-sm" :class="{'bg-white':cBackground,'column-form':cBackground}">
+  <div class="content q-px-xl q-py-md rounded-sm" :class="{'bg-white':cBackground,'column-form':cBackground}">
 
-      <div v-if="selectForm=='init'">
-        <initForm :selectForm="selectForm"  @selectForm ="selectForm = $event"/>
-      </div>
-
-      <div v-if="selectForm=='login'">
-        <login-form @logged="emitLogged()" :email="email" :selectForm="selectForm" @selectForm ="selectForm = $event"/>
-      </div>
-            
+    <div v-if="selectForm=='init'">
+      <initForm :selectForm="selectForm"  @selectForm ="selectForm = $event"/>
     </div>
-    
-  </q-card>
+
+    <div v-if="selectForm=='login'">
+      <login-form @logged="emitLogged()" :email="email" :selectForm="selectForm" @selectForm ="selectForm = $event"/>
+    </div>
+
+  </div>
+
+</q-card>
 </template>
 <script>
   //components
