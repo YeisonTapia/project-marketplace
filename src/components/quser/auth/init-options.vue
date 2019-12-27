@@ -22,11 +22,11 @@
       </div>
     </div>
 
-    <div class="text-body1 q-mb-lg text-white">¿Ya estás registrado?</div>  
+    <div class="text-body1 q-mb-lg text-white">¿Ya estás registrado?</div>
 
     <q-btn label="Entra aquí" @click="emitSelectForm()"text-color="white" outline style="border-left:0;border-right:0; border-radius:0;" />
 
-         
+
   </div>
 </template>
 
@@ -36,10 +36,10 @@
      selectForm: {type: String, default: 'init'}
     },
     watch: {
-      
+
     },
     mounted() {
-     
+
     },
     data() {
       return {
@@ -53,7 +53,7 @@
       }
     },
     computed: {
-      
+
     },
     methods: {
       emitSelectForm(){
@@ -77,7 +77,21 @@
       },
       //Redirect after login
       redirect () {
-        this.$cache.remove('route.after.login')
+        this.$cache.remove('route.after.login');
+        let params={
+          params:{
+            include:'plan.product',
+            filter:{
+              userId:this.$store.state.quserAuth.userId,
+              status:1
+            }
+          }
+        };
+        this.$crud.index("apiRoutes.qsubscription.suscriptions",params).then(response => {
+          if(response.data.length==0){
+            this.$router.push({name:products.show,params:{slug:'tiendas-en-linea'}});
+          }
+        });
         this.$router.push(this.redirectTo)
       }
     }
