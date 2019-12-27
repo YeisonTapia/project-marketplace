@@ -330,6 +330,7 @@ responsePages.qsubscription.plansUpdate.layout= () => import('src/layouts/admin'
 responsePages.qsubscription.features.layout= () => import('src/layouts/admin')
 responsePages.qsubscription.featuresCreate.layout= () => import('src/layouts/admin')
 responsePages.qsubscription.featuresUpdate.layout= () => import('src/layouts/admin')
+responsePages.frontqsubscription.products.page= () => import('src/layouts/qsubscription/frontend/products/show')
 
 //QMARKETPLACE
 responsePages.qmarketplace.myStoreProductCreate.page= () => import('src/layouts/qmarketplace/admin/stores/products/form')
