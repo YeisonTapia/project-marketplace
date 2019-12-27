@@ -21,7 +21,8 @@
                         <div class="profile">
                            <widget-user></widget-user>
                            <span class="q-px-sm font-family-primary line">|</span>
-                           <q-btn class="q-pa-none" dense round flat icon="fas fa-heart" :to="{name: 'qmarketplace.account.favorite.stores'}"/>
+                           <q-btn class="q-pa-none" dense round flat icon="fas fa-heart"
+                                  :to="{name: 'qmarketplace.account.favorite.stores'}"/>
                            <span class="q-px-sm font-family-primary line">|</span>
                            <!--== Button Config ==-->
                            <q-btn round dense flat icon="fas fa-cog"
@@ -42,11 +43,12 @@
                               <search-store></search-store>
                            </div>
                            <div class="col-xs-12 col-sm-9 col-md-auto">
-                              <q-btn v-if="canCreateStore" class="btn-tienda" flat icon="fas fa-store" color="white"
+                              <q-btn v-if="$auth.hasAccess('marketplace.stores.create')&& storeSelect"
+                                     class="btn-tienda" flat icon="fas fa-store" color="white" no-caps
+                                     label="editar tu Tienda Virtual" @click="editStore()"/>
+                              <q-btn v-else class="btn-tienda" flat icon="fas fa-store" color="white"
                                      no-caps label="Crea tu Tienda Virtual" @click="createStore()"/>
-                              <q-btn v-else-if="$auth.hasAccess('marketplace.stores.create')" class="btn-tienda" flat
-                                     icon="fas fa-store" color="white" no-caps label="editar tu Tienda Virtual"
-                                     @click="editStore()"/>
+
                            </div>
                         </div>
                      </div>
@@ -175,8 +177,7 @@
       watch: {},
       mounted() {
          this.$nextTick(function () {
-            this.getSuscriptionData()
-            this.getStore()
+            this.init()
          })
       },
       data() {
@@ -198,18 +199,32 @@
             logo: this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo1').path,
             logoStore: '',
             store: {
-               selected: this.$store.state.qmarketplaceStores.storeSelected,
-               options: this.$store.getters['qmarketplaceStores/userStoresSelect'],
-               loading: false
-            }
+               selected: null,
+               options: [],
+            },
+            loading: false
          }
       },
       computed: {
          quserState() {
             return this.$store.state.quserAuth
          },
+         storeSelect() {
+            return this.$store.state.qmarketplaceStores.storeSelected
+         }
       },
       methods: {
+         async init() {
+            this.loading = true
+            await this.$store.dispatch('qmarketplaceStores/GET_USER_STORES')
+            await this.$store.dispatch('qmarketplaceStores/SET_STORE')
+            await this.getSuscriptionData();
+            this.getStore()
+            this.store.selected = this.$store.state.qmarketplaceStores.storeSelected
+            this.store.options = this.$store.getters['qmarketplaceStores/userStoresSelect']
+            this.loading = false
+            console.log(this.store)
+         },
          //Show drawer specific
          getSuscriptionData() {
             if (this.$store.state.quserAuth.authenticated) {
@@ -338,6 +353,7 @@
             & .q-btn
                min-height 1em !important
                min-width 1em !important
+
                & :hover
                   color $warning
 

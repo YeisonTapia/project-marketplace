@@ -21,25 +21,25 @@
                         <div class="profile">
                            <widget-user></widget-user>
                            <span class="q-px-md font-family-primary line">|</span>
-                           <q-btn 
-                              class="q-pa-none" 
-                              flat dense
-                              icon="fas fa-heart"  
-                              :to="{name: 'qmarketplace.account.favorite.stores'}"/>
+                           <q-btn
+                                   class="q-pa-none"
+                                   flat dense
+                                   icon="fas fa-heart"
+                                   :to="{name: 'qmarketplace.account.favorite.stores'}"/>
                         </div>
                      </div>
                      <div class="col-12 q-py-lg">
                         <div class="row q-col-gutter-sm justify-center items-center">
                            <div class="col-md-9 col-lg-auto">
-
                               <search-store></search-store>
                            </div>
                            <div class="col-xs-12 col-sm-9 col-md-auto">
-                              <q-btn v-if="canCreateStore" class="btn-tienda" flat icon="fas fa-store" color="white"
-                                     no-caps label="Crea tu Tienda Virtual" @click="createStore()"/>
-                              <q-btn v-else-if="$auth.hasAccess('marketplace.stores.create')&& storeSelected"
+                              <q-btn v-if="$auth.hasAccess('marketplace.stores.create')&& storeSelect"
                                      class="btn-tienda" flat icon="fas fa-store" color="white" no-caps
                                      label="editar tu Tienda Virtual" @click="editStore()"/>
+                              <q-btn v-else class="btn-tienda" flat icon="fas fa-store" color="white"
+                                     no-caps label="Crea tu Tienda Virtual" @click="createStore()"/>
+
                            </div>
                         </div>
                      </div>
@@ -87,6 +87,7 @@
             <menu-list :menu="items" class="menu"/>
          </q-list>
       </q-drawer>
+      <inner-loading :visible="loading"/>
    </div>
 </template>
 <script>
@@ -106,8 +107,7 @@
       watch: {},
       mounted() {
          this.$nextTick(function () {
-         this.getCategoryStore();
-            this.getSuscriptionData();
+            this.init()
          })
       },
       data() {
@@ -116,7 +116,6 @@
             drawer: {
                menu: false
             },
-            storeSelected: this.$store.state.qmarketplaceStores.storeSelected,
             logo: this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo1').path,
             modal: {
                show: true,
@@ -124,71 +123,82 @@
             },
             canCreateStore: false,
             phones: [],//this.$store.getters['qsiteSettings/getSettingValueByName']('isite::phones')
-            items :[
+            items: [
                {
                   icon: 'fas fa-bars',
-                  title: 'Categorias',
+                  title: 'app.layout.menu.categories',
                   activated: true,
                   name: '#',
                   children: null
                },
                {
                   icon: 'fas fa-store',
-                  title: 'Tiendas en ofertas',
+                  title: 'app.layout.page.storesOnOffer',
                   name: 'app.ofertas',
                   activated: true
                },
                {
                   icon: 'fas fa-car-side',
-                  title: 'Domicilio',
+                  title: 'app.layout.menu.domicilios',
                   name: 'stores.index',
                   params: {slug: 'agencias-de-envos'},
                   activated: true
                },
                {
                   icon: 'far fa-surprise',
-                  title: '¿Probemas con una tienda?',
+                  title: 'app.layout.page.problems',
                   name: 'app.problems',
                   activated: true
                },
                {
                   icon: 'far fa-newspaper',
-                  title: 'Blog',
+                  title: 'app.layout.menu.blog',
                   name: 'qblog.index',
                   params: {category: 'blog'},
                   activated: true
                },
                {
                   icon: 'fas fa-users',
-                  title: 'Nosotros',
+                  title: 'app.layout.page.about',
                   name: 'app.nosotros',
                   activated: true
                },
                {
                   icon: 'far fa-envelope-open',
-                  title: 'Contacto',
+                  title: 'app.layout.page.contact',
                   name: 'app.contacto',
                   activated: true
                }
-            ]
+            ],
+            loading:false
          }
       },
       computed: {
-
          getImageUrl() {
             return config('apiRoutes.api.base_url') + '/' + this.userData.smallImage;
          },
          userData() {
             return []//this.$store.state.quserAuth.userData
          },
+         storeSelect(){
+            return this.$store.state.qmarketplaceStores.storeSelected
+         }
       },
       methods: {
-         getCategoryStore(){
+         async init() {
+            this.loading = true
+            await this.$store.dispatch('qmarketplaceStores/GET_USER_STORES')
+            await this.$store.dispatch('qmarketplaceStores/SET_STORE')
+            await this.getCategoryStore();
+            await this.getSuscriptionData();
+            this.loading = false;
+         },
+         getCategoryStore() {
             //Transform data
             let params = {
                params: {
                   filter: {
-                     parent:0
+                     parent: 0
                   },
                   include: 'children'
                }
@@ -198,9 +208,9 @@
                if (response.data.length > 0) {
 
                   response.data.forEach(function (item, i, array) {
-                     let itemChild=null;
-                     if(item.children.length){
-                        itemChild=[];
+                     let itemChild = null;
+                     if (item.children.length) {
+                        itemChild = [];
                         item.children.forEach(function (item, i, array) {
                            itemChild.push({
                               title: item.title,
@@ -210,13 +220,13 @@
                            })
                         });
                      }
-                     child.push( {
+                     child.push({
                         icon: item.icon,
                         title: item.title,
                         name: 'stores.index',
                         params: {slug: item.slug},
                         activated: true,
-                        children:itemChild
+                        children: itemChild
                      })
 
                   })
@@ -225,9 +235,7 @@
                }
             });
          },
-         getSuscriptionData()
-
-         {
+         getSuscriptionData() {
             if (this.$store.state.quserAuth.authenticated) {
                if (this.$auth.hasAccess('marketplace.stores.create')) {
                   let params = {
@@ -243,6 +251,7 @@
                         this.canCreateStore = true;
                      }
                   })
+
                }//businessRole
             }
          },
@@ -276,13 +285,17 @@
             .q-expansion-item__container
                .q-expansion-item__content
                   padding 0 0 0 15px
+
                .q-expansion-item__toggle-icon
-                  display none         
+                  display none
+
             .content-item
                transform: none !important;
                border none
+
                .q-expansion-item__content
                   position absolute
+
                #listMenu
                   position absolute
                   width 347px
@@ -290,26 +303,33 @@
                   left 0px
                   top 10px
                   background-color $grey-3
+
                   .q-expansion-item__container
                      .q-expansion-item__toggle-icon
-                        display block 
+                        display block
+
                   .content-item
                      padding 0
                      transform: none !important;
                      font-family Trebuchet MS
-                     height 69 px
+                     height 69px
                      display block
                      border-bottom 2px solid $grey-5
+
                      .q-expansion-item
                         height 100%
+
                         .q-expansion-item__container
                            height 100%
+
                      .q-item
                         padding-left 45px
                         height 100%
+
                         .q-icon
                            color $tertiary
-                           font-size 27px!important
+                           font-size 27px !important
+
                      #listMenu
                         padding-top 18px
                         padding-bottom 18px
@@ -320,15 +340,19 @@
                         top -67 px
                         z-index 10000
                         display block
+
                         .content-item
                            color #fff
                            border-bottom none
-                           height 40 px
+                           height 40px
                            display block
+
                            .q-expansion-item
                               height 100%
+
                               .q-expansion-item__container
                                  height 100%
+
                            .q-item
                               height 100%
                               color #fff
@@ -336,16 +360,20 @@
 
                      .q-separator
                         display none
+
                      .q-item
-                        background-color  transparent
+                        background-color transparent
                         cursor pointer
                         color $secondary
                         font-size: 1.1rem;
+
                         .q-item__section--avatar
                            min-width 20px
                            padding-right 10px
+
                         .q-icon
                            font-size 16px
+
       .header-movil
          .logo
             background-image url('/statics/img/bg-logo.png')
@@ -487,8 +515,9 @@
             font-size 1rem
             position relative
             z-index 99
+
             > div
-               display -ms-flexbox 
+               display -ms-flexbox
                display flex
                -ms-flex-wrap wrap
                flex-wrap wrap
@@ -497,18 +526,23 @@
                padding 0
                -webkit-transform skew(-10deg) !important
                transform skew(-10deg) !important
+
                > .content-item
                   -ms-flex 1 1 auto
                   flex 1 1 auto
+
                   > .q-expansion-item, > .q-item
                      cursor pointer
                      position relative
                      color $secondary
-                     font-size 1rem     
+                     font-size 1rem
+
                      &:hover
                         color $tertiary !important
+
                         .q-focus-helper
                            background-color transparent !important
+
                         &:before
                            content ''
                            background-image url('/statics/img/menu-hover.png')
@@ -520,5 +554,5 @@
                            left 0
                            right 0
                            background-position center
-                    
+
 </style>

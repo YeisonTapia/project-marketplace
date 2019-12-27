@@ -22,9 +22,9 @@ let responsePages = {
             name: 'app.nosotros',
             layout: () => import('src/layouts/master'),
             page: () => import('pages/nosotros.vue'),
-            title: 'Nosotros',
+            title: 'app.layout.page.about',
             icon: 'fas fa-user-friends',
-            authenticated: false
+            authenticated: true
         },
         busqueda: {
             permission: null,
@@ -33,9 +33,9 @@ let responsePages = {
             name: 'app.busqueda',
             layout: () => import('src/layouts/master'),
             page: () => import('pages/busqueda.vue'),
-            title: 'busqueda',
+            title: 'app.layout.page.search',
             icon: 'far fa-envelope-open',
-            authenticated: false
+            authenticated: true
         },
         ofertas: {
             permission: null,
@@ -44,9 +44,9 @@ let responsePages = {
             name: 'app.ofertas',
             layout: () => import('src/layouts/master'),
             page: () => import('pages/ofertas.vue'),
-            title: 'Tiendas en oferta',
+            title: 'app.layout.page.storesOnOffer',
             icon: 'fas fa-store',
-            authenticated: false
+            authenticated: true
         },
         contacto: {
             permission: null,
@@ -55,7 +55,7 @@ let responsePages = {
             name: 'app.contacto',
             layout: () => import('src/layouts/master'),
             page: () => import('pages/contacto.vue'),
-            title: 'Contacto',
+            title: 'app.layout.page.contact',
             icon: 'far fa-envelope-open',
             authenticated: false
         },
@@ -66,7 +66,7 @@ let responsePages = {
             name: 'app.problems',
             layout: () => import('src/layouts/master'),
             page: () => import('pages/problems.vue'),
-            title: 'Problems',
+            title: 'app.layout.page.problems',
             icon: 'far fa-envelope-open',
             authenticated: false
         },
@@ -77,30 +77,30 @@ let responsePages = {
             name: 'app.trivia',
             layout: () => import('src/layouts/master'),
             page: () => import('pages/trivia.vue'),
-            title: 'Trivia',
+            title: 'app.layout.page.trivia',
             icon: 'far fa-envelope-open',
-            authenticated: false
+            authenticated: true
         },
         admin: {
-            permission: null,
+            permission: 'marketplace.stores.mystore',
             activated: true,
             path: '/admin',
             name: 'app.admin',
             layout: () => import('src/layouts/admin'),
             page: () => import('pages/admin/index.vue'),
-            title: 'Administrador',
+            title: 'app.layout.page.administrador',
             icon: 'far fa-envelope-open',
             authenticated: true
         },
         // User Orders Profile
         userOrders: {
-            permission: 'icommerce.orders.index',
+            //permission: 'icommerce.orders.index',
             activated: true,
             path: '/account/orders',
             name: 'qcommerce.account.orders',
             layout: () => import('src/layouts/account.vue'),
             page: () => import('src/layouts/qcommerce/account/orders'),
-            title: 'Mis compras',
+            title: 'app.layout.page.myShopping',
             icon: 'apps',
             authenticated: true
         },
@@ -112,7 +112,7 @@ let responsePages = {
             name: 'qmarketplace.account.favorite.stores',
             layout: () => import('src/layouts/account.vue'),
             page: () => import('src/layouts/qmarketplace/account/favoriteStores'),
-            title: 'Mis tiendas favoritas',
+            title: 'app.layout.page.myFavoriteStores',
             icon: 'apps',
             authenticated: true
         },
@@ -124,7 +124,7 @@ let responsePages = {
             name: 'qform.account.messages',
             layout: () => import('src/layouts/account.vue'),
             page: () => import('src/layouts/qform/account/messages'),
-            title: 'Mis Mensajes',
+            title: 'app.layout.page.myMessages',
             icon: 'apps',
             authenticated: true
         },
@@ -136,7 +136,7 @@ let responsePages = {
             name: 'quser.account.public.profile',
             layout: () => import('src/layouts/quser/public/account.vue'),
             page: () => import('src/layouts/quser/public/profile'),
-            title: 'Perfil',
+            title: 'app.layout.page.profile',
             icon: 'apps',
             authenticated: true
         },
@@ -148,7 +148,7 @@ let responsePages = {
             name: 'quser.account.profile',
             layout: () => import('src/layouts/account.vue'),
             page: () => import('src/layouts/quser/index'),
-            title: 'Inicio',
+            title: 'app.layout.page.userDashboard',
             icon: 'apps',
             authenticated: true
         },
@@ -160,7 +160,7 @@ let responsePages = {
             name: 'quser.account.notifications',
             layout: () => import('src/layouts/account.vue'),
             page: () => import('src/layouts/qnotifications/account/index'),
-            title: 'Notificaciones',
+            title: 'app.layout.page.notifications',
             icon: 'apps',
             authenticated: true
         },
@@ -317,8 +317,9 @@ responsePages.qform.leads.path=  '/admin/iform/leads/index'
 responsePages.qform.leadsShow.layout= () => import('src/layouts/admin')
 responsePages.qform.leadsShow.path=  '/admin//iform/lead/:id'
 responsePages.qform.fields.layout= () => import('src/layouts/admin')
-responsePages.qform.fields.path=  '/admin/iform/fields/:id'
-
+responsePages.qform.fields.path=  '/admin/iform/fields/:id',
+responsePages.qform.forms.permission=  'iforms.forms.manage',
+responsePages.qform.leads.permission=  'iforms.field.manage',
 //QSUBSCRIPTION
 responsePages.qsubscription.products.layout= () => import('src/layouts/admin')
 responsePages.qsubscription.productsCreate.layout= () => import('src/layouts/admin')
@@ -347,5 +348,14 @@ responsePages.qchat.messages.layout = () => import('src/layouts/admin')
 responsePages.qnotification.notifications.path='admin/notifications'
 responsePages.qnotification.notifications.layout = () => import('src/layouts/admin')
 
+//QSLIDER
+responsePages.qslider.index.layout= () => import('src/layouts/admin')
+responsePages.qslider.index.path= '/admin/slider/index'
+responsePages.qslider.showSlider.layout= () => import('src/layouts/admin')
+responsePages.qslider.showSlider.path= '/admin/slider/show/:id'
+responsePages.qslider.createSlide.layout= () => import('src/layouts/admin')
+responsePages.qslider.createSlide.path= '/admin/slide/update/:sliderId/:id'
+responsePages.qslider.updateSlide.layout= () => import('src/layouts/admin')
+responsePages.qslider.updateSlide.path= '/admin//slider/index'
 
 export default responsePages

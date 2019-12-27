@@ -24,7 +24,8 @@
                 <q-input v-model="form.name"  label="Nombre:" />
                 <q-input v-model="form.email"  label="Correo Electrónico:" />
                 <q-input v-model="form.phone"  label="Teléfono:" />
-                <q-select v-model="form.storeTitle" label="Tienda donde tuviste el problema :" :options="storeOptions" />
+                <q-select v-model="form.storeTitle" label="Tienda donde tuviste el problema :" :options="storeOptions" use-input @filter="filterFn()">
+                </q-select>
                 <q-select v-model="form.type" label="Tipo de Solicitud:" :options="typeOptions" />
                 <q-input type="textarea" v-model="form.message"  label="Escribe aquí tu caso e intermediaremos para tratar de solucionarlo" />
                 <q-input type="textarea" v-model="form.solution"  label="Como esperas que te solucionemos el problema" />
@@ -134,6 +135,8 @@ export default {
         {label:'Solicitud',id:3},
         ],
       storeOptions:null,
+      options: this.storeOptions,
+      text:''
     }
   },
   methods: {
@@ -187,7 +190,15 @@ export default {
         }).then(response => {
           this.storeOptions=array.select(response.data, {label : 'name', id : 'name'})
         });
+    },
+    filterFn (val, update) {
+      let data = this.$clone(this.options)
+      return data.filter(item => {
+        return item.name.toLowerCase().includes(this.text.toLowerCase())
+      })
+
     }
+
   }
 
 }

@@ -2,12 +2,12 @@
   <q-page class="bg-fondo advanced_search form-general relative-position" v-if="success">
 
     <!-- Busqueda Avanzada -->
-    <div class="q-pa-xl bg-white shadow-2">
-      <div class="q-container q-pt-xl">
+    <div class="q-pa-md bg-white shadow-2">
+      <div class="q-container q-pt-lg">
 
         <!-- Titulo -->
         <div class="row q-mb-lg">
-          <div class="col-12 flex self-center">
+          <div class="col-12 flex self-center title-page">
             <div class="text-h4 text-primary font-family-secondary">
               Busqueda Avanzada
             </div>
@@ -33,7 +33,7 @@
 
             <div class="q-mb-lg">
               <p class="caption q-mb-xs">Categorias</p>
-              <q-select dense v-model="advancedSearch.category" :options="categoryOptions"/>
+              <q-select dense clearable  v-model="advancedSearch.category" :options="categoryOptions"/>
             </div>
 
             <div class="q-mb-lg">
@@ -54,11 +54,11 @@
 
             <div class="q-mb-lg">
               <p class="caption q-mb-xs">Ciudad</p>
-              <q-select dense v-model="advancedSearch.city" :options="cityOptions"/>
+              <q-select dense  v-model="advancedSearch.city" :options="cityOptions"/>
             </div>
             <div class="q-mb-lg">
               <p class="caption q-mb-xs">Barrio</p>
-              <q-select dense v-model="advancedSearch.neighborhood" :options="neighborhoodOptions"/>
+              <q-select dense clearable v-model="advancedSearch.neighborhood" :options="neighborhoodOptions"/>
             </div>
             <!--
             <div class="q-mb-xl">
@@ -180,19 +180,13 @@ export default {
   methods: {
     // init Method
     async init(){
-
       this.loading = true
       this.$q.loading.show()
-
       if(this.typeSearch==1)
         await this.searchStores()
-
       this.loading = false
       this.$q.loading.hide()
       this.success = true
-
-      console.warn("INICIA PAGE")
-
     },
     // Basic Search Stores
     searchStores() {
@@ -348,11 +342,11 @@ export default {
 
       this.loadingBtn = true
 
-      let categoryId = parseInt(this.advancedSearch.category.id)
-      let cityId = parseInt(this.advancedSearch.city.id)
-      let neighborhoodId = parseInt(this.advancedSearch.neighborhood.id)
-      let product = this.advancedSearch.product
-      let storesOffer = this.advancedSearch.offer
+      let categoryId = this.advancedSearch.category.id?parseInt(this.advancedSearch.category.id):null
+      let cityId = this.advancedSearch.city.id?parseInt(this.advancedSearch.city.id):null
+      let neighborhoodId = this.advancedSearch.neighborhood.id?parseInt(this.advancedSearch.neighborhood.id):null
+      let product = this.advancedSearch.product?this.advancedSearch.product:''
+      let storesOffer = this.advancedSearch.offer?this.advancedSearch.offer:null
       //let companies = this.advancedSearch.company
       //let levelId = parseInt(this.advancedSearch.level.id)
 
@@ -361,18 +355,16 @@ export default {
         remember: false,
         params: {
           filter:{
-            categories: categoryId ? categoryId : null,
-            cities: cityId ? cityId : null,
-            neighborhoods: neighborhoodId ? neighborhoodId: null,
-            search: product ? product : null // Text
+            categories: categoryId,
+            cities: cityId,
+            neighborhoods: neighborhoodId,
+            search: product
           }
         }
       };
 
       this.$crud.index("apiRoutes.qmarketplace.store", params).then(response => {
-        //console.warn('[GET STORES ADVANCE SEARCH] ')
         this.stores = response.data
-
         if(this.stores.length==0){
           this.$alert.error({message:'SIN RESULTADOS', pos: 'bottom'})
         }else{
@@ -414,14 +406,17 @@ export default {
 </script>
 <style lang="stylus">
 
-.advanced_search
+  .advanced_search
 
-  .fade-enter-active,
-  .fade-leave-active
-    transition opacity .5s
+    .fade-enter-active,
+    .fade-leave-active
+      transition opacity .5s
 
-  .fade-enter,
-  .fade-leave-to
-    opacity 0;
-
+    .fade-enter,
+    .fade-leave-to
+      opacity 0;
+    @media screen and (max-width: $breakpoint-xs)
+      .title-page
+        .text-h4
+            font-size 20px
 </style>
