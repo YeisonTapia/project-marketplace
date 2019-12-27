@@ -22,7 +22,7 @@
                         <div class="row items-center bg-teal full-height">
                            <div class="col-5 bg-teal-8 full-height">
                               <div class="row full-height justify-center items-center text-white text-h5">
-                                 {{pointsHistory}}
+                                 {{userPointsAvailables}}
                               </div>
                            </div>
                            <div class="col-7">
@@ -35,7 +35,7 @@
                         <div class="row items-center bg-red full-height">
                            <div class="col-5 bg-red-8 full-height">
                               <div class="row full-height justify-center items-center text-white text-h5">
-                                 150
+                                 {{userPointsMonth}}
                               </div>
                            </div>
                            <div class="col-7">
@@ -137,7 +137,11 @@
       },
       data() {
          return {
-            pointsHistory: 0,
+            userId: this.$store.state.quserAuth.userId ? this.$store.state.quserAuth.userId : null,
+            userPointsAvailables: 0,
+            userPointsMonth: 0,
+            dateStart: null,
+            dateEnd: null,
             stores: [],
             loading:false,
          }
@@ -145,35 +149,70 @@
       methods: {
          //init
          async init() {
-            await this.getPointsHistoryc()
-           await this.getFavoriteStores()
+
+            // Get Dates
+            let dateTarget = new Date()
+
+            let min = date.startOfDate(dateTarget,'month')
+            this.dateStart = date.formatDate(min, 'YYYY-MM-DD')
+
+            let max = date.endOfDate(dateTarget,'month')
+            this.dateEnd = date.formatDate(max, 'YYYY-MM-DD')
+
+            
+            await this.getPointsUser()
+            await this.getFavoriteStores()
+
+            // Filtrado por mes
+            await this.getPointsUser(true)
+
+            
          },
-         getPointsHistoryc() {
-            return new Promise((resolve, reject) => {
-               //Params
-               let params = {
-                  params: {
-                     filter: {
-                        userId: this.$store.state.quserAuth.userId,
-                        type: 'availablePointsUser'
-                     }
-                  }
+         // Total Puntos Disponibles (Los que puede cambiar)
+         // Get Points Available User
+         getPointsUser(filterDate = false){
+           return new Promise((resolve, reject) => {
+             
+             let fDates = null
+
+             // Filtro para fechas
+             if(filterDate==true){
+               fDates = {
+                  field: "created_at",
+                  from: this.dateStart,
+                  to: this.dateEnd
                }
+             }
 
-               http.get(config('apiRoutes.qredeems.calculates'), params)
-                   .then(response => {
+             //Params
+             let params = {
+               params: {
+                 filter: {
+                   userId: this.userId,
+                   type: 'availablePointsUser',
+                   date: fDates
+                 }
+               }
+             }
 
-                      if (response.data.data.points > 0)
-                         this.pointsHistory = response.data.data.points
+             http.get(config('apiRoutes.qredeems.calculates'),params)
+               .then(response => {
 
-                      resolve(true);
+                 if(response.data.data.points>0){
+                     if(filterDate!=true)
+                        this.userPointsAvailables = response.data.data.points
+                     else
+                        this.userPointsMonth = response.data.data.points
+                 }
+                   
+                 //console.warn("*** GET POINTS USER - Puntos Disponibles:"+this.userPointsAvailables )
+                 resolve(true);
 
-                   })
-                   .catch(error => {
-                      reject(error);
-                   });
-            })
-
+               })
+               .catch(error => {
+                 reject(error);
+               });
+           })
          },
          getFavoriteStores() {
             return new Promise((resolve, reject) => {
@@ -202,7 +241,7 @@
 
 
             })
-         },
+         }
       }
    }
 </script>
