@@ -28,7 +28,7 @@
                 </q-select>
                 <q-select v-model="form.type" label="Tipo de Solicitud:" :options="typeOptions" />
                 <q-input type="textarea" v-model="form.message"  label="Escribe aquí tu caso e intermediaremos para tratar de solucionarlo" />
-                <q-input type="textarea" v-model="form.solution"  label="Como esperas que te solucionemos el problema" />
+                <q-input type="textarea" v-model="form.solution"  label="Como esperas que te solucionen el problema" />
               </q-card-section>
               <q-card-actions  align="right" no-caps class="q-pr-xl q-pb-lg">
                 <q-btn class="bg-primary text-white btn-arrow-send-yellow" @click="sendEmail()">Enviar</q-btn>
@@ -47,7 +47,7 @@
                   <div class="text-subtitle1 text-center q-pb-lg  text-secondary">
                     Si tienes alguna duda, alguna consulta o
                     simplemente quieres saludarnos, no dudes en
-                    contactarnos, estatemos listos para responderte.
+                    contactarnos, estaremos listos para responderte.
                   </div>
                   <hr>
 
@@ -58,7 +58,7 @@
                       </q-item-section>
                       <q-item-section class="q-pl-md q-mb-xl">
                         <div class="text-subtitle1 font-family-secondary">Teléfonos</div>
-                        <div class="text-subtitle1"><a href="tel:00">+00000000</a>  -  <a href="tel:00">+00000000</a></div>
+                        <div class="text-subtitle1"><a href="tel:3017753585">+57 301-775-3585</a>  -  <a href="tel:301558520">+57 301-558-5201</a></div>
                       </q-item-section>
                     </q-item>
                     <q-item>
@@ -135,7 +135,7 @@ export default {
         {label:'Solicitud',id:3},
         ],
       storeOptions:null,
-      options: this.storeOptions,
+      options: this.$clone(this.storeOptions),
       text:''
     }
   },

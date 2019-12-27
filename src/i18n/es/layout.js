@@ -4,7 +4,7 @@ export default {
       search: 'Busqueda de Tiendas',
       storesOnOffer: 'Tiendas en oferta',
       contact: 'Contacto',
-      problems: '¿Probemas con una tienda?',
+      problems: '¿Problemas con una tienda?',
       trivia: 'Trivias y preguntas',
       administrador: 'Administrador',
       myShopping: 'Mis Compras',

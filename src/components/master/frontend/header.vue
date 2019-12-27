@@ -36,7 +36,7 @@
                            <div class="col-xs-12 col-sm-9 col-md-auto">
                               <q-btn v-if="$auth.hasAccess('marketplace.stores.create')&& storeSelect"
                                      class="btn-tienda" flat icon="fas fa-store" color="white" no-caps
-                                     label="editar tu Tienda Virtual" @click="editStore()"/>
+                                     label="Mi Tienda" @click="editStore()"/>
                               <q-btn v-else class="btn-tienda" flat icon="fas fa-store" color="white"
                                      no-caps label="Crea tu Tienda Virtual" @click="createStore()"/>
 
