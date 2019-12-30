@@ -192,13 +192,14 @@
                       bar: {
                           dataLabels: {
                               enabled: true
-                          }
+                          },
+                          borderWidth: 0
                       }
                   },
                   credits: {
                     enabled: false
                   },
-                  colors: ['$secondary'],
+                  colors: ['#fff'],
                   series: [
                     {
                       name: "Resultados",
