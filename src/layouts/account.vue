@@ -121,7 +121,7 @@
                     params: {
                       filter: {
                         userId: this.$store.state.quserAuth.userId,
-                        type: 'totalPointsUser'
+                        type: 'availablePointsUser'
                       }
                     }
                   }

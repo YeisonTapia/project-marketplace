@@ -126,7 +126,7 @@
         <q-card class="rounded-md q-mb-xl full-width">
           <div class="q-pl-md">
             <h3 class="title-label-puntos text-center bg-primary">
-              <div>¿Cómo has obtenido los puntos?</div>
+              <div>¿Cómo has obtenido TODOS tus puntos?</div>
             </h3>
           </div>
           <q-card-section class="q-py-xl">
@@ -134,7 +134,7 @@
               <div class="row q-col-gutter-md justify-center  text-center">
                 <div class="col-xs-4 col-sm-4 col-md self-start">
                   <q-avatar class="font-family-secondary" font-size="2rem" color="primary" size="6rem" text-color="white">{{acumulados}}</q-avatar>
-                  <div class="text-h6">Puntos <br> Acumulados</div>
+                  <div class="text-h6">Puntos <br> Históricos</div>
                 </div>
 
                 <div class="col-xs-4 col-md-auto text-center self-center">
@@ -149,6 +149,10 @@
               </div>                    
                        
           </q-card-section>
+          <q-card-section class="q-py-xl q-px-xl text-caption">
+            Puntos Históricos: Son todos los puntos que has ganado desde que comenzaste a utilizar nuestro sitio web (sin descontar los canjeados), y puedes visualizar con mas detalle haciendo click en "Historial de puntos"
+          </q-card-section> 
+
         </q-card>
       </div>
 
@@ -169,7 +173,7 @@
           <q-card class="rounded-md q-mb-xl full-width">
             <div class="q-pl-md">
               <h3 class="title-label-puntos text-center bg-tertiary">
-                <div>Puntos Obtenidos</div>
+                <div>Historial</div>
               </h3>
             </div>
             <q-card-section class="q-py-xl">

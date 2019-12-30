@@ -26,7 +26,7 @@
                               </div>
                            </div>
                            <div class="col-7">
-                              <div class="q-pl-md text-white q-py-md">Total de <br>puntos</div>
+                              <div class="q-pl-md text-white q-py-md">Total puntos <br>disponibles</div>
                            </div>
                         </div>
 
@@ -172,7 +172,8 @@
          // Get Points Available User
          getPointsUser(filterDate = false){
            return new Promise((resolve, reject) => {
-             
+             this.loading = true
+
              let fDates = null
 
              // Filtro para fechas
@@ -206,10 +207,12 @@
                  }
                    
                  //console.warn("*** GET POINTS USER - Puntos Disponibles:"+this.userPointsAvailables )
+                this.loading = false
                  resolve(true);
 
                })
                .catch(error => {
+                 this.loading = false
                  reject(error);
                });
            })
@@ -248,7 +251,7 @@
 <style lang="stylus">
    .page-user-index
       .card-store
-         box-shadow none
+       box-shadow none
 
          & img
             border 2px solid #E1E1E1

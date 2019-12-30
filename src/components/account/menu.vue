@@ -16,7 +16,7 @@
             <div class="circulo bg-secondary text-white round flex items-center justify-center">
               <div class="points font-family-secondary">{{pointsAvailables}}</div>
             </div>
-            <h5 class="font-family-secondary text-secondary q-my-md">Puntos historicos</h5>
+            <h5 class="font-family-secondary text-secondary q-my-md">Puntos disponibles</h5>
           </div>
         </div>
       </div>
@@ -89,7 +89,7 @@
                 <div class="circulo bg-secondary text-white round flex items-center justify-center">
                   <div class="points font-family-secondary">{{pointsHistory}}</div>
                 </div>
-                <h5 class="font-family-secondary text-secondary q-my-md">Puntos historicos</h5>
+                <h5 class="font-family-secondary text-secondary q-my-md">Puntos disponibles</h5>
               </div>
             </div>
           </div>
