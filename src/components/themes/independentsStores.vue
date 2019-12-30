@@ -1,6 +1,6 @@
 <template>
     <div class="independents-stores full-width q-my-lg">
-        <div class="bg-white text-center ">
+        <div class="bg-white text-center q-pb-xl">
             <h3 class="title-label-primary text-center">
                 <div>Independientes Destacados</div>
             </h3>

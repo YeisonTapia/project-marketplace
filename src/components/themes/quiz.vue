@@ -55,7 +55,7 @@
     <!-- Votes Poll -->
     <div v-if="showVotes" class="q-px-xs q-py-md scroll" style="height: 350px;">
       <div class="chart-quiz" v-for="(chart, index) in chartsOptions" :key="index">
-        <chart :options="chart"/>
+        <chart :options="chart" style=" height:300px;"/>
       </div>
     </div>
     <!--
@@ -146,25 +146,42 @@
                 chartOptions: {},
                 chartOptionsBase: {
                   chart: {
-                      type: 'bar'
+                      type: 'bar',
+                      backgroundColor: null,
                   },
                   title: {
-                      text: ''
+                      text: '',
+                      style: {
+                          fontFamily: 'Trebuchet MS',
+                          color: '#ffffff',
+                          fontSize: '18px'
+                      }
                   },
                   xAxis: {
-                      categories: [], //Answers
-                      title: {
-                          text: null
+                    categories: [], //Answers
+                    title: {
+                      text: null,
+                      style: {
+                        color: '#fff'
                       }
+                    },
+                    labels: {
+                      style: {
+                          fontSize: '12px',
+                          color: '#ffffff',
+                      }
+                    },
+                    gridLineWidth: 0,
                   },
                   yAxis: {
-                      min: 0,
-                      title: {
-                          text: ''
-                      },
-                      labels: {
-                          overflow: 'justify'
-                      }
+                    gridLineWidth: 0,
+                    min: 0,
+                    title: {
+                        text: ''
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
                   },
                   /*
                   tooltip: {
@@ -181,6 +198,7 @@
                   credits: {
                     enabled: false
                   },
+                  colors: ['$secondary'],
                   series: [
                     {
                       name: "Resultados",
@@ -519,6 +537,11 @@
 .chart-quiz
   .highcharts-yaxis-labels
     display none
+  .highcharts-axis-title
+    color #fff !important  
+    fill #fff !important  
+  .highcharts-legend
+    display none     
 
 .card-quiz
   border-radius 10px
