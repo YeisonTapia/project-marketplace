@@ -159,7 +159,7 @@ let responsePages = {
             path: '/account/notifications',
             name: 'quser.account.notifications',
             layout: () => import('src/layouts/account.vue'),
-            page: () => import('src/layouts/qnotifications/account/index'),
+            page: () => import('@imagina/qmarketplace/_layouts/admin/notification/notifications'),
             title: 'app.layout.page.notifications',
             icon: 'apps',
             authenticated: true

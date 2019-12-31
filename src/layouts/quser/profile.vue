@@ -64,6 +64,9 @@
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
                            <!--Civil State-->
                            <q-select label="Estado Civil" stack-label
+                                     emit-value
+                                     map-options
+                                     option-label="label"
                                      v-model="form.fields.civilState.value"
                                      :options="civilStateOptions"/>
                         </div>
@@ -76,6 +79,7 @@
                                    stack-label
                                    emit-value
                                    map-options
+                                   option-label="label"
                                    v-model="form.fields.country.value"
                                    :options="countryOptions"
                                    :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
@@ -89,6 +93,7 @@
                                    stack-label
                                    emit-value
                                    map-options
+                                   option-label="label"
                                    v-model="form.fields.city.value"
                                    :options="cityOptions"
                                    :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
@@ -97,6 +102,9 @@
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
                            <!--Academic Leven-->
                            <q-select label="Nivel Académico" stack-label
+                                     emit-value
+                                     map-options
+                                     option-label="label"
                                      v-model="form.fields.academicLevel.value"
                                      :options="academicLevelOptions"/>
                         </div>
@@ -170,6 +178,7 @@
                                    stack-label
                                    emit-value
                                    map-options
+                                   option-label="label"
                                    v-model="address.countryId"
                                    :options="countryResidenceOptions"
                                    :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
@@ -183,6 +192,7 @@
                                    stack-label
                                    emit-value
                                    map-options
+                                   option-label="label"
                                    v-model="address.stateId"
                                    :options="cityResidenceOptions"
                                    :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
@@ -196,6 +206,7 @@
                                    stack-label
                                    emit-value
                                    map-options
+                                   option-label="label"
                                    v-model="address.cityId"
                                    :options="city2ResidenceOptions"
                                    :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>

@@ -223,7 +223,6 @@
             this.store.selected = this.$store.state.qmarketplaceStores.storeSelected
             this.store.options = this.$store.getters['qmarketplaceStores/userStoresSelect']
             this.loading = false
-            console.log(this.store)
          },
          //Show drawer specific
          getSuscriptionData() {
