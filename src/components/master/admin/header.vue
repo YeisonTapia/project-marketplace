@@ -127,7 +127,8 @@
                   <span>NIVEL</span>
                </div>
                <div class="subtitle">
-                  TIENDA PROFESIONAL
+                  <!-- TIENDA PROFESIONAL -->
+                  {{selectStore.level}}
                </div>
             </div>
          </div>
@@ -192,7 +193,8 @@
                logo:
                    {
                       path: this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo1').path
-                   }
+                   },
+               level:'Básico'
             },
             canCreateStore: false,
             menu: config('sidebar'),
@@ -267,8 +269,8 @@
                }
                let criteria = this.store.selected;
                this.$crud.show("apiRoutes.qmarketplace.store", criteria, params).then(response => {
-                  this.selectStore = response.data
-               })
+                  this.selectStore = response.data;
+               });
             }
          }
       }
