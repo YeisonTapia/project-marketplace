@@ -575,7 +575,8 @@
             include:'plan.features',
             filter:{
               userId:this.$store.state.quserAuth.userId,
-              visible:1
+              status:1
+            //visible:1
             }
           }
         };
@@ -593,6 +594,7 @@
             for(var i=0;i<response.data[0].plan.features.length;i++){
               //Cantidad de productos visibles en la página principal
               if(response.data[0].plan.features[i].id==12){
+                console.log('entre aca '+response.data[0].plan.features[i].value);
                 this.canEnableProductToHome=true;//Puede hacer visible productos para el home.
                 this.quantityProductsToHome=response.data[0].plan.features[i].value;
               }//if
@@ -631,7 +633,7 @@
             params:{
               filter:{
                 store: this.$store.state.qmarketplaceStores.storeSelected,
-                status:1
+                visible:1
               }
             }
           }).then(response => {
