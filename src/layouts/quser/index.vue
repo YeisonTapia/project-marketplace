@@ -59,7 +59,7 @@
                         <div class="row items-center bg-amber full-height">
                            <div class="col-5 bg-amber-8 full-height">
                               <div class="row full-height justify-center items-center text-white text-h5">
-                                 300
+                                 {{contNotification}}
                               </div>
                            </div>
                            <div class="col-7">
@@ -90,7 +90,7 @@
                                     </div>
                                     <div class="col-12">
                                        <div class="text-subtitle1 q-mt-sm">{{item.store.name}}</div>
-                                       <q-rating size="20px" v-model="item.store.averageRating" :max="5.0"
+                                       <q-rating v-model="item.store.averageRating" readonly size="30px" color="amber-6"
                                                  v-if="item.store.averageRating"/>
                                     </div>
                                  </div>
@@ -140,6 +140,7 @@
             userId: this.$store.state.quserAuth.userId ? this.$store.state.quserAuth.userId : null,
             userPointsAvailables: 0,
             userPointsMonth: 0,
+            contNotification:0,
             dateStart: null,
             dateEnd: null,
             stores: [],
@@ -158,14 +159,12 @@
 
             let max = date.endOfDate(dateTarget,'month')
             this.dateEnd = date.formatDate(max, 'YYYY-MM-DD')
-
             
             await this.getPointsUser()
             await this.getFavoriteStores()
-
             // Filtrado por mes
             await this.getPointsUser(true)
-
+            await this.getNotifications()
             
          },
          // Total Puntos Disponibles (Los que puede cambiar)
@@ -231,8 +230,15 @@
                //console.warn("BUSCAR TIENDAS FAVORITAS POR USUARIO")
                this.$crud.index("apiRoutes.qmarketplace.favoriteStore", params).then(response => {
                   console.log(response)
-
-                  this.stores = response.data
+                  let data = []
+                  response.data.map(item => {
+                     let store = this.$clone(data)
+                     if (!store.filter(i => (i.storeId == item.storeId)).length) {
+                        item.store.averageRating=parseInt(item.store.averageRating)
+                        data.push(item)
+                     }
+                  })
+                  this.stores = data
                   this.loading = false
                   resolve(true)//Resolve
                }).catch(error => {
@@ -244,7 +250,30 @@
 
 
             })
-         }
+         },
+         getNotifications() {
+            let params = {
+               remember: false,
+               params: {
+                  include: '',
+                  filter: {
+                     me: true,
+                     read: false,
+                  },
+                  take: 1,
+                  page: 1
+               }
+            };//params
+            this.loading = true
+            this.$crud.index("apiRoutes.qnotification.notifications", params).then(response => {
+               this.contNotification = response.meta.page.total
+               this.loading = false
+            }).catch(error => {
+               console.error(error)
+               this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+               this.loading = false
+            })
+         },
       }
    }
 </script>

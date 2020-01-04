@@ -44,6 +44,7 @@
             filter:{
               ranting:'top'
             },
+            include:'categories',
             take:5
           }
         }).then(response => {
@@ -74,7 +75,8 @@
         font-size 17px
         li 
           counter-increment my-awesome-counter
-          margin-bottom 20px
+          padding 10px
+          border-radius 10px
           display flex
           cursor pointer
           &:before 
@@ -84,4 +86,7 @@
             font-family 'Carter One'
             top 0
             position relative
+          &:hover
+            background rgba(253 45 94 0.5)
+
 </style>

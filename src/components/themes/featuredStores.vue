@@ -10,6 +10,7 @@
             </div>  
           </div>
         </div>
+       <q-inner-loading :visible="loading" />
     </div>
 </template>
 <script>
@@ -27,18 +28,25 @@
         data () {
             return {
                 stores: [],
+               loading:false
             }
         },
         methods: {
             getStores() {
+               this.loading = true
                 this.$crud.index("apiRoutes.qmarketplace.store", {
                     params:{
                         filter:{
-
-                        }
+                           rating:'top',
+                           type:0
+                        },
+                        take:8
                     }
                 }).then(response => {
                     this.stores=response.data;
+                   this.loading = false
+                }).catch(error => {
+                   this.loading = false
                 });
             }
         }

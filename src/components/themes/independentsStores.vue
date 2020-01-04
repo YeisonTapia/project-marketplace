@@ -11,6 +11,7 @@
                 </div>
             </div>
         </div>
+        <q-inner-loading :visible="loading" />
     </div>
 </template>
 <script>
@@ -20,66 +21,34 @@
         components: {
             store
         },
+        mounted() {
+            this.$nextTick(function () {
+                this.getStores()
+            })
+        },
         data () {
             return {
-                stores:  [
-                {
-                    name: 'BELLE TIENDA 1',
-                    logo : { path: 'https://cdn.quasar.dev/img/avatar.png' },
-                    mainImage: { path: '/statics/img/banner.png' },
-                    slogan: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
-                    averageRating: 9
-                },
-                {
-                    name: 'BELLE TIENDA 2',
-                    logo : { path: 'https://cdn.quasar.dev/img/avatar.png' },
-                    mainImage: { path: '/statics/img/banner.png' },
-                    slogan: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
-                    averageRating: 9
-                },
-                                {
-                    name: 'BELLE TIENDA 3',
-                    logo : { path: 'https://cdn.quasar.dev/img/avatar.png' },
-                    mainImage: { path: '/statics/img/banner.png' },
-                    slogan: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
-                    averageRating: 3
-                },
-                {
-                    name: 'BELLE TIENDA 4',
-                    logo : { path: 'https://cdn.quasar.dev/img/avatar.png' },
-                    mainImage: { path: '/statics/img/banner.png' },
-                    slogan: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
-                    averageRating: 9
-                },
-                                {
-                    name: 'BELLE TIENDA 5',
-                    logo : { path: 'https://cdn.quasar.dev/img/avatar.png' },
-                    mainImage: { path: '/statics/img/banner.png' },
-                    slogan: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
-                    averageRating: 0
-                },
-                {
-                    name: 'BELLE TIENDA 6',
-                    logo : { path: 'https://cdn.quasar.dev/img/avatar.png' },
-                    mainImage: { path: '/statics/img/banner.png' },
-                    slogan: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
-                    averageRating: 0
-                },
-                {
-                    name: 'BELLE TIENDA 7',
-                    logo : { path: 'https://cdn.quasar.dev/img/avatar.png' },
-                    mainImage: { path: '/statics/img/banner.png' },
-                    slogan: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
-                    averageRating: 9
-                },
-                {
-                    name: 'BELLE TIENDA 8',
-                    logo : { path: 'https://cdn.quasar.dev/img/avatar.png' },
-                    mainImage: { path: '/statics/img/banner.png' },
-                    slogan: 'Belle Tienda tiene para todos ustedes Venta de productos de belleza como: Tratamientos...',
-                    averageRating: 9
-                }
-                ]
+                stores: [],
+                loading:false
+            }
+        },
+        methods: {
+            getStores() {
+                this.loading=true
+                this.$crud.index("apiRoutes.qmarketplace.store", {
+                    params:{
+                        filter:{
+                            rating:'top',
+                            type:1
+                        },
+                        take:8
+                    }
+                }).then(response => {
+                    this.stores=response.data;
+                    this.loading = false
+                }).catch(error => {
+                    this.loading = false
+                });
             }
         }
     }

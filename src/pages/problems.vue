@@ -24,7 +24,7 @@
                 <q-input v-model="form.name"  label="Nombre:" />
                 <q-input v-model="form.email"  label="Correo Electrónico:" />
                 <q-input v-model="form.phone"  label="Teléfono:" />
-                <q-select v-model="form.storeTitle" label="Tienda donde tuviste el problema :" :options="storeOptions" use-input @filter="filterFn()">
+                <q-select v-model="form.storeTitle" label="Tienda donde tuviste el problema :" :options="storeOptions" use-input @filter="(val, update)=>update(()=>{options = $helper.filterOptions(val,storeOptions,options.name)})">
                 </q-select>
                 <q-select v-model="form.type" label="Tipo de Solicitud:" :options="typeOptions" />
                 <q-input type="textarea" v-model="form.message"  label="Escribe aquí tu caso e intermediaremos para tratar de solucionarlo" />

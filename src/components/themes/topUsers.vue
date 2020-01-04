@@ -7,7 +7,7 @@
       <div class="text-h6 destc-text font-family-secondary">Usuarios Destacados</div>
       <div v-if="listUsers.length>0">
         <ul>
-        <li v-for="user of listUsers">{{user.fullName}}</li>
+        <li v-for="item of listUsers" :key="item.userId" @click="openModalUser(item.user)" clickable>{{item.user.fullName}}</li>
         </ul>
       </div>
       <div v-else>
@@ -21,13 +21,20 @@
           </q-banner>
       </div>
     </q-card-section>
-
+    <q-dialog v-model="card.open">
+      <card-user-public :card="card"></card-user-public>
+    </q-dialog>
     <q-inner-loading :visible="loading" />
   </q-card>
 </template>
 <script>
+  import cardUserPublic from '@imagina/qmarketplace/_components/info/cardUserPublic'
   export default {
     name: 'TopUsersComponent',
+    components: {
+
+      cardUserPublic
+    },
     mounted() {
       this.$nextTick(function () {
         this.init()
@@ -43,6 +50,10 @@
           color:'bg-secondary',
           icon:'warning',
           msj:'No existen datos disponbiles'
+        },
+        card: {
+          open: false,
+          info: [],
         },
       }
     },
@@ -75,7 +86,7 @@
           }
 
           //Request
-          this.$crud.index('apiRoutes.quser.users',params).then(response => {
+          this.$crud.index('apiRoutes.qredeems.featuredUsers',params).then(response => {
             this.listUsers = response.data
             resolve(true)//Resolve
           }).catch(error => {
@@ -83,6 +94,11 @@
             reject(false)//Resolve
           })
         })
+      },
+      openModalUser(result) {
+        this.card.open = true;
+        this.card.info = result;
+        this.card.info.fields=this.$helper.convertToFrontField(this.card.info.fields);
       }
 
     }
@@ -103,12 +119,17 @@
           list-style none
           padding-left 5px
           font-size 17px
-          li 
-            margin-bottom 20px
+          li
+            padding 10px
+            border-radius 10px
             display flex
+            cursor pointer
             &:before 
               margin-right 6px
               content '\f005'
               color $warning
               font-family 'fontawesome'
+            &:hover
+              background rgba(255 255 255 0.5)
+  @m
 </style>

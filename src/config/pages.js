@@ -144,7 +144,7 @@ let responsePages = {
         userDashboard:{
             //permission: 'marketplace.stores.manage',
             activated: true,
-            path: '/account/',
+            path: '/account/dashboard',
             name: 'quser.account.profile',
             layout: () => import('src/layouts/account.vue'),
             page: () => import('src/layouts/quser/index'),
@@ -355,8 +355,18 @@ responsePages.qslider.index.path= '/admin/slider/index'
 responsePages.qslider.showSlider.layout= () => import('src/layouts/admin')
 responsePages.qslider.showSlider.path= '/admin/slider/show/:id'
 responsePages.qslider.createSlide.layout= () => import('src/layouts/admin')
-responsePages.qslider.createSlide.path= '/admin/slide/update/:sliderId/:id'
+responsePages.qslider.createSlide.path= '/admin/slide/create/:sliderId'
 responsePages.qslider.updateSlide.layout= () => import('src/layouts/admin')
-responsePages.qslider.updateSlide.path= '/admin//slider/index'
+responsePages.qslider.updateSlide.path= '/admin/slide/update/:sliderId/:id'
+
+//Qbanners
+responsePages.qbanner.index.layout= () => import('src/layouts/admin')
+responsePages.qbanner.index.path= '/admin/banners/index'
+responsePages.qbanner.showPosition.layout= () => import('src/layouts/admin')
+responsePages.qbanner.showPosition.path= '/admin/banners/position/show/:id'
+responsePages.qbanner.createBanner.layout= () => import('src/layouts/admin')
+responsePages.qbanner.createBanner.path= '/admin/banners/banner/create/:sliderId'
+responsePages.qbanner.updateBanner.layout= () => import('src/layouts/admin')
+responsePages.qbanner.updateBanner.path= '/admin/banners/banner/update/:sliderId/:id'
 
 export default responsePages
