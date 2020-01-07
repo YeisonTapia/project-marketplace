@@ -99,7 +99,7 @@
 
       <!--captcha-->
       <captcha v-model="form.captcha" class="full-width" ref="captcha"/>
-      
+
 
       <!-- Button Register -->
       <div class="full-width text-center q-my-md">
@@ -172,7 +172,7 @@
     methods: {
       //Init template
       async init() {
-        
+
         let captcha = this.$clone(this.form.captcha)//Save captcha
         this.form = this.$clone(this.initData)//inti form
         this.form.captcha = captcha//Add captch
@@ -199,10 +199,10 @@
             this.loading = true
             let data = this.$clone(this.form)
             data.fields = this.$helper.convertToBackField(this.form.fields)
-            
+
             // Check rol to register
             let uRol = this.$route.params.userRol
-            
+
             if(uRol && uRol=="business"){
               let roles = [8]
               data['roles'] = roles
@@ -215,7 +215,7 @@
             }).catch(error => {
               this.callbackRequest(false, error)
             })
-           
+
 
           }
         }
@@ -237,7 +237,8 @@
         let message = `${this.$tr('quser.layout.message.activateAccount')} ${this.form.email}`
 
         if (success) {
-          if (!response.checkEmail) message = ''
+          // if (!response.checkEmail) message = ''
+          if (!response.checkEmail) message = 'Bienvenido a dondeestaesavaina.com, ya has ganado 5 puntos por registrarte, corre y gana otros 10 puntos completando tu perfil personal'
           //Dialog to go to iniciar sesión when id register
 
           //console.warn("Callback "+response)
@@ -314,8 +315,8 @@
           if(pointPerRegister>0){
             await this.savePointsRegister(pointPerRegister)
           }
-        } 
- 
+        }
+
       },
       // Save Points
       savePointsRegister(pointPerRegister){
@@ -336,7 +337,7 @@
           this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
         })
 
-      } 
+      }
 
     }
   }
