@@ -26,7 +26,11 @@
                                    flat dense
                                    icon="fas fa-heart"
                                    :to="{name: 'qmarketplace.account.favorite.stores'}"/>
+                           <span class="q-px-md font-family-primary line">|</span>
+                           <notification/>
+
                         </div>
+
                      </div>
                      <div class="col-12 q-py-lg">
                         <div class="row q-col-gutter-sm justify-center items-center">
@@ -36,7 +40,8 @@
                            <div class="col-xs-12 col-sm-9 col-md-auto">
                               <q-btn v-if="$auth.hasAccess('marketplace.stores.create')&& storeSelect"
                                      class="btn-tienda" flat icon="fas fa-store" color="white" no-caps
-                                     label="Mi Tienda" @click="editStore()"/>
+                                     label="Mi Tienda" @click="editStore()">
+                              </q-btn>
                               <q-btn v-else class="btn-tienda" flat icon="fas fa-store" color="white"
                                      no-caps label="Crea tu Tienda Virtual" @click="createStore()"/>
 
@@ -65,10 +70,11 @@
                </div>
             </q-toolbar-title>
             <widget-user></widget-user>
-            <q-btn flat round dense icon="fas fa-heart"/>
-            <q-btn v-if="canCreateStore" flat round dense @click="createStore()" icon="fas fa-store"/>
-            <q-btn v-else-if="$auth.hasAccess('marketplace.stores.create')" flat round dense @click="createStore()"
-                   icon="fas fa-store"/>
+            <q-btn flat round dense icon="fas fa-heart" :to="{name: 'qmarketplace.account.favorite.stores'}"/>
+            <q-btn icon="fas fa-store" v-if="$auth.hasAccess('marketplace.stores.create')&& storeSelect" flat round dense @click="editStore()"
+                   />
+            <q-btn else flat round dense @click="createStore()" icon="fas fa-store"/>
+            <notification/>
          </q-toolbar>
 
       </q-header>
@@ -95,6 +101,7 @@
    import imSocial from 'src/components/master/imSocial';
    import widgetUser from "src/components/quser/widget-user";
    import searchStore from 'src/components/master/searchStore'
+   import notification from '@imagina/qmarketplace/_components/info/notifications/widget-notification'
 
    export default {
       props: {},
@@ -102,7 +109,8 @@
          menuList,
          imSocial,
          widgetUser,
-         searchStore
+         searchStore,
+         notification
       },
       watch: {},
       mounted() {
@@ -170,7 +178,8 @@
                   activated: true
                }
             ],
-            loading:false
+            loading:false,
+            notifications:0
          }
       },
       computed: {
@@ -275,6 +284,7 @@
             //editar Tienda
             this.$router.push({name: 'qmarketplace.admin.stores.my.store'});
          },
+
       }
    }
 </script>

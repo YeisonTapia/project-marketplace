@@ -40,12 +40,10 @@
             let user= this.$helper.convertToFrontField(this.$store.state.quserAuth.userData.fields)
            let userCategories=[]
            if(user.promotions){
-             console.warn(user.promotions.value)
               userCategories= user.promotions.value.map((i => i.value));
            }else{
              userCategories=[1,2,3]
            }
-           console.error(userCategories)
             this.$crud.index("apiRoutes.qmarketplace.store", {
                params: {
                   filter: {

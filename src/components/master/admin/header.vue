@@ -29,6 +29,8 @@
                                   @click="drawer.config = !drawer.config">
                            </q-btn>
                            <span class="q-px-sm font-family-primary line">|</span>
+                           <notification/>
+                           <span class="q-px-sm font-family-primary line">|</span>
                            <!--= BUTTON MENU =-->
                            <q-btn flat dense round
                                   @click="drawer.menu = !drawer.menu"
@@ -71,7 +73,6 @@
          </div>
 
          <div class="" v-else>
-
             <q-toolbar class="bg-degradado header-movil">
                <!--= BUTTON MENU =-->
                <q-btn flat dense round
@@ -79,7 +80,6 @@
                       aria-label="Menu">
                   <q-icon name="menu"/>
                </q-btn>
-
                <!--= TITLE =-->
                <q-toolbar-title class="items-center">
                   <!--Toogle Menu-->
@@ -97,6 +97,7 @@
                      </q-avatar>
                      <div class="q-ml-xs">{{quserState.userData.firstName}}</div>
                   </q-btn>
+                  <notification/>
                </q-no-ssr>
 
                <!--== Button Config ==-->
@@ -165,6 +166,7 @@
    import imSocial from 'src/components/master/imSocial'
    import widgetUser from 'src/components/quser/widget-user'
    import searchStore from 'src/components/master/searchStore'
+   import notification from '@imagina/qmarketplace/_components/info/notifications/widget-notification'
 
    export default {
       props: {},
@@ -173,11 +175,12 @@
          menuList,
          imSocial,
          widgetUser,
-         searchStore
+         searchStore,
+         notification
       },
       watch: {},
       mounted() {
-        this.$nextTick(function () {
+         this.$nextTick(function () {
             this.init()
          })
       },
@@ -194,7 +197,7 @@
                    {
                       path: this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo1').path
                    },
-               level:'Básico'
+               level: 'Básico'
             },
             canCreateStore: false,
             menu: config('sidebar'),
@@ -221,7 +224,8 @@
             await this.$store.dispatch('qmarketplaceStores/GET_USER_STORES')
             await this.$store.dispatch('qmarketplaceStores/SET_STORE')
             await this.getSuscriptionData();
-            this.getStore()
+            this.getStore();
+            this.getNotifications()
             this.store.selected = this.$store.state.qmarketplaceStores.storeSelected
             this.store.options = this.$store.getters['qmarketplaceStores/userStoresSelect']
             this.loading = false
@@ -272,7 +276,29 @@
                   this.selectStore = response.data;
                });
             }
-         }
+         },
+         getNotifications() {
+            let params = {
+               remember: false,
+               params: {
+                  include: '',
+                  filter: {
+                     me: true,
+                     read: false,
+                  },
+                  take: 1,
+                  page: 1
+               }
+            };//params
+            this.loading = true
+            this.$crud.index("apiRoutes.qnotification.notifications", params).then(response => {
+               this.notifications = response.meta.page.total
+            }).catch(error => {
+               console.error(error)
+               this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+               this.loading = false
+            })
+         },
       }
    }
 </script>
