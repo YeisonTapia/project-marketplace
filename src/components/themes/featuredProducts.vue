@@ -106,14 +106,6 @@
                this.loading = false
             })
          },
-         onLoad(index, done) {
-            setTimeout(() => {
-               if (this.items) {
-                  this.getProducts()
-
-               }
-            }, 2000)
-         }
       },
 
    }
