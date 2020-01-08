@@ -247,20 +247,20 @@
          getSuscriptionData() {
             if (this.$store.state.quserAuth.authenticated) {
                if (this.$auth.hasAccess('marketplace.stores.create')) {
+                  let criteria=this.$store.state.quserAuth.userId
                   let params = {
                      params: {
                         filter: {
-                           user: this.$store.state.quserAuth.userId,
+                           field:'user_id',
                            status: 1
                         }
                      }
                   };
-                  this.$crud.index("apiRoutes.qsubscription.subscriptions", params).then(response => {
-                     if (response.data.length > 0 && !this.storeSelected) {
+                  this.$crud.show("apiRoutes.qsubscription.subscriptions",criteria, params).then(response => {
+                     if (response.data.active  && !this.store.selected) {
                         this.canCreateStore = true;
                      }
                   })
-
                }//businessRole
             }
          },
