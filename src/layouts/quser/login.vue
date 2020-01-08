@@ -69,7 +69,7 @@
                 }
               }
             };
-            this.$crud.index("apiRoutes.qsubscription.suscriptions",params).then(response => {
+            this.$crud.index("apiRoutes.qsubscription.subscriptions",params).then(response => {
               if(response.data.length==0)
                 this.$router.push({name: 'products.show',params:{slug:'tiendas-en-linea'}});
             })

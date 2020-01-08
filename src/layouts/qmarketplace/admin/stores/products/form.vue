@@ -580,7 +580,7 @@
             }
           }
         };
-        this.$crud.index("apiRoutes.qsubscription.suscriptions",params).then(response => {
+        this.$crud.index("apiRoutes.qsubscription.subscriptions",params).then(response => {
           /*
           console.log('Subscription data');
           console.log(response.data);
