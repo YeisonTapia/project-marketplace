@@ -255,7 +255,7 @@
                         }
                      }
                   };
-                  this.$crud.index("apiRoutes.qsubscription.suscriptions", params).then(response => {
+                  this.$crud.index("apiRoutes.qsubscription.subscriptions", params).then(response => {
                      if (response.data.length > 0 && !this.storeSelected) {
                         this.canCreateStore = true;
                      }
