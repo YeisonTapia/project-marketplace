@@ -322,14 +322,19 @@ responsePages.qform.forms.permission=  'iforms.forms.manage',
 responsePages.qform.leads.permission=  'iforms.field.manage',
 //QSUBSCRIPTION
 responsePages.qsubscription.products.layout= () => import('src/layouts/admin')
+responsePages.qsubscription.products.path='/admin/subscriptions/products/index'
 responsePages.qsubscription.productsCreate.layout= () => import('src/layouts/admin')
+responsePages.qsubscription.productsCreate.path='/subscriptions/products/create'
 responsePages.qsubscription.productsUpdate.layout= () => import('src/layouts/admin')
+responsePages.qsubscription.productsUpdate.path='/admin/subscriptions/products/:id'
 responsePages.qsubscription.plans.layout= () => import('src/layouts/admin')
+responsePages.qsubscription.plans.path='/admin/subscriptions/products/:id/plans/index'
 responsePages.qsubscription.plansCreate.layout= () => import('src/layouts/admin')
+responsePages.qsubscription.plansCreate.path='/admin/subscriptions/products/:productId/plans/create'
 responsePages.qsubscription.plansUpdate.layout= () => import('src/layouts/admin')
+responsePages.qsubscription.plansUpdate.path='/admin/subscriptions/products/:productId/plans/:id'
 responsePages.qsubscription.features.layout= () => import('src/layouts/admin')
-responsePages.qsubscription.featuresCreate.layout= () => import('src/layouts/admin')
-responsePages.qsubscription.featuresUpdate.layout= () => import('src/layouts/admin')
+responsePages.qsubscription.features.path='/admin/subscriptions/products/:id/features/index'
 responsePages.qsubscription.subscriptions.layout= () => import('src/layouts/admin')
 responsePages.qsubscription.subscriptions.path=  '/admin/subscriptions/subscription'
 responsePages.qsubscription.subscriptionsUpdate.layout= () => import('src/layouts/admin')
