@@ -18,7 +18,7 @@
     <div class="bg-white q-pa-md shadow-2 rounded-lg q-mb-lg" >
       <div class="btn-guest" @click="authenticate()">
         <div class="text-h5 font-family-secondary text-primary">ENTRA SIN REGISTRARTE</div>
-        <div class="text-body2 text-secondary">No tendras beneficios no sorpresas</div>
+        <div class="text-body2 text-secondary">No tendras beneficios ni sorpresas</div>
       </div>
     </div>
 

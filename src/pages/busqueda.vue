@@ -114,6 +114,7 @@
           </div>
 
       </div>
+      <inner-loading :visible="loading"/>
     </div>
 
     <div class="q-container banner q-py-xl text-center">
@@ -159,7 +160,7 @@ export default {
         }
       ],
       stores: [],
-      loading: false,
+      loading: true,
       success: false,
       typeSearch: 1, // 1 = Front Header, 2 = Advance Search
       paramsF:{
@@ -184,12 +185,12 @@ export default {
       this.$q.loading.show()
       if(this.typeSearch==1)
         await this.searchStores()
-      this.loading = false
       this.$q.loading.hide()
       this.success = true
     },
     // Basic Search Stores
     searchStores() {
+      this.loading = true
       if(this.paramsF.text=="Todas las tiendas"){
         this.paramsF.text="";
       }
@@ -209,7 +210,9 @@ export default {
       }
       this.$crud.index("apiRoutes.qmarketplace.store", params).then(response => {
         this.stores = response.data
+        this.loading = false
       }).catch(error => {
+        this.loading = false
         console.error('[ERROR - GET STORES SEARCH] ', error)
         this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
       })
@@ -217,26 +220,26 @@ export default {
     },
     // Get Categories Store
     getCategoriesStore(){
-
+      this.loading = true
       this.$crud.index("apiRoutes.qmarketplace.category").then(response => {
 
         this.categoryOptions = this.$array.tree(response.data);
 
         this.advancedSearch.category = {label:"Selecciona la categoria de la tienda",value:0,id:0}
-
+        this.loading = false
       }).catch(error => {
         this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
         console.error("ERROR - GET CATEGORIES STORE")
-
+        this.loading = false
       })
 
     },
     // Get Cities
     getCities(){
-
+      this.loading = true
       this.advancedSearch.city = {label:"RIOHACHA",value:640,id:640}
       this.getNeighborhoods()
-
+      this.loading = false
         /* Funcional - No eliminar - Comentado por ahora
         let params = {
             remember: false,
@@ -269,7 +272,7 @@ export default {
     },
     // Get Neighborhoods
     getNeighborhoods(){
-
+      this.loading = true
         if(this.advancedSearch.city.id){
 
           //params
@@ -298,8 +301,9 @@ export default {
             }
 
             this.advancedSearch.neighborhood = {label:"Barrio",value:0,id:0}
-
+            this.loading = false
           }).catch(error => {
+            this.loading = false
             console.error('[ERROR - GET Neighborhoods] ', error)
             this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
           })
@@ -309,7 +313,7 @@ export default {
     },
     // Get types of Companies
     getCompanies(){
-
+      this.loading = true
       let params={
         params:{
           filter:{
@@ -330,8 +334,9 @@ export default {
                 id:response.data[i].id
               });
         }
-
+        this.loading = false
       }).catch(error => {
+        this.loading = false
         console.error('[ERROR - GET TYPE COMPANIES] ', error)
         this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
       })
@@ -339,7 +344,7 @@ export default {
     },
     // Advanced Search
     searchAdvanced(){
-
+      this.loading = true
       this.loadingBtn = true
 
       let categoryId = this.advancedSearch.category.id?parseInt(this.advancedSearch.category.id):null
@@ -370,16 +375,18 @@ export default {
         }else{
           this.drawerPoint = false
         }
-
+        this.loading = false
       }).catch(error => {
         console.error('[ERROR - GET STORES ADVANCE SEARCH] ', error)
         this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+        this.loading = false
       })
 
       this.loadingBtn = false
 
     },
     async getInforAdvanced(){
+      this.loading = true
       this.$q.loading.show()
       await this.getCategoriesStore()
       await this.getCities()
@@ -387,6 +394,7 @@ export default {
       //await this.getCompanies()
 
       this.$q.loading.hide()
+      this.loading = false
     }
 
   },

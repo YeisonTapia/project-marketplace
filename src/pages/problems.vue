@@ -18,7 +18,7 @@
               </h3>
               <div class="text-subtitle1 text-center q-pa-md">
                   Si tienes alguna duda, alguna consulta no dudes en
-                  contactarnos, estatemos listos para responderte.
+                  contactarnos, estaremos listos para responderte.
                 </div>
               <q-card-section class="q-px-lg q-pb-lg form-general">
                 <q-input v-model="form.name"  label="Nombre:" />

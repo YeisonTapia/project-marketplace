@@ -35,7 +35,7 @@
                      <div class="col-12 q-py-lg">
                         <div class="row q-col-gutter-sm justify-center items-center">
                            <div class="col-md-9 col-lg-auto">
-                              <search-store></search-store>
+                              <search-store/>
                            </div>
                            <div class="col-xs-12 col-sm-9 col-md-auto">
                               <q-btn v-if="$auth.hasAccess('marketplace.stores.create')&& storeSelect"
@@ -54,7 +54,7 @@
             <!--= Menu Desktop =-->
             <div class="row justify-center full-width" id="bg-menu">
                <div class="col-11">
-                  <menu-list class="menu" :menu="items" in-line></menu-list>
+                  <menu-list class="menu" :menu="items" in-line/>
                </div>
             </div>
 
@@ -73,7 +73,7 @@
             <q-btn flat round dense icon="fas fa-heart" :to="{name: 'qmarketplace.account.favorite.stores'}"/>
             <q-btn icon="fas fa-store" v-if="$auth.hasAccess('marketplace.stores.create')&& storeSelect" flat round dense @click="editStore()"
                    />
-            <q-btn else flat round dense @click="createStore()" icon="fas fa-store"/>
+            <q-btn v-else flat round dense @click="createStore()" icon="fas fa-store"/>
             <notification/>
          </q-toolbar>
 
@@ -257,7 +257,7 @@
                      }
                   };
                   this.$crud.show("apiRoutes.qsubscription.subscriptions",criteria, params).then(response => {
-                     if (response.data.active  && !this.store.selected) {
+                     if (response.data.active  && !this.storeSelect) {
                         this.canCreateStore = true;
                      }
                   })
