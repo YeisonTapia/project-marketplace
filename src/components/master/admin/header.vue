@@ -234,18 +234,26 @@
          getSuscriptionData() {
             if (this.$store.state.quserAuth.authenticated) {
                if (this.$auth.hasAccess('marketplace.stores.create')) {
-                  let criteria=this.$store.state.quserAuth.userId
+                  let criteria = this.$store.state.quserAuth.userId
                   let params = {
                      params: {
                         filter: {
-                           field:'user_id',
+                           field: 'user_id',
                            status: 1
                         }
                      }
                   };
-                  this.$crud.show("apiRoutes.qsubscription.subscriptions",criteria, params).then(response => {
-                     if (response.data.active  && !this.store.selected) {
-                        this.canCreateStore = true;
+                  this.$crud.show("apiRoutes.qsubscription.subscriptions", criteria, params).then(response => {
+                     if (response.data) {
+                        if (response.data.active) {
+                           if (!this.storeSelect) {
+                              this.canCreateStore = true;
+                           }
+                        } else {
+                           this.$router.push({name: 'products.show', params: {slug: 'tiendas-en-linea'}})
+                        }
+                     } else {
+                        this.$router.push({name: 'products.show', params: {slug: 'tiendas-en-linea'}})
                      }
                   })
                }//businessRole

@@ -24,7 +24,8 @@
                 <q-input v-model="form.name"  label="Nombre:" />
                 <q-input v-model="form.email"  label="Correo Electrónico:" />
                 <q-input v-model="form.phone"  label="Teléfono:" />
-                <q-select v-model="form.storeTitle" label="Tienda donde tuviste el problema :" :options="storeOptions" use-input @filter="(val, update)=>update(()=>{options = $helper.filterOptions(val,storeOptions,options.name)})">
+                <q-select v-model="form.storeTitle" label="Tienda donde tuviste el problema :" :options="formatOptions" use-input
+                          @filter="(val, update)=>update(()=>{options = $helper.filterOptions(val,rootOptions,form.storeTitle)})">
                 </q-select>
                 <q-select v-model="form.type" label="Tipo de Solicitud:" :options="typeOptions" />
                 <q-input type="textarea" v-model="form.message"  label="Escribe aquí tu caso e intermediaremos para tratar de solucionarlo" />
@@ -134,8 +135,8 @@ export default {
         {label:'Reclamo',id:2},
         {label:'Solicitud',id:3},
         ],
-      storeOptions:null,
-      options: this.$clone(this.storeOptions),
+      options: [],//Options
+      rootOptions: [],//Options
       text:''
     }
   },
@@ -188,18 +189,23 @@ export default {
             filter:{}
           }
         }).then(response => {
-          this.storeOptions=array.select(response.data, {label : 'name', id : 'name'})
+          this.rootOptions=array.select(response.data, {label : 'name', id : 'name'})
         });
     },
-    filterFn (val, update) {
-      let data = this.$clone(this.options)
-      return data.filter(item => {
-        return item.name.toLowerCase().includes(this.text.toLowerCase())
+
+  },
+  computed: {
+    formatOptions() {
+      let options = this.$clone(this.options)
+
+      //Convert to string
+      options.forEach(item => {
+        if (item.value || item.value >= 0) item.value = item.value.toString()
       })
 
+      return options
     }
-
-  }
+  },
 
 }
 </script>

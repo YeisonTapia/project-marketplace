@@ -256,9 +256,18 @@
                         }
                      }
                   };
-                  this.$crud.show("apiRoutes.qsubscription.subscriptions",criteria, params).then(response => {
-                     if (response.data.active  && !this.storeSelect) {
-                        this.canCreateStore = true;
+                  this.$crud.show("apiRoutes.qsubscription.subscriptions", criteria, params).then(response => {
+                     if (response.data) {
+                        if (response.data.active) {
+                           if (!this.storeSelect) {
+                              this.canCreateStore = true;
+                           }
+
+                        } else {
+                           this.$router.push({name: 'products.show', params: {slug: 'tiendas-en-linea'}})
+                        }
+                     } else {
+                        this.$router.push({name: 'products.show', params: {slug: 'tiendas-en-linea'}})
                      }
                   })
                }//businessRole

@@ -337,6 +337,8 @@ responsePages.qsubscription.features.layout= () => import('src/layouts/admin')
 responsePages.qsubscription.features.path='/admin/subscriptions/products/:id/features/index'
 responsePages.qsubscription.subscriptions.layout= () => import('src/layouts/admin')
 responsePages.qsubscription.subscriptions.path=  '/admin/subscriptions/subscription'
+responsePages.qsubscription.paymentMethods.layout= () => import('src/layouts/admin')
+responsePages.qsubscription.paymentMethods.path=  '/admin/subscriptions/payment-methods'
 responsePages.qsubscription.subscriptionsUpdate.layout= () => import('src/layouts/admin')
 responsePages.qsubscription.subscriptionsUpdate.path=  '/admin/subscriptions/subscription/:id'
 responsePages.frontqsubscription.products.page= () => import('src/layouts/qsubscription/frontend/products/show')
