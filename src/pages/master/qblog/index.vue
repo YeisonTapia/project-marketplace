@@ -20,7 +20,7 @@
                   </div>
                </div>
             </div>
-            <div class="row">
+            <div class="row" v-if="$q.platform.is.desktop">
                <div class="col-12">
                   <h5 class="bg-secondary font-family-secondary text-weight-bold q-inline-block text-white q-px-lg q-py-md"> {{category.title}} </h5>
                </div>       

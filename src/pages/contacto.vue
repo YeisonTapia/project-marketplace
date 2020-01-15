@@ -11,7 +11,7 @@
               </div>
               <q-card-section>
                 
-                <div class="q-px-xl q-pb-xl">
+                <div class="px-xl q-pb-xl">
                   <div class="text-h4 text-primary q-mb-md text-center font-family-secondary">Datos de contacto</div>
                   <div class="text-subtitle1 text-center q-pb-lg  text-secondary">
                     Si tienes alguna duda, alguna consulta o
@@ -22,19 +22,19 @@
 
                   <q-list class=" q-pt-lg list-info">
                     <q-item>
-                      <q-item-section avatar>
+                      <q-item-section avatar class="q-hide q-md-show q-mr-md">
                         <q-icon color="primary" name="fas fa-phone" />
                       </q-item-section>
-                      <q-item-section class="q-pl-md q-mb-xl">
+                      <q-item-section class="q-mb-xl">
                         <div class="text-subtitle1 font-family-secondary">Teléfonos</div>
                         <div class="text-subtitle1"><a href="tel:00">+00000000</a>  -  <a href="tel:00">+00000000</a></div>
                       </q-item-section>
                     </q-item>
                     <q-item>
-                      <q-item-section avatar>
+                      <q-item-section avatar class="q-hide q-md-show q-mr-md">
                         <q-icon color="primary" name="far fa-envelope" />
                       </q-item-section>
-                      <q-item-section class="q-pl-md">
+                      <q-item-section>
                         <div class="text-subtitle1 font-family-secondary">E-mail</div>
                         <div class="text-subtitle1"><a href="mailto:info@dondeestaesavaina.com">info@dondeestaesavaina.com</a></div>
                       </q-item-section>

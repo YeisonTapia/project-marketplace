@@ -9,11 +9,11 @@
                    icon="shopping_cart"/>
          </q-card-actions>
          <q-card-section class="text-left q-pa-sm text-secondary">
-            <q-rating size="30px"
+            <q-rating 
                       v-model="product.averageRating" readonly color="primary"
                       :max="5"
             />
-            <h5 class="q-my-sm font-family-secondary">${{product.price}}</h5>
+            <h5 class="q-my-sm price font-family-secondary">${{product.price}}</h5>
             <div class="text-subtitle1 font-family-secondary text-truncate">{{product.name}}</div>
             <div class="text-subtitle2 text-truncate">{{product.store.name}}</div>
          </q-card-section>
@@ -59,4 +59,12 @@
             color $secondary
             border-right 1px solid #666666
             border-radius 0
+      .q-rating
+         font-size 30px      
+      @media screen and (max-width: $breakpoint-xs)
+         .price 
+            font-size 1rem!important
+            line-height 1rem !important   
+         .q-rating 
+            font-size 15px      
 </style>

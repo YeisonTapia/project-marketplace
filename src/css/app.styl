@@ -440,6 +440,9 @@ footer
   & > div
     -webkit-transform  skew(-10deg)
     transform skew(-10deg)
+  @media screen and (max-width: $breakpoint-sm)   
+    font-size 20px  
+    padding 5px 15px
 
 .q-inline-block
   display inline-block !important
@@ -845,3 +848,49 @@ footer
       font-size 20px
       margin-top 0
       margin-bottom 0
+      
+
+.my-xl
+  margin-bottom 48px
+  margin-top 48px
+.py-xl
+  padding-bottom 48px
+  padding-top 48px  
+.px-xl
+  padding-left 48px
+  padding-right 48px
+
+/* Fonts */
+@media screen and (max-width: $breakpoint-md)
+  h2
+    font-size 3.5rem !important
+    line-height 3.5rem !important
+@media screen and (max-width: $breakpoint-sm)    
+  h2
+    font-size 2.5rem !important
+    line-height 2.5rem !important
+  .px-xl
+    padding-left 15px
+    padding-right 15px    
+  h4
+    font-size 1.5rem !important
+    line-height 1.5rem !important    
+@media screen and (max-width: $breakpoint-xs)
+  h2
+    font-size 2rem !important
+    line-height 2rem !important
+  .text-subtitle1  
+    font-size 1rem !important
+    line-height 1rem !important
+  .text-h4  
+    font-size 1.5rem !important
+    line-height 1.5rem !important  
+  .px-xl
+    padding-left 0px
+    padding-right 0px  
+  .my-xl
+    margin-bottom 8px
+    margin-top 8px  
+  .py-xl
+    padding-bottom 0px
+    padding-top 0px    

@@ -19,7 +19,7 @@
               <div class="text-subtitle1 text-center q-pa-md">
                   Si tienes alguna duda, alguna consulta no dudes en
                   contactarnos, estaremos listos para responderte.
-                </div>
+                </div> 
               <q-card-section class="q-px-lg q-pb-lg form-general">
                 <q-input v-model="form.name"  label="Nombre:" />
                 <q-input v-model="form.email"  label="Correo Electrónico:" />
@@ -43,7 +43,7 @@
               </div>
               <q-card-section>
 
-                <div class="q-px-xl q-pb-xl">
+                <div class="px-xl q-pb-xl">
                   <div class="text-h4 text-primary q-mb-md text-center font-family-secondary">Datos de contacto</div>
                   <div class="text-subtitle1 text-center q-pb-lg  text-secondary">
                     Si tienes alguna duda, alguna consulta o
@@ -51,22 +51,21 @@
                     contactarnos, estaremos listos para responderte.
                   </div>
                   <hr>
-
                   <q-list class=" q-pt-lg list-info">
                     <q-item>
-                      <q-item-section avatar>
+                      <q-item-section avatar class="q-hide q-md-show q-mr-md">
                         <q-icon color="primary" name="fas fa-phone" />
                       </q-item-section>
-                      <q-item-section class="q-pl-md q-mb-xl">
+                      <q-item-section class="q-mb-xl">
                         <div class="text-subtitle1 font-family-secondary">Teléfonos</div>
                         <div class="text-subtitle1"><a href="tel:3017753585">+57 301-775-3585</a>  -  <a href="tel:301558520">+57 301-558-5201</a></div>
                       </q-item-section>
                     </q-item>
                     <q-item>
-                      <q-item-section avatar>
+                      <q-item-section avatar class="q-hide q-md-show q-mr-md">
                         <q-icon color="primary" name="far fa-envelope" />
                       </q-item-section>
-                      <q-item-section class="q-pl-md">
+                      <q-item-section>
                         <div class="text-subtitle1 font-family-secondary">E-mail</div>
                         <div class="text-subtitle1"><a href="mailto:info@dondeestaesavaina.com">info@dondeestaesavaina.com</a></div>
                       </q-item-section>
@@ -212,15 +211,16 @@ export default {
 <style lang="stylus">
   .page-problems
     .card-contacto
-    & .img-title
-      object-fit contain
-      width  auto
-    & .q-item__section--avatar
-      border-radius 50%
-      border 1px solid $primary
-      padding 10px
-      width 50px
-      height 50px
+      & .img-title
+        object-fit contain
+        width  auto
+      & .q-item__section--avatar
+        border-radius 50%
+        border 1px solid $primary
+        padding 10px
+        width 50px
+        height 50px
+
     .redes-contacto
       .imsocial
         display inline-block

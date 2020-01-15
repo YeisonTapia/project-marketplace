@@ -21,7 +21,7 @@
 
                </div>
             </div>
-            <div class="row q-col-gutter-xl q-mt-sm">
+            <div class="row  q-mt-sm" :class="[$q.platform.is.desktop ?  'q-col-gutter-xl' : 'q-col-gutter-none']">
                <div class="col-xs-12 col-sm-12 col-md-8 q-mb-lg" >
 
                  <q-card  v-if="post">
