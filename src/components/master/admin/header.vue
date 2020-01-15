@@ -249,11 +249,11 @@
                            if (!this.storeSelect) {
                               this.canCreateStore = true;
                            }
-                        } else {
-                           this.$router.push({name: 'products.show', params: {slug: 'tiendas-en-linea'}})
+                        } else if(!this.userDat.hasAccess('subscriptions.subscriptions.manage')){
+                           this.$router.push({name: 'products.show', params: {slug: 'tiendas-en-linea'},query:{'storeId':this.storeSelect}})
                         }
                      } else {
-                        this.$router.push({name: 'products.show', params: {slug: 'tiendas-en-linea'}})
+                        this.$router.push({name: 'products.show', params: {slug: 'tiendas-en-linea'},query:{'storeId':this.storeSelect}})
                      }
                   })
                }//businessRole

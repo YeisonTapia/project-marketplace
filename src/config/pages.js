@@ -104,6 +104,17 @@ let responsePages = {
             icon: 'apps',
             authenticated: true
         },
+        userOrder: {
+            //permission: 'icommerce.orders.index',
+            activated: true,
+            path: '/account/orders/:id',
+            name: 'qcommerce.account.order',
+            layout: () => import('src/layouts/account.vue'),
+            page: () => import('src/layouts/qcommerce/account/show'),
+            title: 'app.layout.page.myShopping',
+            icon: 'apps',
+            authenticated: true
+        },
         // User Favorite Marketplace Profile
         userFavoriteStores: {
             //permission: 'qmarketplace.stores.manage',

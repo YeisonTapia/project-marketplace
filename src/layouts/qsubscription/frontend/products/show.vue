@@ -177,24 +177,6 @@ export default {
     this.$nextTick(function () {
       this.getProduct();
       this.init();
-      /*
-        Get role user autentichated
-        var roles=this.$store.state.quserAuth.userData.roles;
-        var businessRole=0;
-        for (var i=0;i<roles.length;i++){
-          if(roles[i].slug=="business"){
-            //Vendedor
-            businessRole=1;
-            break;
-          }//if role business
-        }//for
-        if(businessRole){
-          //Query axios
-          //If doesn't suscription active, redirect to plans
-          $router.push({name: 'products.show',params:{slug:'tiendas-en-linea'}})
-        }
-      */
-      console.log(this.$store.state.quserAuth);
     })
   },
   data() {
@@ -273,18 +255,6 @@ export default {
 
       return response
     },
-    register(){
-      if (this.checkedCaptcha()) {
-        this.loading = true;
-        let data = this.$clone(this.form)
-        data.fields = this.$helper.convertToBackField(this.form.fields)
-        this.$crud.create('apiRoutes.quser.register', data).then(response => {
-          this.callbackRequest(true, response.data)
-        }).catch(error => {
-          this.callbackRequest(false, error)
-        })
-      }
-    },
     //Action after request
     callbackRequest(success = true, response) {
       this.$v.$reset()//Reset validations
@@ -340,7 +310,9 @@ export default {
       // this.$router.push({ name: 'subscriptions.shopping.cart', params: { planId: planId }});
       if(this.userId){
         //push to shopping cart
-        this.$router.push({ name: 'subscriptions.shopping.cart', params: { planId: planId }});
+        let store=null
+        if(this.$route.query.storeId) store=this.$route.query.storeId
+        this.$router.push({ name: 'subscriptions.shopping.cart', params: { planId: planId }, query:{'storeId':store}});
       }else{
         this.minimizedModal = true
       }

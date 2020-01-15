@@ -262,9 +262,6 @@
                            if (!this.storeSelect) {
                               this.canCreateStore = true;
                            }
-
-                        } else {
-                           this.$router.push({name: 'products.show', params: {slug: 'tiendas-en-linea'}})
                         }
                      } else {
                         this.$router.push({name: 'products.show', params: {slug: 'tiendas-en-linea'}})
