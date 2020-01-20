@@ -90,7 +90,7 @@
       //Redirect to route of pages
       redirectTo(item) {
         if (item.linkType && (item.linkType == 'external')) {
-          window.open(`https://${item.url}`, item.target)
+          if(process.env.CLIENT)  window.open(`https://${item.url}`, item.target)
         } else {
           this.$router.push({name: item.name, params: item.params || {}})
         }

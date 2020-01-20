@@ -132,7 +132,10 @@
       },
       //open URL
       openUrl(url) {
-        window.open(url, '_blank')
+        if(process.env.CLIENT){
+          window.open(url, '_blank')
+        }
+
       }
     }
   }

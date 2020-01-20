@@ -80,7 +80,7 @@
       </q-header>
 
       <!-- MENU LEFT -->
-      <q-drawer id="menu_master" v-model="drawer.menu">
+      <q-drawer id="menu_master" v-if="$q.platform.is.mobile" v-model="drawer.menu">
          <q-list no-border>
             <!-- === LOGO === -->
             <q-item-section class="logo-tienda text-center q-py-lg">
@@ -266,6 +266,9 @@
                      } else {
                         this.$router.push({name: 'products.show', params: {slug: 'tiendas-en-linea'}})
                      }
+                  }).catch(error => {
+                     this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+                     reject(false)//Resolve
                   })
                }//businessRole
             }
@@ -280,7 +283,10 @@
          },
          //open URL
          openUrl(url) {
-            window.open(url, '_blank')
+            if(process.env.CLIENT){
+               window.open(url, '_blank')
+            }
+
          },
          createStore() {
             //Crear Tienda
