@@ -37,7 +37,7 @@
                 params:{
                    filter:{
                       rating:'top',
-                      type:1
+                      type:2
                    },
                    take:8
                 }
