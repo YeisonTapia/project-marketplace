@@ -304,6 +304,8 @@
    #masterHeader
       .header-desktop
          #listMenu
+            .q-item
+               background-color transparent
             .q-expansion-item__container
                .q-expansion-item__content
                   padding 0 0 0 15px

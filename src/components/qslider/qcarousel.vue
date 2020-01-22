@@ -7,11 +7,18 @@
             infinite
             autoplay
     >
-      <q-carousel-slide v-for="slide in position.slides"  v-bind:key="slide.id" :name="slide.id" v-if="slide.active" :img-src="slide.imageUrl">
+      <q-carousel-slide v-for="(slide, i) in position.slides"  v-bind:key="slide.id" :name="`slide-${i}`" v-if="slide.active" :img-src="slide.imageUrl">
         <div v-if="slide.title || slide.caption" class="absolute-bottom custom-caption">
+
           <div v-if="slide.title" class="text-h2">{{slide.title}}</div>
           <div v-if="slide.caption" class="text-subtitle1">{{slide.caption}}</div>
+          <q-btn  v-if="slide.uri" rounded
+                   color="primary"
+                  :to="slide.uri"
+                   size="sm" label="Ver más"/>
+
         </div>
+
       </q-carousel-slide>
     </q-carousel>
   </div>
@@ -29,7 +36,7 @@
             return {
                 loading: false,
                 position: {},
-                slide: 0
+                slide: 'slide-0'
             }
         },
         created() {

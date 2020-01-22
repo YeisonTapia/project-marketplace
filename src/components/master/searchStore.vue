@@ -17,8 +17,10 @@
                     dense
                     class="select-neighborhood"
                     v-model="search.neighborhood"
-                    :options="neighborhoodOptions"
+                    :options="neigOption"
+                    @filter="(val, update)=>update(()=>{neigOption = $helper.filterOptions(val,neighborhoodOptions,search.neighborhood)})"
                     clearable
+                    use-input
                     label="Barrio"
             />
             <q-space class="q-mx-sm"/>
@@ -87,6 +89,7 @@
             provinceId: 777, // Default - La Guajira
             cityOptions: [],
             neighborhoodOptions: [],
+            neigOption:[]
 
          }
       },
@@ -216,6 +219,8 @@
                & .q-field__native
                   color $tertiary
                   font-size 18px
+               .q-select__input
+                  max-width 50px
 
             .btn-search
                font-size 20px
