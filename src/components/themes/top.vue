@@ -288,16 +288,20 @@
          .movil-nav
             display none !important
          ol, ul
+            margin-top 5px
             li
-               margin-bottom 4px
+               margin-bottom 2px
                font-size 12px
                max-width 80px
                white-space: nowrap;
                text-overflow: ellipsis;
                overflow: hidden;
+               padding 2px
          .q-card__section
+            padding 5px !important
             .text-h6
                margin 0 9px
                font-weight bold
+
 
 </style>

@@ -1,7 +1,7 @@
 import { Carousel, Slide } from 'vue-carousel';
 import Echo from 'laravel-echo'
 import Pusher from 'pusher-js'
-import HighchartsVue from 'highcharts-vue'
+import {Chart} from 'highcharts-vue'
 import Lingallery from 'lingallery';
 
 export default async ({app, router, store, Vue}) => {
@@ -10,7 +10,7 @@ export default async ({app, router, store, Vue}) => {
   let components = [
     {name: 'Carousel', component: Carousel},
     {name: 'Slide', component: Slide},
-    {name: 'highcharts', component: HighchartsVue},
+    {name: 'chart', component: Chart},
     {name: 'lingallery', component: Lingallery},
   ]
 

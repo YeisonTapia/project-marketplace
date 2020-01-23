@@ -154,7 +154,7 @@
                       style: {
                           fontFamily: 'Trebuchet MS',
                           color: '#ffffff',
-                          fontSize: '18px'
+                          fontSize: '15px'
                       }
                   },
                   xAxis: {

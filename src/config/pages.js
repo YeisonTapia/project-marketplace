@@ -134,7 +134,7 @@ let responsePages = {
             path: '/account/messages',
             name: 'qform.account.messages',
             layout: () => import('src/layouts/account.vue'),
-            page: () => import('src/layouts/qform/account/messages'),
+            page: () => import('@imagina/qmarketplace/_layouts/admin/chat/index'),
             title: 'app.layout.page.myMessages',
             icon: 'apps',
             authenticated: true
@@ -211,9 +211,15 @@ if (appConfig && appConfig.modules) {
 
     })
 }
+
+
+
+
 //======= Add or update pages
 //#example: responsePages.<title-page> = <'title'>
 //qblog
+//admin index
+responsePages.app.home.name='app.admin'
 responsePages.qblog.posts.layout= () => import('src/layouts/admin')
 responsePages.qblog.posts.path=  '/admin/blog/articulos/index'
 responsePages.qblog.categories.layout= () => import('src/layouts/admin')
