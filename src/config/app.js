@@ -10,6 +10,7 @@ export default {
         'qticket',
         'qsubscription',
         'qmarketplace',
+        'qanalytics',
         'qquiz',
         'qtrivia',
         'qredeems',
