@@ -108,7 +108,8 @@
                     </div>
                     <div class="col-6 text-right secondary-font">
 
-                      $ {{$n(order.total - order.shippingAmount)}}
+                      <!-- $ {{$n(order.total - order.shippingAmount)}} -->
+                      $ {{$n(subTotal)}}
                     </div>
                   </div>
                   <div class="row q-mb-sm full-width">
@@ -117,6 +118,14 @@
                     </div>
                     <div class="col-6 text-right secondary-font">
                       $ {{$n(order.shippingAmount)}}
+                    </div>
+                  </div>
+                  <div class="row q-mb-sm full-width" v-if="discount>0">
+                    <div class="col-6 secondary-font">
+                      {{$tr('qsubscription.layout.form.checkout.discount')}}
+                    </div>
+                    <div class="col-6 text-right secondary-font">
+                      $ {{$n(discount)}}
                     </div>
                   </div>
                   <div class="row q-mb-sm q-title text-weight-bold full-width">
@@ -196,6 +205,26 @@ export default {
       }
     }
   },
+  computed:{
+    subTotal(){
+      let subTot=0;
+      if(this.order.items.length>0){
+        for(var i=0;i<this.order.items.length;i++){
+          subTot=parseFloat(subTot)+parseFloat(this.order.items[i].total);
+        }//for
+      }
+      return subTot;
+    },
+    discount(){
+      if(this.order){
+        let discont=0;
+        if((this.subTotal+parseFloat(this.order.shippingAmount))>parseFloat(this.order.total)){
+          discont=(this.subTotal+parseFloat(this.order.shippingAmount))-parseFloat(this.order.total);
+        }
+        return discont;
+      }
+    }
+  },
   created() {
     this.getOrder()
   },
@@ -252,13 +281,13 @@ export default {
       font-size 20px
       padding 0 15px
       &:before
-          display none !important   
+          display none !important
     @media screen and (max-width: $breakpoint-sm)
       min-width 60%
       font-size 15px
-      padding 0 10px         
+      padding 0 10px
     & > div
       -webkit-transform  skew(-10deg)
-      transform skew(-10deg)      
+      transform skew(-10deg)
 
 </style>
