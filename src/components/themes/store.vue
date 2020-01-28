@@ -152,10 +152,11 @@
                justify-content center
                background-size 100% 100%
                padding 0 2px
-               height: 30px;
-               width: 30px;
+               height: 40px;
+               width: 40px;
                background-repeat no-repeat
                background-position center
+               font-size 11px !important
 
             & .label-title
                border-radius 10px 0 0 10px
