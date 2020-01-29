@@ -47,7 +47,7 @@
                            <div class="col-xs-12 col-sm-9 col-md-auto">
                               <q-btn v-if="$auth.hasAccess('marketplace.stores.create')&& storeSelect"
                                      class="btn-tienda" flat icon="fas fa-store" color="white" no-caps
-                                     label="Mi Tienda" @click="editStore()"/>
+                                     label="Mi Tienda" @click="createStore()"/>
                               <q-btn v-else class="btn-tienda" flat icon="fas fa-store" color="white"
                                      no-caps label="Crea tu Tienda Virtual" @click="createStore()"/>
 
@@ -268,7 +268,7 @@
          },
          createStore() {
             //Crear Tienda
-            this.$router.push({name: 'qmarketplace.admin.stores.create'});
+            this.$router.push({name: 'qmarketplace.admin.stores.my.store'});
          },
          editStore() {
             this.$router.push({name: 'qmarketplace.admin.stores.my.store'});
