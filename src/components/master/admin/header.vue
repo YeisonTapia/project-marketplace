@@ -124,9 +124,9 @@
 
          <div class="q-pb-none q-mt-md">
             <div class="label-primary text-center text-white">
-               <div class="title q-pb-md font-family-secondary">
-                  <span>NIVEL</span>
-               </div>
+
+               <q-btn flat color="withe" class="title font-family-secondary" :to="{name:'qmarketplace.admin.mystore.level'}">NIVEL</q-btn>
+
                <div class="subtitle">
                   <!-- TIENDA PROFESIONAL -->
                   {{selectStore.level}}
@@ -249,11 +249,19 @@
                            if (!this.storeSelect) {
                               this.canCreateStore = true;
                            }
-                        } else if(!this.userDat.hasAccess('subscriptions.subscriptions.manage')){
-                           this.$router.push({name: 'products.show', params: {slug: 'tiendas-en-linea'},query:{'storeId':this.storeSelect}})
+                        } else if (!this.userDat.hasAccess('subscriptions.subscriptions.manage')) {
+                           this.$router.push({
+                              name: 'products.show',
+                              params: {slug: 'tiendas-en-linea'},
+                              query: {'storeId': this.storeSelect}
+                           })
                         }
                      } else {
-                        this.$router.push({name: 'products.show', params: {slug: 'tiendas-en-linea'},query:{'storeId':this.storeSelect}})
+                        this.$router.push({
+                           name: 'products.show',
+                           params: {slug: 'tiendas-en-linea'},
+                           query: {'storeId': this.storeSelect}
+                        })
                      }
                   })
                }//businessRole

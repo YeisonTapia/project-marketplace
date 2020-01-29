@@ -73,12 +73,17 @@
            return new Promise((resolve, reject) => {
              let currentPage = this.page
              //Validate last page before do request
-             if ((currentPage != 1) && (currentPage >= this.totalPage)) return this.$refs.infinityScrollOfferStore.stop()
+             if ((currentPage != 1) && (currentPage > this.totalPage)) return this.$refs.infinityScrollOfferStore.stop()
 
              this.visible = true;
              this.$crud.index("apiRoutes.qmarketplace.store", {
                params: {
-                 filter: {},
+                 filter: {
+                    order: {
+                       field: 'created_at',
+                       way: 'desc'
+                    }
+                 },
                  take: this.take,
                  page: currentPage
                }

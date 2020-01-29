@@ -58,13 +58,13 @@
       },
       methods: {
          async init() {
-            this.getProducts(this.page, ()=>{})
+           // this.getProducts(this.page, ()=>{})
             await this.getBanner()
          },
          getProducts(index, done) {
             let currentPage = this.page
             //Validate last page before do request
-            if ((currentPage != 1) && (currentPage >= this.totalPage)) return this.$refs.infinityScroll.stop()
+            if ((currentPage != 1) && (currentPage > this.totalPage)) return this.$refs.infinityScroll.stop()
             //Request Params
             let params = {
                remember: false,
@@ -72,6 +72,10 @@
                   include: '',
                   filter: {
                      visible: true,
+                     order: {
+                        field: 'created_at',
+                        way: 'desc'
+                     }
                   },
                   take: this.take,
                   page: currentPage
