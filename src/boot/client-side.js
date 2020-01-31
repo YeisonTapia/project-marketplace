@@ -3,6 +3,7 @@ import Echo from 'laravel-echo'
 import Pusher from 'pusher-js'
 import {Chart} from 'highcharts-vue'
 import Lingallery from 'lingallery';
+import SocialSharing from 'vue-social-sharing'
 
 export default async ({app, router, store, Vue}) => {
 
@@ -12,6 +13,7 @@ export default async ({app, router, store, Vue}) => {
     {name: 'Slide', component: Slide},
     {name: 'chart', component: Chart},
     {name: 'lingallery', component: Lingallery},
+    {name:'SocialSharing', component:SocialSharing}
   ]
 
   //Register components

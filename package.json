@@ -26,6 +26,7 @@
     "@riophae/vue-treeselect": "0.0.38",
     "apexcharts": "^3.10.1",
     "axios": "^0.18.1",
+    "cool-emoji-picker": "^4.0.3",
     "dotenv": "^6.0.0",
     "emoji-mart-vue": "^2.6.6",
     "highcharts": "^8.0.0",
@@ -40,6 +41,7 @@
     "vue-moment": "^4.0.0",
     "vue-product-zoomer": "^3.0.0",
     "vue-routisan": "^2.1.2",
+    "vue-social-sharing": "^2.4.7",
     "vuedraggable": "^2.23.2",
     "vuelidate": "^0.7.4"
   },

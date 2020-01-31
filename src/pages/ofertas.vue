@@ -97,10 +97,8 @@
                resolve(true)//Resolve
                done()
              }).catch(error => {
-               console.error('GET STORES ',error)
-               this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
-               reject(error)//Resolve
-               done()
+                return this.$refs.infinityScroll.stop()
+                done()
              });
            })
          },
