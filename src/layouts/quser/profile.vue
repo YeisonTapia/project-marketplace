@@ -437,8 +437,8 @@
                            </div>
 
                            <!-- Friend Name -->
-                           <q-input class="label-mini" v-model="form.fields.friendUserName.value"
-                                    label="Escribe el nombre de usuario de tu amigo"/>
+                           <q-input class="label-mini" v-model="form.fields.friendReferralCode.value"
+                                    label="Escribe el código de referido de tu amigo"/>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
                            <!--Otros -->
@@ -785,6 +785,7 @@
                {name: 'importantDate2Why', value: null},
                {name: 'meetUs', value: null},
                {name: 'friendUserName', value: null},
+               {name: 'friendReferralCode', value: null},
                {name: 'otherMedio', value: null},
             ]
          }
