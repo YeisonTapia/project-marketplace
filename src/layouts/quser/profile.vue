@@ -437,7 +437,7 @@
                            </div>
 
                            <!-- Friend Name -->
-                           <q-input class="label-mini" v-model="form.fields.friendReferralCode.value"
+                           <q-input :disable="blockFriendReferralCode" class="label-mini" v-model="form.fields.friendReferralCode.value"
                                     label="Escribe el código de referido de tu amigo"/>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
@@ -633,6 +633,7 @@
          return {
             loading: false,
             success: false,
+            blockFriendReferralCode: false,
             classError: 'nada',
             form: {
                firstName: null,
@@ -822,7 +823,9 @@
             let userData = this.$clone(sessionData.userData)//Get user data
             //Convert fields
             userData.fields = this.$helper.convertToFrontField(this.defaultFields, userData.fields);
-
+            if(userData.fields.friendReferralCode!=""){
+              this.blockFriendReferralCode=true
+            }
             this.form.id = this.$clone(userData.id)
             this.form.activated = this.$clone(userData.activated)
             this.form.firstName = this.$clone(userData.firstName)
