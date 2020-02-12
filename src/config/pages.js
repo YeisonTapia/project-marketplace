@@ -303,8 +303,7 @@ responsePages.qquiz.polls.layout= () => import('src/layouts/admin')
 responsePages.qquiz.polls.path= '/admin/iquiz/polls/index'
 responsePages.qquiz.questions.layout= () => import('src/layouts/admin')
 responsePages.qquiz.questions.path= '/admin/iquiz/questions/index/poll/:id'
-responsePages.qquiz.questionReport.layout= () => import('src/layouts/admin')
-responsePages.qquiz.questionReport.path= '/admin/iquiz/report/question/index/:id'
+
 
 // QTRIVIA
 responsePages.qtrivia.trivias.layout= () => import('src/layouts/admin')
