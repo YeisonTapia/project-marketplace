@@ -52,7 +52,7 @@
                     <div class="text-h5 font-family-secondary">{{meta}}</div>
                     Puntos
                   </div>
-                 
+
                 </q-item-section>
               </q-item>
             </q-list>
@@ -66,11 +66,11 @@
         <q-card class="rounded-md q-mb-xl full-width">
           <div class="q-pl-md">
             <h3 class="title-label-puntos text-center bg-tertiary">
-              <div>Puntos por canjear</div>
+              <div>Items por canjear</div>
             </h3>
           </div>
           <q-card-section class="q-mx-puntos q-my-lg">
-            
+
             <q-list v-if="itemsRedeems.length>0" separator bordered style="border-left: 0; border-right: 0;">
 
               <q-item v-for="(item, index) in itemsRedeems" :key="index">
@@ -100,21 +100,21 @@
                           <q-btn v-else label="Canjear" no-caps size="lg" color="tertiary" disabled class="cursor-not-allowed"/>
 
                         </div>
-                      </div>                    
-                       
+                      </div>
+
                     </div>
-                
+
                   </div>
 
                 </q-item-section>
               </q-item>
-             
+
             </q-list>
 
             <div v-if="itemsRedeems.length==0 && loading==false">
 
                 No existen items disponibles para cambiar
-             
+
             </div>
 
           </q-card-section>
@@ -146,12 +146,12 @@
                   <div class="text-h6">{{group.description}}</div>
                 </div>
 
-              </div>                    
-                       
+              </div>
+
           </q-card-section>
           <q-card-section class="q-py-xl q-px-xl text-caption">
             Puntos Históricos: Son todos los puntos que has ganado desde que comenzaste a utilizar nuestro sitio web (sin descontar los canjeados), y puedes visualizar con mas detalle haciendo click en "Historial de puntos"
-          </q-card-section> 
+          </q-card-section>
 
         </q-card>
       </div>
@@ -197,11 +197,11 @@
             />
         </div>
         -->
-        
+
       </div>
 
 
-    </div>  
+    </div>
     <!--Inner loading-->
     <inner-loading :visible="loading"/>
   </q-page>
@@ -246,7 +246,7 @@
           /*
           {
             name: 'id',
-            field: 'id', 
+            field: 'id',
             label: 'ID',
             align: 'left',
             sortable: true
@@ -254,20 +254,20 @@
           */
           {
             name: 'description',
-            field: 'description', 
+            field: 'description',
             label: 'DESCRIPCION',
             align: 'left',
           },
           {
             name: 'points',
-            field: 'points', 
+            field: 'points',
             label: 'PUNTOS',
             align: 'left',
             sortable: true
           },
           {
             name: 'createdAt',
-            field: 'createdAt', 
+            field: 'createdAt',
             label: 'FECHA',
             align: 'left',
             sortable: true,
@@ -280,20 +280,20 @@
         tableColumnsAllPoints: [
           {
             name: 'id',
-            field: 'id', 
+            field: 'id',
             label: 'ID',
             align: 'left',
             sortable: true
           },
           {
             name: 'description',
-            field: 'description', 
+            field: 'description',
             label: 'DESCRIPCION',
             align: 'left',
           },
           {
             name: 'points',
-            field: 'points', 
+            field: 'points',
             label: 'PUNTOS',
             align: 'left',
             sortable: true,
@@ -301,7 +301,7 @@
           },
           {
             name: 'createdAt',
-            field: 'createdAt', 
+            field: 'createdAt',
             label: 'FECHA',
             align: 'left',
             sortable: true,
@@ -330,7 +330,7 @@
 
         // All points User
         await this.getAllPointsByUser().catch(error => {})
-       
+
         this.loading = false
         this.success = true
 
@@ -366,7 +366,7 @@
       // Get Items Random
       getItems(){
         return new Promise((resolve, reject) => {
-          
+
           this.itemsRedeems = []
 
           //Params
@@ -384,7 +384,7 @@
             this.loading = false
             resolve(true)//Resolve
           }).catch(error => {
-            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'}) 
+            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
             reject(false)//Resolve
           })
 
@@ -393,7 +393,7 @@
       // Get Points Available User
       getPointsUser(){
         return new Promise((resolve, reject) => {
-          
+
           this.userPointsAvailables = 0
 
           //Params
@@ -433,9 +433,9 @@
           'points' : item.value
         }
 
-      
+
         this.$crud.create('apiRoutes.qredeems.redeems', data).then(response => {
-          
+
           //console.warn('*** CREATE REDEEMS REDEEMS')
 
           // Points Availables to User (Account - Menu - Lateral)
@@ -468,7 +468,7 @@
       // Get redeems ITEMS ID for a User
       getRedeemsItemsUser(){
         return new Promise((resolve, reject) => {
-          
+
           this.tableUserItemsRedeems = []
 
           //Params
@@ -480,15 +480,15 @@
           }
 
           this.$crud.index("apiRoutes.qredeems.redeems",params).then(response => {
-            
+
             this.tableUserItemsRedeems = response.data
-            
+
             response.data.forEach((redeems, index) => {
               this.userItemsRedeems.push(redeems.itemId)
             });
 
             console.warn("*** GET REDEEMS ITEMS ")
-            
+
             resolve(true)//Resolve
           }).catch(error => {
             this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
@@ -560,11 +560,11 @@
       height 40px
       width 100%
       background-repeat no-repeat
-      background-size contain  
+      background-size contain
       background-position center
   .avatar-main
     img
-      border 4px solid $secondary 
+      border 4px solid $secondary
 
   .title-label-puntos
     -webkit-transform skew(10deg)
@@ -594,31 +594,31 @@
       font-size 20px
       padding 0 15px
       &:before
-          display none !important   
+          display none !important
     @media screen and (max-width: $breakpoint-sm)
       min-width 60%
       font-size 15px
-      padding 0 10px         
+      padding 0 10px
     & > div
       -webkit-transform  skew(-10deg)
-      transform skew(-10deg)      
-  .q-mx-puntos   
+      transform skew(-10deg)
+  .q-mx-puntos
     padding-left 80px
-    padding-right 80px  
+    padding-right 80px
     @media screen and (max-width: $breakpoint-md)
       padding-left 30px
-      padding-right 30px  
+      padding-right 30px
     @media screen and (max-width: $breakpoint-sm)
       padding-left 10px
-      padding-right 10px  
-  .text-h6 
+      padding-right 10px
+  .text-h6
     line-height 1.5rem
     color $secondary
     @media screen and (max-width: $breakpoint-sm)
       line-height 1rem
       font-sie 1rem
       margin-top 10px
-      margin-bottom 20px  
+      margin-bottom 20px
   .my-sticky-header-table
     .q-table__top
     thead tr:first-child th
