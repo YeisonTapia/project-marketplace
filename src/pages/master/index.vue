@@ -116,21 +116,26 @@
           for(var i=0;i<this.$store.state.quserAuth.userData.benefits.length;i++){
             this.benefitsUser.push(this.$store.state.quserAuth.userData.benefits[i].id);
           }//for
-          let data={
-            id:this.$store.state.quserAuth.userId,
-            activated:1,
-            levelCompleted:1
-          };
-          data.benefits=this.benefitsUser;
-          this.$crud.update('apiRoutes.quser.users', this.$store.state.quserAuth.userId, data).then(response => {
-             this.$alert.success({message: this.$tr('ui.message.recordUpdated')})
-             this.loading = false//Login
-             this.showBenefitsModal = false
-          }).catch(error => {
-             console.error('[UPDATE PROFILE] ', error)
-             this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
-             this.loading = false
-          })
+          if(this.levelData.benefitsQuantity<this.benefitsUser.length){
+            this.$alert.error({message: "Solo puedes seleccionar: "+(this.$store.state.quserAuth.userData.benefits.length-this.levelData.benefitsQuantity)+" beneficio(s)"});
+            this.benefitsUser=[];
+          }else{
+            let data={
+              id:this.$store.state.quserAuth.userId,
+              activated:1,
+              levelCompleted:1
+            };
+            data.benefits=this.benefitsUser;
+            this.$crud.update('apiRoutes.quser.users', this.$store.state.quserAuth.userId, data).then(response => {
+              this.$alert.success({message: this.$tr('ui.message.recordUpdated')})
+              this.loading = false//Login
+              this.showBenefitsModal = false
+            }).catch(error => {
+              console.error('[UPDATE PROFILE] ', error)
+              this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
+              this.loading = false
+            });
+          }
         },
         showBene(){
           console.log(this.benefitsUser);
