@@ -66,7 +66,7 @@
         <q-card class="rounded-md q-mb-xl full-width">
           <div class="q-pl-md">
             <h3 class="title-label-puntos text-center bg-tertiary">
-              <div>Items por canjear</div>
+              <div>Items por canjear (Puntos disponibles: {{userPointsAvailables}})</div>
             </h3>
           </div>
           <q-card-section class="q-mx-puntos q-my-lg">
@@ -81,25 +81,25 @@
 
                       <div class="row q-col-gutter-md justify-center items-center">
                         <div class=" col-sm">
-                          <q-avatar class="font-family-secondary" font-size="2rem" color="primary" size="6rem" text-color="white">{{item.value}}</q-avatar>
-                          <div class="text-h6">Puntos</div>
-                        </div>
-                        <div class=" col-sm text-center">
-                          <div class="font-family-secondary text-secondary" style="font-size: 2rem;">=</div>
-                        </div>
-                        <div class=" col-sm">
                           <q-avatar size="6rem" class="q-mb-sm">
                             <img :src="item.mainImage.path">
                           </q-avatar>
                           <div class="text-h6">{{item.name}}</div>
                         </div>
+                        <div class=" col-sm text-center">
+                          <div class="font-family-secondary text-secondary" style="font-size: 2rem;">=</div>
+                        </div>
+                        <div class=" col-sm">
+                          <q-avatar class="font-family-secondary" font-size="2rem" color="primary" size="6rem" text-color="white">{{item.value}}</q-avatar>
+                          <div class="text-h6">Puntos</div>
+                        </div>
                         <div class=" col-sm canjear">
 
                           <q-btn v-if="userPointsAvailables>=item.value" label="Canjear" no-caps size="lg" color="tertiary" @click="redeemItem(item)"/>
 
-                          <q-btn v-else label="Canjear" no-caps size="lg" color="tertiary" disabled class="cursor-not-allowed"/>
+                            <q-btn v-else label="Canjear" no-caps size="lg" color="tertiary" disabled class="cursor-not-allowed"/>
 
-                        </div>
+                          </div>
                       </div>
 
                     </div>
@@ -380,7 +380,6 @@
 
           this.$crud.index("apiRoutes.qredeems.items",params).then(response => {
             this.itemsRedeems = response.data
-            console.warn("*** GET ITEMS ")
             this.loading = false
             resolve(true)//Resolve
           }).catch(error => {
@@ -412,7 +411,7 @@
               if(response.data.data.points>0)
                 this.userPointsAvailables = response.data.data.points
 
-              console.warn("*** GET POINTS USER - Puntos Disponibles:"+this.userPointsAvailables )
+              //console.warn("*** GET POINTS USER - Puntos Disponibles:"+this.userPointsAvailables )
               resolve(true);
 
             })
@@ -458,7 +457,7 @@
           })
 
         }).catch(error => {
-          console.error('[CREATE REDEEMS REDEEMS] ', error)
+          //console.error('[CREATE REDEEMS REDEEMS] ', error)
           this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
           this.loading = false
         })
@@ -487,7 +486,7 @@
               this.userItemsRedeems.push(redeems.itemId)
             });
 
-            console.warn("*** GET REDEEMS ITEMS ")
+            //console.warn("*** GET REDEEMS ITEMS ")
 
             resolve(true)//Resolve
           }).catch(error => {
@@ -517,13 +516,13 @@
             .then(response => {
 
               this.tableUserAllPoints = response.data
-              console.warn("*** GET ALL POINTS BY USER ")
+              //console.warn("*** GET ALL POINTS BY USER ")
               resolve(true);
 
             })
             .catch(error => {
               this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
-              console.error("*** GET ALL POINTS BY USER - ERROR")
+              //console.error("*** GET ALL POINTS BY USER - ERROR")
               reject(error);
             });
         })
