@@ -146,7 +146,6 @@
             if (this.search.city) {
                //params
                let params = {
-                  remember: false,
                   params: {
                      include: 'city',
                      filter: {

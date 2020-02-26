@@ -68,7 +68,7 @@
           this.alertContent.msj = "Para visualizar este contenido, debes Iniciar Sesión"
           this.alertContent.icon = "account_circle"
         }
-        
+
         this.success = true
         this.loading = false
 
@@ -79,8 +79,8 @@
 
           //Params
           let params = {
-            refresh: true,
-            params: { 
+            //refresh: true,
+            params: {
               take: 5
             }
           }
@@ -115,7 +115,7 @@
       height 80px
   & .q-card__section
       padding 10px 25px 15px 25px
-      & ul 
+      & ul
           list-style none
           padding-left 5px
           font-size 17px
@@ -124,7 +124,7 @@
             border-radius 10px
             display flex
             cursor pointer
-            &:before 
+            &:before
               margin-right 6px
               content '\f005'
               color $warning

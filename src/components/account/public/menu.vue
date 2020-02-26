@@ -13,8 +13,8 @@
            <q-avatar rounded size="180px">
              <img :src="userGetData.mediumImage">
            </q-avatar>
-          </div>  
-       
+          </div>
+
           <!--FullName-->
           <h5 class="fullname font-family-secondary text-center relative-position">{{form.firstName}} {{form.lastName}}</h5>
 
@@ -42,7 +42,7 @@
 
         <div class="q-pa-lg">
 
-          
+
           <!-- Bloque Menu -->
           <div class="row bloque-op-profile relative-position bg-white rounded-md shadow-5">
             <div class="col-12">
@@ -70,11 +70,11 @@
                     </q-item-section>
                   </q-item>
 
-                 
+
               </q-list>
             </div>
-          </div>  
-        </div>  
+          </div>
+        </div>
       </q-drawer>
 
 
@@ -150,10 +150,10 @@
 
         this.loading = true//Loading
         this.form.fields = this.$clone(this.defaultFields)//Set default fields
-        
+
         await this.getInforUser()
-        
-        
+
+
       },
       //Set user data
       setUserData() {
@@ -201,14 +201,13 @@
               reject(error);
             });
         })
-        
+
       },
       // Get Infor User
       getInforUser(){
 
         let criteria = this.userId
         let params = {
-          refresh: true,
           params: {
             include: 'fields',
           }
@@ -240,7 +239,7 @@
         text-align: left
         .q-btn
           background-color $primary !important
-          
+
   .ImgUserNew
     margin 35px auto 20px auto
     width 180px
@@ -335,6 +334,6 @@
         box-shadow 0px 0px 1px #000
 
 
-  
+
 
 </style>

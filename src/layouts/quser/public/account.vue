@@ -4,7 +4,7 @@
         <frontend-header v-if="appState.loadPage"/>
 
         <!-- ROUTER VIEW -->
-       
+
         <q-page-container class="master-frontend">
             <q-page id="profilePage" class="page bg-fondo q-layout-page layout-padding frontend-page">
 
@@ -19,14 +19,14 @@
                       <div class="col-12 col-md-12 col-lg-8 col-xl-9">
                         <router-view v-if="appState.loadPage" :pointsAvailables="pointsAvailables" :changePoints="changePoints" @changePoints ="changePoints = $event"/>
                       </div>
-                      
+
                     </div>
-       
+
                 </q-pull-to-refresh>
 
             </q-page>
         </q-page-container>
-    
+
 
         <!-- FOOTER -->
         <frontend-footer v-if="appState.loadPage"/>
@@ -50,7 +50,7 @@
                     criteria: 'main',
                     apiRoute: 'apiRoutes.qmenu.menus',
                     requestParams: {
-                        refresh: true,
+                       // refresh: true,
                         params: {filter: {field: 'name'}, include: 'menuitems'}
                     }
                 })
@@ -110,11 +110,11 @@
             async init() {
                 //await this.getPointsUser()
             },
-            
+
             // Get Points Available User
             getPointsUser(){
                 return new Promise((resolve, reject) => {
-                  
+
                   this.pointsAvailables = 0
 
                   //Params

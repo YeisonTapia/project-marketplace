@@ -82,5 +82,11 @@
 
 <style lang="stylus">
   #authLoginRegister
+    min-width 320px
     min-height 100vh
+    @media screen and (max-width: $breakpoint-xs)
+      .text-h5
+        font-size 14px !important
+      .text-body2
+        font-size 10px
 </style>

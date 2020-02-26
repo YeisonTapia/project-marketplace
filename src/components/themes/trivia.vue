@@ -13,7 +13,7 @@
           <div class="text-h6  text-primary">{{question.title}}</div>
           <div  v-show="isModal">
               <q-img :ratio="16/9" :src="trivia.mainImage.path" />
-          </div>  
+          </div>
           <div class="q-py-md">
              <q-option-group keep-color
               v-model="selectedOption"
@@ -56,11 +56,11 @@
 
             </div>
           </div>
-        </q-stepper-navigation> 
+        </q-stepper-navigation>
 
       </q-step>
 
-      
+
     </q-stepper>
 
     <q-inner-loading class="absolute-center" :visible="loading" />
@@ -90,7 +90,7 @@
           <div>Puntos Ganados: {{resultsTrivia.pointsWinner}}</div>
           <div class="q-mt-md">Nota: Si tu porcentaje de acierto es menor al 100%, puede ser que ganes menos o incluso ningun punto, asi que recuerda estar seguro al responder.</div>
         </div>
-        
+
     </div>
 
   </q-card>
@@ -126,7 +126,7 @@ export default {
           color:'bg-secondary',
           icon:'check',
           msj:'Gracias por participar!!'
-        },      
+        },
         currentStep: null,
         showResults: false,
         resultsTrivia: [],
@@ -152,7 +152,7 @@ export default {
             // Set questionID to step
             if(i==0) this.currentStep = qId
           }
-  
+
         }else{
           this.alertContent.msj = "No existen trivias disponibles"
           this.alertContent.icon = "info"
@@ -169,22 +169,22 @@ export default {
 
       if(this.isModal)
         this.$emit('loading2',false);
-     
+
     },
     // Get Answers for question
     getAnswers(questionId,pos){
       return new Promise((resolve, reject) => {
       //Params
       let params = {
-        refresh: true,
+        //refresh: true,
         params: {
         include: 'answers',
         filter: {allTranslations: true},
         }
       }
-            
+
       this.$crud.show("apiRoutes.qtrivia.questions",questionId,params).then(response => {
-               
+
         response.data.answers.forEach((answer, index) => {
           this.answersOptions.push({
             label:answer.title,
@@ -195,10 +195,10 @@ export default {
 
       }).catch(error => {
         console.warn('[ERROR - TRIVIA - GET ANSWERS] ')
-        this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})  
+       // this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
         reject(false)//Resolve
       })
-             
+
 
       })
     },
@@ -206,7 +206,7 @@ export default {
     async saveData(){
       this.$v.$touch()
       if (!this.$v.$error) {
-              
+
         this.loading = true;
         this.btnLoading = true
 
@@ -222,7 +222,7 @@ export default {
         this.alertContent.active = true
         this.loading = false;
         this.btnLoading = false
-             
+
       }else{
         this.$alert.error({message: 'Trivia: Debe seleccionar una respuesta', pos: 'bottom'})
       }
@@ -233,7 +233,7 @@ export default {
       this.$v.$touch()
       if (!this.$v.$error) {
         this.setDataFinal()
-        this.$refs.stepper.next() 
+        this.$refs.stepper.next()
       }else{
         this.$alert.error({message: 'Trivia: Debe seleccionar una respuesta', pos: 'bottom'})
       }
@@ -270,7 +270,7 @@ export default {
     // Save Data Questions and Answers
     saveUserQuestionsAnswers(){
       this.finalDataSave.forEach((data, index) => {
-            
+
           this.$crud.create('apiRoutes.qtrivia.userQuestionAnswers', data).then(response => {
             console.warn("TRIVIA - SAVE USER QUESTION ANSWER")
           }).catch(error => {
@@ -281,14 +281,14 @@ export default {
 
       })// End Save Answers
     }
-  }  
+  }
 }
 </script>
 <style lang="stylus">
 .triviaModal
   & .q-card__section
     padding 0
-    .text-h6  
+    .text-h6
       font-size 18px
       text-align center
       margin-top 0
@@ -300,11 +300,11 @@ export default {
       padding 8px
       & .q-icon
         color #FD2D5E
-        font-size 20px    
+        font-size 20px
   .q-stepper
     .q-stepper__header
       display none
-    .q-stepper__step-inner  
+    .q-stepper__step-inner
       padding 15px
 
 .home-trivia
@@ -323,20 +323,20 @@ export default {
     padding-left 0
     padding-right 0
     padding-top 0
-    & .text-h6 
+    & .text-h6
       position relative
       margin-bottom 0
       margin-left 25px
       margin-right 25px
       font-size 18px
       line-height 1.5rem
-      &:before 
+      &:before
         position absolute
         color #FD2D5E
         content "•"
         left -15px
         font-weight bold
-          
+
   & .q-option-group
     > div
       border 1px solid #FD2D5E
@@ -355,9 +355,9 @@ export default {
     border-radius 10px
     .q-stepper__header
       display none
-    .q-stepper__step-inner  
+    .q-stepper__step-inner
       padding 15px
-    
+
   .content-stepper
     .q-inner-loading
       background none

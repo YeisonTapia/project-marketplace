@@ -165,6 +165,6 @@
                border 2px solid #ffffff
 
          .q-avatar
-            height: 50px
-            width: 50px
+            height: 40px
+            width: 40px
 </style>

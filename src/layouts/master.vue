@@ -29,7 +29,7 @@
                     criteria: 'main',
                     apiRoute: 'apiRoutes.qmenu.menus',
                     requestParams: {
-                        refresh: true,
+                        //refresh: true,
                         params: {filter: {field: 'name'}, include: 'menuitems'}
                     }
                 })

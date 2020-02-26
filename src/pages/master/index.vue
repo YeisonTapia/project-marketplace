@@ -142,7 +142,7 @@
         getBenefits(){
           //Params
           let params = {
-            refresh: true,
+            //refresh: true,
             params: {
               include: 'benefits',
               filter: {
@@ -154,11 +154,10 @@
           //Request
           this.$crud.show("apiRoutes.qmarketplace.level",this.$store.state.quserAuth.userData.levelId,params).then(response => {
             this.levelData=response.data;
-            console.log('level data');
             console.log(response.data);
             this.showBenefitsModal=true;
           }).catch(error => {
-            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+             console.error('Level Error',error);
           })
         }
       }

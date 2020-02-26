@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh LpR fFf">
-    
+
     <!-- === ROUTER VIEW === -->
     <q-page-container class="bg-degradado">
       <div id="layout-init" class="flex flex-center">
@@ -10,23 +10,23 @@
 
             <div class="self-center">
               <router-link :to="{name:'app.home'}">
-                <img :src="logo" :alt="projectName">
+                <img :src="logo" :alt="projectName" class="logo-init">
               </router-link>
             </div>
 
           </div>
 
-          <div class="col-12 col-md-7 rounded-borders">
+          <div class="col-12 col-md-7 rounded-borders flex justify-center">
 
             <div id="formInit">
                <router-view/>
             </div>
-            
+
           </div>
 
         </div>
       </div>
-     
+
       <q-ajax-bar />
 
     </q-page-container>
@@ -54,18 +54,21 @@
     },
     data () {
       return {
-        
+
         logo : this.$store.getters['qsiteSettings/getSettingMediaByName']('isite::logo2').path,
         projectName : "Donde esta esa vaina",
-        
+
       }
     },
   }
 </script>
 
 <style lang="stylus">
-
+  .logo-init
+    @media screen and (max-width: $breakpoint-sm)
+      max-width: 250px;
+      margin-top 50px
 #formInit
   max-width 500px
-      
+
 </style>

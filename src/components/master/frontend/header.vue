@@ -1,5 +1,6 @@
 <template>
    <div id="masterHeader">
+      <q-no-ssr>
       <!-- ============= HEADER ======================= -->
       <q-header class="no-shadow">
 
@@ -94,6 +95,7 @@
          </q-list>
       </q-drawer>
       <inner-loading :visible="loading"/>
+      </q-no-ssr>
    </div>
 </template>
 <script>

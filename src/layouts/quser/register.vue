@@ -58,4 +58,6 @@
 <style lang="stylus">
   #authLoginRegister
     min-height 100vh
+
+
 </style>

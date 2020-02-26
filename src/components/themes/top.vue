@@ -150,7 +150,7 @@
 
                //Params
                let params = {
-                  refresh: true,
+                //  refresh: true,
                   params: {
                      include: 'questions',
                      filter: fixFilter,
@@ -163,7 +163,7 @@
 
                   resolve(true)//Resolve
                }).catch(error => {
-                  this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+                 // this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
                   console.warn('ERROR - THEMES - TOP - GET TRIVIAS')
                   reject(false)//Resolve
                })
@@ -175,7 +175,7 @@
             return new Promise((resolve, reject) => {
                //Params
                let params = {
-                  refresh: true,
+                //  refresh: true,
                   params: {
                      filter: {userId: this.userId},
                      fields: 'trivia_id'
@@ -188,7 +188,7 @@
                   });
                   resolve(true)//Resolve
                }).catch(error => {
-                  this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+                 // this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
                   console.warn("ERROR - THEMES - TOP - GET USER TRIVIAS ")
                   reject(false)//Resolve
                })

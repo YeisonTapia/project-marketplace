@@ -67,7 +67,6 @@
             if ((currentPage != 1) && (currentPage > this.totalPage)) return this.$refs.infinityScroll.stop()
             //Request Params
             let params = {
-               remember: false,
                params: {
                   include: '',
                   filter: {

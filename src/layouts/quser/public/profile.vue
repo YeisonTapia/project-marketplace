@@ -1,6 +1,6 @@
 <template>
   <div class="quser-profile ">
-    
+
     <div v-if="success" class="quser-content">
 
       <div class="row items-center form-general">
@@ -47,20 +47,20 @@
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
                 <!--Civil State-->
                 <q-select disable label="Estado Civil" stack-label
-                    v-model="form.fields.civilState.value" 
+                    v-model="form.fields.civilState.value"
                     :options="civilStateOptions"/>
               </div>
 
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
                 <!-- country -->
-                <q-select 
+                <q-select
                     disable
                     label="País"
                     class="requeried"
                     stack-label
                     emit-value
                     map-options
-                    v-model="form.fields.country.value" 
+                    v-model="form.fields.country.value"
                     :options="countryOptions"
                     :rules="[val => !!val || $tr('ui.message.fieldRequired')]"
                     @input="getCities(form.fields.country.value,'CiO')"/>
@@ -68,13 +68,13 @@
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
                 <!--State - Province-->
                 <q-select
-                    disable 
+                    disable
                     label="Departamento"
                     class="requeried"
                     stack-label
                     emit-value
                     map-options
-                    v-model="form.fields.city.value" 
+                    v-model="form.fields.city.value"
                     :options="cityOptions"
                     :rules="[val => !!val || $tr('ui.message.fieldRequired')]"/>
               </div>
@@ -82,15 +82,15 @@
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 q-mb-lg">
                 <!--Academic Leven-->
                 <q-select disable label="Nivel Académico" stack-label
-                    v-model="form.fields.academicLevel.value" 
+                    v-model="form.fields.academicLevel.value"
                     :options="academicLevelOptions"/>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                 <!-- Sexo -->
                 <p class="caption q-mb-sm"><span class="text-primary">*</span> Sexo</p>
                 <div class="text-center">
-                  <q-option-group disable inline left-label keep-color v-model="form.fields.sex.value" 
-                :options="sexOptions" 
+                  <q-option-group disable inline left-label keep-color v-model="form.fields.sex.value"
+                :options="sexOptions"
                 color="primary"/>
                 </div>
               </div>
@@ -99,8 +99,8 @@
                 <!--Sons-->
                 <p class="caption q-mb-sm"> Hijos</p>
                 <div class="text-center">
-                  <q-option-group disable inline left-label keep-color v-model="form.fields.sons.value" 
-                  :options="sonsOptions" 
+                  <q-option-group disable inline left-label keep-color v-model="form.fields.sons.value"
+                  :options="sonsOptions"
                   color="primary"/>
                 </div>
               </div>
@@ -114,11 +114,11 @@
 
       </div>
 
-    </div><!--End if success--> 
+    </div><!--End if success-->
 
     <!--Inner loading-->
     <inner-loading :visible="loading"/>
-   
+
   </div>
 </template>
 
@@ -346,7 +346,7 @@
       //init
       async init() {
         this.loading = true//Loading
-        
+
         this.form.fields = this.$clone(this.defaultFields)//Set default fields
         await this.getInforUser()
 
@@ -373,7 +373,7 @@
       },
       //Set user data
       setUserData() {
-       
+
         let userData = this.$clone(this.userGetData)//Get user data
 
         //Convert fields
@@ -386,7 +386,7 @@
         this.form.email = this.$clone(userData.email)
         this.form.fields = this.$helper.convertToFrontField(this.defaultFields, userData.fields)
 
-       
+
 
         //console.warn(this.address)
 
@@ -413,7 +413,7 @@
             .catch(error => {
               reject(error);
             });
-            
+
 
         })
       },
@@ -423,7 +423,7 @@
 
             if(countryModel.value!=undefined)
               countryModel = countryModel.value
-          
+
             //console.warn("get Cities - CountryID : "+countryModel)
             //console.warn("get Cities - CityOptions : "+cityOptions)
 
@@ -433,13 +433,13 @@
                 filter: {country: countryModel}
               }
             }
-          
+
             if(cityOptions == 'CiO'){
               this.cityOptions = []
               // Second time
               if(this.success==true)
                 this.form.fields.city.value= null
-              
+
             }
 
             if(cityOptions == 'CiRO'){
@@ -450,11 +450,11 @@
 
               // Clean Cities Select
               this.city2ResidenceOptions = []
-             
+
             }
 
-           
-          
+
+
             http.get(config('apiRoutes.ilocations.provinces'), params)
             .then(response => {
               response.data.data.forEach(data => {
@@ -479,11 +479,11 @@
               reject(error);
             });
         })
-        
+
       },
       // Get Cities from Ilocations
       getCities2(cityModel){
-        
+
         //console.warn(cityModel)
 
         this.city2ResidenceOptions = []
@@ -515,7 +515,7 @@
 
         let criteria = this.userId
         let params = {
-          refresh: true,
+          //refresh: true,
           params: {
             include: 'fields',
           }
@@ -533,7 +533,7 @@
     }
   }
 
-</script> 
+</script>
 
 <style lang="stylus">
 .quser-profile
@@ -574,36 +574,36 @@
       font-size 20px
       padding 0 15px
       &:before
-          display none !important   
+          display none !important
     @media screen and (max-width: $breakpoint-sm)
       min-width 60%
       font-size 15px
-      padding 0 10px         
+      padding 0 10px
     & > div
       -webkit-transform  skew(-10deg)
-      transform skew(-10deg)       
-  .text-h6 
+      transform skew(-10deg)
+  .text-h6
     line-height 1.5rem
     color $secondary
     @media screen and (max-width: $breakpoint-sm)
       line-height 1rem
       font-sie 1rem
       margin-top 10px
-      margin-bottom 20px  
+      margin-bottom 20px
 
   .q-field__label
     color #444
     font-size 23px
-    padding-bottom 60px    
-  .requeried   
+    padding-bottom 60px
+  .requeried
     .q-field__label:before
       color $primary
-      content '* ' 
-  .label-mini    
-    .q-field__label  
+      content '* '
+  .label-mini
+    .q-field__label
       font-size 16px
       padding-bottom 20px
       color #888
   .btn-arrow-send-pink:after
-    right 90px  
+    right 90px
 </style>

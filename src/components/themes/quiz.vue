@@ -5,14 +5,14 @@
     </div>
 
     <q-stepper v-if="success && answers.length>0 && !alertContent.active && !showVotes" ref="stepper" v-model="currentStep" class="no-shadow">
-      
+
 
       <q-step :name="question.id" :order="index" :title="question.title" v-for="(question, index) in poll.questions" :key="index">
 
         <q-card-section class="image">
 
          <div class="text-h6 q-mb-sm text-light">{{question.title}}</div>
-            
+
           <q-option-group  keep-color size="sm"
             v-model="selectedOption"
             :options="answers[index]"
@@ -35,7 +35,7 @@
             </template>
            </q-btn>
         </q-stepper-navigation>
-        
+
       </q-step>
 
       <q-inner-loading :visible="loading" />
@@ -79,7 +79,7 @@
                 </tr>
                 <tr>
                  <td>
-                   TOTAL 
+                   TOTAL
                  </td>
                  <td class="text-center">
                    {{question.totalVotes}}
@@ -243,7 +243,7 @@
                 }
 
               }else{
-               
+
                 await this.getResultsPoll()
 
                 if(this.votesPoll.length==0){
@@ -261,7 +261,7 @@
                 this.alertContent.msj = "No existen Encuestas disponibles"
                 this.alertContent.active = true
               }
-              
+
               /*
               if(this.userId!=null)
                 this.alertContent.msj = "Ya respondiste todas las encuestas disponibles"
@@ -283,7 +283,7 @@
           getPolls(){
             return new Promise((resolve, reject) => {
 
-              //filter: 
+              //filter:
               let fixFilter = {}
 
               if(this.userId!=null)
@@ -293,7 +293,7 @@
 
               //Params
               let params = {
-                refresh: true,
+                //refresh: true,
                 params: {
                   include: 'questions',
                   filter: fixFilter,
@@ -302,12 +302,12 @@
               }
 
               this.$crud.index("apiRoutes.qquiz.polls",params).then(response => {
-               
+
                 this.polls = response.data
                 resolve(true)//Resolve
               }).catch(error => {
-                this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
-                
+                //this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+
                 reject(false)//Resolve
               })
 
@@ -318,15 +318,15 @@
             return new Promise((resolve, reject) => {
               //Params
               let params = {
-                refresh: true,
+                //refresh: true,
                 params: {
                   include: 'answers',
                   filter: {allTranslations: true},
                 }
               }
-            
+
               this.$crud.show("apiRoutes.qquiz.questions",questionId,params).then(response => {
-               
+
                 response.data.answers.forEach((answer, index) => {
                   this.answersOptions.push({
                       label:answer.title,
@@ -336,11 +336,11 @@
                 resolve(true)//Resolve
 
               }).catch(error => {
-                this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
-                
+               // this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+
                 reject(false)//Resolve
               })
-             
+
 
             })
           },
@@ -348,16 +348,16 @@
           saveData(){
             this.$v.$touch()
             if (!this.$v.$error) {
-              
-              
+
+
               this.loading = true
               this.btnLoading = true
-              
-             
+
+
               this.setDataFinal()
-              
+
               this.finalDataSave.forEach((data, index) => {
-                
+
                 this.$crud.create('apiRoutes.qquiz.userQuestionAnswers', data).then(response => {
                   //console.warn("SAVE USER QUESTION ANSWER")
                 }).catch(error => {
@@ -365,7 +365,7 @@
                   this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
                   this.loading = false
                 })
-               
+
               })// End Save Answers
 
               // Finished Poll
@@ -376,15 +376,15 @@
               //console.warn("Poll ID "+this.poll.id)
 
               this.getResultsPoll(this.poll.id)
-              
+
               this.$v.$reset()//Reset validations
               //this.alertContent.active = true // OJOOOOOOO
 
               //this.showVotes = true
-               
+
               this.loading = false
               this.btnLoading = false
-             
+
             }else{
               this.$alert.error({message: 'Encuesta: Debe seleccionar una respuesta', pos: 'bottom'})
             }
@@ -411,7 +411,7 @@
 
               //Params
               let params = {
-                refresh: true,
+                //refresh: true,
                 params: {
                   filter: {userId:this.userId},
                   fields: 'poll_id'
@@ -424,8 +424,8 @@
                 });
                 resolve(true)//Resolve
               }).catch(error => {
-                this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
-                
+               // this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+
                 reject(false)//Resolve
               })
 
@@ -438,7 +438,7 @@
 
               this.setDataFinal()
               this.$refs.stepper.next()
-             
+
             }else{
               this.$alert.error({message: 'Encuesta: Debe seleccionar una respuesta', pos: 'bottom'})
             }
@@ -470,7 +470,7 @@
 
               //Params
               let params = {
-                refresh: true,
+               // refresh: true,
                 params: {
                   filter: {votes:true,pollId: pId},
                   include: 'answers',
@@ -483,20 +483,20 @@
               }
 
               this.$crud.index("apiRoutes.qquiz.questions",params).then(response => {
-             
+
                 this.votesPoll = response.data
-               
+
                 this.fixDataChart(this.votesPoll)
-               
+
                 resolve(true)//Resolve
 
               }).catch(error => {
-                this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+               // this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
                 console.error(error)
                 reject(false)//Resolve
               })
 
-            }) 
+            })
           },
           // Fix Data To Chart
           fixDataChart(resultVotes){
@@ -520,7 +520,7 @@
 
               // Copy All Chart
               this.chartsOptions.push(this.chartOptions)
-                
+
             });
 
             this.showVotes = true
@@ -539,29 +539,29 @@
   .highcharts-yaxis-labels
     display none
   .highcharts-axis-title
-    color #fff !important  
-    fill #fff !important  
+    color #fff !important
+    fill #fff !important
   .highcharts-legend
-    display none     
+    display none
 
 .card-quiz
   border-radius 10px
-  .q-radio__outer-circle 
+  .q-radio__outer-circle
     border-radius 4px
   & .image
     background-image url('/statics/img/quiz-fondo.png')
     background-repeat no-repeat
     background-position right bottom
     font-family 'Trebuchet MS'
-    & .text-h6 
+    & .text-h6
       font-size 18px
       position relative
-      &:before 
+      &:before
         position absolute
         content "•"
         left -15px
         font-weight bold
-    & .q-option-group  
+    & .q-option-group
       font-size 17px
       color var(--q-color-light)
   & .send
@@ -573,11 +573,11 @@
     margin-top -22px
   & .q-card-main
     padding 10px 25px 15px 25px
-    
+
   .q-stepper
     background-color $primary
     .q-stepper__header
       display none
-    .q-stepper__step-inner  
+    .q-stepper__step-inner
       padding 15px
 </style>

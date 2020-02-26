@@ -1126,7 +1126,7 @@
                   resolve(true)//Resolve
 
                }).catch(error => {
-                  this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+                 // this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
                   console.error("ERROR - GET CATEGORIES STORE")
                   reject(false)//Resolve
                })

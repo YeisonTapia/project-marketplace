@@ -1,5 +1,6 @@
 <template>
    <div id="masterHeaderAdmin">
+      <q-no-ssr>
       <!-- HEADER -->
       <q-header class="no-shadow">
 
@@ -158,6 +159,7 @@
       <q-drawer bordered id="menu_right" :overlay="true" v-model="drawer.config" side="right">
          <config-list/>
       </q-drawer>
+      </q-no-ssr>
    </div>
 </template>
 <script>
@@ -296,7 +298,6 @@
          },
          getNotifications() {
             let params = {
-               remember: false,
                params: {
                   include: '',
                   filter: {

@@ -7,7 +7,7 @@
           <div class="row ">
             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 col-xl-3" v-for="store in stores">
               <store :store="store"></store>
-            </div>  
+            </div>
           </div>
         </div>
        <q-inner-loading :visible="loading" />
@@ -40,7 +40,8 @@
                            rating:'top',
                            type:0
                         },
-                        take:8
+                        take:8,
+                       refresh:false,
                     }
                 }).then(response => {
                     this.stores=response.data;
@@ -53,6 +54,6 @@
     }
 </script>
 <style lang="stylus">
-.feature-stores   
+.feature-stores
     background-color $warning
 </style>

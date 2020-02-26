@@ -20,7 +20,7 @@
         </q-carousel-slide>
           </q-carousel>
           <div class="absolute-bottom-right" >
-            <q-btn 
+            <q-btn
               :icon="buttonIcon ? buttonIcon : 'fas fa-camera'"
               color="primary"
               class="rounded-sm btn q-mr-sm"
@@ -29,7 +29,7 @@
             </q-btn>
           </div>
         </div>
-  
+
         <div class="images relative-position" v-else>
           <q-carousel
             color="white"
@@ -38,7 +38,7 @@
             navigation
             infinite
           >
-          <q-carousel-slide :name="index+1" class="rounded-md image-multiple" v-for="(file,index) in files" 
+          <q-carousel-slide :name="index+1" class="rounded-md image-multiple" v-for="(file,index) in files"
             :key="index" :img-src="file ? file.medium_thumb : ''" >
             <div class="absolute-top-right q-ma-md" >
               <q-btn round color="red" @click="deleteFile(index)" icon="fas fa-times" size="sm"/>
@@ -55,7 +55,7 @@
               <q-tooltip :delay="300">Editar Imagen</q-tooltip>
             </q-btn>
           </div>
-         
+
         </div>
 
 
@@ -63,9 +63,9 @@
       <!--= if not multiple =-->
 
       <div v-else>
-        
+
         <div class="images ratio-4-3" v-if="files.length == 0">
-          
+
           <img class="rounded-md" src="/statics/img/img-default.jpg" alt="logo">
 
           <div class="absolute-bottom-right">
@@ -77,7 +77,7 @@
               @click="modalMedia = true">
               <q-tooltip :delay="300">Añadir Imagen</q-tooltip>
             </q-btn>
-          </div> 
+          </div>
         </div>
 
         <div class="images ratio-4-3" v-for="(file,index) in files" :key="index" v-else>
@@ -94,7 +94,7 @@
               class="rounded-sm btn q-ml-sm"
               @click="deleteFile(index)"
               icon="fas fa-trash" />
-          </div> 
+          </div>
         </div>
 
 
@@ -184,7 +184,7 @@
               entity: this.entity,
               entity_id: this.entityId
             },
-            remember: false
+
           }
           // if is multiple media, call diff routes and transform diff the response.data
           if (this.multiple) {

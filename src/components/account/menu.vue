@@ -8,8 +8,8 @@
       <div class="row bloque-nivel-club">
         <div class="col-12">
           <div class="nivel relative-position text-white text-center q-pt-lg round-borders">
-            <h4 class="text-uppercase q-my-sm font-family-secondary">nivel</h4>
-            <h5 class="text-uppercase q-mb-xs q-mt-md">club de conocidos</h5>
+            <h4 class="text-uppercase q-my-sm font-family-secondary">  <q-btn flat size="lg" color="withe" :to="{name:'quser.account.level'}">nivel</q-btn></h4>
+            <h5 class="text-uppercase q-mb-xs q-mt-md">{{form.level.name}}</h5>
             <p class="text-center text-white">dondeestaesavaina.com</p>
           </div>
           <div class="club text-center">
@@ -81,8 +81,8 @@
           <div class="row bloque-nivel-club">
             <div class="col-12">
               <div class="nivel relative-position text-white text-center q-pt-lg round-borders">
-                <h4 class="text-uppercase q-my-sm font-family-secondary">nivel</h4>
-                <h5 class="text-uppercase q-mb-xs q-mt-md">club de conocidos</h5>
+                <h4 class="text-uppercase q-my-sm font-family-secondary"><q-btn flat size="lg" color="withe" :to="{name:'quser.account.level'}">nivel</q-btn></h4>
+                <h5 class="text-uppercase q-mb-xs q-mt-md">{{form.level.name}}</h5>
                 <p class="text-center text-white">dondeestaesavaina.com</p>
               </div>
               <div class="club text-center">
@@ -128,8 +128,8 @@
                   </q-item>
               </q-list>
             </div>
-          </div>  
-        </div>  
+          </div>
+        </div>
       </q-drawer>
 
 
@@ -202,7 +202,8 @@
           firstName: null,
           lastName: null,
           email: null,
-          fields: {}
+          fields: {},
+          level:null
         },
         menuAccount:[
           {
@@ -280,7 +281,8 @@
         this.form.lastName = this.$clone(userData.lastName)
         this.form.email = this.$clone(userData.email)
         this.form.fields = this.$helper.convertToFrontField(this.defaultFields, userData.fields)
-
+        this.form.level=this.$clone(userData.level)
+        console.warn(this.form.level)
         if(this.form.fields.mainImage.value!="")
           this.imgUser=this.form.fields.mainImage.value
 
@@ -311,7 +313,7 @@
               reject(error);
             });
         })
-        
+
       }
     }
   }

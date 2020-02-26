@@ -265,7 +265,6 @@
                   this.$route.params.search=null
                }
                let params = {
-                  remember: false,
                   params: {
                      filter: {
                         cities: city,
@@ -348,7 +347,7 @@
 
                   //params
                   let params = {
-                     remember: false,
+
                      params: {
                         include: 'city',
                         filter: {
@@ -418,7 +417,7 @@
             //let companies = this.advancedSearch.company
             //let levelId = parseInt(this.advancedSearch.level.id)
             let params = {
-               remember: false,
+
                params: {
                   filter: {
                      categories: categoryId,

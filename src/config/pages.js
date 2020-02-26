@@ -175,7 +175,17 @@ let responsePages = {
             icon: 'apps',
             authenticated: true
         },
-
+        userLevel:{
+            //permission: 'marketplace.stores.manage',
+            activated: true,
+            path: '/account/level',
+            name: 'quser.account.level',
+            layout: () => import('src/layouts/account.vue'),
+            page: () => import('src/layouts/quser/levels/index.vue'),
+            title: 'app.layout.page.notifications',
+            icon: 'apps',
+            authenticated: true
+        },
 
     }
     //Add here more responsePages...#example

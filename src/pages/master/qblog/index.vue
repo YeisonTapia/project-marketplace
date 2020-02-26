@@ -6,7 +6,7 @@
             <div class="row justify-end">
                <div class="col-auto text-center q-my-lg">
                   <div  v-if="category">
-    
+
                      <!--BreadCrum-->
                      <q-breadcrumbs active-color="secondary" color="secondary" align="right">
                         <!-- Separator -->
@@ -23,9 +23,9 @@
             <div class="row" v-if="$q.platform.is.desktop">
                <div class="col-12">
                   <h5 class="bg-secondary font-family-secondary text-weight-bold q-inline-block text-white q-px-lg q-py-md"> {{category.title}} </h5>
-               </div>       
+               </div>
             </div>
-         
+
             <div class="row q-col-gutter-xl">
                <div class="col-xs-12 col-sm-12 col-md-8 q-mb-lg" v-if="category && category.posts">
 
@@ -46,9 +46,9 @@
                            <h4 class="title q-my-none text-sencondary">
                               <router-link
                                 :to="{name: 'qblog.show',params:{category: post.category.slug, slugPost: post.slug}}">
-                                 
+
                                     {{post.title}}
-                                 
+
                               </router-link>
                            </h4>
                             <p class="q-my-md"> {{post.summary}}</p>
@@ -63,7 +63,7 @@
                             </div>
                           </q-card-actions>
                         </q-card>
-       
+
 
                      </div>
 
@@ -86,7 +86,7 @@
 
          <div class="q-container banner q-py-xl text-center">
            <img class="full-width" src="/statics/img/publicidad1-100.jpg" alt="banner">
-         </div>  
+         </div>
 
       </div>
    </q-page>
@@ -109,7 +109,11 @@ import morePopular from 'src/components/qblog/morePopular'
                indexName: `qblog-categories-${category}`,
                criteria: category,
                apiRoute: 'apiRoutes.qblog.categories',
-               requestParams: {refresh: true, params: {include: 'posts'}}
+               requestParams: {
+                  //refresh: true,
+               params: {include: 'posts'}
+               }
+
             })
             resolve(true)
          })
@@ -144,10 +148,10 @@ import morePopular from 'src/components/qblog/morePopular'
 <style lang="stylus">
 .page-blog
   .title
-    a    
+    a
       color $secondary
   .line-red
-    border-top 3px solid $primary  
+    border-top 3px solid $primary
 </style>
 
 

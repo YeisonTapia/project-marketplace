@@ -75,7 +75,7 @@
 
          <div class="q-container banner q-py-xl text-center">
            <img class="full-width" src="/statics/img/publicidad1-100.jpg" alt="banner">
-         </div>  
+         </div>
       </div>
    </q-page>
 </template>
@@ -103,7 +103,9 @@ import morePopular from 'src/components/qblog/morePopular'
                indexName: `qblog-posts-${postSlug}`,
                criteria: postSlug,
                apiRoute: 'apiRoutes.qblog.posts',
-               requestParams: {refresh: true, params: {include: 'category,user'}}
+               requestParams: {
+                  //refresh: true,
+                  params: {include: 'category,user'}}
             })
             //Get list related posts
             let categorySlug = currentRoute.params.category || false
@@ -111,7 +113,9 @@ import morePopular from 'src/components/qblog/morePopular'
                indexName: `qblog-categories-${categorySlug}`,
                criteria: categorySlug,
                apiRoute: 'apiRoutes.qblog.categories',
-               requestParams: {refresh: true, params: {}}
+               requestParams: {
+                  //refresh: true,
+                  params: {}}
             })
             resolve(true)
          })
@@ -161,7 +165,9 @@ import morePopular from 'src/components/qblog/morePopular'
                indexName: `qblog-posts-${postSlug}`,
                criteria: postSlug,
                apiRoute: 'apiRoutes.qblog.posts',
-               requestParams: {refresh: true, params: {include: 'categories,user'}}
+               requestParams: {
+                  //refresh: true,
+                  params: {include: 'categories,user'}}
             })
             this.loading = false
          },
@@ -171,8 +177,8 @@ import morePopular from 'src/components/qblog/morePopular'
 <style lang="stylus">
 .page-blog
   .title
-    a    
+    a
       color $secondary
   .line-red
-    border-top 3px solid $primary  
+    border-top 3px solid $primary
 </style>

@@ -371,7 +371,7 @@
 
           //Params
           let params = {
-            refresh: true,
+           // refresh: true,
             params: {
               filter: {exclude:this.userItemsRedeems,random:true},
               take: 2
@@ -383,7 +383,7 @@
             this.loading = false
             resolve(true)//Resolve
           }).catch(error => {
-            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+           // this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
             reject(false)//Resolve
           })
 
@@ -472,7 +472,7 @@
 
           //Params
           let params = {
-            refresh: true,
+           // refresh: true,
             params: {
               filter: {userId:this.userId}
             }
@@ -490,7 +490,7 @@
 
             resolve(true)//Resolve
           }).catch(error => {
-            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+           // this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
             reject(false)//Resolve
           })
 
@@ -521,8 +521,8 @@
 
             })
             .catch(error => {
-              this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
-              //console.error("*** GET ALL POINTS BY USER - ERROR")
+              //this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+              console.error("*** GET ALL POINTS BY USER - ERROR")
               reject(error);
             });
         })

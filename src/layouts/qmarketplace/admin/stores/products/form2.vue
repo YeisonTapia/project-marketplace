@@ -781,7 +781,7 @@
           this.loadingCategory = true
           let configName = 'apiRoutes.qcommerce.categories'
           let params = {//Params to request
-            refresh: true,
+           // refresh: true,
             params: {
               include: 'parent',
               filter:{
@@ -797,7 +797,7 @@
             this.loadingCategory = false
             resolve(true)
           }).catch(error => {
-            this.$alert.error({ message: this.$tr('ui.message.errorRequest'), pos: 'bottom' })
+           // this.$alert.error({ message: this.$tr('ui.message.errorRequest'), pos: 'bottom' })
             this.loadingCategory = false
             reject(true)
           })
@@ -811,7 +811,7 @@
             let configName = 'apiRoutes.qcommerce.products'
             //Params
             let params = {
-              refresh: true,
+            //  refresh: true,
               params: {
                 include: 'relatedProducts,categories,parent',
                 filter: { allTranslations: true }
@@ -822,7 +822,7 @@
               this.orderDataItemToLocale(response.data)
               resolve(true)//Resolve
             }).catch(error => {
-              this.$alert.error({ message: this.$tr('ui.message.errorRequest'), pos: 'bottom' })
+            //  this.$alert.error({ message: this.$tr('ui.message.errorRequest'), pos: 'bottom' })
               this.loading = false
               reject(false)//Resolve
             })

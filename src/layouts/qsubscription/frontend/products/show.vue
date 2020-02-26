@@ -326,7 +326,7 @@ export default {
 
           //Params
           let params = {
-            refresh: true,
+            //refresh: true,
             params: {
               include: 'plans.features',
               filter: {
@@ -342,7 +342,7 @@ export default {
             this.loading.page = false;
             resolve(true)//Resolve
           }).catch(error => {
-            this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+          //  this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
             this.loading.page = false;
             this.$router.push({ name: 'app.home'});
             reject(false)//Resolve

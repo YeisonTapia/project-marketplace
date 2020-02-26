@@ -12,8 +12,8 @@
         </div>
 
         <div v-if="success" class="col-12 q-pb-xl">
-          <div class="row q-col-gutter-xs"> 
-          
+          <div class="row q-col-gutter-xs">
+
             <div class="col-sm-12 col-md-6 col-lg-4 q-pb-lg" v-for="trivia in trivias" :key="trivia.id">
               <q-card square  class="card-trivia-item no-shadow q-ma-sm" >
                 <div @click="openModal(trivia)">
@@ -26,7 +26,7 @@
             </div>
 
             <triviaModal v-if="trivia" :trivia="trivia" @trivia="trivia = $event"></triviaModal>
-           
+
           </div>
         </div>
       </div>
@@ -60,7 +60,7 @@ export default {
   methods: {
     // Init Method
     async init() {
-      
+
       this.loading = true
 
       await this.getTrivias().catch(error => {})
@@ -77,14 +77,14 @@ export default {
     getTrivias(){
       return new Promise((resolve, reject) => {
 
-        //filter: 
+        //filter:
         let fixFilter = {}
 
         fixFilter =  {allTranslations: true,status: 1,order:true}
 
         //Params
         let params = {
-          refresh: true,
+          //refresh: true,
           params: {
             include: 'questions',
             filter: fixFilter,
@@ -96,7 +96,8 @@ export default {
           this.trivias = response.data
           resolve(true)//Resolve
         }).catch(error => {
-          this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+          console.error('Tivia Error', error)
+          //this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
           reject(false)//Resolve
         })
 
@@ -115,7 +116,7 @@ export default {
       this.trivia = trivia
       this.loading = false
     }
-    
+
   }
 }
 </script>
@@ -159,10 +160,10 @@ export default {
       top 21px
     & > div
       -webkit-transform  skew(-10deg)
-      transform skew(-10deg)  
+      transform skew(-10deg)
     @media screen and (max-width: $breakpoint-md)
         width 60%
 
-   
+
 
 </style>

@@ -11,17 +11,17 @@
             <q-page-container>
 				<q-page padding>
 	                <trivia v-if="showTrivia" :trivia="trivia" :loading2="loading"  @loading2="loading = $event"
-	                    isModal="true" 
+	                    isModal="true"
 	                    className="modaltrivia">
 	                </trivia>
-	            	
+
 	            	 <!-- msj final -->
 				    <div v-if="alertContent.active" :color="alertContent.color" :icon="alertContent.icon" class="q-mx-sm q-mt-xl">
 				        {{alertContent.msj}}
 				    </div>
-                </q-page>		
+                </q-page>
             </q-page-container>
-                 
+
         </q-layout>
          <q-inner-loading :visible="loading" />
     </q-dialog>
@@ -47,7 +47,7 @@ export default {
 	          color:'secondary',
 	          icon:'info',
 	          msj:'Ya participaste en esta trivia'
-	        },     
+	        },
 	    }
 	 },
     methods:{
@@ -71,7 +71,7 @@ export default {
         		this.alertContent.active = true
         		this.loading = false
     		}
-	    	
+
     	},
     	// Open Modal
 	    openModal(){
@@ -87,7 +87,7 @@ export default {
 	      return new Promise((resolve, reject) => {
 	        //Params
 	        let params = {
-	          refresh: true,
+	          //refresh: true,
 	          params: {
 	            filter: {userId:this.userId,triviaId:this.trivia.id},
 	            fields: 'trivia_id'

@@ -10,7 +10,7 @@
                 <img class="img-title" src="/statics/img/mail.png">
               </div>
               <q-card-section>
-                
+
                 <div class="px-xl q-pb-xl">
                   <div class="text-h4 text-primary q-mb-md text-center font-family-secondary">Datos de contacto</div>
                   <div class="text-subtitle1 text-center q-pb-lg  text-secondary">
@@ -27,7 +27,7 @@
                       </q-item-section>
                       <q-item-section class="q-mb-xl">
                         <div class="text-subtitle1 font-family-secondary">Teléfonos</div>
-                        <div class="text-subtitle1"><a href="tel:00">+00000000</a>  -  <a href="tel:00">+00000000</a></div>
+                        <div class="text-subtitle1"><a href="tel:+573017753585">+57 301 775 3585</a>  <!-- -  <a href="tel:00">+00000000</a>--></div>
                       </q-item-section>
                     </q-item>
                     <q-item>
@@ -42,7 +42,7 @@
                   </q-list>
 
                 </div>
-                
+
               </q-card-section>
             </q-card>
 
@@ -107,13 +107,13 @@ export default {
       loading: false
     }
   },
-  methods: {    
+  methods: {
     async sendEmail() {
       this.$v.$touch();
       if (this.$v.$error) {
         this.$alert.error({message: 'Por favor revisa de nuevo los campos.', pos: 'bottom'});
       } else {
-        
+
         this.loading = true;
         this.$crud.create('apiRoutes.iform.send', this.form).then(response => {
 
@@ -125,7 +125,7 @@ export default {
               this.$alert.success({message: 'Mensaje enviado exitosamente. Pronto nos pondremos en contacto con usted.'});
               this.$router.push({name: 'app.home'})
             }
-        });       
+        });
       }
     },
     clearForm(){
@@ -149,7 +149,7 @@ export default {
 </script>
 <style lang="stylus">
 .page-contacto
-  .card-contacto 
+  .card-contacto
     & .img-title
       object-fit contain
       width  auto
@@ -170,13 +170,13 @@ export default {
         margin 10px
         font-size 2rem
         color $tertiary
-        &:hover 
+        &:hover
           color $secondary
   .text-subtitle1
-    font-weight 600    
-  .list-info    
+    font-weight 600
+  .list-info
     a
-      color $secondary 
-      &:hover 
+      color $secondary
+      &:hover
         color $tertiary
 </style>

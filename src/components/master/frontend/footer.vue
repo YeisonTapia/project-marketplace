@@ -1,6 +1,7 @@
 <template>
   <footer>
     <!--=== Copyright ===-->
+    <q-no-ssr>
     <q-footer class="bg-degradado" v-if="$q.platform.is.desktop">
       <div class="row flex flex-center gutter-x-sm q-py-md">
         <div class="q-px-md">
@@ -40,6 +41,7 @@
 
 
     </q-footer>
+    </q-no-ssr>
   </footer>
 </template>
 <script>
@@ -122,7 +124,7 @@
           background transparent !important
 
     .search
-      background-color red    
+      background-color red
       .select-cities
         display block
 </style>

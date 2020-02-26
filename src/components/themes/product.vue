@@ -13,7 +13,7 @@
                       v-model="product.averageRating" readonly color="primary"
                       :max="5"
             />
-            <h5 class="q-my-sm price font-family-secondary">${{product.price}}</h5>
+            <h5 class="q-my-sm price font-family-secondary">${{$n(product.price)}}</h5>
             <div class="text-subtitle1 font-family-secondary text-truncate">{{product.name}}</div>
             <div class="text-subtitle2 text-truncate">{{product.store.name}}</div>
          </q-card-section>

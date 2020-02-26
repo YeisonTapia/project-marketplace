@@ -159,13 +159,13 @@
 
             let max = date.endOfDate(dateTarget,'month')
             this.dateEnd = date.formatDate(max, 'YYYY-MM-DD')
-            
+
             await this.getPointsUser()
             await this.getFavoriteStores()
             // Filtrado por mes
             await this.getPointsUser(true)
             await this.getNotifications()
-            
+
          },
          // Total Puntos Disponibles (Los que puede cambiar)
          // Get Points Available User
@@ -204,7 +204,7 @@
                      else
                         this.userPointsMonth = response.data.data.points
                  }
-                   
+
                  //console.warn("*** GET POINTS USER - Puntos Disponibles:"+this.userPointsAvailables )
                 this.loading = false
                  resolve(true);
@@ -221,7 +221,7 @@
                this.loading = true
                //Params
                let params = {
-                  refresh: true,
+                  //refresh: true,
                   params: {
                      include: 'store',
                      filter: {userId:this.$store.state.quserAuth.userId}
@@ -244,7 +244,7 @@
                }).catch(error => {
                   this.loading = false
                   console.error("ERROR - GET FAVORITE STORES")
-                  this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+                // this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
                   reject(false)//Resolve
                })
 
@@ -280,8 +280,36 @@
 <style lang="stylus">
    .page-user-index
       .card-store
+         .q-rating
+            font-size 20px !important
        box-shadow none
-
          & img
             border 2px solid #E1E1E1
+      @media screen and (max-width: $breakpoint-md)
+         .card-store
+            .q-avatar
+               width 60px
+               height 60px
+            .q-rating
+               font-size 14px !important
+            .q-btn__content
+               div
+                  font-size 14px
+            .text-subtitle1
+               font-size 14px !important
+               font-weight bold
+      @media screen and (max-width: $breakpoint-xs)
+         .card-store
+            min-height 196px
+            .q-avatar
+               width 50px
+               height 50px
+            .q-rating
+               font-size 10px !important
+            .q-btn__content
+               div
+                  font-size 12px
+            .text-subtitle1
+               font-size 12px !important
+               font-weight bold
 </style>
