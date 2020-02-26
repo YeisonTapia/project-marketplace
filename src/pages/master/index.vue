@@ -18,20 +18,23 @@
       </div>
       <featured-products></featured-products>
 
-      <q-dialog style="background-image:url('https://img.freepik.com/free-vector/colorful-confetti-background-festive-celebrations_41084-378.jpg?size=626&ext=jpg')" v-model="showBenefitsModal" persistent>
-        <q-card v-if="levelData">
+      <q-dialog v-model="showBenefitsModal" persistent>
+        <q-card v-if="levelData"  style="background-image:url('/statics/img/congrats7.jpg'); background-size:cover; background-repeat:no-repeat;background-position:center center; ">
           <q-card-section class="row items-center">
             <div class="q-container">
               <div class="row">
 
-                <div class="col-12">
-                  <div class="text-h5 text-primary q-mb-md font-family-secondary">Has ascendido al nivel: {{levelData.name}}</div>
+                <div class="col-12 text-center">
+                  <div class="text-h5 text-primary q-mb-md font-family-secondary q-pt-md">Has ascendido al nivel: {{levelData.name}}</div>
                 </div>
+              </div>
 
+              <div class="row">
                 <div class="col-12">
                   <p class="caption">
-                    <q-avatar icon="style" color="primary" text-color="white" />
-                    <span class="q-ml-sm">Se han habilitado nuevos beneficios por los que puedes optar:</span>
+                    <!-- <q-avatar icon="style" color="primary" text-color="white" /> -->
+                    <div class="text-h7 text-secondary q-mb-md font-family-secondary text-center">Se han habilitado nuevos beneficios por los que puedes optar:</div>
+                    <!-- <span class="q-ml-sm">Se han habilitado nuevos beneficios por los que puedes optar:</span> -->
                   </p>
                 </div>
 
@@ -105,7 +108,6 @@
         if(this.$store.state.quserAuth.userId){
           if(this.$store.state.quserAuth.userData.levelCompleted==0){
             this.getBenefits();
-
           }
         }
       },
