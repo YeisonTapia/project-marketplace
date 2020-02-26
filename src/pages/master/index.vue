@@ -18,7 +18,7 @@
       </div>
       <featured-products></featured-products>
 
-      <q-dialog v-model="showBenefitsModal" persistent>
+      <q-dialog style="background-image:url('https://img.freepik.com/free-vector/colorful-confetti-background-festive-celebrations_41084-378.jpg?size=626&ext=jpg')" v-model="showBenefitsModal" persistent>
         <q-card v-if="levelData">
           <q-card-section class="row items-center">
             <div class="q-container">
@@ -36,7 +36,10 @@
                 </div>
 
                 <div class="col-12">
-                  <q-select
+
+                  <q-checkbox @input="val => { showBene() }" v-model="benefitsUser" v-for="benefit in levelData.benefits" :val="benefit.id" :key="benefit.id" :label="benefit.name" color="red" />
+
+                  <!-- <q-select
                   class="q-mb-md"
                   :options="levelData.benefits"
                   @input="val => { showBene() }"
@@ -47,7 +50,7 @@
                   option-label="name"
                   option-value="id"
                   placeholder=""
-                  />
+                  /> -->
                 </div>
 
               </div>
@@ -99,12 +102,8 @@
         }
       },
       mounted(){
-        console.log('mounted home asdada');//
-        console.log(this.$store.state.quserAuth);
         if(this.$store.state.quserAuth.userId){
-          console.log('entre en autenticado home');
           if(this.$store.state.quserAuth.userData.levelCompleted==0){
-            console.log('entre en level completedd');
             this.getBenefits();
 
           }
@@ -138,7 +137,7 @@
           }
         },
         showBene(){
-          console.log(this.benefitsUser);
+          //console.log(this.benefitsUser);
         },
         getBenefits(){
           //Params
