@@ -798,6 +798,7 @@
             resolve(true)
           }).catch(error => {
            // this.$alert.error({ message: this.$tr('ui.message.errorRequest'), pos: 'bottom' })
+            console.error("ERROR - GET CATEGORIES", error)
             this.loadingCategory = false
             reject(true)
           })
@@ -822,7 +823,8 @@
               this.orderDataItemToLocale(response.data)
               resolve(true)//Resolve
             }).catch(error => {
-            //  this.$alert.error({ message: this.$tr('ui.message.errorRequest'), pos: 'bottom' })
+            this.$alert.error({ message: this.$tr('ui.message.errorRequest'), pos: 'bottom' })
+              console.error("ERROR - GET PRODUCTS", error)
               this.loading = false
               reject(false)//Resolve
             })

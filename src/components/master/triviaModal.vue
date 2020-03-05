@@ -98,7 +98,8 @@ export default {
 	          this.triviaUserId = response.data
 	          resolve(true)//Resolve
 	        }).catch(error => {
-	          this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+				  console.error('[GET USER TRIVIAS] ', error);
+	          //this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
 	          reject(false)//Resolve
 	        })
 

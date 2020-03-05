@@ -307,7 +307,7 @@
                 resolve(true)//Resolve
               }).catch(error => {
                 //this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
-
+                console.error('[GET POLLS] ', error);
                 reject(false)//Resolve
               })
 
@@ -337,7 +337,7 @@
 
               }).catch(error => {
                // this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
-
+                console.error('[GET QUESTIONS] ', error);
                 reject(false)//Resolve
               })
 
@@ -362,7 +362,7 @@
                   //console.warn("SAVE USER QUESTION ANSWER")
                 }).catch(error => {
                   console.error('[CREATE USER QUESTION ANSWERS] ', error)
-                  this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
+                  //this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
                   this.loading = false
                 })
 
@@ -401,7 +401,7 @@
               this.loading = false
             }).catch(error => {
               console.error('[CREATE USER POLLS] ', error)
-              this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
+             // this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
             })
 
           },
@@ -425,7 +425,7 @@
                 resolve(true)//Resolve
               }).catch(error => {
                // this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
-
+                console.error('[GET USER POLLS] ', error);
                 reject(false)//Resolve
               })
 
@@ -491,6 +491,7 @@
                 resolve(true)//Resolve
 
               }).catch(error => {
+                console.error('[GET QUESTIONS] ', error);
                // this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
                 console.error(error)
                 reject(false)//Resolve

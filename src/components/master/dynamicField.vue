@@ -303,7 +303,8 @@
               this.loading = false
               resolve(true)
             }).catch(error => {
-              this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+
+              //this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
               this.loading = false
               reject(true)
             })

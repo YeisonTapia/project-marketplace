@@ -69,7 +69,7 @@
 
             }).catch(error => {
                console.error("ERROR - DELETED FAVORITE STORES")
-               this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+               //this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
             })
 
          },

@@ -269,7 +269,8 @@
                         this.$router.push({name: 'products.show', params: {slug: 'tiendas-en-linea'}})
                      }
                   }).catch(error => {
-                     this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+                     console.error('[GET PRODUCT] ', error);
+                     //this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
                      reject(false)//Resolve
                   })
                }//businessRole

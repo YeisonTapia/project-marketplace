@@ -105,7 +105,8 @@
                this.slide.push(this.position.banners[this.numSlide])
                this.numSlide++
             }).catch(error => {
-               this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+               console.error('[GET POSITIONS] ', error);
+               //this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
                this.loading = false
             })
          },

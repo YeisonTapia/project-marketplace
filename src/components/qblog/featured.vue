@@ -1,4 +1,4 @@
-<template> 
+<template>
   <q-card class="line-red q-mb-xl">
     <q-card-section class="text-secondary font-family-secondary">
       <h5 class="q-my-none q-mx-lg">Destacado</h5>
@@ -46,12 +46,13 @@ export default {
         console.error(this.featudedPost)
         this.loading = false
       }).catch(error => {
-        this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+        console.error('[GET POSTS] ', error);
+        //this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
         this.loading = false
       })
     },
   }
 }
 </script>
-<style lang="stylus"> 
-</style> 
+<style lang="stylus">
+</style>

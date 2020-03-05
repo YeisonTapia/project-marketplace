@@ -159,7 +159,7 @@
                   resolve(true)//Resolve
                }).catch(error => {
                   console.error("ERROR - GET ORDERS")
-                  this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+                  //this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
                   reject(false)//Resolve
                })
 

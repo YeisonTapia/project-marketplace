@@ -1,7 +1,7 @@
 <template>
    <q-card flat class="card-top bg-light full-width full-height">
       <div class="text-center">
-         <img class="img-title" src="/statics/img/top-companies.png">
+         <img class="img-title" src="statics/img/top-companies.png">
       </div>
       <q-card-section>
          <div class="text-h6 text-primary font-family-secondary">Mejores Empresas</div>

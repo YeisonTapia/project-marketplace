@@ -29,12 +29,12 @@
                        {{$trd(post.createdAt)}}</p>
            		</q-card-section>
             </div>
-          </div>    
+          </div>
         </q-item>
       </q-list>
     </q-card-section>
-  </q-card>  
-</template>    
+  </q-card>
+</template>
 <script>
 export default {
     name: 'MorePopularBlogComponent',
@@ -60,7 +60,8 @@ export default {
         this.popularPost=response.data;
         this.loading = false
       }).catch(error => {
-        this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+        console.error('[GET POSTS] ', error);
+        //this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
         this.loading = false
       })
     },
@@ -71,4 +72,4 @@ export default {
   .popularPost
     a
       color $secondary
-</style> 
+</style>

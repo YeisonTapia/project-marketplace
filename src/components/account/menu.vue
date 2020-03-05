@@ -171,8 +171,8 @@
               this.loading = false//Login
 
             }).catch(error => {
-              /*console.error('[UPDATE PROFILE] ', error)*/
-              this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
+              console.error('[UPDATE PROFILE] ', error);
+              //this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
               this.loading = false
           })
 

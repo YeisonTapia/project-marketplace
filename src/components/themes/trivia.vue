@@ -263,7 +263,7 @@ export default {
         this.loading = false
       }).catch(error => {
         console.error('[TRIVIA - CREATE USER TRIVIAS] ', error)
-        this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
+        //this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
       })
 
     },
@@ -275,7 +275,7 @@ export default {
             console.warn("TRIVIA - SAVE USER QUESTION ANSWER")
           }).catch(error => {
             console.error('[TRIVIA - CREATE USER QUESTION ANSWERS] ', error)
-            this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
+            //this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
             this.loading = false
           })
 

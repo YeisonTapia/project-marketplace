@@ -312,8 +312,8 @@
             this.$crud.index("apiRoutes.qnotification.notifications", params).then(response => {
                this.notifications = response.meta.page.total
             }).catch(error => {
-               console.error(error)
-               this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+               console.error('[GET NOTIFICATIONS] ', error);
+               //this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
                this.loading = false
             })
          },

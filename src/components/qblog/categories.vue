@@ -16,7 +16,7 @@
       </q-list>
     </q-card-section>
   </q-card>
-</template>    
+</template>
 <script>
 export default {
     name: 'CategoriesBlogComponent',
@@ -40,12 +40,13 @@ export default {
         this.categories=response.data;
         this.loading = false
       }).catch(error => {
-        this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+        console.error('[GET CATEGORIES] ', error);
+        //this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
         this.loading = false
       })
     },
   }
 }
 </script>
-<style lang="stylus"> 
-</style> 
+<style lang="stylus">
+</style>

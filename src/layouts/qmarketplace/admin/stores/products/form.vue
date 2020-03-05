@@ -618,7 +618,8 @@
             console.log(this.quantityProductsCanCreate);//
             */
             if(!this.canCreateProduct){
-              this.$alert.error({ message: "No puedes crear más productos.", pos: 'bottom' })
+              console.error("ERROR - GET SUBSCRIPTIONS")
+              //this.$alert.error({ message: "No puedes crear más productos.", pos: 'bottom' })
               this.$router.push({ name: 'qmarketplace.admin.stores.my.store.products', params: {  }})
             }
             this.validateProductsVisibleOfStore();
@@ -812,7 +813,8 @@
           this.$crud.index(configName, params).then(response => {
             callback(null, this.$array.tree(response.data))
           }).catch(error => {
-            this.$alert.error({ message: this.$tr('ui.message.errorRequest'), pos: 'bottom' })
+            console.error("ERROR - GET PRODUCTS", error)
+            //this.$alert.error({ message: this.$tr('ui.message.errorRequest'), pos: 'bottom' })
           })
         }
       },
