@@ -1,7 +1,7 @@
 <template>
   <q-card flat class="card-quiz bg-primary full-width full-height">
     <div>
-      <img class="img-title full-width" src="/statics/img/quiz-title.png">
+      <img class="img-title full-width" src="statics/img/quiz-title.png">
     </div>
 
     <q-stepper v-if="success && answers.length>0 && !alertContent.active && !showVotes" ref="stepper" v-model="currentStep" class="no-shadow">

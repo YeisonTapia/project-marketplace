@@ -7,7 +7,7 @@
          <div class="header-desktop font-family-secondary" v-if="$q.platform.is.desktop">
 
             <div class="row bg-degradado full-width">
-               <div class="col-auto self-center logo-circle">
+               <div class="col-auto self-center logo-circle" style=" background-image: url('statics/img/bg-logo.png')">
                   <div class="logo">
                      <router-link :to="{ name: 'app.home'}">
                         <img :src="logo">
@@ -351,7 +351,6 @@
       .header-desktop
          .logo-circle
             position relative
-            background-image url('/statics/img/bg-logo.png')
             background-size 100% 100%
             padding 10px
 

@@ -1,7 +1,7 @@
 <template>
   <q-card flat :class="className" class="relative-position">
     <div>
-      <img class="img-title full-width" v-show="!isModal" src="/statics/img/trivia-title.png">
+      <img class="img-title full-width" v-show="!isModal" src="statics/img/trivia-title.png">
     </div>
     <div class="content-stepper">
 

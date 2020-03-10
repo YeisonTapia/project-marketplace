@@ -64,7 +64,7 @@
          <q-toolbar class="bg-degradado header-movil" v-else>
             <q-btn color="primary" flat dense round @click="drawer.menu = !drawer.menu" icon="menu"/>
             <q-toolbar-title class="q-pl-none">
-               <div class="q-inline-block logo">
+               <div class="q-inline-block logo" style=" background-image: url('statics/img/bg-logo.png')">
                   <router-link :to="{ name: 'app.home'}">
                      <img :src="logo" :alt="projectName" style="height: 42px; position: relative; top: 4px;">
                   </router-link>
@@ -403,7 +403,6 @@
 
       .header-movil
          .logo
-            background-image url('/statics/img/bg-logo.png')
             background-size 100% 100%
             padding 0 10px
 

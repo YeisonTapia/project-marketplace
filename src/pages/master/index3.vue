@@ -41,19 +41,19 @@
                     <q-item-label>
                         <div class="text-subtitle1 q-mb-none">
                           <i class="fas fa-check text-primary q-pr-sm"></i>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                         </div>
                         <div class="text-subtitle1 q-mb-none">
                           <i class="fas fa-check text-primary q-pr-sm"></i>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                         </div>
                         <div class="text-subtitle1 q-mb-none">
                           <i class="fas fa-check text-primary q-pr-sm"></i>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                         </div>
                         <div class="text-subtitle1 q-mb-none">
                           <i class="fas fa-check text-primary q-pr-sm"></i>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                         </div>
                     </q-item-label>
                   </q-item-section>
@@ -68,18 +68,18 @@
             <q-card>
               <q-card-section class="q-pa-lg text-center">
                 <q-btn no-caps class="no-shadow border-0 q-py-sm">
-                  <q-icon size="3em" color="primary" name="far fa-comment-dots" /> 
+                  <q-icon size="3em" color="primary" name="far fa-comment-dots" />
                   <h5 class="text-secondary q-mt-sm q-mb-none full-width">Chatea conmigo ahora</h5>
                 </q-btn>
                 <div class="line-grey q-my-md"></div>
                 <q-btn no-caps class="no-shadow border-0 q-py-sm">
-                  <q-icon size="3em" color="primary" name="fas fa-briefcase" /> 
+                  <q-icon size="3em" color="primary" name="fas fa-briefcase" />
                   <h5 class="text-secondary q-mt-sm q-mb-none full-width">Solicita tu servicio</h5>
                 </q-btn>
 
                 <div class="line-grey q-my-md"></div>
                 <q-btn no-caps class="no-shadow border-0 q-py-sm">
-                  <q-icon size="3em" color="primary" name="star" /> 
+                  <q-icon size="3em" color="primary" name="star" />
                   <h5 class="text-secondary q-mt-sm q-mb-none full-width">Calificar servicio</h5>
                 </q-btn>
 
@@ -93,7 +93,7 @@
           </div>
         </div>
       </div>
-    </div>  
+    </div>
 
 
     <div>
@@ -116,22 +116,22 @@
       <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-3">
           <div class="ratio-4-3" style="border: 2px solid #fff;">
-              <img src="/statics/img/theme-three/work1.jpg" alt="">
+              <img src="statics/img/theme-three/work1.jpg" alt="">
             </div>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-3">
           <div class="ratio-4-3" style="border: 2px solid #fff;">
-              <img src="/statics/img/theme-three/work2.jpg" alt="">
+              <img src="statics/img/theme-three/work2.jpg" alt="">
             </div>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-3">
           <div class="ratio-4-3" style="border: 2px solid #fff;">
-              <img src="/statics/img/theme-three/work3.jpg" alt="">
+              <img src="statics/img/theme-three/work3.jpg" alt="">
             </div>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-3">
           <div class="ratio-4-3" style="border: 2px solid #fff;">
-              <img src="/statics/img/theme-three/work4.jpg" alt="">
+              <img src="statics/img/theme-three/work4.jpg" alt="">
             </div>
         </div>
       </div>

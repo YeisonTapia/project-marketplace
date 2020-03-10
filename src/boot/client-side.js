@@ -21,6 +21,8 @@ export default async ({app, router, store, Vue}) => {
     Vue.use(item.component)
     Vue.component(item.name, item.component)
   })
+
+
 }
 
 

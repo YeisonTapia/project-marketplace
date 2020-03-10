@@ -5,11 +5,11 @@
       <div class="q-container q-pb-lg">
         <div class="row">
           <div class="col-12 my-xl">
-            <img class="full-width" src="/statics/img/nosotros.jpg" alt="nosotros">
+            <img class="full-width" src="statics/img/nosotros.jpg" alt="nosotros">
           </div>
           <div class="col-xs-12 col-sm-12 col-md-3 text-center q-py-md">
             <h4 class="title text-secondary font-family-secondary q-my-sm">Nosotros</h4>
-            <img class="q-hide q-md-show" style="margin: 0 auto;" src="/statics/img/arrow-right-pink.png" alt="nosotros">
+            <img class="q-hide q-md-show" style="margin: 0 auto;" src="statics/img/arrow-right-pink.png" alt="nosotros">
           </div>
           <div class="col-xs-12 col-sm-12 col-md-9 text-justify">
             <p class="text-weight-medium">Somos dos jóvenes soñadores que un día común y corriente mientras jugábamos un partido de futbol en FIFA 2015 en PlayStation queríamos pedir un domicilio de comida, pero no teníamos un número de contacto ni sabíamos de un buen lugar para comprarla. Al vernos en esta situación nos preguntamos: ¿Qué tal si hubiera una página web dedicada a la búsqueda y localización de todos los negocios de Riohacha, sin discriminación alguna? Fue así como nació la idea de dondeestaesavaina.com. Una  página web dedicada a usuarios que buscan información y localización de las empresas formales e informales y negocios de barrio de la ciudad de Riohacha, para adquirir productos y/o servicios de las mismas, quienes se ven beneficiadas con un reconocimiento y publicidad online, lo cual ayudara en el aumento de sus ventas.</p>
@@ -29,7 +29,7 @@
             <q-item>
               <q-item-section avatar>
                 <q-avatar>
-                  <img src="/statics/img/arrow-right-pink.png">
+                  <img src="statics/img/arrow-right-pink.png">
                 </q-avatar>
               </q-item-section>
               <q-item-section>
@@ -40,7 +40,7 @@
             <q-item>
               <q-item-section avatar>
                 <q-avatar>
-                  <img src="/statics/img/arrow-right-pink.png">
+                  <img src="statics/img/arrow-right-pink.png">
                 </q-avatar>
               </q-item-section>
               <q-item-section>
@@ -51,7 +51,7 @@
             <q-item>
               <q-item-section avatar>
                 <q-avatar>
-                  <img src="/statics/img/arrow-right-pink.png">
+                  <img src="statics/img/arrow-right-pink.png">
                 </q-avatar>
               </q-item-section>
               <q-item-section>
@@ -62,7 +62,7 @@
             <q-item>
               <q-item-section avatar>
                 <q-avatar>
-                  <img src="/statics/img/arrow-right-pink.png">
+                  <img src="statics/img/arrow-right-pink.png">
                 </q-avatar>
               </q-item-section>
               <q-item-section>
@@ -73,7 +73,7 @@
             <q-item>
               <q-item-section avatar>
                 <q-avatar>
-                  <img src="/statics/img/arrow-right-pink.png">
+                  <img src="statics/img/arrow-right-pink.png">
                 </q-avatar>
               </q-item-section>
               <q-item-section>
@@ -84,7 +84,7 @@
             <q-item>
               <q-item-section avatar>
                 <q-avatar>
-                  <img src="/statics/img/arrow-right-pink.png">
+                  <img src="statics/img/arrow-right-pink.png">
                 </q-avatar>
               </q-item-section>
               <q-item-section>
@@ -95,7 +95,7 @@
             <q-item>
               <q-item-section avatar>
                 <q-avatar>
-                  <img src="/statics/img/arrow-right-pink.png">
+                  <img src="statics/img/arrow-right-pink.png">
                 </q-avatar>
               </q-item-section>
               <q-item-section>
@@ -160,14 +160,14 @@ export default {
     .q-item
       margin-bottom 15px
     .q-avatar
-      margin-right 16px  
-  
-  @media screen and (max-width: $breakpoint-xs)  
+      margin-right 16px
+
+  @media screen and (max-width: $breakpoint-xs)
     .mision-vision
-      padding-top 0 !important          
+      padding-top 0 !important
     .valores
       .q-avatar
         font-size 20px
         margin-right 10px
-      
+
 </style>

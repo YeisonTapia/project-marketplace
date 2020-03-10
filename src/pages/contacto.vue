@@ -1,13 +1,13 @@
 <template>
   <q-page>
-    <img class="full-width" src="/statics/img/contacto.jpg" alt="contacto">
+    <img class="full-width" src="statics/img/contacto.jpg" alt="contacto">
     <div class="bg-fondo page-contacto q-px-sm q-py-xl">
       <div class="q-container q-pt-xl">
         <div class="row q-col-gutter-xl">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
             <q-card flat class="card-contacto rounded-md bg-white full-width">
               <div class="text-center">
-                <img class="img-title" src="/statics/img/mail.png">
+                <img class="img-title" src="statics/img/mail.png">
               </div>
               <q-card-section>
 

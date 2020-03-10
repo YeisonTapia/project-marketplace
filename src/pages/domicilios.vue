@@ -6,7 +6,7 @@
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-3 text-center q-py-md">
             <h4 class="title text-secondary font-family-secondary q-my-sm">Domicilios</h4>
-            <img src="/statics/img/arrow-right-pink.png" alt="nosotros">
+            <img src="statics/img/arrow-right-pink.png" alt="nosotros">
           </div>
           <div class="col-xs-12 col-sm-12 col-md-9 text-justify">
             <p class="text-weight-medium">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic aut libero fuga similique blanditiis mollitia, amet delectus. Totam earum nulla nam nostrum optio tempora officia, distinctio aliquam id facere odio! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic aut libero fuga similique blanditiis mollitia, amet delectus. Totam earum nulla nam nostrum optio tempora officia, distinctio aliquam id facere odio! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic aut libero fuga similique blanditiis mollitia, amet delectus. Totam earum nulla nam nostrum optio tempora officia, distinctio aliquam id facere odio! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic aut libero fuga similique blanditiis mollitia, amet delectus. Totam earum nulla nam nostrum optio tempora officia, distinctio aliquam id facere odio!
@@ -27,7 +27,7 @@
             <q-item>
               <q-item-section avatar class="q-mr-md">
                 <q-avatar>
-                  <img src="/statics/img/arrow-right-pink.png">
+                  <img src="statics/img/arrow-right-pink.png">
                 </q-avatar>
               </q-item-section>
               <q-item-section>
@@ -38,7 +38,7 @@
             <q-item>
               <q-item-section avatar class="q-mr-md">
                 <q-avatar>
-                  <img src="/statics/img/arrow-right-pink.png">
+                  <img src="statics/img/arrow-right-pink.png">
                 </q-avatar>
               </q-item-section>
               <q-item-section>
@@ -49,7 +49,7 @@
             <q-item>
               <q-item-section avatar class="q-mr-md">
                 <q-avatar>
-                  <img src="/statics/img/arrow-right-pink.png">
+                  <img src="statics/img/arrow-right-pink.png">
                 </q-avatar>
               </q-item-section>
               <q-item-section>
@@ -60,7 +60,7 @@
             <q-item>
               <q-item-section avatar class="q-mr-md">
                 <q-avatar>
-                  <img src="/statics/img/arrow-right-pink.png">
+                  <img src="statics/img/arrow-right-pink.png">
                 </q-avatar>
               </q-item-section>
               <q-item-section>
@@ -71,7 +71,7 @@
             <q-item>
               <q-item-section avatar class="q-mr-md">
                 <q-avatar>
-                  <img src="/statics/img/arrow-right-pink.png">
+                  <img src="statics/img/arrow-right-pink.png">
                 </q-avatar>
               </q-item-section>
               <q-item-section>
@@ -82,7 +82,7 @@
             <q-item>
               <q-item-section avatar class="q-mr-md">
                 <q-avatar>
-                  <img src="/statics/img/arrow-right-pink.png">
+                  <img src="statics/img/arrow-right-pink.png">
                 </q-avatar>
               </q-item-section>
               <q-item-section>
@@ -93,7 +93,7 @@
             <q-item>
               <q-item-section avatar class="q-mr-md">
                 <q-avatar>
-                  <img src="/statics/img/arrow-right-pink.png">
+                  <img src="statics/img/arrow-right-pink.png">
                 </q-avatar>
               </q-item-section>
               <q-item-section>

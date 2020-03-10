@@ -9,7 +9,7 @@
 if (workbox) {
   workbox.precaching.precache(self.__precacheManifest)
 
-  const baseUrl = 'https://modulos.imaginacolombia.com'
+  const baseUrl = 'https://api.dondeestaesavaina.com'
 
   // Set a name for the current cache
   var shellCacheName = 'app_cache';

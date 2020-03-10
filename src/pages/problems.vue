@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <img class="full-width" src="/statics/img/contacto.jpg" alt="¿Problemas con una tienda?">
+    <img class="full-width" src="statics/img/contacto.jpg" alt="¿Problemas con una tienda?">
     <div class="bg-fondo page-problems q-px-sm q-py-sm">
       <div class="q-container q-py-sm">
         <div class="row gutter-md">
@@ -19,7 +19,7 @@
               <div class="text-subtitle1 text-center q-pa-md">
                   Si tienes alguna duda, alguna consulta no dudes en
                   contactarnos, estaremos listos para responderte.
-                </div> 
+                </div>
               <q-card-section class="q-px-lg q-pb-lg form-general">
                 <q-input v-model="form.name"  label="Nombre:" />
                 <q-input v-model="form.email"  label="Correo Electrónico:" />
@@ -39,7 +39,7 @@
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 q-pa-md">
             <q-card flat class="card-contacto rounded-md bg-white full-width">
               <div class="text-center">
-                <img class="img-title" src="/statics/img/mail.png">
+                <img class="img-title" src="statics/img/mail.png">
               </div>
               <q-card-section>
 

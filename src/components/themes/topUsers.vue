@@ -1,7 +1,7 @@
 <template>
   <q-card flat  class="card-top-users bg-primary text-white full-width full-height relative-position">
     <div class="text-center">
-      <img class="img-title" src="/statics/img/copa.png">
+      <img class="img-title" src="statics/img/copa.png">
     </div>
     <q-card-section>
       <div class="text-h6 destc-text font-family-secondary">Usuarios Destacados</div>
