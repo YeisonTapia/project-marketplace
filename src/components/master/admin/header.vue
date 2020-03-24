@@ -251,7 +251,7 @@
                            if (!this.storeSelect) {
                               this.canCreateStore = true;
                            }
-                        } else if (!this.userDat.hasAccess('subscriptions.subscriptions.manage')) {
+                        } else if (!this.$auth.hasAccess('subscriptions.subscriptions.manage')) {
                            this.$router.push({
                               name: 'products.show',
                               params: {slug: 'tiendas-en-linea'},

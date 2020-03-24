@@ -142,3 +142,7 @@
   | crud | `$crud.<fucntion>()` | Use service functions from `qcrud` |
   | auth.hasAccess | `$auth.hasAccess(<permission>)` | Validate Permissions of user |
   | auth.hasSetting | `$auth.hasSetting(<setting>)` | Validate Setting of project |
+
+# plugion Cordova Requerides 
+cordova plugin add https://bitbucket.org/packt-internal/cordova-plugin-recaptcha.git
+cordova plugin add cordova-plugin-fcm-with-dependecy-updated

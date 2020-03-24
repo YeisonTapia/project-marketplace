@@ -1,7 +1,8 @@
 <template>
    <q-page class="bg-fondo-q store-page layout-padding">
       <div class="text-h5 text-primary q-pb-md q-pl-lg font-family-secondary">Escritorio</div>
-      <div class="q-container-fuild" v-if="success && $auth.hasAccess('ianalytics.reports.manage')">
+      <div class="q-container-fuild"
+           v-if="success && ($auth.hasAccess('ianalytics.reports.manage') || $auth.hasAccess('marketplace.stores.mystore') )">
          <div class="row">
             <q-card class="rounded-md q-ma-sm" style="width: 100%">
                <div class="bg-light">
@@ -46,6 +47,20 @@
                   </div>
                </div>
             </q-card>
+         </div>
+         <div class="row" v-if="$auth.hasAccess('ianalytics.reports.manage') ">
+            <div class="col-xs-12 col-sm-6">
+               <views-and-pages :startDate="startDate" :endDate="endDate"/>
+            </div>
+            <div class="col-xs-6 col-sm-6">
+               <browser-sessions :startDate="startDate" :endDate="endDate"/>
+            </div>
+            <div class="col-xs-6 col-sm-6">
+               <most-visited-pages :startDate="startDate" :endDate="endDate"/>
+            </div>
+            <div class="col-xs-6 col-sm-4">
+               <device-sessions :startDate="startDate" :endDate="endDate"/>
+            </div>
          </div>
          <div class="row q-col-gutter-md q-my-md" v-if="$auth.hasAccess('marketplace.stores.mystore')">
             <div class="col-xs-12 col-sm-6 col-md-3">
@@ -99,21 +114,19 @@
                </div>
             </div>
          </div>
-         <div class="row">
-            <div class="col-xs-12 col-sm-6">
-               <views-and-pages :startDate="startDate" :endDate="endDate"/>
-            </div>
-            <div class="col-xs-6 col-sm-6">
-               <browser-sessions :startDate="startDate" :endDate="endDate"/>
-            </div>
-            <div class="col-xs-6 col-sm-6">
-               <most-visited-pages :startDate="startDate" :endDate="endDate"/>
-            </div>
-            <div class="col-xs-6 col-sm-4">
-               <device-sessions :startDate="startDate" :endDate="endDate"/>
+      </div>
+      <div class="q-container-fuild" v-else>
+         <div class="row  items-center q-col-gutter-md q-pb-md q-px-md">
+            <div class="col-xs-12 col-sm-12 col-md-auto text-center">
+               <q-card class="my-card">
+                  <q-card-section>
+                     <h4>Bienvenido a el panel adminsitrativo de Dones esta esa vaina</h4>
+                  </q-card-section>
+               </q-card>
             </div>
          </div>
       </div>
+
       <inner-loading :visible="loading"/>
    </q-page>
 </template>
@@ -136,12 +149,23 @@
          browserSessions,
          mostVisitedPages
       },
+      computed: {
+         storeId() {
+            if (this.$route.params.id) {
+               return this.$route.params.id
+            }
+            return this.$store.state.qmarketplaceStores.storeSelected
+         }
+      },
       watch: {
          startDate() {
             this.marketplaceReport()
          },
          endDate() {
             this.marketplaceReport()
+         },
+         storeId() {
+            this.init()
          }
       },
       data() {
@@ -158,11 +182,12 @@
             startDate: this.$moment().format('YYYY-MM-DD'),
             endDate: this.$moment().format('YYYY-MM-DD'),
             today: this.$moment().format('YYYY-MM-DD'),
+            loading: false
          }
       },
       mounted() {
          this.$nextTick(function () {
-            this.init()
+
          })
       },
       methods: {
@@ -173,17 +198,18 @@
             this.month2End = this.$clone(this.$moment(this.month2).add(1, 'month').format('YYYY-MM-DD HH:mm'))
             this.success = true
             this.marketplaceReport()
+
          },
          getDates(initDate, endDate = this.$moment().format('YYYY-MM-DD')) {
             this.startDate = initDate;
             this.endDate = endDate;
          },
          marketplaceReport() {
-            this.loading=true
-            let params = {
+            this.loading = true
+              let params = {
                params: {
                   filter: {
-                     storeId: this.$store.state.qmarketplaceStores.storeSelected,
+                     storeId: this.storeId,
                      startDate: this.startDate,
                      endDate: this.endDate,
                      totalFollowers: true,
@@ -204,7 +230,7 @@
                for (var i = 0; i < totalSold.sold.length; i++) {
                   this.totalSolds += totalSold.sold[i];
                }
-               this.loading=false
+               this.loading = false
             });
          },
       }

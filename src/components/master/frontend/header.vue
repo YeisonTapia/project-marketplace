@@ -293,7 +293,7 @@
          },
          createStore() {
             //Crear Tienda
-            this.$router.push({name: 'qmarketplace.admin.stores.create'});
+            this.$router.push({name: 'qmarketplace.admin.stores.my.store'});
          },
          editStore() {
             //editar Tienda
