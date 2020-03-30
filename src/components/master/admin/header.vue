@@ -240,14 +240,13 @@
                   let params = {
                      params: {
                         filter: {
-                           field: 'user_id',
+                           userId: this.$store.state.quserAuth.userId,
                            status: 1
                         }
                      }
                   };
-                  this.$crud.show("apiRoutes.qsubscription.subscriptions", criteria, params).then(response => {
-                     if (response.data) {
-                        if (response.data.active) {
+                  this.$crud.show("apiRoutes.qsubscription.subscriptions", params).then(response => {
+                     if (response.data.length > 0) {
                            if (!this.storeSelect) {
                               this.canCreateStore = true;
                            }
@@ -258,13 +257,10 @@
                               query: {'storeId': this.storeSelect}
                            })
                         }
-                     } else {
-                        this.$router.push({
-                           name: 'products.show',
-                           params: {slug: 'tiendas-en-linea'},
-                           query: {'storeId': this.storeSelect}
-                        })
-                     }
+                  }).catch(error => {
+                     console.error('[GET PRODUCT] ', error);
+                     //this.$alert.error({message: this.$tr('ui.message.errorRequest'), pos: 'bottom'})
+                     reject(false)//Resolve
                   })
                }//businessRole
             }

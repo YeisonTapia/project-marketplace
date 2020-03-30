@@ -72,9 +72,7 @@
             </q-toolbar-title>
             <widget-user></widget-user>
             <q-btn flat round dense icon="fas fa-heart" :to="{name: 'qmarketplace.account.favorite.stores'}"/>
-            <q-btn icon="fas fa-store" v-if="$auth.hasAccess('marketplace.stores.create')&& storeSelect" flat round dense @click="editStore()"
-                   />
-            <q-btn v-else flat round dense @click="createStore()" icon="fas fa-store"/>
+            <q-btn  flat round dense @click="createStore()" icon="fas fa-store"/>
             <notification/>
          </q-toolbar>
 
@@ -258,7 +256,7 @@
                         }
                      }
                   };
-                  this.$crud.show("apiRoutes.qsubscription.subscriptions", criteria, params).then(response => {
+                  this.$crud.index("apiRoutes.qsubscription.subscriptions", criteria, params).then(response => {
                      if (response.data) {
                         if (response.data.active) {
                            if (!this.storeSelect) {
@@ -293,7 +291,12 @@
          },
          createStore() {
             //Crear Tienda
-            this.$router.push({name: 'qmarketplace.admin.stores.my.store'});
+            if(!this.$auth.hasAccess('marketplace.stores.mystore')){
+                this.$router.push({name: 'products.show', params: {slug: 'tiendas-en-linea'}});
+            }else{
+               this.$router.push({name: 'qmarketplace.admin.stores.my.store'});
+            }
+
          },
          editStore() {
             //editar Tienda

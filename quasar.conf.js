@@ -85,8 +85,8 @@ module.exports = function (ctx) {
       workboxPluginMode: 'InjectManifest',
       workboxOptions: {}, // only for NON InjectManifest
       manifest: {
-        name: 'My APP',
-        short_name: 'My APP',
+        name: 'Donde Esta Esa Vaina',
+        short_name: 'DEEV',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
