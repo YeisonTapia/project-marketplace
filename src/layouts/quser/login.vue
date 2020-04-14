@@ -52,7 +52,7 @@
           var roles=this.$store.state.quserAuth.userData.roles;
           var businessRole=0;
           for (var i=0;i<roles.length;i++){
-            if(roles[i].slug=="business"){
+            if(roles[i].slug=="business" || roles[i].slug=="businessfree" || roles[i].slug=="businessservice" || roles[i].slug=="businessdirectory"){
               //Vendedor
               businessRole=1;
               break;

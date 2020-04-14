@@ -106,12 +106,43 @@
       },
       mounted(){
         if(this.$store.state.quserAuth.userId){
+          this.getSubscription();
           if(this.$store.state.quserAuth.userData.levelCompleted==0){
             this.getBenefits();
           }
         }
       },
       methods:{
+        getSubscription(){
+          /*Get role user autentichated*/
+          var roles=this.$store.state.quserAuth.userData.roles;
+          var businessRole=0;
+          for (var i=0;i<roles.length;i++){
+            if(roles[i].slug=="business"){
+              //Vendedor
+              businessRole=1;
+              break;
+            }//if role business
+          }//for
+          if(businessRole){
+            //Query axios
+            //If doesn't suscription active, redirect to plans
+            let params={
+              params:{
+                filter:{
+                  userId:this.$store.state.quserAuth.userId,
+                  status:1
+                }
+              }
+            };
+            this.$crud.index("apiRoutes.qsubscription.subscriptions",params).then(response => {
+              if(response.data.length==0)
+                this.$router.push({name: 'products.show',params:{slug:'tiendas-en-linea'}});
+            })
+          }//if businessRole
+        },
+
+
         saveBenefits(){
           this.loadind=true;
           for(var i=0;i<this.$store.state.quserAuth.userData.benefits.length;i++){
@@ -156,7 +187,7 @@
           //Request
           this.$crud.show("apiRoutes.qmarketplace.level",this.$store.state.quserAuth.userData.levelId,params).then(response => {
             this.levelData=response.data;
-            console.log(response.data);
+            // console.log(response.data);
             this.showBenefitsModal=true;
           }).catch(error => {
              console.error('Level Error',error);
