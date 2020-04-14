@@ -594,7 +594,7 @@
             for(var i=0;i<response.data[0].plan.features.length;i++){
               //Cantidad de productos visibles en la página principal
               if(response.data[0].plan.features[i].id==12){
-                console.log('entre aca '+response.data[0].plan.features[i].value);
+                // console.log('entre aca '+response.data[0].plan.features[i].value);
                 this.canEnableProductToHome=true;//Puede hacer visible productos para el home.
                 this.quantityProductsToHome=response.data[0].plan.features[i].value;
               }//if
