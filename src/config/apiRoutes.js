@@ -5,7 +5,7 @@ import qmarketplace from 'src/config/api/qmarketplace'
 let responseApiRoutes = {
   ...coreApiRoutes,
   ilocations:ilocations,
-  qmarketplace:qmarketplace,
+  marketplace:qmarketplace,
   //Add here more apiRoutes...
 }
 //Export apiRoutes
