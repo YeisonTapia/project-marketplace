@@ -134,11 +134,23 @@ let responsePages = {
             path: '/account/messages',
             name: 'qform.account.messages',
             layout: () => import('src/layouts/account.vue'),
-            page: () => import('@imagina/qmarketplace/_layouts/admin/chat/index'),
+            page: () => import('src/pages/account/qchat/index'),
             title: 'app.layout.page.myMessages',
             icon: 'apps',
             authenticated: true
         },
+        userConversation: {
+            //permission: 'qform.manage',
+            activated: true,
+            path: '/account/messages/conversation/:id',
+            name: 'app.account.messages.conversation',
+            layout: () => import('src/layouts/account.vue'),
+            page: () => import('src/pages/account/qchat/index'),
+            title: 'app.layout.page.myMessages',
+            icon: 'apps',
+            authenticated: true
+        },
+
         // User Public Profile
         userPublicProfile: {
             permission: 'marketplace.stores.manage',
@@ -383,6 +395,8 @@ responsePages.qticket.tickets.layout= () => import('src/layouts/admin')
 //QCHAT
 responsePages.qchat.messages.path='admin/chat/messages'
 responsePages.qchat.messages.layout = () => import('src/layouts/admin')
+responsePages.qchat.conversation.path='admin/chat/conversation/:id'
+responsePages.qchat.conversation.layout = () => import('src/layouts/admin')
 
 //QNOTIFICATIONS
 responsePages.qnotification.notifications.path='admin/notifications'
