@@ -268,13 +268,13 @@ export default {
         }
       }).then(response => {
         this.$alert.success({message: "Calificación registrada exitosamente", pos: 'bottom'});
-        this.getOrder();
         this.ratingStore=false;
       }).catch(error => {
         this.$alert.error({message: error.response.data.errors, pos: 'bottom'})
       });
     },//ratingStore
     commentStore(){
+      console.log(this.order);
       if(this.comment!=""){
         this.$axios.post(config('apiRoutes.icomments.comments'),{
           attributes:{
@@ -292,6 +292,7 @@ export default {
         }).catch(error => {
           this.$alert.error({message: error.response.data.errors, pos: 'bottom'})
         });
+        this.ratingStore=false;
       }
     },//comment
     getOrder () {
