@@ -176,8 +176,32 @@
               </q-card>
             </q-dialog>
 
+            <!-- RATING STORE QDIALOG -->
+            <q-dialog v-model="ratingStore" @hide="ratingStore=false">
+               <q-card>
+                  <q-card-section>
+                     <div class="text-h6">¿Qué te ha parecido la tienda {{order.storeName}}?</div>
+                  </q-card-section>
 
+                  <q-card-section class="text-center">
+                    <div class="input-title">Calificación</div>
 
+                     <q-rating size="20px"
+                               v-model="ratingValue"
+                               :max="5"
+                     />
+
+                     <q-input class="q-mt-sm" v-model="comment" outlined dense
+                              label="Comentario" placeholder=""/>
+
+                  </q-card-section>
+
+                  <q-card-actions align="right">
+                     <q-btn @click="rating();commentStore();" flat label="OK" color="primary" />
+                     <q-btn flat label="Calificar más tarde" color="secondary" v-close-popup/>
+                  </q-card-actions>
+               </q-card>
+            </q-dialog>
 
     <inner-loading :visible="loading"/>
   </div>
@@ -197,6 +221,9 @@ export default {
     return {
       loading: false,
       modal: false,
+      ratingStore:false,
+      comment:"",
+      ratingValue:1,
       order : {
         customer: {
           fullName: ''
@@ -226,22 +253,62 @@ export default {
     }
   },
   created() {
-    this.getOrder()
+    this.getOrder();
+    /*
+    console.log(this.$store.state.quserAuth);
+    */
+    this.ratingStore=true;
   },
   methods:{
+    rating(){
+      console.log(this.order);
+      this.$axios.post(config('apiRoutes.marketplace.store')+'/rating/'+this.order.store.id,{
+        attributes:{
+          rating:this.ratingValue,
+        }
+      }).then(response => {
+        this.$alert.success({message: "Calificación registrada exitosamente", pos: 'bottom'});
+        this.getOrder();
+        this.ratingStore=false;
+      }).catch(error => {
+        this.$alert.error({message: error.response.data.errors, pos: 'bottom'})
+      });
+    },//ratingStore
+    commentStore(){
+      if(this.comment!=""){
+        this.$axios.post(config('apiRoutes.icomments.comments'),{
+          attributes:{
+            comment:this.comment,
+            commentable_id:this.order.store.id,
+            commentable_type:"Modules\\Marketplace\\Entities\\Store"
+          }
+        },{
+          headers:{
+            Authorization:this.$store.state.quserAuth.userToken
+          }
+        }).then(response => {
+          this.comment="";
+          this.$alert.success({message: "Comentario almacenado exitosamente", pos: 'bottom'});
+        }).catch(error => {
+          this.$alert.error({message: error.response.data.errors, pos: 'bottom'})
+        });
+      }
+    },//comment
     getOrder () {
       this.loading = true
       let params = {
         params :{
           filter:{
             key:this.$route.query.key
-          }
+          },
+          includes:'store'
         }
       }
       let criteria = this.$route.params.id
       this.$crud.show('apiRoutes.qcommerce.orders', criteria , params)
       .then( response => {
-        this.order = response.data
+        this.order = response.data;
+        console.log(this.order);
         this.loading = false
       })
       .catch( error => {
