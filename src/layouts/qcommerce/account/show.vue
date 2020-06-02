@@ -198,9 +198,9 @@
                   <q-card-section >
                     <div class="input-title q-my-sm text-center">Comentarios</div>
 
-                    <div class="input-title q-my-sm" v-for="comment in comments">
+                    <div class="input-title q-my-sm" v-if="comments.length>0" v-for="comentary in comments">
                       <p class="caption q-mb-md">
-                        {{comment.user.fullName}}: {{comment.comment}}
+                        {{comentary.user.fullName}}: {{comentary.comment}}
                       </p>
                     </div>
 
@@ -235,6 +235,7 @@ export default {
       comment:"",
       ratingValue:1,
       comments:[],
+      storeId:null,
       order : {
         customer: {
           fullName: ''
@@ -265,15 +266,10 @@ export default {
   },
   created() {
     this.getOrder();
-    /*
-    console.log(this.$store.state.quserAuth);
-    */
-    this.ratingStore=true;
   },
   methods:{
     rating(){
-      console.log(this.order);
-      this.$axios.post(config('apiRoutes.marketplace.store')+'/rating/'+this.order.store.id,{
+      this.$axios.post(config('apiRoutes.marketplace.store')+'/rating/'+this.storeId,{
         attributes:{
           rating:this.ratingValue,
         }
@@ -285,12 +281,11 @@ export default {
       });
     },//ratingStore
     commentStore(){
-      console.log(this.order);
       if(this.comment!=""){
         this.$axios.post(config('apiRoutes.icomments.comments'),{
           attributes:{
             comment:this.comment,
-            commentable_id:this.order.store.id,
+            commentable_id:this.storeId,
             commentable_type:"Modules\\Marketplace\\Entities\\Store"
           }
         },{
@@ -310,7 +305,7 @@ export default {
       this.$axios.get(config('apiRoutes.icomments.comments'),{
         params:{
           filters:{
-            commentableId:this.order.store.id,
+            commentableId:this.storeId,
             commentableType:"Modules\\Marketplace\\Entities\\Store",
             order:{
               field:'created_at',
@@ -320,9 +315,7 @@ export default {
           }
         }
       }).then(response => {
-        console.log('comments');
         this.comments=response.data;
-        console.log(response.data);
       }).catch(error => {
         this.$alert.error({message: error.response.data.errors, pos: 'bottom'})
       });
@@ -341,6 +334,8 @@ export default {
       this.$crud.show('apiRoutes.qcommerce.orders', criteria , params)
       .then( response => {
         this.order = response.data;
+        this.storeId=response.data.order.store.id;
+        this.ratingStore=true;
         this.getCommentsOfStore();
         this.loading = false
       })
