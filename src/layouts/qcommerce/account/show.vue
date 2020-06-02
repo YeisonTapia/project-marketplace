@@ -266,6 +266,7 @@ export default {
   },
   created() {
     this.getOrder();
+    this.ratingStore=true;
   },
   methods:{
     rating(){
@@ -334,8 +335,7 @@ export default {
       this.$crud.show('apiRoutes.qcommerce.orders', criteria , params)
       .then( response => {
         this.order = response.data;
-        this.storeId=response.data.order.store.id;
-        this.ratingStore=true;
+        this.storeId=response.data.store.id;
         this.getCommentsOfStore();
         this.loading = false
       })
