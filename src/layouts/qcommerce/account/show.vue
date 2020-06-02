@@ -195,6 +195,16 @@
                               label="Comentario" placeholder=""/>
 
                   </q-card-section>
+                  <q-card-section >
+                    <div class="input-title q-my-sm text-center">Comentarios</div>
+
+                    <div class="input-title q-my-sm" v-for="comment in comments">
+                      <p class="caption q-mb-md">
+                        {{comment.user.fullName}}: {{comment.comment}}
+                      </p>
+                    </div>
+
+                  </q-card-section>
 
                   <q-card-actions align="right">
                      <q-btn @click="rating();commentStore();" flat label="OK" color="primary" />
@@ -224,6 +234,7 @@ export default {
       ratingStore:false,
       comment:"",
       ratingValue:1,
+      comments:[],
       order : {
         customer: {
           fullName: ''
@@ -295,6 +306,27 @@ export default {
         this.ratingStore=false;
       }
     },//comment
+    getCommentsOfStore(){
+      this.$axios.get(config('apiRoutes.icomments.comments'),{
+        params:{
+          filters:{
+            commentableId:this.order.store.id,
+            commentableType:"Modules\\Marketplace\\Entities\\Store",
+            order:{
+              field:'created_at',
+              way:'desc',
+            },
+            take:8
+          }
+        }
+      }).then(response => {
+        console.log('comments');
+        this.comments=response.data;
+        console.log(response.data);
+      }).catch(error => {
+        this.$alert.error({message: error.response.data.errors, pos: 'bottom'})
+      });
+    },
     getOrder () {
       this.loading = true
       let params = {
@@ -309,7 +341,7 @@ export default {
       this.$crud.show('apiRoutes.qcommerce.orders', criteria , params)
       .then( response => {
         this.order = response.data;
-        console.log(this.order);
+        this.getCommentsOfStore();
         this.loading = false
       })
       .catch( error => {
