@@ -360,6 +360,8 @@
 
                 this.$crud.create('apiRoutes.qquiz.userQuestionAnswers', data).then(response => {
                   //console.warn("SAVE USER QUESTION ANSWER")
+
+
                 }).catch(error => {
                   console.error('[CREATE USER QUESTION ANSWERS] ', error)
                   //this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})
@@ -399,6 +401,18 @@
             }
             this.$crud.create('apiRoutes.qquiz.userPolls', data).then(response => {
               this.loading = false
+              this.$q.dialog({
+                title: 'Encuesta realizada usted a ganado 5 puntos!',
+                color: 'positive',
+                ok: 'Ir a Mis Puntos',
+                cancel: 'Continuar'
+              }).onOk(() => {
+                this.$router.push({name: 'qredeems.account.points'})
+              }).onCancel(() => {
+                this.init()
+                this.loading = false
+              })
+
             }).catch(error => {
               console.error('[CREATE USER POLLS] ', error)
              // this.$alert.error({message: this.$tr('ui.message.recordNoUpdated')})

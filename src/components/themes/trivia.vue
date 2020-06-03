@@ -259,7 +259,6 @@ export default {
         this.resultsTrivia = response.data[0]
         console.warn('[TRIVIA - CREATE USER TRIVIAS]')
         this.showResults = true
-
         this.loading = false
       }).catch(error => {
         console.error('[TRIVIA - CREATE USER TRIVIAS] ', error)
@@ -270,7 +269,6 @@ export default {
     // Save Data Questions and Answers
     saveUserQuestionsAnswers(){
       this.finalDataSave.forEach((data, index) => {
-
           this.$crud.create('apiRoutes.qtrivia.userQuestionAnswers', data).then(response => {
             console.warn("TRIVIA - SAVE USER QUESTION ANSWER")
           }).catch(error => {

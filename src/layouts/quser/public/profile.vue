@@ -524,6 +524,8 @@
         this.$crud.show('apiRoutes.quser.users',criteria,params).then(response => {
             this.userGetData = response.data
             this.setUserData() // Set Data
+
+
         }).catch(error => {
             console.error('[GET USER DATA] ', error)
         })

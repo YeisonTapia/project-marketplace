@@ -533,7 +533,7 @@
     mounted () {
       this.$nextTick(function () {
         this.initForm(),
-        console.log(this.$store.state.qmarketplaceStores.storeSelected);
+        //console.log(this.$store.state.qmarketplaceStores.storeSelected);
 
 
 
@@ -737,9 +737,9 @@
         });
       },
       validateProductsVisibleOfStore(){
-        console.log('enter here asdadadada');
+       // console.log('enter here asdadadada');
         if(this.canEnableProductToHome){
-          console.log('asdaxdd');
+        //  console.log('asdaxdd');
           //Axios products visible of store
           this.$crud.index("apiRoutes.qcommerce.products",{
             params:{

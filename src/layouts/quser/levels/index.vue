@@ -25,21 +25,21 @@
                            </q-item>
                         </q-list>
                      </div>
-                     <hr/>
                      <div v-if="success">
-                        <pre>{{level}}</pre>
-                        <div class="text-h6 q-mb-lg">
+                        <h5 class="title-label-profile font-family-secondary  q-mb-lg">
                            Siguiente nivel
-                        </div>
+                        </h5>
+
                         <div class="text-h6 text-primary q-mb-lg">
                            Nivel - {{level.name}}
                         </div>
-                       <div v-if="level.options.criteria">
+                        <div class=" q-mb-lg" v-html="level.description"></div>
+                       <div v-if="level.options.criterias">
                            <div v-for="(item,i) in level.options.criterias" :key="i">
                               <div class=" q-mb-lg" v-html="item.description"></div>
                               <q-card-section class="q-py-xs">
                                  <div class="q-mt-xs">
-                                    <q-chip color="tertiary" text-color="white">{{item.label}}: {{item.value}}</q-chip>
+                                    <q-chip color="tertiary" text-color="white">{{item.name}}: {{item.value}}</q-chip>
                                  </div>
                               </q-card-section>
                            </div>

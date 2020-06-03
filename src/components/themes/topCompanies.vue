@@ -51,7 +51,7 @@
             this.$crud.index("apiRoutes.qmarketplace.store", {
                params: {
                   filter: {
-                     ranting: 'top'
+                     rating: 'top'
                   },
                   include: 'categories',
                   take: 5
