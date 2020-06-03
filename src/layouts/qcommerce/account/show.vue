@@ -204,7 +204,7 @@
               />
 
               <q-input class="q-mt-sm" v-model="comment" outlined dense
-              label="Comentario" placeholder=""/>
+              label="Comentario" type="textarea"/>
 
             </q-card-section>
 
