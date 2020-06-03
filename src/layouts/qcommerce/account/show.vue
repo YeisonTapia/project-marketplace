@@ -194,7 +194,9 @@
                 </q-card-section>
 
                 <q-card-section class="text-center">
-                    <div class="input-title">Calificación</div>
+                    <div class="input-title">
+                      <h5>Calificación</h5>
+                    </div>
 
                     <q-rating size="20px"
                               v-model="ratingValue"
@@ -203,111 +205,7 @@
 
                     <q-input class="q-mt-sm" v-model="comment" outlined dense
                              label="Comentario" placeholder=""/>
-                    <q-btn @click="getOrder();" flat label="OK" color="primary"/>
-
-                </q-card-section>
-                <q-card-section>
-                    <div class="input-title q-my-sm text-center" v-if="comments.length>0">Comentarios</div>
-
-                    <ul id="comments-list" class="comments-list">
-                        <li>
-                            <div class="comment-main-level">
-                                <!-- Avatar -->
-                                <div class="comment-avatar"><img
-                                        src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg"
-                                        alt=""></div>
-                                <!-- Contenedor del Comentario -->
-                                <div class="comment-box">
-                                    <div class="comment-head">
-                                        <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Agustin
-                                            Ortiz</a></h6>
-                                        <span>hace 20 minutos</span>
-                                        <i class="fa fa-reply"></i>
-                                        <i class="fa fa-heart"></i>
-                                    </div>
-                                    <div class="comment-content">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et
-                                        iure laudantium vitae, praesentium optio, sapiente distinctio illo?
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Respuestas de los comentarios -->
-                            <ul class="comments-list reply-list">
-                                <li>
-                                    <!-- Avatar -->
-                                    <div class="comment-avatar"><img
-                                            src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg"
-                                            alt=""></div>
-                                    <!-- Contenedor del Comentario -->
-                                    <div class="comment-box">
-                                        <div class="comment-head">
-                                            <h6 class="comment-name"><a href="http://creaticode.com/blog">Lorena
-                                                Rojero</a></h6>
-                                            <span>hace 10 minutos</span>
-                                            <i class="fa fa-reply"></i>
-                                            <i class="fa fa-heart"></i>
-                                        </div>
-                                        <div class="comment-content">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi
-                                            et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <!-- Avatar -->
-                                    <div class="comment-avatar"><img
-                                            src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg"
-                                            alt=""></div>
-                                    <!-- Contenedor del Comentario -->
-                                    <div class="comment-box">
-                                        <div class="comment-head">
-                                            <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Agustin
-                                                Ortiz</a></h6>
-                                            <span>hace 10 minutos</span>
-                                            <i class="fa fa-reply"></i>
-                                            <i class="fa fa-heart"></i>
-                                        </div>
-                                        <div class="comment-content">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi
-                                            et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            <div class="comment-main-level">
-                                <!-- Avatar -->
-                                <div class="comment-avatar"><img
-                                        src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg"
-                                        alt=""></div>
-                                <!-- Contenedor del Comentario -->
-                                <div class="comment-box">
-                                    <div class="comment-head">
-                                        <h6 class="comment-name"><a href="http://creaticode.com/blog">Lorena Rojero</a>
-                                        </h6>
-                                        <span>hace 10 minutos</span>
-                                        <i class="fa fa-reply"></i>
-                                        <i class="fa fa-heart"></i>
-                                    </div>
-                                    <div class="comment-content">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et
-                                        iure laudantium vitae, praesentium optio, sapiente distinctio illo?
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-
-                    <!-- Comments -->
-
-                    <div class="input-title q-my-sm" v-for="comentary in comments">
-                        <p class="caption q-mb-md">
-                            {{comentary.user.fullName}}: {{comentary.comment}}
-                        </p>
-                    </div>
+                    <!-- <q-btn @click="getOrder();" flat label="OK" color="primary"/> -->
 
                 </q-card-section>
 
@@ -315,6 +213,111 @@
                     <q-btn @click="rating();commentStore();" flat label="OK" color="primary"/>
                     <q-btn flat label="Calificar más tarde" color="secondary" v-close-popup/>
                 </q-card-actions>
+
+                <q-card-section>
+                  <div class="input-title q-my-sm text-center" v-if="comments.length>0">
+                    <h5>Comentarios</h5>
+                  </div>
+
+                  <ul id="comments-list" class="comments-list" v-if="comments.length>0">
+                    <li v-for="comentary in comments">
+                      <div class="comment-main-level">
+                        <!-- Avatar -->
+                        <div class="comment-avatar"><img
+                          :src="comentary.user.smallImage"
+                          alt=""></div>
+                          <!-- Contenedor del Comentario -->
+                          <div class="comment-box">
+                            <div class="comment-head">
+                              <h6 class="comment-name">
+                                <a href="#">
+                                  {{comentary.user.fullName}}
+                                </a>
+                              </h6>
+                              <span>{{comentary.diffTime}}</span>
+                              <!-- <i class="fa fa-reply"></i> -->
+                              <!-- <i class="fa fa-heart"></i> -->
+                            </div>
+                            <div class="comment-content">
+                              {{comentary.comment}}
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Respuestas de los comentarios -->
+                        <!-- <ul class="comments-list reply-list">
+                        <li>
+                        <div class="comment-avatar"><img
+                        src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg"
+                        alt=""></div>
+                        <div class="comment-box">
+                        <div class="comment-head">
+                        <h6 class="comment-name"><a href="http://creaticode.com/blog">Lorena
+                        Rojero</a></h6>
+                        <span>hace 10 minutos</span>
+                        <i class="fa fa-reply"></i>
+                        <i class="fa fa-heart"></i>
+                      </div>
+                      <div class="comment-content">
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi
+                      et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+                    </div>
+                  </div>
+                </li>
+
+                <li>
+
+                <div class="comment-avatar"><img
+                src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg"
+                alt=""></div>
+
+                <div class="comment-box">
+                <div class="comment-head">
+                <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Agustin
+                Ortiz</a></h6>
+                <span>hace 10 minutos</span>
+                <i class="fa fa-reply"></i>
+                <i class="fa fa-heart"></i>
+              </div>
+              <div class="comment-content">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi
+              et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+            </div>
+          </div>
+        </li>
+      </ul> -->
+    </li>
+
+    <!-- <li>
+    <div class="comment-main-level">
+    <div class="comment-avatar"><img
+    src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg"
+    alt=""></div>
+    <div class="comment-box">
+    <div class="comment-head">
+    <h6 class="comment-name"><a href="http://creaticode.com/blog">Lorena Rojero</a>
+  </h6>
+  <span>hace 10 minutos</span>
+  <i class="fa fa-reply"></i>
+  <i class="fa fa-heart"></i>
+</div>
+<div class="comment-content">
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et
+  iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+</div>
+</div>
+</div>
+</li> -->
+</ul>
+
+<!-- Comments -->
+<!--
+  <div class="input-title q-my-sm" v-for="comentary in comments">
+    <p class="caption q-mb-md">
+      {{comentary.user.fullName}}: {{comentary.comment}}
+    </p>
+  </div> -->
+
+</q-card-section>
             </q-card>
         </q-dialog>
 
@@ -402,10 +405,11 @@
                     }).then(response => {
                         this.comment = "";
                         this.$alert.success({message: "Comentario almacenado exitosamente", pos: 'bottom'});
+                        this.ratingStore = false;
+                        this.getOrder();
                     }).catch(error => {
                         this.$alert.error({message: error.response.data.errors, pos: 'bottom'})
                     });
-                    this.ratingStore = false;
                 }
             },//comment
             getCommentsOfStore() {
