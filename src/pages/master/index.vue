@@ -62,6 +62,37 @@
             </q-card>
         </q-dialog>
 
+        <q-dialog v-model="showBirthdayModal" persistent>
+            <q-card
+                    style="background-image:url('/statics/img/congrats7.jpg'); background-size:cover; background-repeat:no-repeat;background-position:center center; ">
+                <q-card-section class="row items-center">
+                    <div class="q-container">
+                        <div class="row">
+
+                            <div class="col-12 text-center">
+                                <div class="text-h5 text-primary q-mb-md font-family-secondary q-pt-md">¡Feliz cumpleaños!
+                                   Te desea el equipo de Donde Esta Esa Vaina
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="caption">
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </q-card-section>
+                <q-card-actions align="right">
+                    <q-btn flat label="Cerrar" v-close-popup color="primary"/>
+                </q-card-actions>
+            </q-card>
+        </q-dialog>
+
     </q-page>
 </template>
 
@@ -95,6 +126,7 @@
             return {
                 loading: false,
                 showBenefitsModal: false,
+                showBirthdayModal: false,
                 levelData: null,
                 benefits: [],
                 benefitsUser: []
@@ -103,13 +135,54 @@
         mounted() {
             if (this.$store.state.quserAuth.userId) {
                 this.getSubscription();
-                console.error('dsfdsfsdfsdf',this.$store.state.quserAuth.userData.benefits)
+                // console.error('dsfdsfsdfsdf',this.$store.state.quserAuth.userData.benefits)
                 if (this.$store.state.quserAuth.userData.levelCompleted == 0) {
                     this.getBenefits();
                 }
+                this.validateBirthday();
             }
         },
         methods: {
+          isToday(dateParameter) {
+            var today = new Date();
+            return dateParameter.getDate() === today.getDate() && dateParameter.getMonth() === today.getMonth() && dateParameter.getFullYear() === today.getFullYear();
+          },
+          validateBirthday(){
+            let fields=this.$store.state.quserAuth.userData.fields;
+            let birthday=null;
+            for(var i=0;i<fields.length;i++){
+              if(fields[i].name=="birthday"){
+                birthday=fields[i].value;
+                break;
+              }
+            }//
+            //Validate:
+            birthday=new Date(birthday);
+            if(this.isToday(birthday)){
+              var today = new Date();
+              //Birthday today open dialog:
+              var lastBirthday=localStorage.getItem("lastBirthday");
+              if(lastBirthday==null){
+                this.showBirthdayModal=true;
+                localStorage.setItem("lastBirthday", JSON.stringify({
+                  "year":today.getFullYear(),
+                  "status":true
+                }));
+              }else{
+                lastBirthday=JSON.parse(lastBirthday);
+                if(lastBirthday.year==today.getFullYear() && lastBirthday.status){
+                  //Nothing
+                }else {
+                  this.showBirthdayModal=true;
+                  localStorage.setItem("lastBirthday", JSON.stringify({
+                    "year":today.getFullYear(),
+                    "status":true
+                  }));
+
+                }
+              }
+            }
+          },
             getSubscription() {
                 /*Get role user autentichated*/
                 var roles = this.$store.state.quserAuth.userData.roles;
