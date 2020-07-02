@@ -20,6 +20,7 @@
     import frontendHeader from 'src/components/master/frontend/header'
     import frontendFooter from 'src/components/master/frontend/footer'
     import configApp from 'src/config/app'
+
     export default {
         preFetch({store}) {
             return new Promise(async resolve => {
@@ -52,25 +53,32 @@
                 link: [{rel: 'icon', href: iconHref, id: 'icon'}],
             }
         },
+        watch: {
+            '$route': {
+                deep: true,
+                handler: function (newValue) {
+                    console.warn('>>>>Rote name:', newValue.name)
+                }
+            }
+        },
         components: {
             frontendHeader,
             frontendFooter
         },
-        mounted () {
+        mounted() {
             this.$nextTick(async function () {
             })
         },
-        data () {
-            return {
-            }
+        data() {
+            return {}
         },
         computed: {
-            appState () {
+            appState() {
                 return this.$store.state.app
             }
         },
         methods: {
-            async refreshPage(done){
+            async refreshPage(done) {
                 await this.$store.dispatch('app/REFRESH_PAGE')
                 done()
             }

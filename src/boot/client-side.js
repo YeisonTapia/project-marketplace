@@ -21,7 +21,8 @@ export default async ({app, router, store, Vue}) => {
       Vue.use(item.component)
       Vue.component(item.name, item.component)
    })
-   document.addEventListener('deviceready', () => {
+
+   /*document.addEventListener('deviceready', () => {
       document.addEventListener('backbutton', () => {
          if (this.__history.length) {
             this.__history.pop().handler()
@@ -31,6 +32,6 @@ export default async ({app, router, store, Vue}) => {
             window.history.back()
          }
       }, false)
-   })
+   })*/
 }
 

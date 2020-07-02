@@ -19,3 +19,9 @@
 !/.babelrc
 !/.postcssrc.js
 !/babel.config.js
+
+
+#node_modules
+!/node_modules
+/node_modules/*
+!/node_modules/@imagina

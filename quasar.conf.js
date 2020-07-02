@@ -36,7 +36,13 @@ module.exports = function (ctx) {
       // iconSet: 'ionicons-v4',
       // lang: 'de', // Quasar language
       all: true, // --- includes everything; for dev only!
-      cssAddon: true
+      cssAddon: true,
+      cordova: {
+        backButtonExit: true
+      },
+      directives: [
+        'GoBack'
+      ]
     },
 
     supportIE: false,
@@ -44,13 +50,14 @@ module.exports = function (ctx) {
     build: {
       scopeHoisting: true,
       env: envparser(),
-      // vueRouterMode: 'history',
+       //vueRouterMode: 'hash',
       // vueCompiler: true,
       // gzip: true,
       // analyze: true,
       // extractCSS: false,
       extendWebpack (cfg) {
         // Make our helper function Global, for example to use it in js files you should call it env('MY_VALUE')
+        console.warn(cfg)
         cfg.plugins.push(
           new webpack.ProvidePlugin({
             env: [path.resolve(__dirname, 'env/env'), 'default'],
@@ -90,7 +97,7 @@ module.exports = function (ctx) {
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
-        theme_color: '#027be3',
+        theme_color: '#fd2d5e',
         serviceWorker: {
           src: "service-worker.js",
           scope: "/",
@@ -132,6 +139,7 @@ module.exports = function (ctx) {
     cordova: {
       // id: 'org.cordova.quasar.app',
       // noIosLegacyBuildFlag: true, // uncomment only if you know what you are doing
+      //backButtonExit: false
     },
 
     electron: {
@@ -157,7 +165,6 @@ module.exports = function (ctx) {
 
       builder: {
         // https://www.electron.build/configuration/configuration
-
         // appId: 'front-end-v1'
       }
     }

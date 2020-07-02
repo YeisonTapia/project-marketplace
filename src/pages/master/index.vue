@@ -19,8 +19,12 @@
         <featured-products></featured-products>
 
         <q-dialog v-model="showBenefitsModal" persistent>
-            <q-card v-if="levelData"
-                    style="background-image:url('/statics/img/congrats7.jpg'); background-size:cover; background-repeat:no-repeat;background-position:center center; ">
+
+            <q-card style=" width: 100%;  max-width: 500px" v-if="levelData">
+                <video  width="100%" autoplay loop>
+                    <source src="statics/img/nivel.mp4" type="video/mp4">
+                </video>
+
                 <q-card-section class="row items-center">
                     <div class="q-container">
                         <div class="row">
@@ -54,7 +58,6 @@
 
                         </div>
                     </div>
-
                 </q-card-section>
                 <q-card-actions align="right">
                     <q-btn :loading="loading" flat label="Confirmar" @click="saveBenefits()" color="primary"/>
@@ -63,30 +66,10 @@
         </q-dialog>
 
         <q-dialog v-model="showBirthdayModal" persistent>
-            <q-card
-                    style="background-image:url('/statics/img/congrats7.jpg'); background-size:cover; background-repeat:no-repeat;background-position:center center; ">
-                <q-card-section class="row items-center">
-                    <div class="q-container">
-                        <div class="row">
-
-                            <div class="col-12 text-center">
-                                <div class="text-h5 text-primary q-mb-md font-family-secondary q-pt-md">¡Feliz cumpleaños!
-                                   Te desea el equipo de Donde Esta Esa Vaina
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="caption">
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </q-card-section>
+            <q-card style=" width: 100%;  max-width: 500px">
+                <video  width="100%" autoplay loop>
+                    <source src="statics/img/cumple.mp4" type="video/mp4">
+                </video>
                 <q-card-actions align="right">
                     <q-btn flat label="Cerrar" v-close-popup color="primary"/>
                 </q-card-actions>
@@ -125,9 +108,9 @@
         data() {
             return {
                 loading: false,
-                showBenefitsModal: false,
+                showBenefitsModal: null,
                 showBirthdayModal: false,
-                levelData: null,
+                levelData: true,
                 benefits: [],
                 benefitsUser: []
             }
