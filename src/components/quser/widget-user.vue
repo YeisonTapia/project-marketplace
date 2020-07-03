@@ -1,6 +1,6 @@
 <template>
   <div class="q-inline-block widget-user">
-    <q-btn-dropdown class="q-pa-none" round dense flat no-caps icon="fas fa-user-alt" dropdown-icon="fa" v-if="userData">
+    <q-btn-dropdown class="q-pa-none" round dense flat no-caps icon="fas fa-user-alt" size="sm" dropdown-icon="fa" v-if="userData">
       <q-list class="bg-light">
 
         <!--  :to="{name: 'user.profile.me'}" -->
@@ -25,7 +25,9 @@
 
       </q-list>
     </q-btn-dropdown>
-    <q-btn v-else class="q-pa-none" round flat icon="fas fa-user-alt" :to="{name:'auth.login'}" />
+	  <q-btn v-else class="q-pa-none" round flat  :to="{name:'auth.login'}" >
+		  <q-icon size="sm" name="fas fa-user-alt" />
+	  </q-btn>
     <!--
     <q-btn v-else class="q-pa-none" round @click="opened = !opened" flat icon="fas fa-user-alt" />
     <modalInicial :opened="opened"  @opened ="opened = $event"></modalInicial>
