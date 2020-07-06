@@ -17,15 +17,15 @@
                     <q-card-section class="q-pa-lg">
                         <div class="row">
                             <div class="col-md-3">
-                                <div class="text-bold">{{$tr('qcommerce.layout.orderStatus')}}</div>
+                                <div class="text-bold">{{$tr('qcommerce.layout.orderStatus')}}: </div>
                             </div>
                             <div class="col-md-9">
-                                {{order.statusName}}
+                                 {{ order.statusName}}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3">
-                                <div class="text-bold">{{$tr('qcommerce.layout.orderDate')}}</div>
+                                <div class="text-bold">{{$tr('qcommerce.layout.orderDate')}}: </div>
                             </div>
                             <div class="col-md-9">{{(order.createdAt)}}</div>
                         </div>
@@ -58,8 +58,8 @@
                             <div class="col-md-6">
                                 {{order.storeName}}
                             </div>
-                            <div class="col-md-3">
-                                <q-btn @click="ratingStore=true;" label="Calificar tienda" color="primary"/>
+                            <div class="col-md-3 col-xs-12 flex flex-center q-my-md" v-if="order.statusId == 4">
+                                <q-btn @click="ratingStore=true;" label="Calificar tienda" color="primary" v-if="order.statusId == 4"/>
                             </div>
                         </div>
                         <div class="row">
@@ -189,64 +189,47 @@
         <!-- RATING STORE QDIALOG -->
         <q-dialog v-model="ratingStore" @hide="ratingStore=false">
           <q-card>
-            <q-card-section>
-              <div class="text-h6">¿Qué te ha parecido la tienda {{order.storeName}}?</div>
-            </q-card-section>
-
             <q-card-section class="text-center">
-              <div class="input-title">
-                <h5>Calificación</h5>
+	            <div class="text-h5">CALIFICACIÓN</div>
+            </q-card-section>
+
+            <q-card-section >
+	            <div class="text-body2">¿Qué te ha parecido la tienda <b>{{order.storeName}}</b>?</div>
+
+              <div class="flex flex-center">
+	              <q-rating size="40px"
+                  v-model="ratingValue"
+                  :max="5"
+	              />
               </div>
-
-              <q-rating size="20px"
-              v-model="ratingValue"
-              :max="5"
-              />
-
-              <q-input class="q-mt-sm" v-model="comment" outlined dense
-              label="Comentario" type="textarea"/>
+	
+	            <q-input autofocus class="q-mt-sm" v-model="comment" outlined dense
+	                     label="Comentario" type="textarea"/>
 
             </q-card-section>
 
-            <q-card-actions align="right">
-              <q-btn @click="rating();commentStore();" flat label="OK" color="primary"/>
-              <q-btn flat label="Calificar más tarde" color="secondary" v-close-popup/>
+            <q-card-actions align="right" style="border-bottom: 1px solid #f2f2f2" class="q-mx-sm q-pb-lg">
+              <q-btn @click="rating();commentStore();" label="OK" color="primary"/>
+              <q-btn label="Calificar más tarde" outline color="secondary" v-close-popup/>
             </q-card-actions>
+	
+	          <!--comentarios-->
+	          <q-card-section class="text-center">
+		          <div class="text-h6">COMENTARIOS</div>
+	          </q-card-section>
 
             <q-card-section>
-              <div class="input-title q-my-sm text-center" v-if="comments.length>0">
-                <h5>Comentarios</h5>
-              </div>
-
-              <ul id="comments-list" class="comments-list" v-if="comments.length>0">
-                <li v-for="comentary in comments">
-                  <div class="comment-main-level">
-                    <!-- Avatar -->
-                    <div class="comment-avatar"><img
-                      :src="comentary.user.smallImage"
-                      alt=""></div>
-                      <!-- Contenedor del Comentario -->
-                      <div class="comment-box">
-                        <div class="comment-head">
-                          <h6 class="comment-name">
-                            <a href="#">
-                              {{comentary.user.fullName}}
-                            </a>
-                          </h6>
-                          <span>{{comentary.diffTime}}</span>
-                        </div>
-                        <div class="comment-content">
-                          {{comentary.comment}}
-                        </div>
-                      </div>
-                    </div>
-
-                  </li>
-
-                </ul>
-
-
-
+	            <div v-if="comments.length>0">
+		            <q-chat-message
+				            text-color="white"
+				            bg-color="primary"
+				            v-for="(comentary, key) in comments"
+				            :key="key"
+				            :name="comentary.user.fullName"
+				            :avatar="comentary.user.smallImage"
+				            :text="[comentary.comment]"
+				            :stamp="comentary.diffTime"/>
+	            </div>
               </q-card-section>
             </q-card>
           </q-dialog>
@@ -305,7 +288,6 @@
         },
         created() {
             this.getOrder();
-            this.ratingStore = true;
         },
         methods: {
             rating() {
@@ -378,6 +360,9 @@
                         this.storeId = response.data.store.id;
                         this.getCommentsOfStore();
                         this.loading = false
+		                    if(this.order.statusId == 4){
+	                        this.ratingStore = true;
+		                    }
                     })
                     .catch(error => {
                         this.loading = false
