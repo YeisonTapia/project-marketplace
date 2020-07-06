@@ -71,8 +71,8 @@
                </div>
             </q-toolbar-title>
             <widget-user></widget-user>
-            <q-btn flat round dense icon="fas fa-heart" :to="{name: 'qmarketplace.account.favorite.stores'}"/>
-            <q-btn  flat round dense @click="createStore()" icon="fas fa-store"/>
+            <q-btn flat round size="sm" class="q-ml-md" dense icon="fas fa-heart" :to="{name: 'qmarketplace.account.favorite.stores'}"/>
+            <q-btn  flat round size="sm" class="q-ml-md" dense @click="createStore()" icon="fas fa-store"/>
             <notification/>
          </q-toolbar>
 
