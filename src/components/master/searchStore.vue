@@ -15,6 +15,7 @@
             <q-select
                     outlined
                     dense
+                    placeholder="Barrio"
                     class="select-neighborhood"
                     v-model="search.neighborhood"
                     :options="neigOption"
@@ -46,15 +47,21 @@
                     placeholder="Busca tu vaina aquí..."
                     @keydown.enter="searchReedirect()"/>
 
-            <q-select
-                    rounded
-                    outlined
-                    dense
-                    clearable
-                    class="select-neighborhood q-mb-sm"
-                    v-model="search.neighborhood"
-                    :options="neighborhoodOptions"
-            />
+
+	
+	         <q-select
+					         rounded
+					         outlined
+					         dense
+					         placeholder="Barrio"
+					         class="select-neighborhood q-mb-sm"
+					         v-model="search.neighborhood"
+					         :options="neigOption"
+					         @filter="(val, update)=>update(()=>{neigOption = $helper.filterOptions(val,neighborhoodOptions,search.neighborhood)})"
+					         clearable
+					         use-input
+					         label="Barrio"
+	         />
 
             <q-select
                     rounded
