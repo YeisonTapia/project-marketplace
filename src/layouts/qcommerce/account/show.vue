@@ -188,47 +188,63 @@
 
         <!-- RATING STORE QDIALOG -->
         <q-dialog v-model="ratingStore" @hide="ratingStore=false">
-          <q-card>
+          <q-card class="bg-degradado">
+	          
             <q-card-section class="text-center">
-	            <div class="text-h5">CALIFICACIÓN</div>
+	            <div class="text-h5 text-white">CALIFICACIÓN</div>
             </q-card-section>
 
             <q-card-section >
-	            <div class="text-body2">¿Qué te ha parecido la tienda <b>{{order.storeName}}</b>?</div>
-
-              <div class="flex flex-center">
-	              <q-rating size="40px"
-                  v-model="ratingValue"
-                  :max="5"
-	              />
-              </div>
-	
-	            <q-input autofocus class="q-mt-sm" v-model="comment" outlined dense
-	                     label="Comentario" type="textarea"/>
-
+	            <div class="bg-white q-mx-lg rounded-borders q-pa-lg">
+		
+		            <div class="text-body2">¿Qué te ha parecido la tienda <b>{{order.storeName}}</b>?</div>
+		
+		            <div class="flex flex-center">
+			            <q-rating
+										size="40px"
+										v-model="ratingValue"
+										:max="5"
+			            />
+		            </div>
+		
+		            <q-input autofocus class="q-mt-sm" v-model="comment" outlined dense
+		                     label="Comentario" type="textarea"/>
+		            
+	            </div>
             </q-card-section>
 
-            <q-card-actions align="right" style="border-bottom: 1px solid #f2f2f2" class="q-mx-sm q-pb-lg">
+            <q-card-actions align="right" class="q-mx-sm q-pb-lg">
               <q-btn @click="rating();commentStore();" label="OK" color="primary"/>
-              <q-btn label="Calificar más tarde" outline color="secondary" v-close-popup/>
+              <q-btn label="Calificar más tarde" outline color="white" v-close-popup/>
             </q-card-actions>
 	
 	          <!--comentarios-->
 	          <q-card-section class="text-center">
-		          <div class="text-h6">COMENTARIOS</div>
+		          <div class="text-h6 text-white">COMENTARIOS</div>
 	          </q-card-section>
 
             <q-card-section>
-	            <div v-if="comments.length>0">
-		            <q-chat-message
-				            text-color="white"
-				            bg-color="primary"
-				            v-for="(comentary, key) in comments"
-				            :key="key"
-				            :name="comentary.user.fullName"
-				            :avatar="comentary.user.smallImage"
-				            :text="[comentary.comment]"
-				            :stamp="comentary.diffTime"/>
+	            <div v-if="comments.length>0" class="bg-white q-mx-lg rounded-borders q-pa-lg">
+		             <q-list>
+								   <q-item
+									    class="q-mb-sm"
+											v-for="(comentary, key) in comments"
+											:key="key">
+									   <q-item-section avatar>
+										   <q-avatar square>
+											   <img :src="comentary.user.smallImage">
+										   </q-avatar>
+									   </q-item-section>
+									   <q-item-section class="bg-degradado text-white rounded-borders q-px-sm">
+										   {{comentary.comment}}
+										   <div class="block">
+											   <small class="text-caption">
+												   {{comentary.diffTime}}
+											   </small>
+										   </div>
+									   </q-item-section>
+								   </q-item>
+							   </q-list>
 	            </div>
               </q-card-section>
             </q-card>
