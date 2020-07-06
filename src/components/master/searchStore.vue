@@ -15,6 +15,7 @@
             <q-select
                     outlined
                     dense
+                    placeholder="Barrio"
                     class="select-neighborhood"
                     v-model="search.neighborhood"
                     :options="neigOption"
@@ -50,6 +51,7 @@
                     rounded
                     outlined
                     dense
+                    label="Barrio..."
                     clearable
                     class="select-neighborhood q-mb-sm"
                     v-model="search.neighborhood"
