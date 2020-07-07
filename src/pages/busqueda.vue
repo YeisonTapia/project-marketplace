@@ -2,6 +2,7 @@
    <q-page class="bg-fondo advanced_search form-general relative-position" v-if="success">
       <!-- Busqueda Avanzada -->
       <div class="q-pa-md bg-white shadow-2 advanced-search-block">
+	      
          <div class="q-container q-pt-lg">
             <!-- Titulo -->
             <div class="row q-mb-lg">
@@ -20,6 +21,7 @@
             </div>
 
             <transition name="fade">
+	            
                <div v-if="drawerPoint">
 
                   <div class="row q-col-gutter-lg">
@@ -38,6 +40,7 @@
                            />
                         </div>
                      </div>
+	                  
                      <div class="col-xs-12 col-sm-6 ">
                         <div class="q-mb-lg">
                            <p class="caption q-mb-xs">Ingrese el texto</p>
@@ -68,6 +71,7 @@
                                    label="Selecione Ciudad"/>
                         </div>
                      </div>
+	                  
                      <div class="col-xs-12 col-sm-6">
                         <div class="q-mb-lg">
                            <p class="caption q-mb-xs">Barrio</p>
@@ -91,8 +95,7 @@
                         <q-toggle dense v-model="advancedSearch.offer" color="primary" label="Tienda en Oferta"/>
 
                      </div>
-
-
+	                  
                   </div>
 
                   <div class="col-12 text-right">
@@ -120,19 +123,18 @@
                   <store :store="store"></store>
                </div>
             </div>
-
-
+	         
             <div class="q-container">
                <div
                        class="row"
                        v-if="paginate.maxPages > 1">
                   <div class="col-md-12 flex justify-center q-pt-xl">
-                     <q-pagination
-                             direction-links
-                             @input="searchStores()"
-                             v-model="paginate.page"
-                             :min="paginate.minPages"
-                             :max="paginate.maxPages"/>
+	                  
+	                  
+	                  <q-btn outline color="primary" @click="getMore" v-if="!(paginate.page >= paginate.maxPages)">
+		                  Cargar mas
+	                  </q-btn>
+	                  
                   </div>
                </div>
             </div>
@@ -187,7 +189,7 @@
             },
             paginate: {
                page: 1,
-               take: 10,
+               take: 12,
                minPages: 1,
                maxPages: 0
             },
@@ -276,7 +278,7 @@
                   }
                };
                this.$crud.index("apiRoutes.qmarketplace.store", params).then(response => {
-                  this.stores = response.data
+                  this.stores.push(...response.data)
                   this.loading = false
                   resolve(true);
                   this.paginate.maxPages = response.meta.page.lastPage
@@ -288,6 +290,10 @@
                })
             })
          },
+		      getMore(){
+            this.paginate.page ++
+            this.searchStores()
+		      },
          // Get Categories Store
          getCategoriesStore() {
             this.loading = true
