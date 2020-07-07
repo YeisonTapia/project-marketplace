@@ -48,7 +48,6 @@
                     @keydown.enter="searchReedirect()"/>
 
 
-	
 	         <q-select
 					         rounded
 					         outlined
@@ -62,7 +61,6 @@
 					         use-input
 					         label="Barrio"
 	         />
-
             <q-select
                     rounded
                     outlined
