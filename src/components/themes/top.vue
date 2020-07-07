@@ -26,7 +26,7 @@
 
             <slide>
                <div class="content-modal" @click="modal.quiz = !modal.quiz"></div>
-               <quiz></quiz>
+               <quizMobile></quizMobile>
             </slide>
             <slide>
                <div class="content-modal" @click="modal.companies = !modal.companies"></div>
@@ -38,7 +38,7 @@
             </slide>
             <slide>
                <div class="content-modal" @click="modal.trivia = !modal.trivia"></div>
-               <trivia v-if="success" :trivia="trivia" :isModal="false" className="home-trivia"></trivia>
+               <triviaMobile v-if="success" :trivia="trivia" :isModal="false" className="home-trivia"></triviaMobile>
             </slide>
          </carousel>
          <!-- -->
@@ -84,9 +84,11 @@
 </template>
 <script>
    import quiz from 'src/components/themes/quiz'
+   import quizMobile from "./quizMobile";
    import topCompanies from 'src/components/themes/topCompanies'
    import topUsers from 'src/components/themes/topUsers'
    import trivia from 'src/components/themes/trivia'
+   import triviaMobile from "./triviaMobile";
 
    export default {
       name: 'TopComponent',
