@@ -126,12 +126,12 @@
 	         
             <div class="q-container">
                <div
-                       class="row"
+                       class="row flex flex-center"
                        v-if="paginate.maxPages > 1">
-                  <div class="col-md-12 flex justify-center q-pt-xl">
+                  <div class="col-md-12 flex justify-center">
 	                  
 	                  
-	                  <q-btn outline color="primary" @click="getMore" v-if="!(paginate.page >= paginate.maxPages)">
+	                  <<q-btn outline color="primary" @click="getMore" v-if="!(paginate.page >= paginate.maxPages)">
 		                  Cargar mas
 	                  </q-btn>
 	                  
