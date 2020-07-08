@@ -124,18 +124,26 @@
                </div>
             </div>
 	         
-            <div class="q-container">
+                      <div class="q-container">
                <div
-                       class="row flex flex-center"
+                       class="row flex flex-center q-px-xl"
                        v-if="paginate.maxPages > 1">
-                  <div class="col-md-12 flex justify-center">
-	                  
-	                  
-	                  <<q-btn outline color="primary" @click="getMore" v-if="!(paginate.page >= paginate.maxPages)">
-		                  Cargar mas
+                  <div class="col-md-6" v-if="$q.platform.is.desktop">
+	
+	                  <q-btn class="full-width" rounded color="primary" @click="getMore" v-if="!(paginate.page >= paginate.maxPages)">
+		                  Cargar más
 	                  </q-btn>
 	                  
                   </div>
+	               
+	               <div v-else class="col-md-12 full-width q-px-xl">
+		
+		               <q-btn  class="full-width q-mx-xl" rounded color="primary" @click="getMore" v-if="!(paginate.page >= paginate.maxPages)">
+			               Cargar más
+		               </q-btn>
+		              
+	               </div>
+	               
                </div>
             </div>
 
