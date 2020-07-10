@@ -8,8 +8,16 @@
       <div class="row bloque-nivel-club">
         <div class="col-12">
           <div class="nivel relative-position text-white text-center q-pt-lg round-borders">
-            <h4 class="text-uppercase q-my-sm font-family-secondary">  <q-btn flat size="lg" color="withe" :to="{name:'quser.account.level'}">nivel</q-btn></h4>
-            <h5 class="text-uppercase q-mb-xs q-mt-md">{{form.level.name}}</h5>
+            <h4 class="text-uppercase q-my-xs font-family-secondary">
+              <q-btn flat dense size="lg" color="withe" :to="{name:'quser.account.level'}">
+                nivel
+              </q-btn>
+            </h4>
+            <h5 class="text-uppercase q-mb-xs q-mt-xs">
+              <q-btn flat dense size="lg" color="withe" :to="{name:'quser.account.level'}">
+                {{form.level.name}}
+              </q-btn>
+            </h5>
             <p class="text-center text-white">dondeestaesavaina.com</p>
           </div>
           <div class="club text-center">
@@ -81,8 +89,16 @@
           <div class="row bloque-nivel-club">
             <div class="col-12">
               <div class="nivel relative-position text-white text-center q-pt-lg round-borders">
-                <h4 class="text-uppercase q-my-sm font-family-secondary"><q-btn flat size="lg" color="withe" :to="{name:'quser.account.level'}">nivel</q-btn></h4>
-                <h5 class="text-uppercase q-mb-xs q-mt-md">{{form.level.name}}</h5>
+                <h4 class="text-uppercase q-my-xs font-family-secondary">
+		              <q-btn flat dense size="lg" color="withe" :to="{name:'quser.account.level'}">
+			              nivel
+		              </q-btn>
+	              </h4>
+	              <h5 class="text-uppercase q-mb-xs q-mt-xs">
+		              <q-btn flat dense size="lg" color="withe" :to="{name:'quser.account.level'}">
+			              {{form.level.name}}
+		              </q-btn>
+	              </h5>
                 <p class="text-center text-white">dondeestaesavaina.com</p>
               </div>
               <div class="club text-center">
