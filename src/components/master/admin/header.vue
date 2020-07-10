@@ -147,11 +147,18 @@
          <!--= MENU =-->
          <menu-list v-if="store.selected || $auth.hasAccess('marketplace.stores.manage')" :menu="menu"/>
 
-         <div class="bg-light text-center q-py-lg">
+         <div class="bg-light text-center q-py-lg q-pb-xl">
+	         <q-btn flat dense class="text-primary" no-caps size="md" to="/terms-and-conditions">
+		         Términos y condiciones
+	         </q-btn>
+	         <q-btn flat dense class="text-primary q-mb-md" no-caps size="md" to="/policies">
+		         Protección de datos
+	         </q-btn>
             <div class="q-headline text-primary text-weight-bold">¿NECESITAS AYUDA</div>
             <div class="q-subheading text-primary  text-weight-bold q-mb-md">PARA EDITAR TU TIENDA?</div>
             <q-btn rounded to="/contacto" color="primary" label="Contáctanos aquí"/>
          </div>
+	      
 
       </q-drawer>
 

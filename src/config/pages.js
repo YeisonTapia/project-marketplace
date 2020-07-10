@@ -43,7 +43,7 @@ let responsePages = {
             path: '/tiendas-en-ofertas',
             name: 'app.ofertas',
             layout: () => import('src/layouts/master'),
-            page: () => import('pages/ofertas.vue'),
+              page: () => import('pages/ofertas.vue'),
             title: 'app.layout.page.storesOnOffer',
             icon: 'fas fa-store',
             authenticated: true
@@ -197,6 +197,26 @@ let responsePages = {
             title: 'app.layout.page.notifications',
             icon: 'apps',
             authenticated: true
+        },
+        terms:{
+          activated: true,
+          path: '/terms-and-conditions',
+          name: 'app.terms',
+          layout: () => import('src/layouts/master'),
+          page: () => import('pages/termsAndConditions.vue'),
+          title: 'app.layout.page.terms',
+          icon: 'far fa-envelope-open',
+          authenticated: false
+        },
+        policies:{
+          activated: true,
+          path: '/policies',
+          name: 'app.terms',
+          layout: () => import('src/layouts/master'),
+          page: () => import('pages/policies.vue'),
+          title: 'app.layout.page.policies',
+          icon: 'far fa-envelope-open',
+          authenticated: false
         },
 
     }
