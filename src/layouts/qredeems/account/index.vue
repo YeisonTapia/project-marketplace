@@ -15,13 +15,13 @@
         <!-- Meta Mensual -->
         <q-card class="rounded-md q-mb-xl full-width">
           <div class="q-pl-md">
-            <h3 class="title-label-puntos text-center bg-primary">
+            <h3 class="title-label-puntos text-center bg-primary" >
               <div>Meta del mes</div>
             </h3>
           </div>
           <q-card-section class="q-pt-xl">
 
-            <q-list dense class="q-mt-xl">
+            <q-list dense class="q-mt-xl q-mt-xs-xs">
               <q-item>
 
                 <q-item-section>
@@ -63,13 +63,13 @@
         <div class="q-my-md full-width"></div>
 
         <!-- Puntos por Canjear -->
-        <q-card class="rounded-md q-mb-xl full-width">
+        <q-card class="rounded-md q-mb-xl full-width q-mt-xs-xs">
           <div class="q-pl-md">
             <h3 class="title-label-puntos text-center bg-tertiary">
               <div>Items por canjear (Puntos disponibles: {{userPointsAvailables}})</div>
             </h3>
           </div>
-          <q-card-section class="q-mx-puntos q-my-lg">
+          <q-card-section class="q-mx-puntos q-my-lg ">
 
             <q-list v-if="itemsRedeems.length>0" separator bordered style="border-left: 0; border-right: 0;">
 
@@ -123,9 +123,9 @@
         <div class="q-my-md full-width"></div>
 
         <!-- Todos los puntos acumulados -->
-        <q-card class="rounded-md q-mb-xl full-width">
+        <q-card class="rounded-md q-mb-xl full-width q-mt-xs-xs">
           <div class="q-pl-md">
-            <h3 class="title-label-puntos text-center bg-primary">
+            <h3 class="title-label-puntos text-center bg-primary" >
               <div>¿Cómo has obtenido TODOS tus puntos?</div>
             </h3>
           </div>
@@ -199,7 +199,23 @@
         -->
 
       </div>
-
+	
+	
+	    <q-dialog v-model="showConfirm">
+		    <q-card>
+			    <q-card-section class="row items-center q-pb-none">
+				    <div class="text-h6">Item Canjeado !!</div>
+				    <q-space />
+				    <q-btn icon="close" flat round dense v-close-popup />
+			    </q-card-section>
+			    <q-card-section>
+				    Felicidades as redimino {{this.itemRedemed}},
+				    para hacer valida tu redencion puede <span v-if="phoneStore[0]">cominucarce con nosotros al numero {{phoneStore[0]}} o</span>
+				    escribirnos al chat.
+			    </q-card-section>
+		    </q-card>
+	    </q-dialog>
+	    
 
     </div>
     <!--Inner loading-->
@@ -230,6 +246,9 @@
     },
     data() {
       return {
+        showConfirm: false,
+        itemRedemed: '',
+	      phoneStore: this.$store.getters['qsiteSettings/getSettingValueByName']('isite::phones'),
         loading: false,
         success: false,
         drawerPoint: false,
@@ -450,11 +469,13 @@
           this.getItems()
 
           // Notify MSG
-          this.$q.notify({
+	        this.itemRedemed = item.name
+	        this.showConfirm = true
+          /*this.$q.notify({
             color:'green',
             message: 'Item Canjeado!!',
             position: 'bottom-right'
-          })
+          })*/
 
         }).catch(error => {
           //console.error('[CREATE REDEEMS REDEEMS] ', error)
@@ -595,6 +616,7 @@
       &:before
           display none !important
     @media screen and (max-width: $breakpoint-sm)
+      line-height 2.125rem
       min-width 60%
       font-size 15px
       padding 0 10px
