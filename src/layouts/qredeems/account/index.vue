@@ -199,7 +199,23 @@
         -->
 
       </div>
-
+	
+	
+	    <q-dialog v-model="showConfirm">
+		    <q-card>
+			    <q-card-section class="row items-center q-pb-none">
+				    <div class="text-h6">Item Canjeado !!</div>
+				    <q-space />
+				    <q-btn icon="close" flat round dense v-close-popup />
+			    </q-card-section>
+			    <q-card-section>
+				    Felicidades as redimino {{this.itemRedemed}},
+				    para hacer valida tu redencion puede <span v-if="phoneStore[0]">cominucarce con nosotros al numero {{phoneStore[0]}} o</span>
+				    escribirnos al chat.
+			    </q-card-section>
+		    </q-card>
+	    </q-dialog>
+	    
 
     </div>
     <!--Inner loading-->
@@ -230,6 +246,9 @@
     },
     data() {
       return {
+        showConfirm: false,
+        itemRedemed: '',
+	      phoneStore: this.$store.getters['qsiteSettings/getSettingValueByName']('isite::phones'),
         loading: false,
         success: false,
         drawerPoint: false,
@@ -450,11 +469,13 @@
           this.getItems()
 
           // Notify MSG
-          this.$q.notify({
+	        this.itemRedemed = item.name
+	        this.showConfirm = true
+          /*this.$q.notify({
             color:'green',
             message: 'Item Canjeado!!',
             position: 'bottom-right'
-          })
+          })*/
 
         }).catch(error => {
           //console.error('[CREATE REDEEMS REDEEMS] ', error)
